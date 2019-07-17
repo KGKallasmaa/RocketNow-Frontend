@@ -1,1 +1,2 @@
-# RocketNow-Fronend
+# NoNoLine
+An e-commerce site in development.
