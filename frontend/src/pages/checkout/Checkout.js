@@ -8,7 +8,7 @@ import Emoji from 'react-emoji-render';
 
 import {Helmet} from "react-helmet";
 import Script from 'react-load-script';
-import PageFooter from "../navbar_and_footer/PageFooter";
+import Footer from "../navbarAndFooter/Footer.jsx";
 
 import omniva_logo from './ParcelDeliveryLocation_img/omniva-logo.png';
 import itella_logo from './ParcelDeliveryLocation_img/itella-logo.svg';
@@ -206,8 +206,7 @@ function formatDeliveryEstimate(DeliveryEstimate) {
         estimate = "In " + yearDif + " years and " + monDif + ((monDif === 1) ? " month" : " months");
     }
     return estimate;
-};
-
+}
 
 class AddressForm extends Component {
     constructor(props) {
@@ -1176,7 +1175,7 @@ export default class Checkout extends React.Component {
                     </div>
                 </div>
                 < br/> < br/> < br/> < br/>
-                < PageFooter/>
+                < Footer/>
             </div>
         );
     }

@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
-import PageNavbar from "./navbar_and_footer/PageNavbar";
-import PageFooter from "./navbar_and_footer/PageFooter";
+import Navbar from "./navbarAndFooter/Navbar.jsx";
+import Footer from "./navbarAndFooter/Footer.jsx";
 import {Breadcrumb, Carousel, Icon, InputNumber, Rate, Skeleton, Tabs} from "antd";
 import {AddToCart} from '../buttons/ModifyCart';
 import {Query} from 'react-apollo';
@@ -154,7 +154,7 @@ export default class GoodsPage extends React.Component {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-12">
-                        <PageNavbar/>
+                        <Navbar/>
                         <br/>
                         <Breadcrumb separator=">">
                             <Breadcrumb.Item href="/">
@@ -179,7 +179,7 @@ export default class GoodsPage extends React.Component {
                         </Fragment>
                     </div>
                 </div>
-                <PageFooter/>
+                <Footer/>
             </div>
         )
     }

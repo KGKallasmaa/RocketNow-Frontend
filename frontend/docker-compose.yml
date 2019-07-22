@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+
+  provisioning-app:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '3001:3000'
+    environment:
+      - NODE_ENV=production

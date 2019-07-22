@@ -3,8 +3,8 @@ import gql from "graphql-tag";
 import {Query} from "react-apollo";
 import {Col, Icon, Row, Skeleton, Steps, Carousel, Avatar, Button, Card} from "antd";
 import {Helmet} from "react-helmet";
-import PageFooter from "../navbar_and_footer/PageFooter";
-import PageNavbar from "../navbar_and_footer/PageNavbar";
+import Footer from "../navbarAndFooter/Footer.jsx";
+import Navbar from "../navbarAndFooter/Navbar.jsx";
 
 const {Meta} = Card;
 const {Step} = Steps;
@@ -198,7 +198,7 @@ export default class Success extends React.Component {
         const Keywords = ["RocketNow", "Shopping", "E-commerce", "Success", "Order"];
         return (
             <div className="container-fluid">
-                <PageNavbar/>
+                <Navbar/>
                 <Helmet>
                     <title>Thank you from RocketNow</title>
                     <meta name="keywords" content={Keywords}/>
@@ -274,7 +274,7 @@ export default class Success extends React.Component {
                 </div>
                 <br/>
                 <br/>
-                <PageFooter/>
+                <Footer/>
             </div>
         );
     }

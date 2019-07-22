@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Form, Tabs} from 'antd';
-import logo from "../../style/logo.png";
+import logo from '../../assets/img/logo.png';
 import {Link} from "react-router-dom";
 import AuthContext from '../../context/auth-context';
 import Redirect from "react-router-dom/es/Redirect";
@@ -9,13 +9,23 @@ import {Helmet} from "react-helmet";
 
 const TabPane = Tabs.TabPane;
 
-const PageLogo = (props) => {
+
+
+const PageLogo = () => {
+    const style = {
+        width: "50px",
+        height: "50px",
+        paddingRight: "0px",
+        marginRight: "15px",
+        margin_top: "10px"
+    };
     return (
-        <div className="logo">
-            <a href="/"><img alt="Logo" src={logo} width="90" height="90" /></a>
-        </div>
+        <img src={logo}
+             style={style}
+             alt="Logo"/>
     )
 };
+
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -217,17 +227,17 @@ class NormalLoginForm extends React.Component {
 
     render() {
         const login_user_status = this.state.login_user;
-        const keywords = ["login", "NoNoLine"];
-        const cannonial_url = process.env.REACT_APP_CLIENT_URL + "/login";
+        const keywords = ["login", "RocketNow"];
+        const cannonial_url = process.env.REACT_APP_PUBLIC_URL + "/login";
         return (
             <div>
                 <br /><br /><br /><br />
                 {this.RenderRicrect()}
                 <div className="container-fluid">
                     <Helmet>
-                        <title>NoNoLine Login</title>
-                        <meta name="description" content="Signing in to NoNoLine unlocks a whole new world." />
-                        <meta property="og:title" content="NoNoLine Login" />
+                        <title>Login</title>
+                        <meta name="description" content="Signing in to RocketNow unlocks a whole new world." />
+                        <meta property="og:title" content="RocketNow Login" />
                         <meta name="keywords" content={keywords}/>
                         <link rel="canonial" href={cannonial_url}/>
                     </Helmet>

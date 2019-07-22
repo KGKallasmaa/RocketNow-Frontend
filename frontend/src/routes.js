@@ -4,17 +4,24 @@ import {Route, Switch} from "react-router-dom";
 import GoodsPage from "./pages/IndividualGoodPage";
 import SearchResults from "./pages/SearchResults";
 import Reset from "./pages/user/Reset";
-import ShoppingCart from "./pages/Cart";
+import ShoppingCart from "./pages/checkout/Cart";
 import Checkout from "./pages/checkout/Checkout";
-import Home from "./pages/Home";
+import Home from "./pages/Home.jsx";
 import BusinessHome from "./pages/business/Home";
 
 import Login from "./pages/user/Login";
 import Signup from "./pages/user/Signup";
-import SellerPage from "./pages/SellerPage";
+import SellerPage from "./pages/business/business_public/SellerPage";
 import Redirect from "react-router/es/Redirect";
 import Success from "./pages/checkout/Success";
 import Cancel from "./pages/checkout/Cancel";
+import Sitemap from "./pages/staic/Sitemap";
+import About from "./pages/staic/About";
+import Careers from "./pages/staic/Careers";
+import Business from "./pages/staic/Business";
+import Faq from "./pages/staic/Faq";
+import Tos from "./pages/staic/Tos";
+import Blog from "./pages/staic/Blog";
 
 
 const Logout = (props) =>{
@@ -58,6 +65,7 @@ const BaseRouter = (props) => (
     <div>
         <React.Fragment>
             <Switch>
+                <Route exact path="/sitemap"  component={Sitemap} />
                 <Route exact path="/signup"  component={Signup} />
                 <Route exact path="/login"  component={Login}/>
                 <Route exact path="/logout" component={Logout}/>
@@ -70,6 +78,12 @@ const BaseRouter = (props) => (
                 < PrivateRegularRoute path = "/cancel/:cancel_id"component = {Cancel}/>
                 <Route exact path="/search/:query/:page_nr?/:category?"  component={SearchResults} />
                 <PrivateBusinessRoute path= "/business" component={BusinessHome} />
+                <Route exact path="/about"  component={About} />
+                <Route exact path="/careers"  component={Careers} />
+                <Route exact path="/rocketbusiness"  component={Business} />
+                <Route exact path="/faq"  component={Faq} />
+                <Route exact path="/toc"  component={Tos} />
+                <Route exact path="/blog"  component={Blog} />
                 <Route exact path = "" component = {Home}/>
             </Switch>
         </React.Fragment>

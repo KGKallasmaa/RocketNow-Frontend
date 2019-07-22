@@ -1,18 +1,26 @@
 import React from 'react';
 import {Button, Form, message, Tabs} from 'antd';
 
-import logo from "../../style/logo.png";
+import logo from '../../assets/img/logo.png';
 import {Link} from "react-router-dom";
 import Redirect from "react-router-dom/es/Redirect";
+import {Helmet} from "react-helmet";
 
 
 const TabPane = Tabs.TabPane;
 
-const PageLogo = (props) =>{
+const PageLogo = () => {
+    const style = {
+        width: "50px",
+        height: "50px",
+        paddingRight: "0px",
+        marginRight: "15px",
+        margin_top: "10px"
+    };
     return (
-        <div className="logo">
-            <a href="/signup"><img alt="Logo" src={logo} width="90" height="90"/></a>
-        </div>
+        <img src={logo}
+             style={style}
+             alt="Logo"/>
     )
 };
 
@@ -378,10 +386,19 @@ class NormalSignupForm extends React.Component {
 
     render() {
         const signup_user_status = this.state.signup_user;
+        const keywords = ["signup", "RocketNow"];
+        const cannonial_url = process.env.REACT_APP_PUBLIC_URL + "/signup";
         return (
             <div>
                 <br/><br/><br/><br/>
                 <div className="container-fluid">
+                    <Helmet>
+                        <title>Sign up</title>
+                        <meta name="description" content="Signing up to RocketNow unlocks a whole new world." />
+                        <meta property="og:title" content="SignUp to RocketNow" />
+                        <meta name="keywords" content={keywords}/>
+                        <link rel="canonial" href={cannonial_url}/>
+                    </Helmet>
                     <div className="row">
                         <div className="col-md-12">
                             <div className="row">

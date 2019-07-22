@@ -11,20 +11,20 @@ export default class SearchBox extends React.Component {
         super(props);
         this.state = {
             goods: [],
-            query: ((this.props.query !== null)?this.props.query:''),
+            query: ((this.props.query !== null) ? this.props.query : ''),
             redirect: false
         };
         this.handleSearch = this.handleSearch.bind(this);
     }
 
     handleSearch = (query) => {
+        console.log(query);
         this.setState({
             query: query,
             redirect: true
         });
 
     };
-
     renderRedirect = () => {
         if (this.state.redirect === true) {
             const query = this.state.query;
@@ -33,12 +33,10 @@ export default class SearchBox extends React.Component {
         }
     };
 
-    //Todo: make search box size relative
-
     render() {
         const query = this.state.query;
         return (
-            <div className="global-search" style={{width: 500, minWidth: 100}}>
+            <div className="global-search" style={this.props.style}>
                 <Search
                     placeholder="Search ..."
                     onSearch={this.handleSearch}
@@ -46,8 +44,6 @@ export default class SearchBox extends React.Component {
                     autosize={true}
                     onChange={event => {this.setState({query:event.target.value})}}
                     value={query}
-                    compact = {true}
-                    enterButton
                 />
                 {this.renderRedirect()}
             </div>

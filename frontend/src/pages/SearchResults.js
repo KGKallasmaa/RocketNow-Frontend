@@ -1,8 +1,8 @@
 import React, {Fragment} from 'react';
 import {Divider, Empty, Rate, Skeleton} from 'antd';
 import {AddToCart} from '../buttons/ModifyCart';
-import PageNavbar from './navbar_and_footer/PageNavbar';
-import PageFooter from './navbar_and_footer/PageFooter';
+import Navbar from './navbarAndFooter/Navbar.jsx';
+import Footer from './navbarAndFooter/Footer.jsx';
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
 import {Image} from 'cloudinary-react';
@@ -189,17 +189,17 @@ export default class SearchResults extends React.Component {
 
         //TODO: add page_nr support
 
-        const keywords = [query, "NoNoLine"];
-        const cannonial_url = process.env.REACT_APP_CLIENT_URL + "/search/" + query;
+        const keywords = [query, "RocketNow"];
+        const cannonial_url = process.env.REACT_APP_PUBLIC_URL + "/search/" + query;
         //TODO: develop funcionality
         const {min_rating} = this.state;
 
         return (
             <div>
                 <div>
-                    <PageNavbar query={query}/>
+                    <Navbar query={query}/>
                     <Helmet>
-                        <title>NoNoLine: {query}</title>
+                        <title>RocketNow: {query}</title>
                         <meta name="keywords" content={keywords}/>
                         <link rel="canonial" href={cannonial_url}/>
                     </Helmet>
@@ -261,7 +261,7 @@ export default class SearchResults extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <PageFooter/>
+                    <Footer/>
                 </div>
             </div>
         )

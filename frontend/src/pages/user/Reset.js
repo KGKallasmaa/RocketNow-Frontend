@@ -5,7 +5,10 @@ import {Form} from 'antd';
 class NormalResetForm extends React.Component {
     render() {
         return (
-            <h1>Reset pw</h1>
+            <div>
+                <h1>This page is still under construction</h1>
+                <h4>Reset pw</h4>
+            </div>
         );
     }
 }

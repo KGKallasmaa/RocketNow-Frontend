@@ -4,7 +4,7 @@ import Footer from "../navbarAndFooter/Footer.jsx";
 import Navbar from "../navbarAndFooter/Navbar.jsx";
 
 
-export default class Cancel extends React.Component {
+export default class About extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,10 +17,10 @@ export default class Cancel extends React.Component {
             <div className="container-fluid">
                 <Navbar/>
                 <Helmet>
-                    <title>Your order was canceled on RocketNow</title>
+                    <title>About</title>
                 </Helmet>
                 <h1>This page is still under construction</h1>
-                <p>Cancel page</p>
+                <p>About page</p>
                 <Footer/>
             </div>
         );

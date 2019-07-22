@@ -69,12 +69,13 @@ export class AddToCart extends React.Component {
             disabled: this.props.disabled,
             quantity: this.props.quantity,
             good_id: this.props.good_id,
+            style:this.props.style,
             user_identifier: getUserId(),
         };
     }
 
     render() {
-        const {good_id, quantity, user_identifier, title} = this.state;
+        const {good_id,style, quantity, user_identifier, title} = this.state;
         return (
             <div>
                 <Mutation
@@ -87,7 +88,7 @@ export class AddToCart extends React.Component {
                 >
                     {(addToCart, {loading, error}) => (
                         <div>
-                            <button className="btn btn-warning btn-lg" onClick={addToCart}>
+                            <button style= {style} className="btn btn-warning btn-lg" onClick={addToCart}>
                                 Add to cart
                             </button>
                             {loading && loadingIcon}

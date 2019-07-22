@@ -4,7 +4,7 @@ import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
 import {Image} from 'cloudinary-react';
 import Redirect from "react-router-dom/es/Redirect";
-import {RemoveFromCart} from '../buttons/ModifyCart';
+import {RemoveFromCart} from '../../buttons/ModifyCart';
 
 
 const NUMBEROFGOODS_INCART_AND_SUBTOTAL_QUERY = gql`
@@ -190,7 +190,7 @@ export default class ShoppingCart extends React.Component {
                 </Query>
             </Fragment>
         );
-    }
+    };
 
 
     render() {
@@ -199,10 +199,12 @@ export default class ShoppingCart extends React.Component {
         if (sessionStorage.getItem("temporary_user_id")) sessionStorage.setItem("temporary_user_id", temporary_user_id);
 
         const jwt_token = (jwt !== null) ? jwt : temporary_user_id;
-        console.log(jwt_token);
+
         return (
             <div>
-                <Drawer title={"Shopping cart"} placement="right" closable={false} width={520} onClose={this.onClose}
+                <Drawer style={{
+                    maxWidth:"100%",
+                }} title={"Shopping cart"} placement="right" closable={false} width={510} onClose={this.onClose}
                         visible={this.state.visible}>
                     <div className="card-body">
                         {this.getShoppingCart(jwt_token)}
