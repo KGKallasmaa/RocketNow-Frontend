@@ -4,7 +4,7 @@ import Footer from "../navbarAndFooter/Footer.jsx";
 import Navbar from "../navbarAndFooter/Navbar.jsx";
 
 
-export default class Sitemap extends React.Component {
+export default class Tos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,10 +17,10 @@ export default class Sitemap extends React.Component {
             <div className="container-fluid">
                 <Navbar/>
                 <Helmet>
-                    <title>Sitemap</title>
+                    <title>Privacy Policy</title>
                 </Helmet>
                 <h1>This page is still under construction</h1>
-                <p>Sitemap</p>
+                <p>PrivacyPolicy page</p>
                 <Footer/>
             </div>
         );

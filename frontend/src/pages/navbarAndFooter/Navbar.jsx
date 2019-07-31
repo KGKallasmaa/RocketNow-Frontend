@@ -3,24 +3,21 @@ import SearchBox from "../../components/SearchBox.jsx";
 import ShoppingCart from "../checkout/Cart";
 
 import logo from '../../assets/img/logo.png';
-
 import account_not_logged_in_img from '../../assets/img/user_not_logged_in.png';
-import logged_in_girl from '../../assets/img/logged_in_girl.png';
 import shopping_cart_img from "../../assets/img/Shopping cart Image.png";
-
+import {isRegularUserLoggedIn} from "../../components/Authentication";
 
 const PageLogo = () => {
-    const style = {
-        width: "50px",
-        height: "50px",
-        paddingRight: "0px",
-        marginRight: "15px",
-        margin_top: "10px"
-    };
     return (
         <div>
             <a href="/">
-                <img src={logo} style={style} alt="RocketNow logo"/>
+                <img src={logo} style={{
+                    width: "50px",
+                    height: "50px",
+                    paddingRight: "0px",
+                    marginRight: "15px",
+                    margin_top: "10px"
+                }} alt="RocketNow logo"/>
             </a>
         </div>
     )
@@ -80,7 +77,7 @@ export default class Navbar extends Component {
     constructor(props) {
         super(props);
         this.setState({
-            visible: false
+            visible: false,
         });
         this.showShoppingCart = this.showShoppingCart.bind(this);
         this.shopppingcartElement = React.createRef()
@@ -109,11 +106,11 @@ export default class Navbar extends Component {
         });
     };
 
-    renderMyAccountImage(isLoggedIn) {
+    renderMyAccountImage(isLoggedIn, image_URL) {
         if (isLoggedIn) {
             return (<img
                 style={myAccountImage_style}
-                src={logged_in_girl} alt="My Account"/>);
+                src={image_URL} alt="My logged in account"/>);
         }
         return (<img
             style={myAccountImage_style}
@@ -122,18 +119,17 @@ export default class Navbar extends Component {
 
 
     render() {
-        const regular_token = sessionStorage.getItem("jwtToken");
-        const business_token = sessionStorage.getItem("business_jwtToken");
+        const image_URL = sessionStorage.getItem("regularUserImageURL");
+        
+        const userIsLoggedIn = isRegularUserLoggedIn();
+        let temporary_user_id;
+        if (!userIsLoggedIn){
+            temporary_user_id = (sessionStorage.getItem("temporary_user_id") !== null) ? sessionStorage.getItem("temporary_user_id") :generate_temporary_userid(256);
+        }
+        const login_or_logout_button_text = (!userIsLoggedIn) ? "Login" : "Logout";
+        const login_or_logout_button_url = (!userIsLoggedIn) ? ("/login") : ("/logout");
 
-        const login_or_logout_button_text = (regular_token == null && business_token == null) ? "Login" : "Logout";
-        const login_or_logout_button_url = (regular_token == null && business_token == null) ? ("/login") : ("/logout");
-
-        const temporary_user_id = (sessionStorage.getItem("temporary_user_id") !== null) ? sessionStorage.getItem("temporary_user_id") : generate_temporary_userid(256);
-        if (sessionStorage.getItem("temporary_user_id")) sessionStorage.setItem("temporary_user_id", temporary_user_id);
-
-        const jwt_token = (regular_token !== null) ? regular_token : temporary_user_id;
-
-        const userIsLoggedIn = (jwt_token.length !== 256);
+        const jwt_token = (userIsLoggedIn) ? sessionStorage.getItem("jwtToken") : temporary_user_id;
 
         return (
             <nav className="navbar navbar-light navbar-expand-md border rounded-0 shadow navigation-clean-search">
@@ -150,7 +146,7 @@ export default class Navbar extends Component {
                         <ul className="nav navbar-nav">
                             <li className="nav-item" role="presentation">
                                 <a href="/me">
-                                    {this.renderMyAccountImage(userIsLoggedIn)}
+                                    {this.renderMyAccountImage(userIsLoggedIn, image_URL)}
                                 </a>
                             </li>
                             <li className="nav-item" role="presentation">
@@ -166,7 +162,7 @@ export default class Navbar extends Component {
                     </div>
                     <br/>
                 </div>
-                <ShoppingCart ref={this.shopppingcartElement}/>
+                <ShoppingCart token ={jwt_token} ref={this.shopppingcartElement}/>
             </nav>
         );
     }

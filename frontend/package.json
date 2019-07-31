@@ -22,10 +22,13 @@
     "react-bootstrap": "^1.0.0-beta.6",
     "react-dom": "^16.8.6",
     "react-emoji-render": "^0.6.0",
+    "react-facebook-login": "^4.1.1",
     "react-geocode": "^0.1.2",
     "react-global": "^0.1.8",
     "react-google-autocomplete": "^1.0.18",
+    "react-google-login": "^5.0.4",
     "react-google-maps": "^9.4.5",
+    "react-google-recaptcha": "^1.1.0",
     "react-helmet": "^5.2.1",
     "react-load-script": "0.0.6",
     "react-meta-tags": "^0.7.4",
@@ -33,10 +36,11 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "3.0.1",
+    "react-snapshot": "^2.0.0-0",
     "redux": "^4.0.1"
   },
   "scripts": {
-    "develop": "PORT=3001 react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -194,11 +194,7 @@ export default class ShoppingCart extends React.Component {
 
 
     render() {
-        const jwt = sessionStorage.getItem("jwtToken");
-        const temporary_user_id = (sessionStorage.getItem("temporary_user_id") !== null) ? sessionStorage.getItem("temporary_user_id") : generate_temporary_userid(256);
-        if (sessionStorage.getItem("temporary_user_id")) sessionStorage.setItem("temporary_user_id", temporary_user_id);
-
-        const jwt_token = (jwt !== null) ? jwt : temporary_user_id;
+        const jwt_token = this.props.token;
 
         return (
             <div>

@@ -1,11 +1,10 @@
 import React from 'react';
 import * as serviceWorker from './serviceWorker';
-import ReactDOM from 'react-dom';
-import App from './App';
+import App from './App.jsx';
 import ApolloClient from 'apollo-boost';
 import {ApolloProvider} from 'react-apollo';
 import {InMemoryCache} from 'apollo-cache-inmemory';
-
+import ReactDOM from 'react-dom';
 
 const cache = new InMemoryCache();
 
@@ -19,5 +18,6 @@ const app = (
         <App/>
     </ApolloProvider>
 );
+
 ReactDOM.render(app, document.getElementById('root'));
 serviceWorker.unregister();

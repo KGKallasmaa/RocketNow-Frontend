@@ -13,7 +13,7 @@ import pets_img from "../assets/img/Pets_Category_Image.png";
 import sports_img from "../assets/img/Sports_Category_image.png";
 import gql from "graphql-tag";
 
-import "../assets/css/styles.min.css";
+import "../assets/css/home.min.css";
 import {AddToCart} from "../buttons/ModifyCart";
 import Card from "antd/es/card";
 

@@ -4,7 +4,7 @@ import Footer from "../navbarAndFooter/Footer.jsx";
 import Navbar from "../navbarAndFooter/Navbar.jsx";
 
 
-export default class Blog extends React.Component {
+export default class MyAccount extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,10 +17,10 @@ export default class Blog extends React.Component {
             <div className="container-fluid">
                 <Navbar/>
                 <Helmet>
-                    <title>Blog</title>
+                    <title>My Account</title>
                 </Helmet>
                 <h1>This page is still under construction</h1>
-                <p>Blog page</p>
+                <p>My account page</p>
                 <Footer/>
             </div>
         );
