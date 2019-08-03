@@ -29,6 +29,7 @@ const TRENDING_GOOD_QUERY = gql`
     query trending($country: String!) {
         trending(country: $country) {
             _id
+            nr
             title
             current_price
             description
@@ -42,6 +43,7 @@ const RECCOMEND_GOOD_QUERY = gql`
     query recommend($jwt_token: String!,$nr:Int!) {
         recommend(jwt_token: $jwt_token,nr:$nr) {
             _id
+            nr
             title
             current_price
             description
@@ -54,8 +56,7 @@ const RECCOMEND_GOOD_QUERY = gql`
 
 
 const GoodCard = (props) => {
-
-    const good_url = "/goods/" + props._id;
+    const good_url = "/goods/" + props.nr+"/"+props.title;
     const image_style = {
         height: "auto",
         maxWidth: "350px"

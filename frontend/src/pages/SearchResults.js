@@ -5,7 +5,6 @@ import Navbar from './navbarAndFooter/Navbar.jsx';
 import Footer from './navbarAndFooter/Footer.jsx';
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
-import {Image} from 'cloudinary-react';
 import {Helmet} from "react-helmet";
 
 
@@ -14,6 +13,7 @@ const SEARCH_QUERY = gql`
         search(searchInput:{query: $query,page_nr:$page_nr}) {
             _id
             title
+            nr
             current_price
             general_category {
                 name
@@ -21,10 +21,10 @@ const SEARCH_QUERY = gql`
             listing_timestamp
             quantity
             currency
-            main_image_cloudinary_public_id
-            other_images_cloudinary_public_id
+            main_image_cloudinary_secure_url
             seller {
                 businessname
+                nr
             }
             custom_attribute_names
             custom_attribute_values
@@ -36,6 +36,7 @@ const REFINEMENT_QUERY = gql`
         search(searchInput:{query: $query,page_nr:$page_nr}) {
             _id
             title
+            nr
             current_price
             general_category {
                 name
@@ -43,10 +44,10 @@ const REFINEMENT_QUERY = gql`
             listing_timestamp
             quantity
             currency
-            main_image_cloudinary_public_id
-            other_images_cloudinary_public_id
+            main_image_cloudinary_secure_url
             seller {
                 businessname
+                nr
             }
             custom_attribute_names
             custom_attribute_values
@@ -100,7 +101,7 @@ function reformatListingDate(listing_time_s) {
 function renderSearchResults(good) {
     const id = good._id;
     const title = good.title;
-    const main_image = good.main_image_cloudinary_public_id;
+    const main_image = good.main_image_cloudinary_secure_url;
     const seller_name = good.seller.businessname;
 
     const listing_date = reformatListingDate(good.listing_timestamp);
@@ -108,16 +109,15 @@ function renderSearchResults(good) {
     const price = good.current_price;
     const quantity = good.quantity;
 
-    const product_url = "/goods/"+ id;
-    const seller_url = "/seller/" + seller_name;
+    const product_url = "/goods/" + good.nr + "/" + title;
+    const seller_url = "/seller/" + good.seller.nr + "/" + seller_name;
 
     return (
         <div className="col-md-12">
             <div className="row">
                 <div className="col-md-1"/>
                 <div className="col-md-2">
-                    <Image secure="true" cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME} publicId={main_image}
-                           width="100" crop="scale"/>
+                    <img alt={title} className="w-100 d-block" src={main_image} style={{width: "100px"}}/>
                 </div>
                 <div className="col-md-7">
                     <h4><a href={product_url}>{title}</a></h4>
@@ -129,7 +129,13 @@ function renderSearchResults(good) {
                 </div>
                 <div className="col-md-2">
                     <h3>{price}&nbsp;{currency}</h3>
-                    <AddToCart disabled={(quantity === 0)} title={title} quantity={1} good_id={good._id}/>
+                    <AddToCart style={{
+                        marginLeft: "0px",
+                        width: "auto",
+                        paddingLeft: "0px",
+                        minWidth: "150px",
+                        paddingRight: "0px"
+                    }} disabled={(quantity === 0)} title={title} quantity={1} good_id={good._id}/>
                 </div>
             </div>
             <Divider/>

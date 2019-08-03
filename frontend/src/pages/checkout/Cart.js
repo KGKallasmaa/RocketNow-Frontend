@@ -2,7 +2,6 @@ import React, {Fragment} from "react";
 import {Drawer, Empty, Skeleton} from 'antd';
 import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
-import {Image} from 'cloudinary-react';
 import Redirect from "react-router-dom/es/Redirect";
 import {RemoveFromCart} from '../../buttons/ModifyCart';
 
@@ -24,7 +23,7 @@ const SHOPPINGCART_QUERY = gql`
                     quantity
                     current_price
                     currency
-                    main_image_cloudinary_public_id
+                    main_image_cloudinary_secure_url
                 }
             }
         }
@@ -53,7 +52,7 @@ function generate_temporary_userid(size) {
 function renderResults(good, jwt_token) {
     //TODO: remove const variables  #performance
     const title = good.good.title;
-    const main_image = good.good.main_image_cloudinary_public_id;
+    const main_image = good.good.main_image_cloudinary_secure_url;
 
     const currency = currency_display_dictionary[good.good.currency];
     const price = good.price_per_one_item;
@@ -66,8 +65,7 @@ function renderResults(good, jwt_token) {
                     <div className="col-md-12">
                         <div className="row">
                             <div className="col-md-3">
-                                <Image secure="true" cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
-                                       publicId={main_image} width="60" crop="scale"/>
+                                <img alt={title} className="w-100 d-block" src={main_image} style={{width:"60px"}}/>
                             </div>
                             <div className="col-md-7">
                                 <h3>{title}</h3>

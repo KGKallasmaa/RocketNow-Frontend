@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import 'antd/dist/antd.css';
 
-import GoodsPage from "./pages/IndividualGoodPage";
+import GoodsPage from "./pages/ProductPage";
 import SearchResults from "./pages/SearchResults";
 import Reset from "./pages/user/Reset.jsx";
 import ShoppingCart from "./pages/checkout/Cart";
@@ -72,9 +72,9 @@ export default class App extends Component {
                         <Route exact path="/verify/email/:token?"  component={Vefify}/>
                         <Route exact path="/reset/password/:token?"  component={Reset} />
                         <Route exact path="/logout" component={Logout}/>
-                        <Route exact path="/goods/:good_id" component={GoodsPage}/>
+                        <Route exact path="/goods/:nr/:title" component={GoodsPage}/>
                         <Route exact path="/cart"  component={ShoppingCart} />
-                        <Route exact path="/seller/:name"  component={SellerPage} />
+                        <Route exact path="/seller/:nr/:name"  component={SellerPage} />
                         <PrivateRegularRoute path="/checkout" component={Checkout} />
                         <PrivateRegularRoute path="/me" component={MyAccount} />
                         <PrivateRegularRoute path="/success/:success_id" component={Success} />

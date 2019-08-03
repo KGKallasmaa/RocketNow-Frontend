@@ -10,20 +10,27 @@ const ADD_TOCART_MUTAION = gql`
         }
     }
 `;
-const alert_message = (type, title, quantity) => {
+const ADD_TO_FAVORITES_MUTAION = gql`
+    mutation addToFavorites($user_identifier:String!,$good_id:ID!,$quantity:Int!) {
+        addToFavorites(cart_identifier:$user_identifier,good_id:$good_id,quantity:$quantity) {
+            _id
+        }
+    }
+`;
+const alert_message = (type, title, quantity,cathegory) => {
     const abs_quantity = Math.abs(quantity);
     const isSingular = abs_quantity === 1;
 
     if (type === "SUCCESS") {
         if (quantity < 0) {
-            (isSingular) ? message.success(title + ' was removed from the cart') : message.success(abs_quantity + ' ' + title + 's were removed from the cart');
+            (isSingular) ? message.success(title + ' was removed from the '+cathegory) : message.success(abs_quantity + ' ' + title + 's were removed from the '+cathegory);
         } else if (quantity > 0) {
-            (isSingular) ? message.success(title + ' was added to the cart') : message.success(abs_quantity + ' ' + title + 's were added to the cart');
+            (isSingular) ? message.success(title + ' was added to the '+cathegory) : message.success(abs_quantity + ' ' + title + 's were added to the '+cathegory);
         }
     } else if (type === "WARNING") {
-        message.warning(title + " couldn't be added to the cart, because you already have the maximum quantity in your shoppingcart")
+        message.warning(title + " couldn't be added to the "+cathegory+", because you already have selected the maximu quantity")
     } else {
-        (isSingular) ? message.error('An error accrued. ' + title + ' was not added to the cart') : message.error('An error accrued. ' + quantity + ' ' + title + 's were not added to the cart');
+        (isSingular) ? message.error('An error accrued. ' + title + ' was not added to the '+cathegory) : message.error('An error accrued. ' + quantity + ' ' + title + 's were not added to the '+cathegory);
     }
 };
 const make_an_id = (size) => {
@@ -75,21 +82,62 @@ export class AddToCart extends React.Component {
     }
 
     render() {
-        const {good_id,style, quantity, user_identifier, title} = this.state;
+        const {good_id,style, quantity, user_identifier, title,disabled} = this.state;
         return (
             <div>
                 <Mutation
                     mutation={ADD_TOCART_MUTAION}
                     variables={{user_identifier, good_id, quantity}}
                     onCompleted={({data}) => {
-                        alert_message("SUCCESS", title, quantity)
+                        alert_message("SUCCESS", title, quantity,"cart")
                     }
                     }
                 >
                     {(addToCart, {loading, error}) => (
                         <div>
-                            <button style= {style} className="btn btn-warning btn-lg" onClick={addToCart}>
-                                Add to cart
+                            <button disabled={disabled}type="button" style= {style} className="btn btn-outline-warning text-center" onClick={addToCart}>
+                               {<i className="fa fa-check"/>}
+
+                            </button>
+                            {loading && loadingIcon}
+                            {error && alert_message("ERROR", title, quantity)}
+                        </div>
+                    )}
+                </Mutation>
+            </div>
+        );
+    }
+}
+export class AddToFavorites extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: this.props.title,
+            disabled: this.props.disabled,
+            quantity: this.props.quantity,
+            good_id: this.props.good_id,
+            style:this.props.style,
+            user_identifier: getUserId(),
+        };
+    }
+
+    render() {
+        const {good_id,style, quantity, user_identifier, title,disabled} = this.state;
+        console.log(this.state);
+        return (
+            <div>
+                <Mutation
+                    mutation={ADD_TO_FAVORITES_MUTAION}
+                    variables={{user_identifier, good_id, quantity}}
+                    onCompleted={({data}) => {
+                        alert_message("SUCCESS", title, quantity,"favorites")
+                    }
+                    }
+                >
+                    {(addToFavorites, {loading, error}) => (
+                        <div>
+                            <button disabled={disabled} style= {style} className="btn btn-outline-danger text-center" type="button" onClick={addToFavorites}>
+                                {<i className="fa fa-heart"/>}
                             </button>
                             {loading && loadingIcon}
                             {error && alert_message("ERROR", title, quantity)}
@@ -120,7 +168,7 @@ export class RemoveFromCart extends React.Component {
                     mutation={ADD_TOCART_MUTAION}
                     variables={{user_identifier, good_id, quantity}}
                     onCompleted={({data}) => {
-                        alert_message("SUCCESS", title, quantity)
+                        alert_message("SUCCESS", title, quantity,"cart")
                     }
                     }
                 >

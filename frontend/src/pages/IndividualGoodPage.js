@@ -11,8 +11,8 @@ import {Helmet} from "react-helmet";
 const TabPane = Tabs.TabPane;
 
 const INDIVIDUALGOOD_QUERY = gql`
-    query individualGood($good_id: ID!) {
-        individualGood(id: $good_id) {
+    query individualGood($good_id: ID!,$jwt_token:String) {
+        individualGood(id: $good_id,jwt_token:$jwt_token) {
             _id
             title
             current_price
@@ -20,9 +20,8 @@ const INDIVIDUALGOOD_QUERY = gql`
             listing_timestamp
             quantity
             currency
-            main_image_cloudinary_public_id
             main_image_cloudinary_secure_url
-            other_images_cloudinary_public_id
+            other_images_cloudinary_secure_url
             seller {
                 businessname
             }
@@ -69,14 +68,12 @@ export default class GoodsPage extends React.Component {
 
         //Render images
         let images = [];
-        const main_image = good.main_image_cloudinary_public_id;
-        const other_images = good.other_images_cloudinary_public_id;
-        images.push(<div><Image secure="true" cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
-                                publicId={main_image} width="300" crop="scale"/></div>);
+        const main_image = good.main_image_cloudinary_secure_url;
+        const other_images = good.other_images_cloudinary_secure_url;
+        images.push(<div><img alt={title} src={main_image} style={{ width:"300x"}}/></div>);
         for (let index = 0; index < other_images.length; index++) {
             const element = other_images[index];
-            images.push(<div><Image secure="true" cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
-                                    publicId={element} width="300" crop="scale"/></div>);
+            images.push(<div><img alt={title} src={element} style={{ width:"300x"}}/></div>);
         }
         //Render custom attributes and values
         const custom_attribute_names = good.custom_attribute_names;
@@ -149,7 +146,7 @@ export default class GoodsPage extends React.Component {
     render() {
         const good_id = this.props.match.params.good_id;
         //TODO: implement back button
-       //
+        //
         return (
             <div className="container-fluid">
                 <div className="row">
