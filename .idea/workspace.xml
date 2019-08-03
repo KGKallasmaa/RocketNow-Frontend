@@ -2,52 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b9d701a-1cf6-4937-805c-3438943d6dcc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/assets/img/logged_in_girl.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/SearchBox.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Home.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/navbarAndFooter/Footer.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/navbarAndFooter/Navbar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/staic/About.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/staic/Blog.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/staic/Business.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/staic/Careers.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/staic/Faq.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/staic/Sitemap.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/staic/Tos.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/css/product.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/ProductPage.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/favicon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/sitemap.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/buttons/ModifyCart.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/buttons/ModifyCart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SearchBox.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/checkout/Cart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Home.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/IndividualGoodPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/IndividualGoodPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/SearchResults.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/SearchResults.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/SellerPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/business/business_public/SellerPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/checkout/Cancel.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/checkout/Cancel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/checkout/Checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/checkout/Checkout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/checkout/Success.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/checkout/Success.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/PageFooter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/PageNavbar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/Reset.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/Reset.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/Signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/style/Navbar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/style/Search_results.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/css/Search_results.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/style/ShoppingcartAndCheckout/checkout.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/css/checkout.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/style/button.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/style/example-pics/CathegoryExample.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/style/example-pics/ReccomendExample.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/style/example-pics/TrendingExample.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/style/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/opensearch.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/opensearch.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/checkout/Cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/checkout/Cart.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -59,7 +25,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/frontend/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="11" column="58" lean-forward="true" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -76,6 +52,12 @@
       <find>.logõ</find>
       <find>NoNo</find>
       <find>Hel</find>
+      <find>&lt;br</find>
+      <find>style=</find>
+      <find>style=&quot;'</find>
+      <find>estima</find>
+      <find>console.l</find>
+      <find>can</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -85,7 +67,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/frontend/.dockerignore" />
-        <option value="$PROJECT_DIR$/frontend/src/index.js" />
         <option value="$PROJECT_DIR$/frontend/package.json" />
         <option value="$PROJECT_DIR$/frontend/docker-compose.yml" />
         <option value="$PROJECT_DIR$/frontend/Dockerfile" />
@@ -98,20 +79,15 @@
         <option value="$PROJECT_DIR$/frontend/src/pages/OldHome.js" />
         <option value="$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/PageFooter.js" />
         <option value="$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/PageNavbar.js" />
-        <option value="$PROJECT_DIR$/frontend/public/index.html" />
-        <option value="$PROJECT_DIR$/frontend/src/buttons/ModifyCart.js" />
-        <option value="$PROJECT_DIR$/frontend/src/pages/IndividualGoodPage.js" />
         <option value="$PROJECT_DIR$/frontend/src/pages/checkout/Success.js" />
         <option value="$PROJECT_DIR$/frontend/opensearch.xml" />
         <option value="$PROJECT_DIR$/frontend/src/pages/SellerPage.js" />
         <option value="$PROJECT_DIR$/frontend/src/pages/user/Reset.js" />
-        <option value="$PROJECT_DIR$/frontend/src/pages/Home.jsx" />
         <option value="$PROJECT_DIR$/frontend/src/pages/checkout/Checkout.js" />
         <option value="$PROJECT_DIR$/frontend/src/components/Searchbox.jsx" />
         <option value="$PROJECT_DIR$/frontend/src/components/SearchBox.jsx" />
         <option value="$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/Navbar.jsx" />
         <option value="$PROJECT_DIR$/frontend/src/pages/Cart.js" />
-        <option value="$PROJECT_DIR$/frontend/src/pages/SearchResults.js" />
         <option value="$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/Footer.jsx" />
         <option value="$PROJECT_DIR$/frontend/src/pages/checkout/Cancel.js" />
         <option value="$PROJECT_DIR$/frontend/src/pages/staic/About.jsx" />
@@ -122,19 +98,30 @@
         <option value="$PROJECT_DIR$/frontend/src/pages/staic/Faq.jsx" />
         <option value="$PROJECT_DIR$/frontend/src/pages/staic/Tos.jsx" />
         <option value="$PROJECT_DIR$/frontend/src/pages/staic/Business.jsx" />
-        <option value="$PROJECT_DIR$/frontend/src/pages/checkout/Cart.js" />
         <option value="$PROJECT_DIR$/frontend/src/pages/staic/Sitemap.jsx" />
         <option value="$PROJECT_DIR$/frontend/src/pages/navbarAndFooter/Footer.jsx" />
         <option value="$PROJECT_DIR$/frontend/src/routes.js" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/oldGoodPage.js" />
+        <option value="$PROJECT_DIR$/frontend/public/index.html" />
+        <option value="$PROJECT_DIR$/frontend/src/index.js" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/IndividualGoodPage.js" />
+        <option value="$PROJECT_DIR$/frontend/public/robots.txt" />
+        <option value="$USER_HOME$/Desktop/product page/index.html" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/Home.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/App.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/buttons/ModifyCart.js" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/user/Login.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/checkout/Cart.js" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/SearchResults.js" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/ProductPage.jsx" />
         <option value="$PROJECT_DIR$/frontend/.env" />
+        <option value="$PROJECT_DIR$/frontend/public/sitemap.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="820" />
-    <option name="y" value="240" />
-    <option name="width" value="1664" />
-    <option name="height" value="996" />
+    <option name="width" value="2560" />
+    <option name="height" value="1440" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -166,16 +153,56 @@
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="RocketNow-Fronend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RocketNow-Fronend" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RocketNow-Fronend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RocketNow-Fronend" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RocketNow-Fronend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RocketNow-Fronend" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="buttons" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RocketNow-Fronend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RocketNow-Fronend" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RocketNow-Fronend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RocketNow-Fronend" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -183,11 +210,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/assets/css" />
+      <recent name="$PROJECT_DIR$/frontend/src/pages" />
       <recent name="$PROJECT_DIR$/frontend/src/pages/checkout" />
       <recent name="$PROJECT_DIR$/frontend/src/assets/img" />
       <recent name="$PROJECT_DIR$/frontend/src/pages/business/public" />
-      <recent name="$PROJECT_DIR$/frontend/src/pages/business" />
-      <recent name="$PROJECT_DIR$/frontend" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -202,7 +229,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.develop">
+  <component name="RunManager" selected="npm.start">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/frontend/package.json" />
       <command value="run" />
@@ -235,8 +262,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.develop" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.develop" />
         <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
@@ -252,23 +279,27 @@
       <option name="presentableId" value="Default" />
       <updated>1563391953808</updated>
       <workItem from="1563391955594" duration="42083000" />
+      <workItem from="1564592340088" duration="470000" />
+      <workItem from="1564689490342" duration="15356000" />
+      <workItem from="1564771386394" duration="688000" />
+      <workItem from="1564834052320" duration="7182000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42083000" />
+    <option name="totallyTimeSpent" value="85063000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
+    <frame x="0" y="0" width="2560" height="1440" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13548641" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11579362" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" weight="0.3293944" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="GraphQL" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.3618907" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.20531757" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.2813885" />
@@ -276,9 +307,24 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" weight="0.3293944" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="GraphQL" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.2097489" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection Results" order="12" weight="0.3293944" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Mongo Explorer" order="6" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info anchor="right" id="Jms Messenger" order="10" />
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -305,133 +351,16 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/frontend/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/docker-compose.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/manifest.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="30" selection-start-column="30" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/public/manifest.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="38" lean-forward="true" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/OldPageFooter.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/Home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="92" column="76" lean-forward="true" selection-end-line="258" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/index.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/App.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/style/logo.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/style/button.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/assets/css/styles.min.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="13" column="28" lean-forward="true" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/App.css" />
+    <entry file="file://$PROJECT_DIR$/frontend/src/style/logo.png" />
+    <entry file="file://$PROJECT_DIR$/frontend/src/style/button.css" />
+    <entry file="file://$PROJECT_DIR$/frontend/src/assets/css/styles.min.css" />
     <entry file="file://$PROJECT_DIR$/frontend/public/favicon.ico">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/PageNavbar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="66" column="29" lean-forward="true" selection-end-line="154" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-            <element signature="e#332#480#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/PageFooter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="68" lean-forward="true" selection-end-line="43" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/IndividualGoodPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/opensearch.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/PageNavbar.js" />
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/PageFooter.js" />
+    <entry file="file://$PROJECT_DIR$/frontend/opensearch.xml" />
     <entry file="file://$PROJECT_DIR$/frontend/src/pages/business/Customers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -448,26 +377,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/user/Reset.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/buttons/ModifyCart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="90" column="49" selection-start-line="90" selection-start-column="49" selection-end-line="90" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/user/Reset.js" />
     <entry file="file://$PROJECT_DIR$/frontend/src/pages/business/new_goods/PhysicalGood.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -487,36 +397,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/SearchBox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" column="8" selection-end-line="55" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/OldNavbar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" selection-start-line="8" selection-end-line="12" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/SearchResults.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4011">
-          <caret line="191" column="43" selection-start-line="191" selection-start-column="43" selection-end-line="191" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/SearchBox.js" />
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/navbar_and_footer/OldNavbar.js" />
     <entry file="file://$PROJECT_DIR$/frontend/src/pages/checkout/Checkout.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="760">
@@ -527,46 +409,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/NavbarAndFooter/OldPageFooter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/OldHome.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3940">
-          <caret line="3" column="54" lean-forward="true" selection-start-line="3" selection-start-column="54" selection-end-line="3" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/static/About.jsx">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/navbarAndFooter/Navbar.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3318">
-          <caret line="158" column="71" lean-forward="true" selection-start-line="158" selection-start-column="71" selection-end-line="158" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="14" column="73" selection-start-line="14" selection-start-column="73" selection-end-line="14" selection-end-column="73" />
-          <folding>
-            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/NavbarAndFooter/OldPageFooter.js" />
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/OldHome.js" />
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/static/About.jsx" />
     <entry file="file://$PROJECT_DIR$/frontend/src/components/SearchBox.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="785">
@@ -587,16 +432,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/user/Signup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="389" column="73" selection-start-line="389" selection-start-column="73" selection-end-line="389" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/user/Signup.js" />
     <entry file="file://$PROJECT_DIR$/frontend/src/pages/staic/Careers.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
@@ -647,36 +483,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/user/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="229" selection-start-line="229" selection-end-line="230" selection-end-column="74" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/checkout/Cart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4074">
-          <caret line="194" lean-forward="true" selection-start-line="194" selection-end-line="194" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/staic/Sitemap.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/user/Login.js" />
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/staic/Sitemap.jsx" />
     <entry file="file://$PROJECT_DIR$/frontend/src/pages/staic/Tos.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -694,30 +502,226 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/routes.js">
+    <entry file="file://$PROJECT_DIR$/frontend/src/routes.js" />
+    <entry file="file://$PROJECT_DIR$/frontend/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1407">
-          <caret line="67" column="68" selection-start-line="67" selection-start-column="68" selection-end-line="67" selection-end-column="68" />
+        <state relative-caret-position="294">
+          <caret line="14" column="38" lean-forward="true" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/oldGoodPage.js" />
+    <entry file="file://$PROJECT_DIR$/frontend/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/Home.jsx">
+    <entry file="file://$PROJECT_DIR$/frontend/public/robots.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="827">
-          <caret line="183" column="10" lean-forward="true" selection-start-line="175" selection-start-column="8" selection-end-line="183" selection-end-column="10" />
+        <state relative-caret-position="189">
+          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="26" column="53" lean-forward="true" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
+          <folding>
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/product page/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="72" selection-start-line="5" selection-start-column="72" selection-end-line="5" selection-end-column="72" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h1#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#h1#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#1;n#h1#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h1#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h6#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#div#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h2#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h2#1;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#div#0;n#div#2;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#3;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#3;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#div#0;n#div#3;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#4;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#4;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#4;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#div#0;n#div#4;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#5;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#5;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#5;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#div#0;n#div#5;n#div#1;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#6;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#8;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="43" column="35" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/App.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="568">
+          <caret line="76" column="88" lean-forward="true" selection-start-line="76" selection-start-column="23" selection-end-line="76" selection-end-column="88" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/navbarAndFooter/Navbar.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="871">
+          <caret line="131" column="79" selection-start-line="131" selection-start-column="45" selection-end-line="131" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/user/Verify.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="105" lean-forward="true" selection-start-line="105" selection-end-line="108" selection-end-column="157" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/IndividualGoodPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2359">
+          <caret line="169" column="32" selection-start-line="166" selection-start-column="23" selection-end-line="175" selection-end-column="35" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/SearchResults.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-331">
+          <caret line="132" column="38" selection-start-line="132" selection-start-column="38" selection-end-line="132" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+            <element signature="n#!!block;n#reformatListingDate#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/buttons/ModifyCart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="124" column="71" selection-start-line="124" selection-start-column="71" selection-end-line="124" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="n#!!block;n#getUserId#0" />
+            <element signature="n#RemoveFromCart#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/user/Login.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-868">
+          <caret line="193" selection-start-line="193" selection-end-line="193" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/checkout/Cart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="25" column="52" lean-forward="true" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/Home.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="58" column="58" lean-forward="true" selection-start-line="58" selection-start-column="3" selection-end-line="58" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#2646#4294#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/ProductPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2813">
+          <caret line="299" column="79" selection-start-line="299" selection-start-column="79" selection-end-line="299" selection-end-column="79" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+            <element signature="n#!!block;n#renderCustomAtributes#0" />
+            <element signature="n#!!block;n#ReccomendationCart#0" />
+            <element signature="n#!!block;n#renderCaursell#0" />
+            <element signature="e#10602#10963#0" />
+            <element signature="e#10999#11218#0" />
+            <element signature="e#13132#13639#0" />
+            <element signature="e#13673#14145#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/public/sitemap.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1050">
+          <caret line="50" column="10" selection-start-line="50" selection-start-column="10" selection-end-line="50" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+        <state relative-caret-position="231">
+          <caret line="11" column="58" lean-forward="true" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
         </state>
       </provider>
     </entry>
