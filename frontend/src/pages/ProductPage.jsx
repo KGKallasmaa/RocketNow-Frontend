@@ -17,13 +17,16 @@ const INDIVIDUALGOOD_QUERY = gql`
             nr
             title
             current_price
+            general_category {
+                name
+                tax
+            }
             description
             listing_timestamp
             quantity
             booked
             currency
             main_image_cloudinary_secure_url
-            other_images_cloudinary_secure_url
             seller {
                 nr
                 businessname
@@ -68,19 +71,12 @@ function renderCustomAtributes(custom_attribute_names, custom_attribute_values) 
                 </tr>)
         }
         return (
-            <div className="row">
-                <div className="col-md-12">
-                    <div>
-                        <h1>&nbsp; &nbsp; &nbsp;</h1>
-                    </div>
-                    <div className="table-responsive">
-                        <table className="table">
-                            <tbody>
-                            {renders}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div className="container-fluid">
+                <table className="table">
+                    <tbody>
+                    {renders}
+                    </tbody>
+                </table>
             </div>
         );
     }
@@ -131,27 +127,6 @@ function ReccomendationCart(good) {
 }
 
 
-function renderCaursell(title, other_images) {
-    const carossselImage_style = {
-        width: "100%",
-        maxHeight: "500px",
-        height: "auto",
-        maxWidth: "100%"
-    };
-    let images = [];
-    if (other_images) {
-        for (let index = 0; index < other_images.length; index++) {
-            const element = other_images[index];
-            images.push(
-                <div className="carousel-item">
-                    <img alt={title} className="w-100 d-block" src={element} style={carossselImage_style}/>
-                </div>
-            );
-        }
-    }
-    return images;
-}
-
 function rendeQuanitity(nr) {
 
     let quanitity = [];
@@ -180,19 +155,18 @@ export default class ProductPage extends React.Component {
     }
 
     renderGood(good) {
-        if (!good) {
-            return;
-        }
+        if (!good) return;
+
         const id = good._id;
         const title = good.title;
         const description = good.description;
         let seller_name = good.seller.businessname;
         let currency = good.currency;
-        let price = good.current_price;
+        const tax = good.general_category.tax;
+        const price = Math.round(100 * ( good.current_price*(1+tax))) / 100;
         let seller_url = "/seller/" + good.seller.nr + "/" + good.seller.businessname;
         let max_quantity = Math.max(good.quantity - good.booked, 0);
         let main_image = good.main_image_cloudinary_secure_url;
-        let other_images = good.other_images_cloudinary_secure_url;
         let custom_attribute_names = good.custom_attribute_names;
         let custom_attribute_values = good.custom_attribute_values;
         let shareDescription = description.length > 80 ? description.substring(0, 80 - 3) + "..." : description;
@@ -231,20 +205,12 @@ export default class ProductPage extends React.Component {
                                  paddingRight: "10px",
                                  minWidth: "310px"
                              }}>
-                            <div className="carousel slide" data-ride="carousel" id="carousel-1"
-                                 style={{maxWidth: "100%"}}>
-                                <div className="carousel-inner" role="listbox" style={{maxWidth: "100%"}}>
-                                    <div className="carousel-item active">
-                                        <img alt={title} className="w-100 d-block" src={main_image} style={{
-                                            width: "100%",
-                                            maxHeight: "500px",
-                                            height: "auto",
-                                            maxWidth: "100%"
-                                        }}/>
-                                        {renderCaursell(title, other_images)}
-                                    </div>
-                                </div>
-                            </div>
+                            <img alt={title} className="w-100 d-block" src={main_image} style={{
+                                width: "100%",
+                                maxHeight: "500px",
+                                height: "auto",
+                                maxWidth: "100%"
+                            }}/>
 
                             <h1 style={{width: "20%", minWidth: "300px", fontSize: "35px"}}>
                                 <i style={{color: "rgb(6,188,57)"}} className="fa fa-arrow-up"/>100
@@ -297,7 +263,8 @@ export default class ProductPage extends React.Component {
                             <br/>
                             <form style={{backgroundColor: "#0c81f7"}} onChange={this.new_quantity}>
                                 <div style={{backgroundColor: "rgb(238,244,247)"}} className="text-uppercase field">
-                                    <select value={this.state.quantity_selected} style={{backgroundColor: "rgb(255,255,255)"}}
+                                    <select value={this.state.quantity_selected}
+                                            style={{backgroundColor: "rgb(255,255,255)"}}
                                             className="custom-select custom-select-lg">
                                         {rendered_quantity}
                                     </select>
@@ -313,7 +280,8 @@ export default class ProductPage extends React.Component {
                                     minWidth: "56px",
                                     paddingRight: "0px"
                                 }}/>
-                                <AddToCart title={title} disabled={max_quantity === 0} quantity={this.state.quantity_selected}
+                                <AddToCart title={title} disabled={max_quantity === 0}
+                                           quantity={this.state.quantity_selected}
                                            good_id={id} style={{
                                     marginLeft: "23px",
                                     width: "auto",

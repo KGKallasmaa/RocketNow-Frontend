@@ -9,6 +9,7 @@ import axios from 'axios';
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import '../../assets/css/login.min.css';
+import {isRegularUserLoggedIn} from "../../components/Authentication";
 
 
 const login_QUERY = gql`
@@ -93,33 +94,33 @@ class NormalLoginForm extends React.Component {
             email: email,
             password: password,
             cart_identifier: cart_identifier,
-            loginMethod:"Regular"
+            loginMethod: "Regular"
         } : {
             email: email,
             password: password,
-            loginMethod:"Regular"
+            loginMethod: "Regular"
         };
 
 
         axios.post(process.env.REACT_APP_SERVER_URL, {
             query: print(login_QUERY),
-            variables:variables
+            variables: variables
         }).then(res => {
             if (res.status !== 200 && res.status !== 201) {
                 return false;
             }
             return res.data;
         }).then(resData => {
-            const token = resData.data.login.token;
-            const tokenExpiration = resData.data.login.tokenExpiration;
-            const userFullName = resData.data.login.userFullName;
-            const userImage_URL = resData.data.login.userImage_URL;
+                const token = resData.data.login.token;
+                const tokenExpiration = resData.data.login.tokenExpiration;
+                const userFullName = resData.data.login.userFullName;
+                const userImage_URL = resData.data.login.userImage_URL;
 
-            sessionStorage.setItem("jwtToken", token);
-            sessionStorage.setItem("jwtToken_expires", tokenExpiration);
-            sessionStorage.setItem("regularUserFullName",userFullName);
-            sessionStorage.setItem("regularUserImageURL",userImage_URL);
-            sessionStorage.removeItem("temporary_user_id");
+                sessionStorage.setItem("jwtToken", token);
+                sessionStorage.setItem("jwtToken_expires", tokenExpiration);
+                sessionStorage.setItem("regularUserFullName", userFullName);
+                sessionStorage.setItem("regularUserImageURL", userImage_URL);
+                sessionStorage.removeItem("temporary_user_id");
                 this.setState({
                     redirect: true,
                     login_user: false
@@ -137,7 +138,6 @@ class NormalLoginForm extends React.Component {
                     }
                 }
             }
-            console.log(error);
             this.setState({
                 redirect: false,
                 login_user: false
@@ -148,7 +148,7 @@ class NormalLoginForm extends React.Component {
 
     SocialLogin = (response, method) => {
         let email;
-        let password=method;
+        let password = method;
         let image_URL;
         let fullname;
 
@@ -171,15 +171,15 @@ class NormalLoginForm extends React.Component {
             email: email,
             password: password,
             cart_identifier: cart_identifier,
-            image_URL:image_URL,
-            loginMethod:method,
-            fullname:fullname
+            image_URL: image_URL,
+            loginMethod: method,
+            fullname: fullname
         } : {
             email: email,
             password: password,
-            image_URL:image_URL,
-            loginMethod:method,
-            fullname:fullname
+            image_URL: image_URL,
+            loginMethod: method,
+            fullname: fullname
         };
 
         axios.post(process.env.REACT_APP_SERVER_URL, {
@@ -191,20 +191,20 @@ class NormalLoginForm extends React.Component {
             }
             return res.data;
         }).then(resData => {
-            const token = resData.data.login.token;
-            const tokenExpiration = resData.data.login.tokenExpiration;
-            const userFullName = resData.data.login.userFullName;
-            const userImage_URL = resData.data.login.userImage_URL;
+                const token = resData.data.login.token;
+                const tokenExpiration = resData.data.login.tokenExpiration;
+                const userFullName = resData.data.login.userFullName;
+                const userImage_URL = resData.data.login.userImage_URL;
 
-            sessionStorage.setItem("jwtToken", token);
-            sessionStorage.setItem("jwtToken_expires", tokenExpiration);
-            sessionStorage.setItem("regularUserFullName",userFullName);
-            sessionStorage.setItem("regularUserImageURL",userImage_URL);
-            sessionStorage.removeItem("temporary_user_id");
-            this.setState({
-                redirect: true,
-                login_user: false
-            });
+                sessionStorage.setItem("jwtToken", token);
+                sessionStorage.setItem("jwtToken_expires", tokenExpiration);
+                sessionStorage.setItem("regularUserFullName", userFullName);
+                sessionStorage.setItem("regularUserImageURL", userImage_URL);
+                sessionStorage.removeItem("temporary_user_id");
+                this.setState({
+                    redirect: true,
+                    login_user: false
+                });
                 return true;
             }
         ).catch(error => {
@@ -237,10 +237,15 @@ class NormalLoginForm extends React.Component {
 
     renderRedirect = () => {
         if (this.state.redirect === true) {
-            const redirect_url = '/';
-            return <Redirect to={redirect_url}/>
+            return <Redirect to="/"/>
         }
     };
+
+     componentDidMount() {
+        if (isRegularUserLoggedIn() === true) {
+            return <Redirect to="/"/>
+        }
+    }
 
     render() {
         const login_user_status = this.state.login_user;
@@ -339,6 +344,7 @@ class NormalLoginForm extends React.Component {
                                 value={this.state.password}
                                 onChange={this.handleChange}
                             />
+                            <span>Forgot your password? <a href="/reset/password">Reset it!</a></span>
                             <div className="invalid-feedback">{this.state.formErrors.password}</div>
                         </Form.Item>
                         <Form.Item>
@@ -364,12 +370,6 @@ class NormalLoginForm extends React.Component {
                         <p style={{marginBottom: "0px"}}> Don't have an account? <a id="register-link"
                                                                                     href="/signup">Sign up!</a>
                         </p>
-                        <br/>
-                        <p style={{marginBottom: "0px"}}> Forgot your password? <a id="register-link"
-                                                                                   href="/reset/password">Reset it!</a>
-                        </p>
-
-
                     </div>
                     <br/>
                     <br/>

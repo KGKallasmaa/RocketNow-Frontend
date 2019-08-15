@@ -6,6 +6,9 @@ import Footer from './navbarAndFooter/Footer.jsx';
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
 import {Helmet} from "react-helmet";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import electronics_img from "../assets/img/Electronics_Category_Image.png";
+import {formatTimeStamp} from "../components/RelativeTimestamp";
 
 
 const SEARCH_QUERY = gql`
@@ -17,6 +20,7 @@ const SEARCH_QUERY = gql`
             current_price
             general_category {
                 name
+                tax
             }
             listing_timestamp
             quantity
@@ -60,43 +64,6 @@ function show_EmptyState(nr_of_items, text) {
     if (nr_of_items === 0) return (<Empty description={text}/>);
 }
 
-function reformatListingDate(listing_time_s) {
-    const current_time_s = new Date().getTime() / 1000;
-    const base = "Listed";
-    let difference = "";
-    let unit = "";
-
-
-    //Time intervals
-    const sPerMinute = 60;
-    const sPerHour = 3600;
-    const sPerDay = 86400;
-    const sPerMonth = 2592000;
-    const sPerYear = 31536000;
-
-    const elapsed = current_time_s - listing_time_s;
-
-    if (elapsed < sPerMinute) {
-        return base + " just now";
-    } else if (elapsed < sPerHour) {
-        difference = Math.floor(elapsed / sPerMinute);
-        unit = (difference === 1) ? " minute" : "minutes";
-    } else if (elapsed < sPerDay) {
-        difference = Math.floor(elapsed / sPerHour);
-        unit = (difference === 1) ? " hour" : "hours";
-    } else if (elapsed < sPerMonth) {
-        difference = Math.floor(elapsed / sPerDay);
-        unit = (difference === 1) ? " day" : "days";
-    } else if (elapsed < sPerYear) {
-        difference = Math.floor(elapsed / sPerMonth);
-        unit = (difference === 1) ? " month" : "months";
-    } else {
-        difference = Math.floor(elapsed / sPerYear);
-        unit = (difference === 1) ? " year" : "years";
-    }
-    //Formatting the result
-    return "Listed " + difference + " " + unit + " ago";
-}
 
 function renderSearchResults(good) {
     const id = good._id;
@@ -104,9 +71,10 @@ function renderSearchResults(good) {
     const main_image = good.main_image_cloudinary_secure_url;
     const seller_name = good.seller.businessname;
 
-    const listing_date = reformatListingDate(good.listing_timestamp);
+    const listing_date = formatTimeStamp(good.listing_timestamp);
     const currency = good.currency;
-    const price = good.current_price;
+    const tax = good.general_category.tax;
+    const price = Math.round(100 * (good.current_price*(1+tax))) / 100;
     const quantity = good.quantity;
 
     const product_url = "/goods/" + good.nr + "/" + title;
@@ -117,7 +85,11 @@ function renderSearchResults(good) {
             <div className="row">
                 <div className="col-md-1"/>
                 <div className="col-md-2">
-                    <img alt={title} className="w-100 d-block" src={main_image} style={{width: "100px"}}/>
+                    <LazyLoadImage
+                        alt={title}
+                        src={main_image}
+                        width="100px"
+                    />
                 </div>
                 <div className="col-md-7">
                     <h4><a href={product_url}>{title}</a></h4>

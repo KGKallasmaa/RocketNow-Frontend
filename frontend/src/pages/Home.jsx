@@ -16,11 +16,10 @@ import gql from "graphql-tag";
 import "../assets/css/home.min.css";
 import {AddToCart} from "../buttons/ModifyCart";
 import Card from "antd/es/card";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 //todo: example pictures. Remove later
 
-
-const axios = require("axios");
 
 const {Meta} = Card;
 
@@ -56,7 +55,7 @@ const RECCOMEND_GOOD_QUERY = gql`
 
 
 const GoodCard = (props) => {
-    const good_url = "/goods/" + props.nr+"/"+props.title;
+    const good_url = "/goods/" + props.nr + "/" + props.title;
     const image_style = {
         height: "auto",
         maxWidth: "350px"
@@ -99,40 +98,46 @@ const TopCategories = (props) => {
     return (
         <div className="row justify-content-center features">
             <div className="col-sm-6 col-md-5 col-lg-4 item">
-                <img className="img-fluid"
-                     style={image_style}
-                     src={book_img}
-                     alt="Books"/>
+                <LazyLoadImage
+                    style={image_style}
+                    src={book_img}
+                    alt="Books"
+                />
             </div>
             <div className="col-sm-6 col-md-5 col-lg-4 item">
-                <img className="img-fluid"
-                     style={image_style}
-                     src={tickets_img}
-                     alt="Tickets"/>
+                <LazyLoadImage
+                    style={image_style}
+                    src={tickets_img}
+                    alt="Tickets"
+                />
             </div>
             <div className="col-sm-6 col-md-5 col-lg-4 item">
-                <img className="img-fluid"
-                     style={image_style}
-                     src={electronics_img}
-                     alt="Electronics"/>
+                <LazyLoadImage
+                    style={image_style}
+                    src={electronics_img}
+                    alt="Electronics"
+                />
             </div>
             <div className="col-sm-6 col-md-5 col-lg-4 item">
-                <img className="img-fluid"
-                     style={image_style}
-                     src={pets_img}
-                     alt="Pets"/>
+                <LazyLoadImage
+                    style={image_style}
+                    src={pets_img}
+                    alt="Pets"
+                />
             </div>
             <div className="col-sm-6 col-md-5 col-lg-4 item">
-                <img className="img-fluid"
-                     style={image_style}
-                     src={jewelry_img}
-                     alt="Jewelry"/>
+                <LazyLoadImage
+                    style={image_style}
+                    src={jewelry_img}
+                    alt="Jewelry"
+                />
             </div>
             <div className="col-sm-6 col-md-5 col-lg-4 item">
-                <img className="img-fluid"
-                     style={image_style}
-                     src={sports_img}
-                     alt="Sports"/>
+                <LazyLoadImage
+                    style={image_style}
+                    src={sports_img}
+                    alt="Sports"
+                />
             </div>
         </div>
     )
@@ -170,7 +175,6 @@ export default class Home extends React.Component {
                 return "";
         }
     }
-
 
 
     render() {
@@ -232,7 +236,7 @@ export default class Home extends React.Component {
                         <br/>
                         <div className="row">
                             <Fragment>
-                                <Query query={RECCOMEND_GOOD_QUERY} variables={{jwt_token,nr}}>
+                                <Query query={RECCOMEND_GOOD_QUERY} variables={{jwt_token, nr}}>
                                     {({data, loading, error}) => {
                                         if (loading) return <Skeleton loading={true}/>;
                                         if (error) console.log(error);
