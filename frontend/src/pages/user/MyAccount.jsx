@@ -214,7 +214,7 @@ export default class MyAccount extends React.Component {
                     <meta property="og:title" content="My account"/>
                     <meta property="og:description"
                           content="View your personal story at Rocketnow"/>
-                    <meta name="description" content="View your personal story at Rocketnow"/>
+                    <meta name="description" content="View your personal story at RocketNow"/>
                 </Helmet>
                 <Navbar/>
                 <div className="features-boxed">
