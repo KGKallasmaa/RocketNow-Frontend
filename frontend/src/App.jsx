@@ -5,8 +5,7 @@ import 'antd/dist/antd.css';
 import GoodsPage from "./pages/ProductPage";
 import SearchResults from "./pages/SearchResults";
 import Reset from "./pages/user/Reset.jsx";
-import ShoppingCart from "./pages/checkout/Cart";
-import Checkout from "./pages/checkout/Checkout";
+import ShoppingCart from "./pages/checkout/Cart.jsx";
 import Home from "./pages/Home.jsx";
 import BusinessHome from "./pages/business/Home";
 
@@ -18,7 +17,7 @@ import MyAccount from "./pages/user/MyAccount";
 
 import SellerPage from "./pages/business/business_public/SellerPage";
 import Redirect from "react-router/es/Redirect";
-import Success from "./pages/checkout/Success";
+import Success from "./pages/checkout/Success.jsx";
 import Cancel from "./pages/checkout/Cancel";
 import About from "./pages/staic/About";
 import Careers from "./pages/staic/Careers";
@@ -26,6 +25,7 @@ import Business from "./pages/staic/Business";
 import Faq from "./pages/staic/Faq";
 import Tos from "./pages/staic/Tos";
 import PrivacyPolicy from "./pages/staic/PrivacyPolicy";
+import OrderReceipt from "./pages/checkout/OrderReceipt";
 import Blog from "./pages/staic/Blog";
 import {isBusinessUserLoggedIn, isRegularUserLoggedIn} from "./components/Authentication";
 
@@ -75,10 +75,10 @@ export default class App extends Component {
                         <Route exact path="/goods/:nr/:title" component={GoodsPage}/>
                         <Route exact path="/cart"  component={ShoppingCart} />
                         <Route exact path="/seller/:nr/:name"  component={SellerPage} />
-                        <PrivateRegularRoute path="/checkout" component={Checkout} />
                         <PrivateRegularRoute path="/me" component={MyAccount} />
                         <PrivateRegularRoute path="/success/:success_id" component={Success} />
-                        <PrivateRegularRoute path = "/cancel/:cancel_id"component = {Cancel}/>
+                        <PrivateRegularRoute path = "/cancel/:cancel_id" component = {Cancel}/>
+                        <PrivateRegularRoute path= "/receipt/order/:order_id" component= {OrderReceipt} />
                         <Route exact path="/search/:query/:page_nr?/:category?"  component={SearchResults} />
                         <PrivateBusinessRoute path= "/business" component={BusinessHome} />
                         <Route exact path="/about"  component={About} />
