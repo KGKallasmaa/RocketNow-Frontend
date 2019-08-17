@@ -262,11 +262,14 @@ export default class ShoppingCart extends React.Component {
         const total = (!shipping || !tax || !subtotal) ? '' : Math.round(100 * (shipping + tax + subtotal)) / 100;
         const currency = (!shipping || !tax || !subtotal) ? '' : currency_display_dictionary[ShippingCurrency];
 
+        const cannonialUrl = process.env.REACT_APP_CLIENT_URL + "/cart";
         return (
             <div>
                 <Navbar/>
                 <Helmet>
-                    <title>Shoppingcart</title>
+                    <title>Shopping cart</title>
+                    <link rel="canonial" href={cannonialUrl}/>
+                    <meta name="description" content="View your shopping cart at RocketNow"/>
                 </Helmet>
                 <div className="px-4 px-lg-0" style={{
                     background: "linear-gradient(to right, #ffffff, #1E96FF)",

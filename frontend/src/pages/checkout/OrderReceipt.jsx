@@ -4,6 +4,7 @@ import logo from '../../assets/img/logo.png';
 import {Query} from "react-apollo";
 import {Skeleton} from "antd";
 import gql from "graphql-tag";
+import {Helmet} from "react-helmet";
 
 const PageLogo = () => {
     return (
@@ -100,6 +101,10 @@ export default class OrderReceipt extends React.Component {
 
         return (
             <div className="container-fluid">
+                <Helmet>
+                    <title>Order nr {order_id}</title>
+                    <meta name="description" content="View the order you made at RocketNow"/>
+                </Helmet>
                 <div className="row">
                     <div className="col-md-6">
                         <PageLogo/>
