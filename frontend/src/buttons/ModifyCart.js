@@ -17,55 +17,33 @@ const ADD_TO_FAVORITES_MUTAION = gql`
         }
     }
 `;
-const alert_message = (type, title, quantity,cathegory) => {
+const alert_message = (type, title, quantity, cathegory) => {
     const abs_quantity = Math.abs(quantity);
     const isSingular = abs_quantity === 1;
 
     if (type === "SUCCESS") {
         if (quantity < 0) {
-            (isSingular) ? message.success(title + ' was removed from the '+cathegory) : message.success(abs_quantity + ' ' + title + 's were removed from the '+cathegory);
+            (isSingular) ? message.success(title + ' was removed from the ' + cathegory) : message.success(abs_quantity + ' ' + title + 's were removed from the ' + cathegory);
         } else if (quantity > 0) {
-            (isSingular) ? message.success(title + ' was added to the '+cathegory) : message.success(abs_quantity + ' ' + title + 's were added to the '+cathegory);
+            (isSingular) ? message.success(title + ' was added to the ' + cathegory) : message.success(abs_quantity + ' ' + title + 's were added to the ' + cathegory);
         }
     } else if (type === "WARNING") {
-        message.warning(title + " couldn't be added to the "+cathegory+", because you already have selected the maximu quantity")
+        message.warning(title + " couldn't be added to the " + cathegory + ", because you already have selected the maximu quantity")
     } else {
-        (isSingular) ? message.error('An error accrued. ' + title + ' was not added to the '+cathegory) : message.error('An error accrued. ' + quantity + ' ' + title + 's were not added to the '+cathegory);
+        (isSingular) ? message.error('An error accrued. ' + title + ' was not added to the ' + cathegory) : message.error('An error accrued. ' + quantity + ' ' + title + 's were not added to the ' + cathegory);
     }
 };
-const make_an_id = (size) => {
-    let text = "";
-    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (let i = 0; i < size; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
-};
+
 const loadingIcon = <Icon type="loading" style={{fontSize: 24}} spin/>;
 
 
 function getUserId() {
-    //Initial variables
     const jwt_token = sessionStorage.getItem("jwtToken");
     const temporary_user_id = sessionStorage.getItem("temporary_user_id");
-    const id_size = 256;
-
-    let user_identifier;
-    //1. Is the user logged in?
     if (jwt_token) {
-        user_identifier = jwt_token;
+        return jwt_token;
     }
-    //2 Do we already have a tempoary used id?
-    else if (typeof temporary_user_id != 'undefined' && temporary_user_id) {
-        user_identifier = temporary_user_id;
-    }
-    //User is not logged in
-    else {
-        user_identifier = make_an_id(id_size);
-        sessionStorage.setItem("temporary_user_id", user_identifier);
-    }
-    return user_identifier;
-
+    return temporary_user_id;
 }
 
 export class AddToCart extends React.Component {
@@ -76,27 +54,28 @@ export class AddToCart extends React.Component {
             disabled: this.props.disabled,
             quantity: this.props.quantity,
             good_id: this.props.good_id,
-            style:this.props.style,
+            style: this.props.style,
             user_identifier: getUserId(),
         };
     }
 
     render() {
-        const {good_id,style, quantity, user_identifier, title,disabled} = this.state;
+        const {good_id, style, quantity, user_identifier, title, disabled} = this.state;
         return (
             <div>
                 <Mutation
                     mutation={ADD_TOCART_MUTAION}
                     variables={{user_identifier, good_id, quantity}}
                     onCompleted={({data}) => {
-                        alert_message("SUCCESS", title, quantity,"cart")
+                        alert_message("SUCCESS", title, quantity, "cart")
                     }
                     }
                 >
                     {(addToCart, {loading, error}) => (
                         <div>
-                            <button disabled={disabled}type="button" style= {style} className="btn btn-outline-warning text-center" onClick={addToCart}>
-                               {<i className="fa fa-check"/>}
+                            <button disabled={disabled} type="button" style={style}
+                                    className="btn btn-outline-warning text-center" onClick={addToCart}>
+                                {<i className="fa fa-check"/>}
 
                             </button>
                             {loading && loadingIcon}
@@ -108,6 +87,7 @@ export class AddToCart extends React.Component {
         );
     }
 }
+
 export class AddToFavorites extends React.Component {
     constructor(props) {
         super(props);
@@ -116,27 +96,27 @@ export class AddToFavorites extends React.Component {
             disabled: this.props.disabled,
             quantity: this.props.quantity,
             good_id: this.props.good_id,
-            style:this.props.style,
+            style: this.props.style,
             user_identifier: getUserId(),
         };
     }
 
     render() {
-        const {good_id,style, quantity, user_identifier, title,disabled} = this.state;
-        console.log(this.state);
+        const {good_id, style, quantity, user_identifier, title, disabled} = this.state;
         return (
             <div>
                 <Mutation
                     mutation={ADD_TO_FAVORITES_MUTAION}
                     variables={{user_identifier, good_id, quantity}}
                     onCompleted={({data}) => {
-                        alert_message("SUCCESS", title, quantity,"favorites")
+                        alert_message("SUCCESS", title, quantity, "favorites")
                     }
                     }
                 >
                     {(addToFavorites, {loading, error}) => (
                         <div>
-                            <button disabled={disabled} style= {style} className="btn btn-outline-danger text-center" type="button" onClick={addToFavorites}>
+                            <button disabled={disabled} style={style} className="btn btn-outline-danger text-center"
+                                    type="button" onClick={addToFavorites}>
                                 {<i className="fa fa-heart"/>}
                             </button>
                             {loading && loadingIcon}
@@ -168,7 +148,7 @@ export class RemoveFromCart extends React.Component {
                     mutation={ADD_TOCART_MUTAION}
                     variables={{user_identifier, good_id, quantity}}
                     onCompleted={({data}) => {
-                        alert_message("SUCCESS", title, quantity,"cart")
+                        alert_message("SUCCESS", title, quantity, "cart")
                     }
                     }
                 >
