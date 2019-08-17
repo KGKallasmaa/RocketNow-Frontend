@@ -6,5 +6,7 @@ Disallow: /cart*
 Disallow: /checkout*
 Disallow: /success*
 Disallow: /cancel*
+Disallow: /receipt/order/*
+
 
 Sitemap: http://rocketnow.eu/sitemap.xml

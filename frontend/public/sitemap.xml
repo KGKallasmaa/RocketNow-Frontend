@@ -6,15 +6,15 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
         <loc>http://rocketnow.eu/</loc>
-        <lastmod>2019-08-02T16:59:52+00:00</lastmod>
+        <lastmod>2019-08-16T16:59:52+00:00</lastmod>
     </url>
     <url>
         <loc>http://rocketnow.eu/login</loc>
-        <lastmod>2019-08-02T16:59:52+00:00</lastmod>
+        <lastmod>2019-08-16T16:59:52+00:00</lastmod>
     </url>
     <url>
         <loc>http://rocketnow.eu/signup</loc>
-        <lastmod>2019-08-02T16:59:52+00:00</lastmod>
+        <lastmod>2019-08-16T16:59:52+00:00</lastmod>
     </url>
     <url>
         <loc>http://rocketnow.eu/about</loc>
@@ -24,14 +24,21 @@
         <loc>http://rocketnow.eu/faq</loc>
         <lastmod>2019-08-02T16:59:52+00:00</lastmod>
     </url>
-
+    <url>
+        <loc>http://rocketnow.eu/cart</loc>
+        <lastmod>2019-08-16T16:59:52+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rocketnow.eu/me</loc>
+        <lastmod>2019-08-16T16:59:52+00:00</lastmod>
+    </url>
     <url>
         <loc>http://rocketnow.eu/tos</loc>
         <lastmod>2019-08-02T16:59:52+00:00</lastmod>
     </url>
     <url>
         <loc>http://rocketnow.eu/careers</loc>
-        <lastmod>2019-08-02T16:59:52+00:00</lastmod>
+        <lastmod>2019-08-16T16:59:52+00:00</lastmod>
     </url>
     <url>
         <loc>http://rocketnow.eu/blog</loc>
@@ -39,14 +46,14 @@
     </url>
     <url>
         <loc>http://rocketnow.eu/goods/1/Harry%20Potter%20and%20the%20Philosopher%20Stone</loc>
-        <lastmod>2019-08-02T16:59:52+00:00</lastmod>
+        <lastmod>2019-08-16T16:59:52+00:00</lastmod>
     </url>
     <url>
         <loc>http://rocketnow.eu/goods/2/Harry%20Potter%20and%20the%20Chamber%20of%20Secrets</loc>
-        <lastmod>2019-08-02T16:59:52+00:00</lastmod>
+        <lastmod>2019-08-16T16:59:52+00:00</lastmod>
     </url>
     <url>
         <loc>http://rocketnow.eu/goods/3/Harry%20Potter%20and%20the%20Prisoner%20of%20Azkaban</loc>
-        <lastmod>2019-08-02T16:59:52+00:00</lastmod>
+        <lastmod>2019-08-16T16:59:52+00:00</lastmod>
     </url>
 </urlset>
