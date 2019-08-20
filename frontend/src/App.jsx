@@ -14,7 +14,7 @@ import Verify from "./pages/user/verify";
 import {MyAccount} from "./pages/user/myAccount";
 
 
-import SellerPage from "./pages/business/business_public/sellerPage";
+import {SellerPage} from "./pages/business/business_public/sellerPage.jsx";
 import Redirect from "react-router/es/Redirect";
 import Success from "./pages/checkout/success.jsx";
 import Cancel from "./pages/checkout/cancel";
@@ -70,6 +70,7 @@ export default class App extends Component {
                     <Route exact path="/goods/:nr/:title" component={GoodsPage}/>
                     <Route exact path="/cart" component={ShoppingCart}/>
                     <Route exact path="/seller/:nr/:name" component={SellerPage}/>
+                    <Route exact path ="/seller/:nr/:name" render={(props) => <SellerPage {...props} />}/>
                     <PrivateRegularRoute path="/me" component={MyAccount}/>
                     <PrivateRegularRoute path="/success/:success_id" component={Success}/>
                     <PrivateRegularRoute path="/cancel/:cancel_id" component={Cancel}/>
