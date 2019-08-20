@@ -1,4 +1,4 @@
-FROM node:latest AS builder
+FROM node:10-alpine AS builder
 
 #Contact information
 MAINTAINER karl.gustav1789@gmail.com
