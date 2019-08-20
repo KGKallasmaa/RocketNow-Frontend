@@ -7,6 +7,7 @@ import '../assets/css/product.min.css';
 import {Navbar} from "../components/navbar";
 import {Footer} from "../components/footer";
 import {AddToCart, AddToFavorites} from "../components/modifyCart";
+import {LazyLoadImage} from 'react-lazy-load-image-component';
 
 const {Option} = Select;
 
@@ -109,9 +110,12 @@ function ReccomendationCart(good) {
     const good_url = "/goods/" + good.nr + "/" + good.title;
     return (
         <div className="col-sm-6 col-md-5 col-lg-4 item">
-            <div className="box">
+            <div className="box" style={{maxWidth: "100%"}}>
                 <a href={good_url}>
-                    <img src={main_image} style={{width: "250px", maxWidth: " 100%"}} alt={title}/>
+                    <LazyLoadImage
+                        alt={title}
+                        src={main_image}
+                        width={"250px"}/>
                 </a>
                 <h3 className="name">{title}</h3>
                 <p className="description">{description}</p>
@@ -179,18 +183,18 @@ export default class ProductPage extends React.Component {
 
         return (
             <div style={{width: "100%"}}>
-                <Helmet>
-                    <title>{title}</title>
-                    <meta name="twitter:description" content={shareDescription}/>
-                    <meta name="twitter:card" content={shareDescription}/>
-                    <meta name="twitter:image" content={main_image}/>
-                    <meta property="og:image" content={main_image}/>
-                    <meta name="description" content={shareDescription}/>
-                    <meta property="og:type" content="website"/>
-                    <meta name="twitter:title" content={twitterTitle}/>
-                    <link rel="canonial" href={urlToShare}/>
-                </Helmet>
                 <div className="container" style={{width: "100%", marginTop: "20px"}}>
+                    <Helmet>
+                        <title>{title}</title>
+                        <meta name="twitter:description" content={shareDescription}/>
+                        <meta name="twitter:card" content={shareDescription}/>
+                        <meta name="twitter:image" content={main_image}/>
+                        <meta property="og:image" content={main_image}/>
+                        <meta name="description" content={shareDescription}/>
+                        <meta property="og:type" content="website"/>
+                        <meta name="twitter:title" content={twitterTitle}/>
+                        <link rel="canonial" href={urlToShare}/>
+                    </Helmet>
                     <div className="row">
                         <div className="col-xl-4"
                              style={{

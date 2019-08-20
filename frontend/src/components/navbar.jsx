@@ -5,18 +5,23 @@ import logo from '../assets/img/logo.svg';
 import account_not_logged_in_img from '../assets/img/user_not_logged_in.png';
 import shopping_cart_img from "../assets/img/shopping_cart_Image.png";
 import {isRegularUserLoggedIn} from "./authentication";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 const PageLogo = () => {
     return (
         <div>
             <a title={"Homepage"} href="/">
-                <img src={logo} style={{
-                    width: "50px",
-                    height: "50px",
+                <div style={{
                     paddingRight: "0px",
                     marginRight: "15px",
                     margin_top: "10px"
-                }} alt="RocketNow logo"/>
+                }} >
+                    <LazyLoadImage
+                        alt="RocketNow logo"
+                        src={logo}
+                        height={"50px"}
+                        width={"50px"}/>
+                </div>
             </a>
         </div>
     )
