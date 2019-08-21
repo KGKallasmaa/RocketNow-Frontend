@@ -2,8 +2,6 @@ User-agent: *
 Disallow: /verify*
 Disallow: /reset*
 Disallow: /logout
-Disallow: /cart*
-Disallow: /checkout*
 Disallow: /success*
 Disallow: /cancel*
 Disallow: /receipt/order/*

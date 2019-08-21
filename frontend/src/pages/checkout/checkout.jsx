@@ -11,7 +11,6 @@ import {CHECKOUT_MUTATION} from "../../graphql/checkout_MUTATION";
 import {ShippingCost_QUERY} from "../../graphql/shippingCost_QUERY";
 import {DeliveryEstimate_QUERY} from "../../graphql/deliveryEstimate_QUERY";
 import {ShippingLocations_QUERY} from "../../graphql/parcelLocations_QUERY";
-import {Helmet} from "react-helmet";
 
 
 const Search = Input.Search;

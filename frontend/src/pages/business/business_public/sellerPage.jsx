@@ -1,5 +1,5 @@
 import {Navbar} from "../../../components/navbar";
-import {Footer} from "../../../components/footer";
+import Footer from "../../../components/footer";
 import {Helmet} from "react-helmet";
 import React, {Fragment} from "react";
 import {Query} from "react-apollo";

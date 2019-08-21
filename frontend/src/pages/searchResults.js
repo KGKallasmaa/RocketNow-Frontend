@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {Divider, Empty, Rate, Skeleton} from 'antd';
 import {AddToCart} from '../components/modifyCart';
 import {Navbar} from '../components/navbar.jsx';
-import {Footer} from '../components/footer.jsx';
+import Footer from '../components/footer.jsx';
 import {Query} from 'react-apollo';
 import {Helmet} from "react-helmet";
 import {LazyLoadImage} from "react-lazy-load-image-component";

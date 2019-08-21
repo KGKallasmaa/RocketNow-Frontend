@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import {Skeleton, Checkbox} from 'antd';
 import {Query} from 'react-apollo';
 import {RemoveFromCart} from '../../components/modifyCart';
-import {Footer} from "../../components/footer.jsx";
+import Footer from "../../components/footer.jsx";
 import {Navbar} from "../../components/navbar.jsx";
 import {isRegularUserLoggedIn} from "../../components/authentication";
 import {ParcelDeliveryLocationForm, GoToPayment, AddressForm} from "./checkout";

@@ -6,7 +6,7 @@ import Redirect from "react-router-dom/es/Redirect";
 import {Helmet} from "react-helmet";
 import axios from 'axios';
 import '../../assets/css/login.min.css';
-import {Footer} from "../../components/footer";
+import Footer from "../../components/footer";
 
 import '../../assets/css/verification.min.css';
 import logo from '../../assets/img/logo.svg';

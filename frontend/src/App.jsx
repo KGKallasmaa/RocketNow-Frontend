@@ -11,7 +11,7 @@ import BusinessHome from "./pages/business/home";
 import Login from "./pages/user/login"
 import Signup from "./pages/user/signup";
 import Verify from "./pages/user/verify";
-import {MyAccount} from "./pages/user/myAccount";
+import MyAccount from "./pages/user/myAccount";
 
 
 import {SellerPage} from "./pages/business/business_public/sellerPage.jsx";
@@ -57,36 +57,34 @@ const PrivateRegularRoute = ({component: Component, ...rest}) => (
     )}/>
 );
 
-export default class App extends Component {
-    render() {
-        return (
-            <Router>
-                <Switch>
-                    <Route exact path="/signup" component={Signup}/>
-                    <Route exact path="/login" component={Login}/>
-                    <Route exact path="/verify/email/:token?" component={Verify}/>
-                    <Route exact path="/reset/password/:token?" component={Reset}/>
-                    <Route exact path="/logout" component={Logout}/>
-                    <Route exact path="/goods/:nr/:title" component={GoodsPage}/>
-                    <Route exact path="/cart" component={ShoppingCart}/>
-                    <Route exact path="/seller/:nr/:name" component={SellerPage}/>
-                    <Route exact path ="/seller/:nr/:name" render={(props) => <SellerPage {...props} />}/>
-                    <PrivateRegularRoute path="/me" component={MyAccount}/>
-                    <PrivateRegularRoute path="/success/:success_id" component={Success}/>
-                    <PrivateRegularRoute path="/cancel/:cancel_id" component={Cancel}/>
-                    <PrivateRegularRoute path="/receipt/order/:order_id" component={OrderReceipt}/>
-                    <Route exact path="/search/:query/:page_nr?/:category?" component={SearchResults}/>
-                    <PrivateBusinessRoute path="/business" component={BusinessHome}/>
-                    <Route exact path="/about" component={About}/>
-                    <Route exact path="/careers" component={Careers}/>
-                    <Route exact path="/rocketbusiness" component={Business}/>
-                    <Route exact path="/faq" component={Faq}/>
-                    <Route exact path="/tos" component={Tos}/>
-                    <Route exact path="/privacy" component={PrivacyPolicy}/>
-                    <Route exact path="/blog" component={Blog}/>
-                    <Route exact path="" component={Home}/>
-                </Switch>
-            </Router>
-        );
-    }
-}
+export default function App() {
+    return (
+        <Router>
+            <Switch>
+                <Route exact path="/signup" component={Signup}/>
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/verify/email/:token?" component={Verify}/>
+                <Route exact path="/reset/password/:token?" component={Reset}/>
+                <Route exact path="/logout" component={Logout}/>
+                <Route exact path="/goods/:nr/:title" component={GoodsPage}/>
+                <Route exact path="/cart" component={ShoppingCart}/>
+                <Route exact path="/seller/:nr/:name" component={SellerPage}/>
+                <Route exact path="/seller/:nr/:name" render={(props) => <SellerPage {...props} />}/>
+                <PrivateRegularRoute path="/me" component={MyAccount}/>
+                <PrivateRegularRoute path="/success/:success_id" component={Success}/>
+                <PrivateRegularRoute path="/cancel/:cancel_id" component={Cancel}/>
+                <PrivateRegularRoute path="/receipt/order/:order_id" component={OrderReceipt}/>
+                <Route exact path="/search/:query/:page_nr?/:category?" component={SearchResults}/>
+                <PrivateBusinessRoute path="/business" component={BusinessHome}/>
+                <Route exact path="/about" component={About}/>
+                <Route exact path="/careers" component={Careers}/>
+                <Route exact path="/rocketbusiness" component={Business}/>
+                <Route exact path="/faq" component={Faq}/>
+                <Route exact path="/tos" component={Tos}/>
+                <Route exact path="/privacy" component={PrivacyPolicy}/>
+                <Route exact path="/blog" component={Blog}/>
+                <Route exact path="" component={Home}/>
+            </Switch>
+        </Router>
+    );
+};

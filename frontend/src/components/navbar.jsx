@@ -75,14 +75,9 @@ function uuidv4() {
 }
 
 function renderMyAccountImage(isLoggedIn, image_URL) {
-    if (isLoggedIn) {
-        return (<img
-            style={myAccountImage_style}
-            src={image_URL} alt="My logged in account"/>);
-    }
-    return (<img
-        style={myAccountImage_style}
-        src={account_not_logged_in_img} alt="My Account"/>);
+    const img = (isLoggedIn) ? image_URL: account_not_logged_in_img;
+    const altMessage = (isLoggedIn) ? "My logged in account": "My Account";
+    return (<img style={myAccountImage_style} src={img} alt={altMessage}/>);
 }
 
 

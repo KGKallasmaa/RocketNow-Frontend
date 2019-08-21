@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import {Helmet} from 'react-helmet';
-import {Footer} from '../../components/footer.jsx';
+import Footer from'../../components/footer.jsx';
 import {Navbar} from '../../components/navbar.jsx';
 import {Skeleton} from 'antd';
 
@@ -126,7 +126,8 @@ function renderAddress(location) {
     }
 }
 
-export const MyAccount = () => {
+
+export default function MyAccount() {
     return (
         <div>
             <Helmet>

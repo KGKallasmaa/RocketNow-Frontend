@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 import {Query} from "react-apollo";
 import { Icon , Skeleton, Steps, message} from "antd";
 import {Helmet} from "react-helmet";
-import {Footer} from "../../components/footer.jsx";
+import Footer from"../../components/footer.jsx";
 import {Navbar} from "../../components/navbar.jsx";
 
 const {Step} = Steps;

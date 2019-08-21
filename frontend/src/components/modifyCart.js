@@ -47,36 +47,25 @@ function getUserId() {
 }
 
 export class AddToCart extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: this.props.title,
-            disabled: this.props.disabled,
-            quantity: this.props.quantity,
-            good_id: this.props.good_id,
-            style: this.props.style,
-            user_identifier: getUserId(),
-        };
-    }
 
     render() {
-        const {good_id, style, quantity, user_identifier, title, disabled} = this.state;
+        const {good_id, style, quantity, title, disabled} = this.props;
+        const user_identifier = getUserId();
         return (
             <div>
                 <Mutation
                     mutation={ADD_TOCART_MUTAION}
                     variables={{user_identifier, good_id, quantity}}
                     onCompleted={({data}) => {
-                        alert_message("SUCCESS", title, quantity, "cart")
+                        alert_message("SUCCESS",title,quantity, "cart")
                     }
                     }
                 >
                     {(addToCart, {loading, error}) => (
                         <div>
-                            <button disabled={disabled} type="button" style={style}
+                            <button disabled={disabled} type="button" style={style} aria-label={"Add to cart"}
                                     className="btn btn-outline-warning text-center" onClick={addToCart}>
-                                {<i className="fa fa-check"/>}
-
+                                Add to Cart
                             </button>
                             {loading && loadingIcon}
                             {error && alert_message("ERROR", title, quantity)}
@@ -115,7 +104,7 @@ export class AddToFavorites extends React.Component {
                 >
                     {(addToFavorites, {loading, error}) => (
                         <div>
-                            <button disabled={disabled} style={style} className="btn btn-outline-danger text-center"
+                            <button disabled={disabled} style={style} className="btn btn-outline-danger text-center" aria-label={"Add to favorites"}
                                     type="button" onClick={addToFavorites}>
                                 {<i className="fa fa-heart"/>}
                             </button>

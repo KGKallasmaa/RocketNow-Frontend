@@ -1,6 +1,7 @@
 import React from 'react';
 
-export const Footer = () => {
+
+export default function Footer() {
     return (
         <div className="footer-dark">
             <footer>
@@ -36,5 +37,5 @@ export const Footer = () => {
                 </div>
             </footer>
         </div>
-    )
+    );
 };

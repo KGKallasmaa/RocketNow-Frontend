@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {Skeleton} from 'antd';
 import {Navbar} from '../components/navbar.jsx';
-import {Footer} from '../components/footer.jsx';
+import Footer from '../components/footer.jsx';
 import {Query} from 'react-apollo';
 
 import book_img from "../assets/img/Book_Category_Image.png";

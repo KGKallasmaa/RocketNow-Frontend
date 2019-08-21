@@ -5,7 +5,7 @@ import {message, Select, Skeleton} from "antd";
 import {Query} from 'react-apollo';
 import '../assets/css/product.min.css';
 import {Navbar} from "../components/navbar";
-import {Footer} from "../components/footer";
+import Footer from "../components/footer";
 import {AddToCart, AddToFavorites} from "../components/modifyCart";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 
@@ -148,7 +148,7 @@ function rendeQuanitity(nr) {
 }
 
 
-export default class ProductPage extends React.Component {
+export default class ProductPage extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -156,6 +156,10 @@ export default class ProductPage extends React.Component {
         };
         this.new_quantity = this.new_quantity.bind(this);
         this.renderGood = this.renderGood.bind(this);
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return this.state.quantity_selected !== nextState.quantity_selected;
     }
 
     renderGood(good) {
@@ -315,10 +319,11 @@ export default class ProductPage extends React.Component {
                                 }}>Estimated
                                 shipping cost:<b>{getShippingEstimate()}</b>
                             </h2>
+                            <br/>
                             <div className="col">
                                 <ul className="list-inline text-center">
                                     <li className="list-inline-item">
-                                        <a href={facebookUrl} target="_blank">
+                                        <a title={"Share it on Facebook"} href={facebookUrl} target="_blank">
                             <span
                                 className="fa-stack fa-lg"><i
                                 className="fa fa-circle fa-stack-2x"/><i
@@ -327,7 +332,7 @@ export default class ProductPage extends React.Component {
                                         </a>
                                     </li>
                                     <li className="list-inline-item">
-                                        <a href={twitterUrl} target="_blank">
+                                        <a title={"Share it on Twitter"} href={twitterUrl} target="_blank">
                             <span
                                 className="fa-stack fa-lg"><i
                                 className="fa fa-circle fa-stack-2x"/><i
@@ -336,7 +341,7 @@ export default class ProductPage extends React.Component {
                                         </a>
                                     </li>
                                     <li className="list-inline-item">
-                                        <a href={emailUrl} target="_blank">
+                                        <a title={"Share it via Email"} href={emailUrl} target="_blank">
                             <span
                                 className="fa-stack fa-lg"><i
                                 className="fa fa-circle fa-stack-2x"/><i
@@ -361,7 +366,6 @@ export default class ProductPage extends React.Component {
 
 
     render() {
-
         const goodVariables = (sessionStorage.getItem("jwtToken") === null) ? {nr: parseInt(this.props.match.params.nr, 10)} : {
             nr: parseInt(this.props.match.params.nr, 10),
             jwt_token: sessionStorage.getItem("jwtToken")
