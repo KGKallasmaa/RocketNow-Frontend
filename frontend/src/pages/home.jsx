@@ -1,243 +1,211 @@
-import React, {Fragment} from 'react';
-import {Skeleton} from 'antd';
-import {Navbar} from '../components/navbar.jsx';
-import Footer from '../components/footer.jsx';
-import {Query} from 'react-apollo';
-
-import book_img from "../assets/img/Book_Category_Image.png";
-import tickets_img from "../assets/img/tickets_category_Image.png";
-import electronics_img from "../assets/img/Electronics_Category_Image.png";
-
-import jewelry_img from "../assets/img/jewelry_Category__Image.png";
-import pets_img from "../assets/img/pets_Category_Image.png";
-import sports_img from "../assets/img/sports_Category_image.png";
-
+import React from 'react';
 import "../assets/css/home.min.css";
-import {AddToCart} from "../components/modifyCart";
-import Card from "antd/es/card";
-import {LazyLoadImage} from "react-lazy-load-image-component";
-import { LazyLoadComponent } from 'react-lazy-load-image-component';
-import {RECCOMEND_GOOD_QUERY} from "../graphql/reccomend_good_QUERY";
+import {Navbar} from "../components/navbar";
+import Footer from "../components/footer";
 import {TRENDING_GOOD_QUERY} from "../graphql/trending_good_QUERY";
+import axios from 'axios';
+import {print} from 'graphql';
+import {message} from "antd";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import {AddToCart} from "../components/modifyCart";
+import {RECOMMEND_GOOD_QUERY} from "../graphql/reccomendGood_QUERY";
+import {BEST_SELLING_QUERY} from "../graphql/bestSelling_QUERY";
 
-const {Meta} = Card;
-
-const GoodCard = (props) => {
-    const good_url = "/goods/" + props.nr + "/" + props.title;
-    const image_style = {
-        height: "auto",
-        maxWidth: "350px"
-    };
-    const button_style = {
-        width: "350px",
-        maxWidth: "100%",
-        minWidth: "100%"
-    };
-    const maxDiscriptionLenght = 150;
-    const description = props.description.length > maxDiscriptionLenght ?
-        props.description.substring(0, maxDiscriptionLenght - 3) + "..." :
-        props.description;
-    return (
-        <div className="col-md-4 cust_blogteaser">
-            <LazyLoadComponent>
-                <a href={good_url}>
-                    <Card
-                        hoverable
-                        cover={<img className="img-fluid"
-                                    alt={props.title}
-                                    style={image_style}
-                                    src={props.main_image_cloudinary_secure_url}/>}
-                    >
-                        <Meta title={props.title} description={description}/>
-                    </Card>
-                </a>
-                <AddToCart style={button_style} title={props.title} quantity={1} good_id={props._id}/>
-            </LazyLoadComponent>
-        </div>
-    )
-};
-const TopCategories = () => {
-    const image_style = {
-        height: "150px",
-        width: "50%",
-        maxWidth: "150px"
-    };
-
-    return (
-        <div className="row justify-content-center features">
-            <div className="col-sm-6 col-md-5 col-lg-4 item">
-                <LazyLoadImage
-                    style={image_style}
-                    src={book_img}
-                    alt="Books"
-                />
-            </div>
-            <div className="col-sm-6 col-md-5 col-lg-4 item">
-                <LazyLoadImage
-                    style={image_style}
-                    src={tickets_img}
-                    alt="Tickets"
-                />
-            </div>
-            <div className="col-sm-6 col-md-5 col-lg-4 item">
-                <LazyLoadImage
-                    style={image_style}
-                    src={electronics_img}
-                    alt="Electronics"
-                />
-            </div>
-            <div className="col-sm-6 col-md-5 col-lg-4 item">
-                <LazyLoadImage
-                    style={image_style}
-                    src={pets_img}
-                    alt="Pets"
-                />
-            </div>
-            <div className="col-sm-6 col-md-5 col-lg-4 item">
-                <LazyLoadImage
-                    style={image_style}
-                    src={jewelry_img}
-                    alt="Jewelry"
-                />
-            </div>
-            <div className="col-sm-6 col-md-5 col-lg-4 item">
-                <LazyLoadImage
-                    style={image_style}
-                    src={sports_img}
-                    alt="Sports"
-                />
-            </div>
-        </div>
-    )
+const currency_display_dictionary = {
+    'EUR': '€',
+    'USD': '$',
+    'RUB': '₽',
+    'GBP': '£',
+    'CNY': '¥',
+    'JPY': '¥',
+    'CHF': 'Fr'
 };
 
-
-function generate_temporary_userid(size) {
-    let text = "";
-    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (let i = 0; i < size; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
+function renderSingleCategory(good) {
+    return (
+        <li><a href="#">{good.general_category.name}</a></li>
+    );
 }
 
+function renderSingleTrendingResult(good) {
+    let price = good.current_price * (1 + good.general_category.tax);
+    price = Math.ceil(100 * price) / 100;
+    const good_url = "/goods/" + good.nr + "/" + good.title;
+
+    return (
+        <div className="col-lg-4 col-sm-6">
+            <div className="product-item">
+                <div className="pi-pic">
+                    <a title={good.title} href={good_url}>
+                        <LazyLoadImage
+                            alt={good.title}
+                            src={good.main_image_cloudinary_secure_url}
+                        />
+                    </a>
+                    <div className="pi-links">
+                        <AddToCart good_id={good._id} title={good.title} quantity={1}/>
+                    </div>
+                </div>
+                <div className="pi-text">
+                    <h6>{currency_display_dictionary[good.currency]}{price}</h6>
+                    <p>{good.title}</p>
+                </div>
+            </div>
+        </div>
+    );
+}
 
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            redirect_to_business: false
-        };
-        if (sessionStorage.getItem('business_jwtToken')) {
-            this.setState({
-                redirect_to_business: true
-            });
-        }
+        this.state =
+            {};
     }
 
-    getCountryEmoji(Country) {
-        switch (Country) {
-            case "Estonia":
-                return "🇪🇪";
-            default:
-                return "";
-        }
-    }
+    componentDidMount() {
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(TRENDING_GOOD_QUERY),
 
+        }).then(async resData => {
+                if (resData.data.data.trending.length > 0) {
+                    this.setState({
+                        trending: resData.data.data.trending,
+                    });
+                } else {
+                    this.setState({
+                        trending: "noResults",
+                    });
+                }
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+        const regular_token = sessionStorage.getItem("jwtToken");
+        const jwt_token = (regular_token !== null) ? regular_token : sessionStorage.getItem("temporary_user_id");
+
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(RECOMMEND_GOOD_QUERY),
+            variables: {
+                jwt_token: jwt_token,
+                nr: 6
+            }
+        }).then(async resData => {
+                if (resData.data.data.recommend.length > 0) {
+                    this.setState({
+                        reccomend: resData.data.data.recommend,
+                    });
+                } else {
+                    this.setState({
+                        reccomend: "noResults",
+                    });
+                }
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(BEST_SELLING_QUERY),
+            variables: {
+                nr: 6
+            }
+
+        }).then(async resData => {
+                if (resData.data.data.bestselling.length > 0) {
+                    this.setState({
+                        bestselling: resData.data.data.bestselling,
+                    });
+                } else {
+                    this.setState({
+                        bestselling: "noResults",
+                    });
+                }
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
 
     render() {
-        const card_Columns_style = {
-            marginTop: "52px",
-            marginLeft: "34px",
-            fontFamily: "Open Sans sans-serif",
-            fontSize: "30px",
-            fontWeight: "800",
-            lineHeight: " 32px",
-            color: "rgb(0,0,0)"
-        };
-        const country = 'Estonia';
-
-        const regular_token = sessionStorage.getItem("jwtToken");
-
-        const temporary_user_id = (sessionStorage.getItem("temporary_user_id") !== null) ? sessionStorage.getItem("temporary_user_id") : generate_temporary_userid(256);
-        if (sessionStorage.getItem("temporary_user_id")) sessionStorage.setItem("temporary_user_id", temporary_user_id);
-
-        const jwt_token = (regular_token !== null) ? regular_token : temporary_user_id;
-
-        const nr = 3;
-
+        const {trending, reccomend, bestselling} = this.state;
         return (
             <div>
                 <Navbar/>
                 <br/>
-                <div>
+                <section className="product-filter-section">
                     <div className="container">
-                        <h1 className="display-2 text-justify"
-                            style={card_Columns_style}>
-                            <strong>Trending in&nbsp;{this.getCountryEmoji(country)}</strong></h1>
-                        <br/>
+                        <div className="section-title">
+                            <h2>Recommendations </h2>
+                        </div>
+                        <ul className="product-filter-menu">
+                            {(reccomend !== undefined && reccomend !== "noResults") ? reccomend.map(renderSingleCategory) :
+                                <p/>}
+                        </ul>
                         <div className="row">
-                            <Fragment>
-                                <Query query={TRENDING_GOOD_QUERY} variables={{country}}>
-                                    {({data, loading, error}) => {
-                                        if (loading) return <Skeleton loading={true}/>;
-                                        if (error) console.log(error);
-                                        if (data) {
-                                            if (data.trending.length === 0) {
-                                                return ""
-                                            }
-                                            return data.trending.map(GoodCard)
-                                        }
-                                    }
-                                    }
-                                </Query>
-                            </Fragment>
+                            {(reccomend !== undefined && reccomend !== "noResults") ? reccomend.map(renderSingleTrendingResult) :
+                                <p/>}
                         </div>
                     </div>
-                </div>
-                <br/>
-                <div>
+                </section>
+                <section className="product-filter-section">
                     <div className="container">
-                        <h2 className="text-justify"
-                            style={card_Columns_style}>
-                            <strong>Our picks for you</strong></h2>
-                        <br/>
+                        <div className="section-title">
+                            <h2>Trending </h2>
+                        </div>
+                        <ul className="product-filter-menu">
+                            {(trending !== undefined && trending !== "noResults") ? trending.map(renderSingleCategory) :
+                                <p/>}
+                        </ul>
                         <div className="row">
-                            <Fragment>
-                                <Query query={RECCOMEND_GOOD_QUERY} variables={{jwt_token, nr}}>
-                                    {({data, loading, error}) => {
-                                        if (loading) return <Skeleton loading={true}/>;
-                                        if (error) console.log(error);
-                                        if (data) {
-                                            if (data.recommend.length === 0) {
-                                                return ""
-                                            }
-                                            return data.recommend.map(GoodCard)
-                                        }
-                                    }
-                                    }
-                                </Query>
-                            </Fragment>
+                            {(trending !== undefined && trending !== "noResults") ? trending.map(renderSingleTrendingResult) :
+                                <p/>}
                         </div>
-                        <br/>
-                        <br/>
-                        <br/>
                     </div>
-                </div>
-                <br/>
-                <br/>
-                <div className="features-boxed">
+                </section>
+                <section className="product-filter-section">
                     <div className="container">
-                        <div className="intro">
-                            <h1 className="text-center" style={{fontSize: "45px"}}>Top categories</h1>
+                        <div className="section-title">
+                            <h2>Best sellers </h2>
                         </div>
-                        <TopCategories/>
+                        <ul className="product-filter-menu">
+                            {(bestselling !== undefined && bestselling !== "noResults") ? bestselling.map(renderSingleCategory) :
+                                <p/>}
+                        </ul>
+                        <div className="row">
+                            {(bestselling !== undefined && bestselling !== "noResults") ? bestselling.map(renderSingleTrendingResult) :
+                                <p/>}
+                        </div>
                     </div>
-                </div>
+                </section>
                 <Footer/>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"/>
-                <script
-                    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"/>
+                <script src="../assets/js/main.js"/>
             </div>
         );
     }

@@ -1,12 +1,16 @@
 import gql from "graphql-tag";
 
 export const TRENDING_GOOD_QUERY = gql`
-    query trending($country: String!) {
-        trending(country: $country) {
+    query trending{
+        trending {
             _id
             nr
             title
             current_price
+            general_category {
+                name
+                tax
+            }
             description
             quantity
             currency

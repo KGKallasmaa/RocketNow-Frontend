@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
-export const INDIVIDUALGOOD_QUERY = gql`
-    query individualGood($nr:Int!,$jwt_token:String) {
-        individualGood(nr: $nr,jwt_token:$jwt_token) {
+export const RECOMMEND_GOOD_QUERY = gql`
+    query recommend($jwt_token: String,$nr:Int!) {
+        recommend(jwt_token: $jwt_token,nr:$nr) {
             _id
             nr
             title
@@ -12,17 +12,10 @@ export const INDIVIDUALGOOD_QUERY = gql`
                 tax
             }
             description
-            listing_timestamp
             quantity
             booked
             currency
             main_image_cloudinary_secure_url
-            seller {
-                nr
-                businessname
-            }
-            custom_attribute_names
-            custom_attribute_values
         }
     }
 `;

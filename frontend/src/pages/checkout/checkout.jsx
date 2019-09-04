@@ -277,6 +277,7 @@ export class AddressForm extends Component {
                         <input
                             className={`form-control ${this.errorClass(this.state.formErrors.ShippingName)}`}
                             id="ShippingName"
+                            aria-label={"Shipping name"}
                             name="ShippingName"
                             type="text"
                             placeholder="Full name"
@@ -294,6 +295,7 @@ export class AddressForm extends Component {
                                     <input
                                         className={`form-control ${this.errorClass(this.state.formErrors.ShippingName)}`}
                                         id="ShippingAddressLine1"
+                                        aria-label={"Shipping AddressLine One"}
                                         name="ShippingAddressLine1"
                                         type="text"
                                         placeholder="Street address"
@@ -311,6 +313,7 @@ export class AddressForm extends Component {
                                     <input
                                         className={`form-control ${this.errorClass(this.state.formErrors.ShippingAddressLine2)}`}
                                         id="ShippingAddressLine2"
+                                        aria-label={"Shipping AddressLine Two"}
                                         name="ShippingAddressLine2"
                                         type="text"
                                         placeholder="Apartment, suite, building, floor"
@@ -334,6 +337,7 @@ export class AddressForm extends Component {
                                         className={`form-control ${this.errorClass(this.state.formErrors.ShippingZip)}`}
                                         id="ShippingZip"
                                         name="ShippingZip"
+                                        aria-label={"Shipping Zip Code"}
                                         type="text"
                                         placeholder="Zip/Postal code"
                                         value={ShippingZip}
@@ -351,6 +355,7 @@ export class AddressForm extends Component {
                                         className={`form-control ${this.errorClass(this.state.formErrors.ShippingCity)}`}
                                         id="ShippingCity"
                                         name="ShippingCity"
+                                        aria-label={"Shipping City"}
                                         type="text"
                                         placeholder="City/Town"
                                         value={ShippingCity}
@@ -372,6 +377,7 @@ export class AddressForm extends Component {
                                         className={`form-control ${this.errorClass(this.state.formErrors.ShippingRegion)}`}
                                         id="ShippingRegion"
                                         name="ShippingRegion"
+                                        aria-label={"Shipping Region"}
                                         type="text"
                                         placeholder="State/Province/Region"
                                         value={ShippingRegion}
@@ -389,6 +395,7 @@ export class AddressForm extends Component {
                                         className={`form-control ${this.errorClass(this.state.formErrors.ShippingCountry)}`}
                                         id="ShippingCountry"
                                         name="ShippingCountry"
+                                        aria-label={"Shipping Country"}
                                         type="text"
                                         placeholder="Country"
                                         value={ShippingCountry}
@@ -402,7 +409,7 @@ export class AddressForm extends Component {
                     </div>
                     <Form.Item>
                         <button disabled={!this.state.canSubmit}
-                                className="btn btn-primary btn-lg btn-block" type="submit">
+                                className="site-btn submit-order-btn" type="submit">
                             {(this.state.SavingAddressInfo) ? {loadingIcon} : "Save your shipping address"}
                         </button>
                     </Form.Item>
@@ -416,28 +423,30 @@ export class AddressForm extends Component {
         if (this.props.disabled === true) {
             return (<div/>);
         }
-
-
         const script_url = "https://maps.googleapis.com/maps/api/js?key=" + process.env.REACT_APP_GOOGLE_PLACES_API_KEY + "&libraries=places";
         return (
-            <div className="col-md-12">
-                <div>
-                    <Script
-                        url={script_url}
-                        onLoad={this.handleScriptLoad}
-                    />
-                    <Search id="autocomplete"
-                            placeholder="Search for Your Address"
-                            style={{
-                                margin: '0 auto',
-                                maxWidth: 800,
-                            }}
-                    />
+            <div>
+                <div className="cf-title">
+                    Address Delivery
                 </div>
-                <br/><br/>
-                <div>
-                    {this.renderForm()}
-
+                <div className="col-md-12">
+                    <div>
+                        <Script
+                            url={script_url}
+                            onLoad={this.handleScriptLoad}
+                        />
+                        <Search id="autocomplete"
+                                placeholder="Search for Your Address"
+                                style={{
+                                    margin: '0 auto',
+                                    maxWidth: 800,
+                                }}
+                        />
+                    </div>
+                    <br/>
+                    <div>
+                        {this.renderForm()}
+                    </div>
                 </div>
             </div>
         );
@@ -608,32 +617,43 @@ export class ParcelDeliveryLocationForm extends React.Component {
         }
         const {NearestLocations, OtherLocations} = this.state;
         return (
-            <div className="col-md-12">
-                <br/>
-                <Input value={this.state.ShippingName} placeholder="Shipping name" allowClear
-                       onChange={this.setShippingName}/>
-                <br/>
-                <br/>
-                <Select
-                    showSearch
-                    autoFocus={true}
-                    className="container-fluid"
-                    style={{maxWidth: 800, minWidth: 300}}
-                    placeholder="Search for your favorite location"
-                    optionFilterProp="children"
-                    maxTagCount={5}
-                    onChange={this.handleChange}
-                    filterOption={true}
-                    value={(this.props.ParcelDeliveryLocationCountry !== undefined) ? <Emoji
-                        text={getEmoji(this.props.ParcelDeliveryLocationCountry) + " " + this.props.ParcelDeliveryLocation}/> : undefined}
-                >
-                    <OptGroup label="Near you">
-                        {NearestLocations}
-                    </OptGroup>
-                    <OptGroup label="Other locations">
-                        {OtherLocations}
-                    </OptGroup>
-                </Select>
+            <div>
+                <div className="cf-title">
+                    Parcel Delivery
+                </div>
+                <div className="col-md-12">
+                    <div className="row address-inputs">
+                        <div className="col-md-12">
+                            <input onChange={this.setShippingName} value={this.state.ShippingName} type="text"
+                                   placeholder="Shipping name"/>
+                        </div>
+                        <br/>
+                        <div className="col-md-12">
+                            <div className="row address-inputs">
+                                <Select
+                                    showSearch
+                                    autoFocus={true}
+                                    className="container-fluid"
+                                    style={{maxWidth: 800, minWidth: 300}}
+                                    placeholder="Search for your favorite location"
+                                    optionFilterProp="children"
+                                    maxTagCount={5}
+                                    onChange={this.handleChange}
+                                    filterOption={true}
+                                    value={(this.props.ParcelDeliveryLocationCountry !== undefined) ? <Emoji
+                                        text={getEmoji(this.props.ParcelDeliveryLocationCountry) + " " + this.props.ParcelDeliveryLocation}/> : undefined}
+                                >
+                                    <OptGroup label="Near you">
+                                        {NearestLocations}
+                                    </OptGroup>
+                                    <OptGroup label="Other locations">
+                                        {OtherLocations}
+                                    </OptGroup>
+                                </Select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -700,7 +720,7 @@ export class GoToPayment extends React.Component {
                 <div>
                     <button disabled={this.props.disabled}
                             style={{backgroundColor: "#1F96FE"}}
-                            className="btn btn-primary btn-lg btn-block"
+                            className="site-btn submit-order-btn"
                             onClick={this.goToCheckout}>
                         {this.state.IsLoading && loadingIcon}
                         {!this.state.IsLoading && "Proceed to Payment"}

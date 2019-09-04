@@ -1,65 +1,27 @@
-import React, {Fragment} from 'react';
-import gql from 'graphql-tag';
-import {Helmet} from "react-helmet";
-import {message, Select, Skeleton} from "antd";
-import {Query} from 'react-apollo';
-import '../assets/css/product.min.css';
-import {Navbar} from "../components/navbar";
+import React from 'react';
+import {message} from "antd";
+
+import "../assets/css/product.min.css"
+
 import Footer from "../components/footer";
-import {AddToCart, AddToFavorites} from "../components/modifyCart";
+import {Navbar} from "../components/navbar";
+import axios from 'axios';
+import {print} from 'graphql';
+import {Helmet} from "react-helmet";
+import {product_QUERY} from "../graphql/individualProduct_QUERY";
+import {RECOMMEND_GOOD_QUERY} from "../graphql/reccomendGood_QUERY";
+import {AddToCart} from "../components/modifyCart";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 
-const {Option} = Select;
-
-const INDIVIDUALGOOD_QUERY = gql`
-    query individualGood($nr:Int!,$jwt_token:String) {
-        individualGood(nr: $nr,jwt_token:$jwt_token) {
-            _id
-            nr
-            title
-            current_price
-            general_category {
-                name
-                tax
-            }
-            description
-            listing_timestamp
-            quantity
-            booked
-            currency
-            main_image_cloudinary_secure_url
-            seller {
-                nr
-                businessname
-            }
-            custom_attribute_names
-            custom_attribute_values
-        }
-    }
-`;
-const RECCOMEND_GOOD_QUERY = gql`
-    query recommend($jwt_token: String,$nr:Int!) {
-        recommend(jwt_token: $jwt_token,nr:$nr) {
-            _id
-            nr
-            title
-            current_price
-            description
-            quantity
-            booked
-            currency
-            main_image_cloudinary_secure_url
-        }
-    }
-`;
-
-function renderQuanitity(max_quantity) {
-    const children = [];
-    for (let i = 1; i < Math.min(11, max_quantity); i++) {
-        children.push(<Option key={i}>{i}</Option>);
-    }
-    return children;
-}
+const currency_display_dictionary = {
+    'EUR': '€',
+    'USD': '$',
+    'RUB': '₽',
+    'GBP': '£',
+    'CNY': '¥',
+    'JPY': '¥',
+    'CHF': 'Fr'
+};
 
 function renderCustomAtributes(custom_attribute_names, custom_attribute_values) {
     if (custom_attribute_names) {
@@ -83,22 +45,34 @@ function renderCustomAtributes(custom_attribute_names, custom_attribute_values) 
     }
 }
 
-//TODO
-function getDeliveryEstimate() {
-    return ("05.09.3029");
+function rendeOtherImages(otherImages, title) {
+    if (!otherImages) {
+        return;
+    }
+    let images = [];
+    for (let i = 0; i < otherImages.length; i++) {
+        const img = otherImages[i];
+        images.push(
+            <div className="pt active" data-imgbigurl={img}>
+                <img src={img} alt={title}/>
+            </div>
+        );
+    }
+    return (
+        <div className="product-thumbs"  style={{overflow: "hidden", marginBottom:"25px", outline: "none"}}>
+            <div className="product-thumbs-track">
+                {images}
+            </div>
+        </div>
+
+    );
 }
 
-//TODO
-function getShippingEstimate() {
-    return ("7€");
-}
 
-//TODO
-function ReccomendationCart(good) {
+function reccomendationCard(good) {
     if (!good) {
         return;
     }
-    const id = good._id;
     const title = good.title;
     const maxDiscriptionLenght = 80;
     const description = good.description.length > maxDiscriptionLenght ?
@@ -106,319 +80,229 @@ function ReccomendationCart(good) {
         good.description;
 
     const main_image = good.main_image_cloudinary_secure_url;
-    const max_quantity = Math.max(good.quantity - good.booked, 0);
     const good_url = "/goods/" + good.nr + "/" + good.title;
     return (
         <div className="col-sm-6 col-md-5 col-lg-4 item">
             <div className="box" style={{maxWidth: "100%"}}>
-                <a href={good_url}>
+                <a href={good_url} aria-label={"View recommended good: "+title}>
                     <LazyLoadImage
                         alt={title}
                         src={main_image}
                         width={"250px"}/>
                 </a>
+                <br/>
                 <h3 className="name">{title}</h3>
                 <p className="description">{description}</p>
-                <AddToCart title={title} disabled={max_quantity === 0} quantity={1} good_id={id} style={{
-                    width: "auto",
-                    paddingLeft: "0px",
-                    minWidth: "150px",
-                    paddingRight: "0px"
-                }}/>
+                <AddToCart title={title} quantity={1} good_id={good.id}/>
             </div>
         </div>
     );
 }
 
 
-function rendeQuanitity(nr) {
+export default class Home extends React.Component {
 
-    let quanitity = [];
-
-    quanitity.push(
-        <option value={1} selected="">1</option>
-    );
-
-    for (let i = 1; i < Math.min(10, nr); i++) {
-        quanitity.push(
-            <option value={i + 1}>{i + 1}</option>
-        );
-    }
-    return quanitity;
-}
-
-
-export default class ProductPage extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.state = {
-            quantity_selected: 1
-        };
-        this.new_quantity = this.new_quantity.bind(this);
-        this.renderGood = this.renderGood.bind(this);
+        this.state = {};
     }
 
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return this.state.quantity_selected !== nextState.quantity_selected;
-    }
-
-    renderGood(good) {
-        if (!good) return;
-
-        const id = good._id;
-        const title = good.title;
-        const description = good.description;
-        let seller_name = good.seller.businessname;
-        let currency = good.currency;
-        const tax = good.general_category.tax;
-        const price = Math.round(100 * (good.current_price * (1 + tax))) / 100;
-        let seller_url = "/seller/" + good.seller.nr + "/" + good.seller.businessname;
-        let max_quantity = Math.max(good.quantity - good.booked, 0);
-        let main_image = good.main_image_cloudinary_secure_url;
-        let custom_attribute_names = good.custom_attribute_names;
-        let custom_attribute_values = good.custom_attribute_values;
-        let shareDescription = description.length > 80 ? description.substring(0, 80 - 3) + "..." : description;
-        let urlToShare = process.env.REACT_APP_PUBLIC_URL + "/goods/" + good.nr + "/" + title;
-        let twitterTitle = title + "- Rocketnow";
-        let facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=" + urlToShare;
-        let twitterUrl = "https://twitter.com/share?url=" + urlToShare + "&amp;text=Check%20it%20@%20RocketNow🚀&amp;hashtags=rocketnow";
-        let emailUrl = "mailto:?Subject=View " + title + " at RocketNow🚀 &amp;Body=I%20just%20saw%20a%20cool%20product%20at%20RocketNow" + urlToShare;
-        let rendered_quantity = rendeQuanitity(max_quantity);
-
-        return (
-            <div style={{width: "100%"}}>
-                <div className="container" style={{width: "100%", marginTop: "20px"}}>
-                    <Helmet>
-                        <title>{title}</title>
-                        <meta name="twitter:description" content={shareDescription}/>
-                        <meta name="twitter:card" content={shareDescription}/>
-                        <meta name="twitter:image" content={main_image}/>
-                        <meta property="og:image" content={main_image}/>
-                        <meta name="description" content={shareDescription}/>
-                        <meta property="og:type" content="website"/>
-                        <meta name="twitter:title" content={twitterTitle}/>
-                        <link rel="canonial" href={urlToShare}/>
-                    </Helmet>
-                    <div className="row">
-                        <div className="col-xl-4"
-                             style={{
-                                 width: "20%",
-                                 maxWidth: "100%",
-                                 marginTop: "10px",
-                                 maxHeight: "500px",
-                                 marginBottom: "20px",
-                                 height: "auto",
-                                 padding: "10px",
-                                 paddingBottom: "10px",
-                                 paddingRight: "10px",
-                                 minWidth: "310px"
-                             }}>
-                            <img alt={title} className="w-100 d-block" src={main_image} style={{
-                                width: "100%",
-                                maxHeight: "500px",
-                                height: "auto",
-                                maxWidth: "100%"
-                            }}/>
-
-                            <h1 style={{width: "20%", minWidth: "300px", fontSize: "35px"}}>
-                                <i style={{color: "rgb(6,188,57)"}} className="fa fa-arrow-up"/>100
-                                <i style={{color: "rgb(191,11,0)"}} className="fa fa-arrow-down"/>450
-                                &nbsp;#123
-                            </h1>
-
-                        </div>
-                        <div className="col-md-6 col-lg-5 col-xl-4"
-                             style={{
-                                 marginTop: "20px",
-                                 width: "auto",
-                                 maxWidth: "100%",
-                                 paddingRight: "5px",
-                                 paddingLeft: "5px",
-                                 minWidth: "150px",
-                                 marginBottom: "20px"
-                             }}>
-
-                            <h1 style={{fontSize: "32px", color: "#000000"}}>{title}</h1>
-                            <span style={{color: "rgb(0,0,0)"}}>Sold by:<a
-                                href={seller_url}>{seller_name}</a></span>
-                            <p>{description}</p>
-
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <div className="table-responsive">
-                                        <table className="table">
-                                            <tbody>
-                                            {renderCustomAtributes(custom_attribute_names, custom_attribute_values)}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-6 col-lg-3 col-xl-4 visible"
-                             style={{
-                                 backgroundColor: "rgb(238,244,247)",
-                                 marginTop: "20px",
-                                 marginBottom: "10px",
-                                 maxWidth: "100%",
-                                 minWidth: "200px",
-                                 height: "280px"
-                             }}>
-                            <h6 className="text-right"
-                                style={{marginTop: "2px", fontSize: "40px", color: " #000000"}}>
-                                {price}{currency}
-                            </h6>
-                            <br/>
-                            <form style={{backgroundColor: "#0c81f7"}} onChange={this.new_quantity}>
-                                <div style={{backgroundColor: "rgb(238,244,247)"}} className="text-uppercase field">
-                                    <select value={this.state.quantity_selected}
-                                            style={{backgroundColor: "rgb(255,255,255)"}}
-                                            className="custom-select custom-select-lg">
-                                        {rendered_quantity}
-                                    </select>
-                                </div>
-                            </form>
-                            <div className="btn-group" role="group" style={{width: "95%"}}>
-                                <AddToFavorites title={title} disabled={true}
-                                                quantity={this.state.quantity_selected}
-                                                good_id={id} style={{
-                                    width: "auto",
-                                    marginLeft: "0px",
-                                    paddingLeft: "0px",
-                                    minWidth: "56px",
-                                    paddingRight: "0px"
-                                }}/>
-                                <AddToCart title={title} disabled={max_quantity === 0}
-                                           quantity={this.state.quantity_selected}
-                                           good_id={id} style={{
-                                    marginLeft: "23px",
-                                    width: "auto",
-                                    paddingLeft: "0px",
-                                    minWidth: "150px",
-                                    paddingRight: "0px"
-                                }}/>
-
-                            </div>
-                            <br/><br/>
-                            <h2
-                                className="text-right"
-                                style={{
-                                    marginTop: "2px",
-                                    fontSize: "20px",
-                                    color: "#000000",
-                                    marginRight: "5px"
-                                }}>Estimated
-                                arrival time:<b>{getDeliveryEstimate()}</b>
-                            </h2>
-                            <h2 className="text-right"
-                                style={{
-                                    marginTop: "2px",
-                                    fontSize: "20px",
-                                    color: "#000000",
-                                    marginRight: "5px"
-                                }}>Estimated
-                                shipping cost:<b>{getShippingEstimate()}</b>
-                            </h2>
-                            <br/>
-                            <div className="col">
-                                <ul className="list-inline text-center">
-                                    <li className="list-inline-item">
-                                        <a title={"Share it on Facebook"} href={facebookUrl} target="_blank">
-                            <span
-                                className="fa-stack fa-lg"><i
-                                className="fa fa-circle fa-stack-2x"/><i
-                                className="fa fa-facebook fa-stack-1x fa-inverse"/>
-                        </span>
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a title={"Share it on Twitter"} href={twitterUrl} target="_blank">
-                            <span
-                                className="fa-stack fa-lg"><i
-                                className="fa fa-circle fa-stack-2x"/><i
-                                className="fa fa-twitter fa-stack-1x fa-inverse"/>
-                            </span>
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a title={"Share it via Email"} href={emailUrl} target="_blank">
-                            <span
-                                className="fa-stack fa-lg"><i
-                                className="fa fa-circle fa-stack-2x"/><i
-                                className="fa fa-share-alt fa-stack-1x fa-inverse"/>
-                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <br/><br/>
-                </div>
-            </div>
-        );
-    }
-
-
-    new_quantity(event) {
-        this.setState({quantity_selected: event.target.value});
-    }
-
-
-    render() {
+    componentDidMount() {
         const goodVariables = (sessionStorage.getItem("jwtToken") === null) ? {nr: parseInt(this.props.match.params.nr, 10)} : {
             nr: parseInt(this.props.match.params.nr, 10),
             jwt_token: sessionStorage.getItem("jwtToken")
         };
 
-        const reccomendationVariables = (sessionStorage.getItem("jwtToken") === null) ? {nr: 6} : {
-            nr: 6,
-            jwt_token: sessionStorage.getItem("jwtToken")
-        };
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(product_QUERY),
+            variables: goodVariables
+
+        }).then(async resData => {
+                const base = resData.data.data.individualGood;
+                const recVariables = (sessionStorage.getItem("jwtToken") === null) ? {nr: 3} : {
+                    nr: 3,
+                    jwt_token: sessionStorage.getItem("jwtToken")
+                };
+                let rec;
+                await axios.post(process.env.REACT_APP_SERVER_URL, {
+                    query: print(RECOMMEND_GOOD_QUERY),
+                    variables: recVariables
+                }).then(resData => {
+                        rec = resData.data.data.recommend;
+                    }
+                );
+                let price = base.current_price * (1 + base.general_category.tax);
+                price = Math.ceil(100 * price) / 100;
+
+                this.setState({
+                    id: base._id,
+                    title: base.title,
+                    description: base.description,
+                    currency: currency_display_dictionary[base.currency],
+                    price: price,
+                    mainImage: base.main_image_cloudinary_secure_url,
+                    otherImages: base.other_images_cloudinary_secure_url,
+                    category: base.general_category.name,
+                    custom_attribute_names: base.custom_attribute_names,
+                    custom_attribute_values: base.custom_attribute_values,
+                    sellerName: base.seller.businessname,
+                    sellerUrl: "/seller/" + base.seller.nr + "/" + base.seller.businessname,
+                    rec: rec
+                });
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+
+    render() {
+        const {id, title, currency, price, mainImage, description, category, otherImages, custom_attribute_names, custom_attribute_values, sellerName, sellerUrl, rec} = this.state;
+
+        const urlToShare = process.env.REACT_APP_PUBLIC_URL + "/goods/" + this.props.match.params.nr + "/" + title;
+        const facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=" + urlToShare;
+        const faceBookUrlText = "Share " + title + " on Facebook";
+        const twitterUrl = "https://twitter.com/share?url=" + urlToShare + "&amp;text=Check%20it%20@%20RocketNow🚀&amp;hashtags=rocketnow";
+        const twitterUrlText = "Share " + title + " on Twitter";
+        const categoryUrl = "/c/" + category;
+        const twitterTitle = title + "- Rocketnow";
 
         return (
             <div>
                 <Navbar/>
-                <div/>
-                <div style={{width: "100%"}}/>
-                <div className="container" style={{width: "100%", marginTop: "20px"}}>
-                    <div className="row">
-                        <Fragment>
-                            <Query query={INDIVIDUALGOOD_QUERY} variables={goodVariables}>
-                                {({data, loading, error}) => {
-                                    if (loading) return <Skeleton loading={true} active avatar/>;
-                                    if (error) console.log(error);
-                                    if (data) return this.renderGood(data.individualGood);
-                                }
-                                }
-                            </Query>
-                        </Fragment>
-                        <br/>
+                <div className="page-top-info">
+                    <div className="container">
+                        <h4>{title}</h4>
+                        <div className="site-pagination">
+                            <a title={"Home page"} href="/">Home</a> /
+                            <a title={category} href={categoryUrl}>{category}</a>
+                        </div>
                     </div>
-                    <br/><br/>
                 </div>
-                < div
-                    className="features-boxed">
+                <Helmet>
+                    <title>{title}</title>
+                    <meta name="twitter:description" content={description}/>
+                    <meta name="twitter:card" content={description}/>
+                    <meta name="twitter:image" content={mainImage}/>
+                    <meta property="og:image" content={mainImage}/>
+                    <meta name="description" content={description}/>
+                    <meta property="og:type" content="website"/>
+                    <meta name="twitter:title" content={twitterTitle}/>
+                    <link rel="canonial" href={urlToShare}/>
+                </Helmet>
+                <section className="product-section">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-6">
+                                <div className="product-pic-zoom">
+                                    <img className="product-big-img" src={mainImage}
+                                         alt={title}/>
+                                </div>
+                                {rendeOtherImages(otherImages, title)}
+                            </div>
+                            <div className="col-lg-6 product-details">
+                                <h2 className="p-title">{title}</h2>
+                                <h3 className="p-price">{currency} {price}</h3>
+                                <h4 className="p-stock">Sold by: <a href={sellerUrl}><span>{sellerName}</span></a></h4>
+                                <div className="quantity">
+                                    <p>Quantity</p>
+                                    <div className="pro-qty"
+                                         aria-label={"Seleclt how many goods you want to add to your cart"}>
+                                        <input  aria-label={"Select product quantity"}
+                                            type="text" value="1"/>
+                                    </div>
+                                </div>
+                                <AddToCart good_id={id} title={title} quantity={1}/>
+                                <div id="accordion" className="accordion-area">
+                                    <div className="panel">
+                                        <div className="panel-header" id="headingOne">
+                                            <button className="panel-link active" data-toggle="collapse"
+                                                    data-target="#collapse1" aria-expanded="true"
+                                                    aria-controls="collapse1">Description
+                                            </button>
+                                        </div>
+                                        <div id="collapse1" className="collapse show" aria-labelledby="headingOne"
+                                             data-parent="#accordion">
+                                            <div className="panel-body">
+                                                <p> {description}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="panel">
+                                        <div className="panel-header" id="headingTwo">
+                                            <button className="panel-link" data-toggle="collapse"
+                                                    data-target="#collapse2" aria-expanded="false"
+                                                    aria-controls="collapse2">Product details
+                                            </button>
+                                        </div>
+                                        <div id="collapse2" className="collapse" aria-labelledby="headingTwo"
+                                             data-parent="#accordion">
+                                            <div className="panel-body">
+                                                <img src="../assets/img/cards.png" alt=""/>
+                                                {renderCustomAtributes(custom_attribute_names, custom_attribute_values)}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="panel">
+                                        <div className="panel-header" id="headingThree">
+                                            <button className="panel-link" data-toggle="collapse"
+                                                    data-target="#collapse3" aria-expanded="false"
+                                                    aria-controls="collapse3">shipping & Delivery
+                                            </button>
+                                        </div>
+                                        <div id="collapse3" className="collapse" aria-labelledby="headingThree"
+                                             data-parent="#accordion">
+                                            <div className="panel-body">
+                                                <p>Home Delivery
+                                                    <br/>
+                                                    Estimated delivery time is <span>3 - 4 days</span>
+                                                    <br/>
+                                                    Home delivery will cost approximately <span>€5</span>
+                                                </p>
+                                                <p>Parcel Delivery
+                                                    <br/>
+                                                    Estimated delivery time is <span>1 - 2 days</span>
+                                                    <br/>
+                                                    Parcel Delivery will cost approximately <span>€3</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="social-sharing">
+                                    <a  aria-label={"Share "+title+" on Facebook"} title={faceBookUrlText} href={facebookUrl}><i className="fa fa-facebook"/></a>
+                                    <a aria-label={"Share "+title+" on Twitter"} title={twitterUrlText} href={twitterUrl}><i className="fa fa-twitter"/></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                < div className="features-boxed">
                     < div className="container">
                         < div className="intro">
                             < h2 className="text-center"> You might like </h2>
                         </div>
                         <div className="row justify-content-center features">
-                            <Fragment>
-                                <Query query={RECCOMEND_GOOD_QUERY} variables={reccomendationVariables}>
-                                    {({data, loading, error}) => {
-                                        if (loading) return <Skeleton loading={true} active avatar/>;
-                                        if (error) console.log(error);
-                                        if (data) return data.recommend.map(ReccomendationCart);
-                                    }
-                                    }
-                                </Query>
-                            </Fragment>
+                            {(rec !== undefined) ? rec.map(reccomendationCard) : <p/>}
                         </div>
                     </div>
                 </div>
-                <br/>
                 <Footer/>
+                <script src="../assets/js/jquery-3.2.1.min.js"/>
+                <script src="../assets/js/bootstrap.min.js"/>
+                <script src="../assets/js/jquery.nicescroll.min.js"/>
+                <script src="../assets/js/jquery.zoom.min.js"/>
+                <script src="../assets/js/jquery-ui.min.js"/>
+                <script src="../assets/js/main.js"/>
             </div>
         );
     }

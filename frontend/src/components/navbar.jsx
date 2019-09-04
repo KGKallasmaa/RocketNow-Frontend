@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import SearchBox from "./searchBox.jsx";
 
 import logo from '../assets/img/logo.svg';
@@ -34,17 +34,11 @@ const myAccountImage_style = {
 };
 const shoppingCartImage_style = {
     height: "50px",
-    paddingRight: "50px",
-    paddingLeft: "20px",
-    marginTop: "10px"
+    paddingRight: "10px",
+    marginTop: "12px"
 };
 
-const loginButton_style = {
-    backgroundColor: "#1f96fe",
-    color: "rgb(242,247,252)",
-    height: "auto",
-    fontSize: "18px"
-};
+
 
 const collapsibleNavbar_style = {
     paddingLeft: "0px",
@@ -57,15 +51,6 @@ const searchForm_style = {
     paddingTop: "10px",
 };
 
-
-const searchBox_style = {
-    height: "50px",
-    filter: "contrast(146%)",
-    color: "f",
-    maxWidth: "550px",
-    width: "89%",
-    minWidth: "231px"
-};
 
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -81,7 +66,7 @@ function renderMyAccountImage(isLoggedIn, image_URL) {
 }
 
 
-export const Navbar = () => {
+export function Navbar(props) {
     const image_URL = sessionStorage.getItem("regularUserImageURL");
     const userIsLoggedIn = isRegularUserLoggedIn();
     if (!userIsLoggedIn) {
@@ -93,13 +78,15 @@ export const Navbar = () => {
     }
     const login_or_logout_button_text = (!userIsLoggedIn) ? "Login" : "Logout";
     const login_or_logout_button_url = (!userIsLoggedIn) ? ("/login") : ("/logout");
+    const query = props.query;
+
 
     return (
         <nav className="navbar navbar-light navbar-expand-md border rounded-0 shadow navigation-clean-search">
             <div className="container">
                 <PageLogo/>
                 <form className="form-inline mr-auto" target="_self" style={searchForm_style}>
-                    <SearchBox style={searchBox_style}/>
+                    <SearchBox query={query}/>
                 </form>
                 <button data-toggle="collapse" className="navbar-toggler" data-target="#navcol-1"><span
                     className="sr-only">Toggle navigation</span><span
@@ -120,9 +107,9 @@ export const Navbar = () => {
                             </a>
                         </li>
                     </ul>
-                    <a className="btn btn-primary action-button" role="button" title={"Logout"}
+                    <a className="site-btn" role="button" title={login_or_logout_button_text}
                        href={login_or_logout_button_url}
-                       style={loginButton_style}>{login_or_logout_button_text}</a>
+                       >{login_or_logout_button_text}</a>
                 </div>
                 <br/>
             </div>

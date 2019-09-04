@@ -1,12 +1,16 @@
 import gql from "graphql-tag";
 
-export const RECCOMEND_GOOD_QUERY = gql`
-    query recommend($jwt_token: String!,$nr:Int!) {
-        recommend(jwt_token: $jwt_token,nr:$nr) {
+export const BEST_SELLING_QUERY = gql`
+    query bestselling($nr:Int!) {
+        bestselling(nr:$nr) {
             _id
             nr
             title
             current_price
+            general_category {
+                name
+                tax
+            }
             description
             quantity
             booked
