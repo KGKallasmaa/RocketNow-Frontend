@@ -1,28 +1,30 @@
-import {Input} from 'antd';
 import React from 'react';
 import Redirect from "react-router-dom/es/Redirect";
-
-
-const Search = Input.Search;
+import "../assets/css/searchbox.min.css"
 
 export default class SearchBox extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            goods: [],
-            query: ((this.props.query !== null) ? this.props.query : ''),
-            redirect: false
+            redirect: false,
+            query: React.createRef()
         };
         this.handleSearch = this.handleSearch.bind(this);
+        this.updateQuery = this.updateQuery.bind(this);
     }
 
-    handleSearch = (query) => {
+    componentDidMount() {
+            this.setState({
+                query: (this.props.query !== undefined) ? this.props.query : ""
+            });
+    }
+
+    handleSearch() {
         this.setState({
-            query: query,
             redirect: true
         });
-
     };
+
     renderRedirect = () => {
         if (this.state.redirect === true) {
             const query = this.state.query;
@@ -30,21 +32,20 @@ export default class SearchBox extends React.Component {
             return <Redirect to={redirect_url}/>
         }
     };
-
+    updateQuery(e) {
+        e.preventDefault();
+        this.setState({query: e.target.value})
+    }
     render() {
         const query = this.state.query;
         return (
-            <div className="global-search" style={this.props.style}>
-                <Search
-                    placeholder="Search ..."
-                    onSearch={this.handleSearch}
-                    size="large"
-                    autosize={true}
-                    onChange={event => {this.setState({query:event.target.value})}}
-                    value={query}
-                />
-                {this.renderRedirect()}
-            </div>
+            <form id="search-form" onSubmit={this.handleSearch}>
+                <div id="search-box">
+                    <input type="search" name="search-box"  aria-label={"Search for products on RocketNow"} onChange={this.updateQuery} value={query} placeholder="Search for anything" min={1}/>
+                    <i className="fa fa-search" aria-hidden="true"/>
+                    {this.renderRedirect()}
+                </div>
+            </form>
         );
     }
 }

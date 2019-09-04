@@ -2,6 +2,8 @@ import React from "react";
 import {Icon, message} from 'antd';
 import gql from "graphql-tag";
 import {Mutation} from "react-apollo";
+import axios from 'axios';
+import {print} from "graphql";
 
 const ADD_TOCART_MUTAION = gql`
     mutation addToCart($user_identifier:String!,$good_id:ID!,$quantity:Int!) {
@@ -39,43 +41,55 @@ const loadingIcon = <Icon type="loading" style={{fontSize: 24}} spin/>;
 
 function getUserId() {
     const jwt_token = sessionStorage.getItem("jwtToken");
-    const temporary_user_id = sessionStorage.getItem("temporary_user_id");
-    if (jwt_token) {
-        return jwt_token;
+    if (jwt_token === null) {
+        return sessionStorage.getItem("temporary_user_id");
     }
-    return temporary_user_id;
-}
+    return jwt_token;
+
+};
+
 
 export class AddToCart extends React.Component {
+    constructor(props) {
+        super(props);
+        this.addToCart = this.addToCart.bind(this);
+    }
+
+    addToCart(event) {
+        if (event === undefined){
+            return;
+        }
+        event.preventDefault();
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(ADD_TOCART_MUTAION),
+            variables: {user_identifier: getUserId(), good_id: this.props.good_id, quantity: this.props.quantity}
+
+        }).then(() => {
+                alert_message("SUCCESS",this.props.title, this.props.quantity, "cart")
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
 
     render() {
-        const {good_id, style, quantity, title, disabled} = this.props;
-        const user_identifier = getUserId();
         return (
-            <div>
-                <Mutation
-                    mutation={ADD_TOCART_MUTAION}
-                    variables={{user_identifier, good_id, quantity}}
-                    onCompleted={({data}) => {
-                        alert_message("SUCCESS",title,quantity, "cart")
-                    }
-                    }
-                >
-                    {(addToCart, {loading, error}) => (
-                        <div>
-                            <button disabled={disabled} type="button" style={style} aria-label={"Add to cart"}
-                                    className="btn btn-outline-warning text-center" onClick={addToCart}>
-                                Add to Cart
-                            </button>
-                            {loading && loadingIcon}
-                            {error && alert_message("ERROR", title, quantity)}
-                        </div>
-                    )}
-                </Mutation>
-            </div>
+            <button onClick={this.addToCart} aria-label={"Add to cart"}
+                    className="site-btn">Add to cart
+            </button>
         );
     }
 }
+
 
 export class AddToFavorites extends React.Component {
     constructor(props) {
@@ -104,7 +118,8 @@ export class AddToFavorites extends React.Component {
                 >
                     {(addToFavorites, {loading, error}) => (
                         <div>
-                            <button disabled={disabled} style={style} className="btn btn-outline-danger text-center" aria-label={"Add to favorites"}
+                            <button disabled={disabled} style={style} className="btn btn-outline-danger text-center"
+                                    aria-label={"Add to favorites"}
                                     type="button" onClick={addToFavorites}>
                                 {<i className="fa fa-heart"/>}
                             </button>
