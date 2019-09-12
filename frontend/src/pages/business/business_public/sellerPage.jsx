@@ -24,16 +24,16 @@ function renderBusinessUserGoods(good) {
 
 
 export const SellerPage = ({match}) => {
-    const businessname = match.params.name;
+    const displayname = match.params.name;
     const nr = parseInt(match.params.nr, 10);
-    const ogTitle = businessname + "at RocketNow";
-    const shareDescription = "View what " + businessname + " offers at RocketNow";
-    const urlToShare = "/" + nr + "/" + businessname;
+    const ogTitle = displayname + "at RocketNow";
+    const shareDescription = "View what " + displayname + " offers at RocketNow";
+    const urlToShare = "/" + nr + "/" + displayname;
 
     return (
         <div>
             <Helmet>
-                <title>{businessname} at RocketNow</title>
+                <title>{displayname} at RocketNow</title>
                 <meta property="og:title" content={ogTitle}/>
                 <meta property="twitter:title" content={ogTitle}/>
                 <meta property="og:type" content="website"/>
@@ -46,7 +46,7 @@ export const SellerPage = ({match}) => {
                 <br/>
                 <div className="container">
                     <Fragment>
-                        <Query query={individualBusinessUser_QUERY} variables={{nr, businessname}}>
+                        <Query query={individualBusinessUser_QUERY} variables={{nr, displayname}}>
                             {({data, loading}) => {
                                 if (loading) return <Skeleton loading={true} active avatar/>;
                                 if (data) {
@@ -62,10 +62,10 @@ export const SellerPage = ({match}) => {
                                                 <img className="rounded border"
                                                      src={data.individualBusinessUser.logoURL}
                                                      style={{maxWidth: "100px"}}
-                                                     alt={businessname + " logo at RocketNow"}/>
+                                                     alt={displayname + " logo at RocketNow"}/>
                                             </div>
                                             <div className="col-md-6">
-                                                <h1>{businessname}</h1>
+                                                <h1>{displayname}</h1>
                                                 <p className="lead">About</p>
                                                 <p>{data.individualBusinessUser.description}</p>
                                             </div>
@@ -83,7 +83,7 @@ export const SellerPage = ({match}) => {
                     <h1>Products</h1>
                     <div className="row flex-box flex-wrap-wrap">
                         <Fragment>
-                            <Query query={businessUserGoods_QUERY} variables={{nr, businessname}}>
+                            <Query query={businessUserGoods_QUERY} variables={{nr,displayname}}>
                                 {({data, loading}) => {
                                     if (loading) return <Skeleton loading={true} active avatar/>;
                                     if (data) {

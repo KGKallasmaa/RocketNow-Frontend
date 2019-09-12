@@ -9,14 +9,17 @@ export const isRegularUserLoggedIn = ()=>{
 };
 
 export const isBusinessUserLoggedIn = ()=>{
-    if (sessionStorage.getItem("temporary_user_id")) {
+    if (sessionStorage.getItem("temporary_user_id") || sessionStorage.getItem("jwtToken")) {
         return false;
     }
-    if (sessionStorage.getItem("jwtToken")) {
+
+    if (!sessionStorage.getItem("jwtToken_business") ||
+        !sessionStorage.getItem("jwtToken_expires_business") ||
+        !sessionStorage.getItem("businessDisplayName")||
+        !sessionStorage.getItem("businessLegalName")||
+        !sessionStorage.getItem("logoURL")
+    ) {
         return false;
     }
-    if (!sessionStorage.getItem("business_jwtToken") && !sessionStorage.getItem("jwtToken_expires")) {
-        return false;
-    }
-    return !Number(sessionStorage.getItem("jwtToken_expires") < new Date().getTime());
+    return !Number(sessionStorage.getItem("jwtToken_business") < new Date().getTime());
 };

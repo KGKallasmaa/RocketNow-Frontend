@@ -1,32 +1,14 @@
 import React from 'react';
 import {Form, message, Spin, Icon} from 'antd';
-import gql from "graphql-tag";
 import {print} from 'graphql';
-import logo from '../../assets/img/logo.svg';
+import logo from '../../../assets/img/logo.svg';
 import Redirect from "react-router-dom/es/Redirect";
 import {Helmet} from "react-helmet";
 import axios from 'axios';
-import FacebookLogin from "react-facebook-login";
-import GoogleLogin from "react-google-login";
-import '../../assets/css/login.min.css';
+import '../../../assets/css/login.min.css';
+import {businessSignUp_MUTATION} from "../../../graphql/businessSignup_MUTATION";
 
 
-const signUp_MUTATION = gql`
-    mutation createUser($fullname: String!,$email:String!,$password:String,$signupMethod:String!,$image_URL:String) {
-        createUser(userInput:{fullname:$fullname,email: $email, password:$password,signupMethod:$signupMethod,image_URL:$image_URL})
-    }
-`;
-const login_QUERY = gql`
-    query login($email: String!,$password:String!,$cart_identifier:String,$image_URL:String,$loginMethod:String!,$fullname:String)
-    {
-        login(email:$email,password:$password, old_cart_id:$cart_identifier,image_URL:$image_URL,loginMethod:$loginMethod,fullname:$fullname) {
-            userFullName
-            userImage_URL
-            token
-            tokenExpiration
-        }
-    }
-`;
 
 const antIcon = <Icon type="loading" theme="twoTone" twoToneColor="#fffffff" style={{fontSize: 33}} spin/>;
 
@@ -36,78 +18,46 @@ function passwordPreventCommon(password) {
 }
 
 
-function socialLogin(email, image_URL, method, fullname) {
-    const cart_identifier = sessionStorage.getItem("temporary_user_id");
-
-    const variables = (cart_identifier) ? {
-        email: email,
-        password: method,
-        image_URL: image_URL,
-        cart_identifier: cart_identifier,
-        loginMethod: method,
-        fullname: fullname
-    } : {
-        email: email,
-        password: method,
-        image_URL: image_URL,
-        loginMethod: method,
-        fullname: fullname
-    };
-
-    axios.post(process.env.REACT_APP_SERVER_URL, {
-        query: print(login_QUERY),
-        variables: variables
-    }).then(res => {
-        if (res.status !== 200 && res.status !== 201) {
-            return false;
-        }
-        return res.data;
-    }).then(resData => {
-            const token = resData.data.login.token;
-            const tokenExpiration = resData.data.login.tokenExpiration;
-            const userFullName = resData.data.login.userFullName;
-            const userImage_URL = resData.data.login.userImage_URL;
-
-            sessionStorage.setItem("jwtToken", token);
-            sessionStorage.setItem("jwtToken_expires", tokenExpiration);
-            sessionStorage.setItem("regularUserFullName", userFullName);
-            sessionStorage.setItem("regularUserImageURL", userImage_URL);
-            sessionStorage.removeItem("temporary_user_id");
-            return true;
-        }
-    ).catch(error => {
-        if (error.response) {
-            if (error.response.data) {
-                if (error.response.data.errors[0]) {
-                    const errorMessage = error.response.data.errors[0].message;
-                    if (errorMessage !== null) {
-                        message.error(errorMessage);
-                    }
-                }
-            }
-        }
-    });
-}
-
 class NormalSignupForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            legalname: '',
+            logoURL: '',
+            displayname: '',
+            description: '',
+            IBAN: '',
             email: '',
-            fullname: '',
             password: '',
             repassword: '',
             signupBusinessUser: false,
             redirectURL: '/verify/email',
-            formErrors: {email: '', password: '', fullname: '', repassword: ''},
-            formValidity: {email: false, password: false, fullname: false, repassword: false},
+            formErrors: {
+                legalname: '',
+                logoURL: '',
+                displayname: '',
+                description: '',
+                IBAN: '',
+                email: '',
+                password: '',
+                repassword: ''
+            },
+            formValidity: {
+                legalname: false,
+                logoURL: false,
+                displayname: false,
+                description: false,
+                IBAN: false,
+                email: false,
+                password: false,
+                repassword: false
+            },
             canSubmit: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.businessSignupSubmit = this.PersonalSignupSubmit.bind(this);
-        this.SocialSignUp = this.SocialSignUp.bind(this);
+        this.businessSignupSubmit = this.businessSignupSubmit.bind(this);
     }
 
     handleChange(event) {
@@ -127,20 +77,51 @@ class NormalSignupForm extends React.Component {
 
         const emailTest = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/g;
         const passwordCommonTest = passwordPreventCommon(this.state.password);
+        const imageURLTest = /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|svg)/;
+        const ibanTest = /^\b[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?!(?:[ ]?[0-9]){3})(?:[ ]?[0-9]{1,2})?\b/;
 
         validity[name] = value.length > 0;
         let capitalizeFirstLetter = function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         };
         fieldValidationErrors[name] = capitalizeFirstLetter(validity[name] ? '' : `${name} is required and cannot be empty.`);
+
+
+        const {legalname} = this.state;
+
         if (validity[name]) {
             switch (name) {
-                case "fullname": {
-                    //TODO: full name regex
-                    validity[name] = this.state.fullname.length >= 6;
-                    fieldValidationErrors[name] = capitalizeFirstLetter(validity[name] ? '' : `${name} should be a valid name.`);
+                case "legalname": {
+                    validity[name] = value.length >= 6;
+                    fieldValidationErrors[name] = capitalizeFirstLetter(validity[name] ? '' : `Please enter a correct legal name`);
                     break;
                 }
+                case "displayname": {
+                    if (legalname.length < 6) {
+                        fieldValidationErrors[name] = capitalizeFirstLetter(`Display name should be more than 6 characters`);
+                        break;
+                    }
+                    validity[name] = value !== legalname;
+                    fieldValidationErrors[name] = capitalizeFirstLetter(validity[name] ? '' : `Legal name and displayname cannot' be equal`);
+                    break;
+                }
+                case "description": {
+                    validity[name] = value.length < 150;
+                    fieldValidationErrors[name] = capitalizeFirstLetter(validity[name] ? '' : `Description should be less than 150 characters`);
+                    break;
+                }
+
+                case "IBAN": {
+                    validity[name] = ibanTest.test(value);
+                    fieldValidationErrors[name] = capitalizeFirstLetter(validity[name] ? '' : `Please enter a valid IBAN`);
+                    break;
+                }
+                case "logoURL": {
+                    validity[name] = imageURLTest.test(value);
+                    fieldValidationErrors[name] = capitalizeFirstLetter(validity[name] ? '' : `Please enter a valid logo url`);
+                    break;
+                }
+
                 case "email": {
                     validity[name] = emailTest.test(value);
                     fieldValidationErrors[name] = capitalizeFirstLetter(validity[name] ? '' : `Please enter a valid email address.`);
@@ -200,39 +181,40 @@ class NormalSignupForm extends React.Component {
     }
 
     canSubmit() {
+        const {legalname, logoURL, displayname, description, IBAN, email, password, repassword} = this.state.formValidity;
         this.setState({
             canSubmit:
-                this.state.formValidity.fullname &&
-                this.state.formValidity.repassword &&
-                this.state.formValidity.email &&
-                this.state.formValidity.password
+                legalname &&
+                logoURL &&
+                displayname &&
+                description &&
+                IBAN &&
+                email &&
+                password &&
+                repassword
         });
     }
 
-    PersonalSignupSubmit = (event) => {
+    businessSignupSubmit = (event) => {
         event.preventDefault();
         this.setState({signupBusinessUser: true});
 
-        const {email, password, fullname} = this.state;
+        const {legalname, logoURL, displayname, description, IBAN, email, password} = this.state;
 
         axios.post(process.env.REACT_APP_SERVER_URL, {
-            query: print(signUp_MUTATION),
+            query: print(businessSignUp_MUTATION),
             variables: {
-                fullname: fullname,
                 email: email,
                 password: password,
                 signupMethod: "Regular",
+                legalname: legalname,
+                logoURL: logoURL,
+                displayname: displayname,
+                description: description,
+                IBAN: IBAN
             }
-        }).then(res => {
-            if (res.status !== 200 && res.status !== 201) {
-                this.setState({
-                    signupBusinessUser: false,
-                    redirect: false
-                });
-                return res.data;
-            }
-            return null;
         }).then(resData => {
+
                 message.success('You successfully signed up!');
                 this.setState({
                     redirect: true,
@@ -256,64 +238,6 @@ class NormalSignupForm extends React.Component {
             });
 
         });
-    };
-
-    SocialSignUp = (response, method) => {
-        let fullname;
-        let email;
-        let image_URL;
-
-        if (method === "Google") {
-            fullname = response.w3.ig;
-            email = response.w3.U3;
-            image_URL = response.profileObj.imageUrl;
-        } else if (method === "Facebook") {
-            fullname = response.name;
-            email = response.email;
-            image_URL = response.picture.data.url;
-        }
-        if (fullname && email && image_URL) {
-            axios.post(process.env.REACT_APP_SERVER_URL, {
-                query: print(signUp_MUTATION),
-                variables: {
-                    fullname: fullname,
-                    email: email,
-                    image_URL: image_URL,
-                    signupMethod: method,
-                }
-            }).then(res => {
-                if (res.status !== 200 && res.status !== 201) {
-                    message.error('There was a problem setting up your new account with ' + method + ".");
-                    this.setState({
-                        signupBusinessUser: false,
-                        redirect: false
-                    });
-                    throw new Error('Failed to signup user with ' + method);
-                }
-                return res.data;
-            }).then(resData => {
-                    this.setState({
-                        redirect: false
-                    });
-                    //Log users in
-                    socialLogin(email, image_URL, method, fullname);
-
-                    this.setState({
-                        signupBusinessUser: false,
-                        redirect: true,
-                        redirectURL: "/"
-                    });
-                }
-            );
-        }
-    };
-
-    responseGoogle = (response) => {
-        this.SocialSignUp(response, "Google");
-    };
-
-    responseFacebook = (response) => {
-        this.SocialSignUp(response, "Facebook");
     };
 
 
@@ -349,66 +273,76 @@ class NormalSignupForm extends React.Component {
                              alt="RocketNow logo"/>
                     </h4>
                 </div>
-                <div className="login-box-content">
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="row">
-                                    <div className="col-md-6"
-                                         style={{height: "40px", textAlign: "center", width: "250px"}}>
-                                        <FacebookLogin
-                                            appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-                                            fields="name,email,picture"
-                                            buttonText="Sign up with Facebook"
-                                            callback={this.responseFacebook}
-                                            cssClass="my-facebook-button-class"
-                                            icon="fa-facebook"
-                                        />
-                                    </div>
-                                    <div className="col-md-6"
-                                         style={{height: "40px", textAlign: "center", width: "250px"}}>
-                                        <GoogleLogin
-                                            clientId={process.env.REACT_APP_GOOGLE_LOGIN_KEY}
-                                            buttonText="Sign up with Google"
-                                            onSuccess={this.responseGoogle}
-                                            onFailure={() => {
-                                                message.error("Something went wrong with signing in with Google")
-                                            }}
-                                            cookiePolicy={'single_host_origin'}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="d-flex flex-row align-items-center login-box-seperator-container">
-                    < div className="login-box-seperator"/>
-                    <div className="login-box-seperator-text">
-                        <p style={{
-                            marginBottom: "0px",
-                            paddingLeft: "10px",
-                            paddingRight: "10px",
-                            fontWeight: "400",
-                            color: "rgb(201,201,201)"
-                        }}> or </p>
-                    </div>
-                    <div className="login-box-seperator"/>
-                </div>
                 <div className="email-login" style={{backgroundColor: "#ffffff"}}>
-                    <Form onSubmit={this.PersonalSignupSubmit} className="login-form">
+                    <Form onSubmit={this.businessSignupSubmit} className="login-form">
                         <Form.Item>
-                            <label htmlFor="name">Your name</label>
+                            <label htmlFor="name">Legal name</label>
                             <input
-                                className={`form-control ${this.errorClass(this.state.formErrors.fullname)}`}
-                                id="fullname"
-                                name="fullname"
+                                className={`form-control ${this.errorClass(this.state.formErrors.legalname)}`}
+                                id="legalname"
+                                name="legalname"
                                 type="text"
-                                placeholder="Your name"
-                                value={this.state.fullname}
+                                placeholder="Legal name"
+                                value={this.state.legalname}
                                 onChange={this.handleChange}
                             />
-                            <div className="invalid-feedback">{this.state.formErrors.fullname}</div>
+                            <div className="invalid-feedback">{this.state.formErrors.legalname}</div>
+                            <small className="form-text text-muted">e.g. Spotify Technology S.A</small>
+                        </Form.Item>
+                        <Form.Item>
+                            <label htmlFor="name">Display name</label>
+                            <input
+                                className={`form-control ${this.errorClass(this.state.formErrors.displayname)}`}
+                                id="displayname"
+                                name="displayname"
+                                type="text"
+                                placeholder="Display name"
+                                value={this.state.displayname}
+                                onChange={this.handleChange}
+                            />
+                            <div className="invalid-feedback">{this.state.formErrors.displayname}</div>
+                            <small className="form-text text-muted">e.g. Spotify </small>
+                        </Form.Item>
+
+                        <Form.Item>
+                            <label htmlFor="name">IBAN</label>
+                            <input
+                                className={`form-control ${this.errorClass(this.state.formErrors.IBAN)}`}
+                                id="IBAN"
+                                name="IBAN"
+                                type="text"
+                                placeholder="IBAN"
+                                value={this.state.IBAN}
+                                onChange={this.handleChange}
+                            />
+                            <div className="invalid-feedback">{this.state.formErrors.IBAN}</div>
+                        </Form.Item>
+                        <Form.Item>
+                            <label htmlFor="name">Logo URL</label>
+                            <input
+                                className={`form-control ${this.errorClass(this.state.formErrors.logoURL)}`}
+                                id="logoURL"
+                                name="logoURL"
+                                type="url"
+                                placeholder="Logo url"
+                                value={this.state.logoURL}
+                                onChange={this.handleChange}
+                            />
+                            <div className="invalid-feedback">{this.state.formErrors.logoURL}</div>
+                        </Form.Item>
+
+                        <Form.Item>
+                            <label htmlFor="name">Short description</label>
+                                 <input
+                                     className={`form-control ${this.errorClass(this.state.formErrors.description)}`}
+                                     id="description"
+                                     name="description"
+                                     type="text"
+                                     placeholder="Tell your customers about your venture"
+                                     value={this.state.description}
+                                     onChange={this.handleChange}
+                                 />
+                            <div className="invalid-feedback">{this.state.formErrors.description}</div>
                         </Form.Item>
                         <Form.Item>
                             <label htmlFor="email">Email</label>
@@ -416,7 +350,7 @@ class NormalSignupForm extends React.Component {
                                 className={`form-control ${this.errorClass(this.state.formErrors.email)}`}
                                 id="email"
                                 name="email"
-                                type="text"
+                                type="email"
                                 placeholder="Email"
                                 value={this.state.email}
                                 onChange={this.handleChange}
@@ -451,7 +385,7 @@ class NormalSignupForm extends React.Component {
                         </Form.Item>
                         <Form.Item>
                             <p>By signing up I agree to <a href="/tos">Terms of Service</a> and <a
-                                href="privacy">Privacy
+                                href="/privacy">Privacy
                                 Policy</a>
                             </p>
                         </Form.Item>
@@ -469,8 +403,8 @@ class NormalSignupForm extends React.Component {
                     {this.renderRedirect()}
                     <div id="login-box-footer"
                          style={{padding: "10px 20px", paddingBottom: "23px", paddingTop: "18px"}}>
-                        <p style={{marginBottom: "0px"}}> Already have an account? <a id="register-link"
-                                                                                      href="/login">Login!</a>
+                        <p style={{marginBottom: "0px"}}> Already have an business account? <a id="register-link"
+                                                                                      href="/business/login">Login!</a>
                         </p>
                     </div>
                     <br/>
