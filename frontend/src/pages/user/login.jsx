@@ -40,7 +40,7 @@ class NormalLoginForm extends React.Component {
             formValidity: {email: false, password: false}
         };
         this.handleChange = this.handleChange.bind(this);
-        this.PersonalLoginSubmit = this.PersonalLoginSubmit.bind(this);
+        this.BusinessLoginSubmit = this.PersonalLoginSubmit.bind(this);
         this.SocialLogin = this.SocialLogin.bind(this);
     }
 

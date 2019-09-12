@@ -16,7 +16,7 @@ export const SEARCH_QUERY = gql`
             currency
             main_image_cloudinary_secure_url
             seller {
-                businessname
+                displayname
                 nr
             }
             custom_attribute_names

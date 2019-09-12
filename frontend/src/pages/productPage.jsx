@@ -133,6 +133,7 @@ export default class Home extends React.Component {
                 );
                 let price = base.current_price * (1 + base.general_category.tax);
                 price = Math.ceil(100 * price) / 100;
+                console.log(base);
 
                 this.setState({
                     id: base._id,
@@ -145,8 +146,8 @@ export default class Home extends React.Component {
                     category: base.general_category.name,
                     custom_attribute_names: base.custom_attribute_names,
                     custom_attribute_values: base.custom_attribute_values,
-                    sellerName: base.seller.businessname,
-                    sellerUrl: "/seller/" + base.seller.nr + "/" + base.seller.businessname,
+                    sellerName: base.seller.displayname,
+                    sellerUrl: "/seller/" + base.seller.nr + "/" + base.seller.displayname,
                     rec: rec
                 });
             }
