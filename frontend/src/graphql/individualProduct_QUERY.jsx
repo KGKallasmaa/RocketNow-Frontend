@@ -20,7 +20,7 @@ export const product_QUERY = gql`
             other_images_cloudinary_secure_url
             seller {
                 nr
-                businessname
+                displayname
             }
             custom_attribute_names
             custom_attribute_values
