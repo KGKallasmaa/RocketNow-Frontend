@@ -10,10 +10,7 @@ export default function Footer() {
                         <div className="col-sm-6 col-md-3 item">
                             <h3 style={{color: "#ffffff"}}>Services</h3>
                             <ul>
-                                <li><a href="/business/signup">Sell on RocketNow</a></li>
-                                <li><a href="/faq">FAQ</a></li>
-                                <li><a href="/tos">Terms of Service</a></li>
-                                <li><a aria-label={"Sell your goods on RocketNow"} href="/rocketbusiness">Sell on RocketNow</a></li>
+                                <li><a aria-label={"Sell your goods on RocketNow"} href="/business/signup">Sell on RocketNow</a></li>
                                 <li><a aria-label={"See the answers to the most frequently asked questions"} href="/faq">FAQ</a></li>
                                 <li><a aria-label={"Read the terms of service"}  href="/tos">Terms of Service</a></li>
                             </ul>
@@ -25,10 +22,6 @@ export default function Footer() {
                                 <li><a aria-label={"See the careers that are currently available"} href="/careers">Careers</a></li>
                                 <li><a aria-label={"Read some tips and tips about shopping online"} href="/blog">Blog</a></li>
                                 <li><a aria-label={"View our pages sitemap"} href="/sitemap.xml">Sitemap</a></li>
-                                <li><a href="/about">About</a></li>
-                                <li><a href="/careers">Careers</a></li>
-                                <li><a href="/blog">Blog</a></li>
-                                <li><a href="/sitemap.xml">Sitemap</a></li>
                             </ul>
                         </div>
                         <div className="col-md-6 item text">
@@ -42,16 +35,8 @@ export default function Footer() {
                     </div>
                     <p className="copyright">Made with&nbsp;❤️ &nbsp;in Estonia 🇪🇪</p>
                     <p className="copyright">© RocketNow OÜ 2019</p>
-                            <p style={{color: "#ffffff"}}>A new e-commerce platform.</p>
-                        </div>
-                        <div className="col item social"><a href="#"><i
-                            className="icon ion-social-facebook"/></a><a
-                            href="#"><i className="icon ion-social-instagram"/></a></div>
-                    </div>
-                    <p style={{color: "#ffffff"}} className="copyright">Made with&nbsp;❤️ &nbsp;in Estonia 🇪🇪</p>
-                    <p style={{color: "#ffffff"}} className="copyright">© RocketNow OÜ 2019</p>
                 </div>
             </footer>
         </div>
     );
-};
+}
