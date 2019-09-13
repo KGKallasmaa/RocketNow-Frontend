@@ -284,7 +284,6 @@ export default class ShoppingCart extends React.Component {
                                                     <p/>} </b></h4>
                                         </div>
                                     </div>
-
                                     <GoToPayment
                                         jwt_token={jwt_token}
                                         ShippingName={ShippingName}

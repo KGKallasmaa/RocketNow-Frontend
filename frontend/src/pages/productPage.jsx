@@ -93,7 +93,7 @@ function reccomendationCard(good) {
                 <br/>
                 <h3 className="name">{title}</h3>
                 <p className="description">{description}</p>
-                <AddToCart title={title} quantity={1} good_id={good.id}/>
+                <AddToCart title={title} quantity={1} good_id={good._id}/>
             </div>
         </div>
     );
