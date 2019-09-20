@@ -284,26 +284,26 @@ export default class ShoppingCart extends React.Component {
                                                     <p/>} </b></h4>
                                         </div>
                                     </div>
-                                    <GoToPayment
-                                        jwt_token={jwt_token}
-                                        ShippingName={ShippingName}
-                                        ShippingAddressLine1={ShippingAddressLine1}
-                                        ShippingAddressLine2={ShippingAddressLine2}
-                                        ShippingCity={ShippingCity}
-                                        ShippingRegion={ShippingRegion}
-                                        ShippingZip={ShippingZip}
-                                        ShippingCountry={ShippingCountry}
-                                        TimezoneOffset_M={TimezoneOffset_M}
-                                        ShippingMethod={ShippingMethod}
-                                        ShippingCost={ShippingCost + shippingTaxCost}
-                                        taxCost={tax - subTotalTaxCost}
-                                        ParcelDeliveryLocation={ParcelDeliveryLocation}
-                                        ShippingCurrency={ShippingCurrency}
-                                        deliveryEstimate_UTC={ShippingEstimatedDeliveryTime}
-                                        orderSubtotal={orderSubtotal}
-                                        disabled={!ShippingValuesAreValid}
-                                    />
                                 </form>
+                                <GoToPayment
+                                    jwt_token={jwt_token}
+                                    ShippingName={ShippingName}
+                                    ShippingAddressLine1={ShippingAddressLine1}
+                                    ShippingAddressLine2={ShippingAddressLine2}
+                                    ShippingCity={ShippingCity}
+                                    ShippingRegion={ShippingRegion}
+                                    ShippingZip={ShippingZip}
+                                    ShippingCountry={ShippingCountry}
+                                    TimezoneOffset_M={TimezoneOffset_M}
+                                    ShippingMethod={ShippingMethod}
+                                    ShippingCost={ShippingCost + shippingTaxCost}
+                                    taxCost={tax - subTotalTaxCost}
+                                    ParcelDeliveryLocation={ParcelDeliveryLocation}
+                                    ShippingCurrency={ShippingCurrency}
+                                    deliveryEstimate_UTC={ShippingEstimatedDeliveryTime}
+                                    orderSubtotal={orderSubtotal}
+                                    disabled={!ShippingValuesAreValid}
+                                />
                             </div>
                             <div class="col-lg-4 order-1 order-lg-2">
                                 <div class="checkout-cart">
