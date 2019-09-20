@@ -669,19 +669,34 @@ export class GoToPayment extends React.Component {
         this.goToCheckout = this.goToCheckout.bind(this);
     }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (nextState.gettingStripeId === true){
+            return false
+        }
+        return true
+    }
+
+
     componentDidMount() {
         if (window.Stripe) {
-            this.setState({stripe: window.Stripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)});
+            this.setState({
+                stripe: window.Stripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY),
+                IsLoading:false
+
+            });
         } else {
             document.querySelector('#stripe-js').addEventListener('load', () => {
-                this.setState({stripe: window.Stripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)});
+                this.setState({
+                    stripe:window.Stripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY),
+                    IsLoading:false
+                });
             });
         }
-        this.setState({IsLoading: false});
+
     }
 
     goToCheckout() {
-        this.setState({IsLoading: true});
+        this.setState({gettingStripeId: true});
         axios.post(process.env.REACT_APP_SERVER_URL, {
             query: print(CHECKOUT_MUTATION),
             variables: {
@@ -703,12 +718,15 @@ export class GoToPayment extends React.Component {
                 totalCost: this.props.taxCost + this.props.ShippingCost + this.props.orderSubtotal
             }
         }).then(res => {
+            alert(JSON.stringify(res));
+
             if (res.status !== 200 && res.status !== 201) {
                 message.error('Failed to proceed to payment');
                 return;
             }
             return res.data;
         }).then(resData => {
+            console.log(resData)
             this.state.stripe.redirectToCheckout({sessionId: resData.data.showCheckout.sessionId});
         });
         this.setState({IsLoading: false});
