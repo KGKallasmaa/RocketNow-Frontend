@@ -6,7 +6,7 @@ import SearchResults from "./pages/searchResults";
 import Reset from "./pages/user/reset";
 import ShoppingCart from "./pages/checkout/cart";
 import Home from "./pages/home";
-import BusinessHome from "./pages/business/home";
+import BusinessHome from "./pages/business/home.jsx";
 
 import Login from "./pages/user/login"
 import Signup from "./pages/user/signup";
@@ -80,11 +80,15 @@ export default function App() {
                 <Route exact path="/careers" component={Careers}/>
                 <Route exact path="/business/signup" component={BusinessSignup}/>
                 <Route exact path="/business/login" component={BusinessLogin}/>
-                <PrivateBusinessRoute exact path="/business/home" component={BusinessHome}/>
                 <Route exact path="/faq" component={Faq}/>
                 <Route exact path="/tos" component={Tos}/>
                 <Route exact path="/privacy" component={PrivacyPolicy}/>
                 <Route exact path="/blog" component={Blog}/>
+                <PrivateBusinessRoute exact path="/business/home" component={BusinessHome}/>
+                <PrivateBusinessRoute exact path="/business/new/product" component={BusinessHome}/>
+                <PrivateBusinessRoute exact path="/business/finance" component={BusinessHome}/>
+                <PrivateBusinessRoute exact path="/business/orders" component={BusinessHome}/>
+                <PrivateBusinessRoute exact path="/business/warehouse" component={BusinessHome}/>
                 <Route exact path="" component={Home}/>
             </Switch>
         </Router>
