@@ -718,15 +718,12 @@ export class GoToPayment extends React.Component {
                 totalCost: this.props.taxCost + this.props.ShippingCost + this.props.orderSubtotal
             }
         }).then(res => {
-            alert(JSON.stringify(res));
-
             if (res.status !== 200 && res.status !== 201) {
                 message.error('Failed to proceed to payment');
                 return;
             }
             return res.data;
         }).then(resData => {
-            console.log(resData)
             this.state.stripe.redirectToCheckout({sessionId: resData.data.showCheckout.sessionId});
         });
         this.setState({IsLoading: false});
