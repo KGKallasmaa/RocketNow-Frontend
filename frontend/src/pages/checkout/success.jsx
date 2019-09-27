@@ -1,10 +1,11 @@
-import React, {Fragment} from "react";
+import React from "react";
 import gql from "graphql-tag";
-import {Query} from "react-apollo";
-import { Icon , Skeleton, Steps, message} from "antd";
+import {Icon, Steps, message} from "antd";
 import {Helmet} from "react-helmet";
-import Footer from"../../components/footer.jsx";
+import Footer from "../../components/footer.jsx";
 import {Navbar} from "../../components/navbar.jsx";
+import axios from "axios";
+import {print} from "graphql";
 
 const {Step} = Steps;
 
@@ -34,9 +35,57 @@ const OrderGoodCard = (good) => {
     );
 };
 
+function renderOrdergoods(ordergoods) {
+    if (ordergoods) {
+        return ordergoods.map(good => {
+            return <OrderGoodCard image={good.main_image_cloudinary_secure_url}
+                                  title={good.title}/>
+        });
+    }
+    return "";
+}
+
 export default class Success extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            ordergoods: null,
+        };
+        this.makeAnOrder = this.makeAnOrder.bind(this);
+    }
+
+    makeAnOrder() {
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(Order_QUERY),
+            variables: {
+                jwt_token: sessionStorage.getItem("jwtToken"),
+                success_id: this.props.match.params.success_id
+            }
+        }).then(res => {
+                this.setState({
+                    ordergoods:res.data.data.orderGoods.order_items
+                });
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
+    componentDidMount() {
+        this.makeAnOrder();
+    }
+
     render() {
         const CannonialUrl = process.env.REACT_APP_CLIENT_URL + "/success/" + this.props.match.params.success_id;
+        const {ordergoods} = this.state;
         return (
             <div>
                 <Navbar/>
@@ -62,26 +111,7 @@ export default class Success extends React.Component {
                             <br/>
                         </div>
                         <div className="row justify-content-center features">
-                            <Fragment>
-                                <Query query={Order_QUERY}
-                                       variables={{
-                                           jwt_token: sessionStorage.getItem("jwtToken"),
-                                           success_id: this.props.match.params.success_id
-                                       }}>
-                                    {({data, loading, error}) => {
-                                        if (loading) return <Skeleton loading={true} active avatar/>;
-                                        if (error) message.error(error);
-                                        if (data) {
-                                            return data.orderGoods.order_items.map(good => {
-                                                return <OrderGoodCard image={good.main_image_cloudinary_secure_url}
-                                                                      title={good.title}/>
-                                            });
-                                        }
-                                        return "";
-                                    }
-                                    }
-                                </Query>
-                            </Fragment>
+                            {renderOrdergoods(ordergoods)}
                         </div>
                     </div>
                 </div>
