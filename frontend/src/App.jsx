@@ -6,7 +6,8 @@ import SearchResults from "./pages/searchResults";
 import Reset from "./pages/user/reset";
 import ShoppingCart from "./pages/checkout/cart";
 import Home from "./pages/home";
-import BusinessHome from "./pages/business/home.jsx";
+
+import BusinessHome from "./pages/business/home";
 
 import Login from "./pages/user/login"
 import Signup from "./pages/user/signup";
