@@ -1,27 +1,15 @@
-/* =================================
-------------------------------------
-	Divisima | eCommerce Template
-	Version: 1.0
- ------------------------------------
- ====================================*/
-
-
 'use strict';
 
 
 $(window).on('load', function() {
-	/*------------------
-		Preloder
-	--------------------*/
+
 	$(".loader").fadeOut();
 	$("#preloder").delay(400).fadeOut("slow");
 
 });
 
 (function($) {
-	/*------------------
-		Navigation
-	--------------------*/
+
 	$('.main-menu').slicknav({
 		prependTo:'.main-navbar .container',
 		closedSymbol: '<i class="flaticon-right-arrow"></i>',
@@ -29,19 +17,12 @@ $(window).on('load', function() {
 	});
 
 
-	/*------------------
-		ScrollBar
-	--------------------*/
 	$(".cart-table-warp, .product-thumbs").niceScroll({
 		cursorborder:"",
 		cursorcolor:"#afafaf",
 		boxzoom:false
 	});
 
-
-	/*------------------
-		Category menu
-	--------------------*/
 	$('.category-menu > li').hover( function(e) {
 		$(this).addClass('active');
 		e.preventDefault();
@@ -52,19 +33,13 @@ $(window).on('load', function() {
 	});
 
 
-	/*------------------
-		Background Set
-	--------------------*/
+
 	$('.set-bg').each(function() {
 		var bg = $(this).data('setbg');
 		$(this).css('background-image', 'url(' + bg + ')');
 	});
 
 
-
-	/*------------------
-		Hero Slider
-	--------------------*/
 	var hero_s = $(".hero-slider");
     hero_s.owlCarousel({
         loop: true,
@@ -92,10 +67,6 @@ $(window).on('load', function() {
 	$(".hero-slider .owl-nav, .hero-slider .owl-dots").appendTo('.slider-nav');
 
 
-
-	/*------------------
-		Brands Slider
-	--------------------*/
 	$('.product-slider').owlCarousel({
 		loop: true,
 		nav: true,
@@ -119,10 +90,6 @@ $(window).on('load', function() {
 		}
 	});
 
-
-	/*------------------
-		Popular Services
-	--------------------*/
 	$('.popular-services-slider').owlCarousel({
 		loop: true,
 		dots: false,
@@ -143,10 +110,6 @@ $(window).on('load', function() {
 		}
 	});
 
-
-	/*------------------
-		Accordions
-	--------------------*/
 	$('.panel-link').on('click', function (e) {
 		$('.panel-link').removeClass('active');
 		var $this = $(this);
@@ -156,10 +119,6 @@ $(window).on('load', function() {
 		e.preventDefault();
 	});
 
-
-	/*-------------------
-		Range Slider
-	--------------------- */
 	var rangeSlider = $(".price-range"),
 		minamount = $("#minamount"),
 		maxamount = $("#maxamount"),
@@ -178,10 +137,6 @@ $(window).on('load', function() {
 	minamount.val('$' + rangeSlider.slider("values", 0));
 	maxamount.val('$' + rangeSlider.slider("values", 1));
 
-
-	/*-------------------
-		Quantity change
-	--------------------- */
     var proQty = $('.pro-qty');
 	proQty.prepend('<span class="dec qtybtn">-</span>');
 	proQty.append('<span class="inc qtybtn">+</span>');
@@ -201,11 +156,6 @@ $(window).on('load', function() {
 		$button.parent().find('input').val(newVal);
 	});
 
-
-
-	/*------------------
-		Single Product
-	--------------------*/
 	$('.product-thumbs-track > .pt').on('click', function(){
 		$('.product-thumbs-track .pt').removeClass('active');
 		$(this).addClass('active');

@@ -10,17 +10,21 @@ export default function Footer() {
                         <div className="col-sm-6 col-md-3 item">
                             <h3 style={{color: "#ffffff"}}>Services</h3>
                             <ul>
-                                <li><a aria-label={"Sell your goods on RocketNow"} href="/business/signup">Sell on RocketNow</a></li>
-                                <li><a aria-label={"See the answers to the most frequently asked questions"} href="/faq">FAQ</a></li>
-                                <li><a aria-label={"Read the terms of service"}  href="/tos">Terms of Service</a></li>
+                                <li><a aria-label={"Sell your goods on RocketNow"} href="/business/signup">Sell on
+                                    RocketNow</a></li>
+                                <li><a aria-label={"See the answers to the most frequently asked questions"}
+                                       href="/faq">FAQ</a></li>
+                                <li><a aria-label={"Read the terms of service"} href="/tos">Terms of Service</a></li>
                             </ul>
                         </div>
                         <div className="col-sm-6 col-md-3 item">
                             <h3 style={{color: "#ffffff"}}>About</h3>
                             <ul>
                                 <li><a aria-label={"Read the story of RocketNow"} href="/about">About</a></li>
-                                <li><a aria-label={"See the careers that are currently available"} href="/careers">Careers</a></li>
-                                <li><a aria-label={"Read some tips and tips about shopping online"} href="/blog">Blog</a></li>
+                                <li><a aria-label={"See the careers that are currently available"}
+                                       href="/careers">Careers</a></li>
+                                <li><a aria-label={"Read some tips and tips about shopping online"}
+                                       href="/blog">Blog</a></li>
                                 <li><a aria-label={"View our pages sitemap"} href="/sitemap.xml">Sitemap</a></li>
                             </ul>
                         </div>
@@ -29,8 +33,9 @@ export default function Footer() {
                             <p>A new e-commerce platform.</p>
                         </div>
                         <div className="col item social">
-                            <a title={"View RocketNow on Facebook"} href="#"><i className="icon ion-social-facebook"/></a>
-                            <a title={"View RocketNow on Instagram"}href="#"><i className="icon ion-social-instagram"/></a>
+                            <a title={"View RocketNow on Facebook"} href="#"><i
+                                className="icon ion-social-facebook"/></a>
+                            <a title={"View RocketNow on Instagram"} href="#"><i className="icon ion-social-instagram"/></a>
                         </div>
                     </div>
                     <p className="copyright">Made with&nbsp;❤️ &nbsp;in Estonia 🇪🇪</p>
@@ -39,4 +44,4 @@ export default function Footer() {
             </footer>
         </div>
     );
-}
+};

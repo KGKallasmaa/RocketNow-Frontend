@@ -13,10 +13,7 @@ export const SHOPPINGCART_QUERY = gql`
                     current_price
                     currency
                     main_image_cloudinary_secure_url
-                    seller {
-                        businessname
-                        nr
-                    }
+                    
                 }
             }
         }
