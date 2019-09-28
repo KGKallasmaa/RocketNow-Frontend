@@ -9,6 +9,7 @@ import Home from "./pages/home";
 
 import BusinessHome from "./pages/business/home";
 import BusinessWarehouse from "./pages/business/warehouse";
+import BusinessOrders from "./pages/business/orders";
 
 import Login from "./pages/user/login"
 import Signup from "./pages/user/signup";
@@ -89,7 +90,7 @@ export default function App() {
                 <PrivateBusinessRoute exact path="/business/home" component={BusinessHome}/>
                 <PrivateBusinessRoute exact path="/business/new/product" component={BusinessHome}/>
                 <PrivateBusinessRoute exact path="/business/finance" component={BusinessHome}/>
-                <PrivateBusinessRoute exact path="/business/orders" component={BusinessHome}/>
+                <PrivateBusinessRoute exact path="/business/orders" component={BusinessOrders}/>
                 <PrivateBusinessRoute exact path="/business/warehouse" component={BusinessWarehouse}/>
                 <Route exact path="" component={Home}/>
             </Switch>

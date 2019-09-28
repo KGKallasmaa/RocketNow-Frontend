@@ -7,7 +7,11 @@ import {message} from "antd";
 import BusinessNavbar from "./common/navbar";
 import {formatTimeStamp} from "../../components/relativeTimestamp";
 import BusinessFooter from "./common/footer";
-import {WAREHOUSE_QUERY} from "../../graphql/businessuser/warehouse/warehouse_QUERY";
+import {PARTIALORDER_QUERY} from "../../graphql/businessuser/order/partialOrder_QUERY";
+import {NR_OF_ORDERDS_PROCESSING_NOT_STARTED_QUERY} from "../../graphql/businessuser/order/nrOfOrderdsProcessingNotStarted_QUERY";
+import {NR_OF_NOT_SHIPPED_ORDERS_QUERY} from "../../graphql/businessuser/order/nrOfNotShippedOrders_QUERY";
+import {UN_COMPLETED_ORDERS_VALUE_QUERY} from "../../graphql/businessuser/order/unCompletedOrdersValue_QUERY";
+import {NR_OF_IN_PROGRESS_ORDERS_QUERY} from "../../graphql/businessuser/order/nrOfInProgressOrders_QUERY";
 
 let GLOBAL_enumerator = 0;
 
@@ -21,22 +25,62 @@ const currency_display_dictionary = {
     'CHF': 'Fr'
 };
 
-function renderResults(good) {
-    const product_url = "/goods/" + good.nr +"/"+ good.title;
-    const empty_or_regular = ((good.quantity - good.booked) <= 0) ? "table-danger" : 0;
+function renderPartialOrderGoods(ordergoods) {
+    if (ordergoods) {
+        return ordergoods.map(ordergood => {
+            return (
+                <div>
+                    <p><b>Title:</b> {ordergood.title}</p>
+                    <p><b>Price:</b> {currency_display_dictionary[ordergood.currency]}{ordergood.price_per_one_item}</p>
+                    <p><b>Quantity:</b> {ordergood.quantity}</p>
+                </div>
+            );
+        });
+    }
+    return "";
+}
+
+function renderResults(partialOrder) {
     GLOBAL_enumerator += 1;
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const today  = new Date(parseInt(good.listing_timestamp*1000));
+    const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+    const offset = new Date().getTimezoneOffset();
+    const offsetInMs = offset* 60 * 60 *1000;
+    const recivedTime = new Date(parseInt(partialOrder.received_timestamp_UTC+ offsetInMs));
+
+    let proccesingStartTime = undefined;
+    if (partialOrder.processing_start_timestamp_UTC) {
+        proccesingStartTime = new Date(parseInt(partialOrder.processing_start_timestamp_UTC+offsetInMs));
+    }
+    let proccesingEndTime = undefined;
+    if (partialOrder.processing_end_timestamp_UTC) {
+        proccesingEndTime = new Date(parseInt(partialOrder.processing_end_timestamp_UTC+offsetInMs));
+    }
+    let shippedTime = undefined;
+    if (partialOrder.shipped_timestamp_UTC) {
+        shippedTime = new Date(parseInt(partialOrder.shipped_timestamp_UTC+offsetInMs));
+    }
+
     return (
-        <tr className={empty_or_regular}>
+        <tr>
             <th scope="row">{GLOBAL_enumerator}</th>
-            <td><img className="product-big-img"  height={"150px"} src={good.main_image_cloudinary_secure_url}
-                     alt={good.title}/></td>
-            <td>{today.toLocaleDateString("en-US", options)}</td>
-            <td><a href={product_url}>{good.title}</a></td>
-            <td>{good.quantity}</td>
-            <td>{good.booked}</td>
-            <td>{currency_display_dictionary[good.currency]}{good.current_price}</td>
+            <td>{partialOrder._id}</td>
+            <td>{partialOrder.partial_order_status}</td>
+            <td>
+                <b>Order received:</b> {recivedTime.toLocaleDateString("en-US", options)} ({formatTimeStamp(recivedTime)}) <br/>
+                {(proccesingStartTime) ? <b>Processing started:</b> : <p/>}
+                {(proccesingStartTime) ? proccesingStartTime.toLocaleDateString("en-US", options)(formatTimeStamp(proccesingStartTime)) : <p/>}
+                <br/>
+                {(proccesingEndTime) ? <b>Processing ended:</b> : <p/>}
+                {(proccesingEndTime) ? proccesingEndTime.toLocaleDateString("en-US", options)(formatTimeStamp(proccesingEndTime)) : <p/>}
+                <br/>
+                {(shippedTime) ? <b>Shipped:</b> : <p/>}
+                {(shippedTime) ? shippedTime.toLocaleDateString("en-US", options)(formatTimeStamp(shippedTime)) : <p/>}
+                <br/>
+            </td>
+            <td>
+                {renderPartialOrderGoods(partialOrder.order_items)}
+            </td>
+            <td>Shipping (todo)</td>
         </tr>
     );
 }
@@ -50,28 +94,133 @@ function renderTableRows(goods) {
     return "";
 }
 
-export default class Warehouse extends React.Component {
+export default class Order extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            myWarehouseGoods: null,
-            nrOfGoodsAvailable: 0,
-            nrOfGoodsBooked: 0,
-            warehouseGoodsValue: 0,
-            lastUpdateTime: 0,
+            myPartialOrders: null,
+            nrOfOrdersProcessingNotStarted: 0,
+            nrOfInProgressOrders: 0,
+            nrOfNotShippedOrders: 0,
+            unCompletedOrdersValue: 0,
         };
-        this.getMyWarehouseGoods = this.getMyWarehouseGoods.bind(this);
+        this.getMyPartialOrders = this.getMyPartialOrders.bind(this);
+        this.getNrOfInProgressOrders = this.getNrOfInProgressOrders.bind(this);
+        this.getNrOfOrdersProcessingNotStarted = this.getNrOfOrdersProcessingNotStarted.bind(this);
+        this.getNrOfNotShippedOrders = this.getNrOfNotShippedOrders.bind(this);
+        this.getUnCompletedOrdersValue = this.getUnCompletedOrdersValue.bind(this);
+
     }
 
-    getMyWarehouseGoods() {
+    getNrOfInProgressOrders() {
         axios.post(process.env.REACT_APP_SERVER_URL, {
-            query: print(WAREHOUSE_QUERY),
+            query: print(NR_OF_IN_PROGRESS_ORDERS_QUERY),
             variables: {
                 jwt_token: sessionStorage.getItem("jwtToken_business")
             }
         }).then(res => {
                 this.setState({
-                    myWarehouseGoods: res.data.data.productsInWarehouse
+                    nrOfInProgressOrders: res.data.data.nrOfInProgressOrders
+                });
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    getNrOfOrdersProcessingNotStarted() {
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(NR_OF_ORDERDS_PROCESSING_NOT_STARTED_QUERY),
+            variables: {
+                jwt_token: sessionStorage.getItem("jwtToken_business")
+            }
+        }).then(res => {
+                this.setState({
+                    nrOfOrdersProcessingNotStarted: res.data.data.nrOfOrdersProcessingNotStarted
+                });
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    getNrOfNotShippedOrders() {
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(NR_OF_NOT_SHIPPED_ORDERS_QUERY),
+            variables: {
+                jwt_token: sessionStorage.getItem("jwtToken_business")
+            }
+        }).then(res => {
+                this.setState({
+                    nrOfNotShippedOrders: res.data.data.nrOfNotShippedOrders
+                });
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    getUnCompletedOrdersValue() {
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(UN_COMPLETED_ORDERS_VALUE_QUERY),
+            variables: {
+                jwt_token: sessionStorage.getItem("jwtToken_business")
+            }
+        }).then(res => {
+                this.setState({
+                    unCompletedOrdersValue: res.data.data.unCompletedOrdersValue
+                });
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    getMyPartialOrders() {
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(PARTIALORDER_QUERY),
+            variables: {
+                jwt_token: sessionStorage.getItem("jwtToken_business")
+            }
+        }).then(res => {
+                this.setState({
+                    myPartialOrders: res.data.data.partialOrdersNotYetShipped
                 });
             }
         ).catch(error => {
@@ -91,11 +240,21 @@ export default class Warehouse extends React.Component {
 
     componentDidMount() {
         GLOBAL_enumerator = 0;
-        this.getMyWarehouseGoods();
+        this.getMyPartialOrders();
+        this.getNrOfInProgressOrders();
+        this.getNrOfOrdersProcessingNotStarted();
+        this.getNrOfNotShippedOrders();
+        this.getUnCompletedOrdersValue();
     }
 
     render() {
-        const {myWarehouseGoods, nrOfGoodsAvailable, nrOfGoodsBooked, warehouseGoodsValue, lastUpdateTime} = this.state;
+        const {
+            myPartialOrders,
+            nrOfOrdersProcessingNotStarted,
+            nrOfInProgressOrders,
+            nrOfNotShippedOrders,
+            unCompletedOrdersValue
+        } = this.state;
         return (
             <div id="page-top">
                 <link rel="stylesheet"
@@ -108,22 +267,23 @@ export default class Warehouse extends React.Component {
                             <BusinessNavbar/>
                             <div className="container-fluid">
                                 <div className="d-sm-flex justify-content-between align-items-center mb-4">
-                                    <h3 className="text-dark mb-0">Warehouse</h3>
+                                    <h3 className="text-dark mb-0">Orders</h3>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-6 col-xl-3 mb-4">
-                                        <div className="card shadow border-left-success py-2">
+                                        <div className="card shadow border-left-error py-2">
                                             <div className="card-body">
                                                 <div className="row align-items-center no-gutters">
                                                     <div className="col mr-2">
                                                         <div
-                                                            className="text-uppercase text-success font-weight-bold text-xs mb-1">
-                                                            <span>Nr of Goods available (TODO)</span></div>
+                                                            className="text-uppercase text-error font-weight-bold text-xs mb-1">
+                                                            <span>Processing not started</span></div>
                                                         <div className="text-dark font-weight-bold h5 mb-0">
-                                                            <span>{nrOfGoodsAvailable} </span></div>
+                                                            <span>{nrOfOrdersProcessingNotStarted} </span></div>
                                                     </div>
                                                     <div className="col-auto"><i
-                                                        className="fas fa fa-cubes fa-2x text-gray-300"/></div>
+                                                        className="fas fa fa-hourglass-start fa-2x text-gray-300"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -135,29 +295,12 @@ export default class Warehouse extends React.Component {
                                                     <div className="col mr-2">
                                                         <div
                                                             className="text-uppercase text-warning font-weight-bold text-xs mb-1">
-                                                            <span>Nr of Goods booked (TODO)</span></div>
+                                                            <span>InProgress orders</span></div>
                                                         <div className="text-dark font-weight-bold h5 mb-0">
-                                                            <span>{nrOfGoodsBooked}</span></div>
+                                                            <span>{nrOfInProgressOrders}</span></div>
                                                     </div>
                                                     <div className="col-auto"><i
-                                                        className="fas fa fa-cube fa-2x text-gray-300"/></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6 col-xl-3 mb-4">
-                                        <div className="card shadow border-left-primary py-2">
-                                            <div className="card-body">
-                                                <div className="row align-items-center no-gutters">
-                                                    <div className="col mr-2">
-                                                        <div
-                                                            className="text-uppercase text-primary font-weight-bold text-xs mb-1">
-                                                            <span>Goods value (TODO)</span></div>
-                                                        <div className="text-dark font-weight-bold h5 mb-0">
-                                                            <span>{warehouseGoodsValue}</span></div>
-                                                    </div>
-                                                    <div className="col-auto"><i
-                                                        className="fas fa-euro-sign fa-2x text-gray-300"/></div>
+                                                        className="fas fa-tasks fa-2x text-gray-300"/></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,12 +312,29 @@ export default class Warehouse extends React.Component {
                                                     <div className="col mr-2">
                                                         <div
                                                             className="text-uppercase text-info font-weight-bold text-xs mb-1">
-                                                            <span>Last updateTime (TODO)</span></div>
+                                                            <span>Not shipped orders</span></div>
                                                         <div className="text-dark font-weight-bold h5 mb-0">
-                                                            <span>{formatTimeStamp(lastUpdateTime)}</span></div>
+                                                            <span>{nrOfNotShippedOrders}</span></div>
                                                     </div>
                                                     <div className="col-auto"><i
-                                                        className="fas fa-calendar fa-2x text-gray-300"/></div>
+                                                        className="fas fa-truck fa-2x text-gray-300"/></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6 col-xl-3 mb-4">
+                                        <div className="card shadow border-left-success py-2">
+                                            <div className="card-body">
+                                                <div className="row align-items-center no-gutters">
+                                                    <div className="col mr-2">
+                                                        <div
+                                                            className="text-uppercase text-success font-weight-bold text-xs mb-1">
+                                                            <span>Uncompleted orders value</span></div>
+                                                        <div className="text-dark font-weight-bold h5 mb-0">
+                                                            <span>{unCompletedOrdersValue}</span></div>
+                                                    </div>
+                                                    <div className="col-auto"><i
+                                                        className="fas fa-euro-sign fa-2x text-gray-300"/></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -238,23 +398,22 @@ export default class Warehouse extends React.Component {
                                     <div className="col-lg-12 col-xl-12 mb-4">
                                         <div className="card shadow mb-4">
                                             <div className="card-header py-3">
-                                                <h6 className="text-primary font-weight-bold m-0">Warehouse goods</h6>
+                                                <h6 className="text-primary font-weight-bold m-0">Partial orders</h6>
                                             </div>
                                             <div className="card-body">
                                                 <table className="table table-striped table-hover">
                                                     <thead className="thead-dark">
                                                     <tr>
                                                         <th scope="col">#</th>
-                                                        <th scope="col">Main image</th>
-                                                        <th scope="col">Listing date</th>
-                                                        <th scope="col">Title</th>
-                                                        <th scope="col">Quantity</th>
-                                                        <th scope="col">Booked</th>
-                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Partial Order Id</th>
+                                                        <th scope="col">Current status</th>
+                                                        <th scope="col">Dates</th>
+                                                        <th scope="col">Items</th>
+                                                        <th scope="col">Shipping info</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    {renderTableRows(myWarehouseGoods)}
+                                                    {renderTableRows(myPartialOrders)}
                                                     </tbody>
                                                 </table>
                                             </div>

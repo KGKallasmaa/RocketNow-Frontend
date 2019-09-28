@@ -4,10 +4,10 @@ import "../../assets/css/business/admin.min.css";
 import axios from "axios";
 import {print} from "graphql";
 import {message} from "antd";
-import {THIS_YEAR_EXPENSES_QUERY} from "../../graphql/businessuser/thisYearsExpenses_QUERY";
-import {THIS_MONTH_EXPENSES_QUERY} from "../../graphql/businessuser/thisMonthsExpenses_QUERY";
-import {THIS_YEAR_REVENEU_QUERY} from "../../graphql/businessuser/thisYearsReveneu_QUERY";
-import {THIS_MONTH_REVENEU_QUERY} from "../../graphql/businessuser/thisMonthsReveneu_QUERY";
+import {THIS_YEAR_EXPENSES_QUERY} from "../../graphql/businessuser/dashboard/thisYearsExpenses_QUERY";
+import {THIS_MONTH_EXPENSES_QUERY} from "../../graphql/businessuser/dashboard/thisMonthsExpenses_QUERY";
+import {THIS_YEAR_REVENEU_QUERY} from "../../graphql/businessuser/dashboard/thisYearsReveneu_QUERY";
+import {THIS_MONTH_REVENEU_QUERY} from "../../graphql/businessuser/dashboard/thisMonthsReveneu_QUERY";
 import BusinessNavbar from "./common/navbar";
 import BusinessFooter from "./common/footer";
 
@@ -136,7 +136,6 @@ export default class Home extends React.Component {
 
     render() {
         const {thisMonthsRevenue, thisYearsRevenue, thisMonthsExpenses, thisYearsExpenses} = this.state;
-        console.log(thisMonthsRevenue)
         return (
             <div id="page-top">
                 <link rel="stylesheet"
