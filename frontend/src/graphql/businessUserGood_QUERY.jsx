@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const businessUserGoods_QUERY = gql`
-    query businessUserGoods($nr:Int!,$businessname:String!) {
-        businessUserGoods(nr:$nr,businessname:$businessname) {
+    query businessUserGoods($nr:Int!,$displayname:String!) {
+        businessUserGoods(nr:$nr,displayname:$displayname) {
             _id
             nr
             title
