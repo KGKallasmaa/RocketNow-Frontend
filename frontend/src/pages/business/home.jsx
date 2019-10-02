@@ -10,6 +10,7 @@ import {THIS_YEAR_REVENEU_QUERY} from "../../graphql/businessuser/dashboard/this
 import {THIS_MONTH_REVENEU_QUERY} from "../../graphql/businessuser/dashboard/thisMonthsReveneu_QUERY";
 import BusinessNavbar from "./common/navbar";
 import BusinessFooter from "./common/footer";
+import {Helmet} from "react-helmet";
 
 
 export default class Home extends React.Component {
@@ -136,8 +137,17 @@ export default class Home extends React.Component {
 
     render() {
         const {thisMonthsRevenue, thisYearsRevenue, thisMonthsExpenses, thisYearsExpenses} = this.state;
+        const cannonial_url = process.env.REACT_APP_PUBLIC_URL + "/business/home";
         return (
             <div id="page-top">
+                <Helmet>
+                    <title>Dashboard</title>
+                    <meta property="og:title" content="Dashboard"/>
+                    <link rel="canonial" href={cannonial_url}/>
+                    <meta property="og:description"
+                          content="View the performance of your RocketNow store"/>
+                    <meta name="description" content="View the performance of your RocketNow store"/>
+                </Helmet>
                 <link rel="stylesheet"
                       href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"/>

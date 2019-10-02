@@ -10,6 +10,7 @@ import Home from "./pages/home";
 import BusinessHome from "./pages/business/home";
 import BusinessWarehouse from "./pages/business/warehouse";
 import BusinessOrders from "./pages/business/orders";
+import BusinessNewProduct from "./pages/business/newGood";
 
 import Login from "./pages/user/login"
 import Signup from "./pages/user/signup";
@@ -88,7 +89,7 @@ export default function App() {
                 <Route exact path="/privacy" component={PrivacyPolicy}/>
                 <Route exact path="/blog" component={Blog}/>
                 <PrivateBusinessRoute exact path="/business/home" component={BusinessHome}/>
-                <PrivateBusinessRoute exact path="/business/new/product" component={BusinessHome}/>
+                <PrivateBusinessRoute exact path="/business/new/product" component={BusinessNewProduct}/>
                 <PrivateBusinessRoute exact path="/business/finance" component={BusinessHome}/>
                 <PrivateBusinessRoute exact path="/business/orders" component={BusinessOrders}/>
                 <PrivateBusinessRoute exact path="/business/warehouse" component={BusinessWarehouse}/>

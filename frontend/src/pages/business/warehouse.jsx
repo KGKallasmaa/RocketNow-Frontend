@@ -8,6 +8,7 @@ import BusinessNavbar from "./common/navbar";
 import {formatTimeStamp} from "../../components/relativeTimestamp";
 import BusinessFooter from "./common/footer";
 import {WAREHOUSE_QUERY} from "../../graphql/businessuser/warehouse/warehouse_QUERY";
+import {Helmet} from "react-helmet";
 
 let GLOBAL_enumerator = 0;
 
@@ -96,8 +97,17 @@ export default class Warehouse extends React.Component {
 
     render() {
         const {myWarehouseGoods, nrOfGoodsAvailable, nrOfGoodsBooked, warehouseGoodsValue, lastUpdateTime} = this.state;
+        const cannonial_url = process.env.REACT_APP_PUBLIC_URL + "/business/warehouse";
         return (
             <div id="page-top">
+                <Helmet>
+                    <title>Warehouse </title>
+                    <meta property="og:title" content="Warehouse"/>
+                    <link rel="canonial" href={cannonial_url}/>
+                    <meta property="og:description"
+                          content="View the product in your RocketNow store"/>
+                    <meta name="description" content="View the product in your RocketNow store"/>
+                </Helmet>
                 <link rel="stylesheet"
                       href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"/>

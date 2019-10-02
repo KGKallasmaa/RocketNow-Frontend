@@ -12,6 +12,7 @@ import {NR_OF_ORDERDS_PROCESSING_NOT_STARTED_QUERY} from "../../graphql/business
 import {NR_OF_NOT_SHIPPED_ORDERS_QUERY} from "../../graphql/businessuser/order/nrOfNotShippedOrders_QUERY";
 import {UN_COMPLETED_ORDERS_VALUE_QUERY} from "../../graphql/businessuser/order/unCompletedOrdersValue_QUERY";
 import {NR_OF_IN_PROGRESS_ORDERS_QUERY} from "../../graphql/businessuser/order/nrOfInProgressOrders_QUERY";
+import {Helmet} from "react-helmet";
 
 let GLOBAL_enumerator = 0;
 
@@ -255,8 +256,18 @@ export default class Order extends React.Component {
             nrOfNotShippedOrders,
             unCompletedOrdersValue
         } = this.state;
+        const cannonial_url = process.env.REACT_APP_PUBLIC_URL + "/business/orders";
         return (
             <div id="page-top">
+                <Helmet>
+                    <title>Orders</title>
+                    <meta property="og:title" content="Orders"/>
+                    <link rel="canonial" href={cannonial_url}/>
+                    <meta property="og:description"
+                          content="Manage your orders from the RocketNow store"/>
+                    <meta name="description" content="Manage your orders from the RocketNow store"/>
+                </Helmet>
+
                 <link rel="stylesheet"
                       href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"/>

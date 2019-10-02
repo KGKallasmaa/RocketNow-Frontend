@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function BusinessNavbar() {
+    const altMessage = sessionStorage.getItem("businessDisplayName") + " logo";
     return (
         <nav className="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
             <div className="container-fluid">
@@ -11,12 +12,18 @@ export default function BusinessNavbar() {
                 <ul className="nav navbar-nav flex-nowrap ml-auto">
                     <div className="d-none d-sm-block topbar-divider"/>
                     <li className="nav-item dropdown no-arrow" role="presentation">
-                        <li className="nav-item dropdown no-arrow"><a
-                            className="dropdown-toggle nav-link" data-toggle="dropdown"
-                            aria-expanded="false" href="#"><span
-                            className="d-none d-lg-inline mr-2 text-gray-600 small">USER &nbsp;1 &nbsp;&nbsp;</span><img
-                            className="border rounded-circle img-profile"
-                            src="assets/img/avatars/avatar1.jpeg"/></a>
+                        <li className="nav-item dropdown no-arrow">
+                            <a
+                                className="dropdown-toggle nav-link" data-toggle="dropdown"
+                                aria-expanded="false" href="#">
+                                <span
+                                    className="d-none d-lg-inline mr-2 text-gray-600 small">{sessionStorage.getItem("businessDisplayName")}
+                                </span>
+                                <img
+                                    alt={altMessage}
+                                    className="border rounded-circle img-profile"
+                                    src={sessionStorage.getItem("logoURL")}/>
+                            </a>
                             <div
                                 className="dropdown-menu shadow dropdown-menu-right animated--grow-in"
                                 role="menu"><a className="dropdown-item" role="presentation"

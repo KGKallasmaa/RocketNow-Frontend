@@ -1,13 +1,10 @@
 import React from 'react';
-import {Form, Icon, message, Select, Spin, Tooltip} from 'antd';
+import {Form, Select, Tooltip} from 'antd';
 import {DropzoneArea} from 'material-ui-dropzone';
-import {Button} from "react-bootstrap";
-import axios from 'axios';
 
 const {Option} = Select;
 
 
-const antIcon = <Icon type="loading" style={{fontSize: 24}} spin/>;
 
 //Helper funcions
 function capitalizeFirstLetter(string) {
@@ -17,123 +14,6 @@ function capitalizeFirstLetter(string) {
 
 //TODO: make it more accurate. Add business logic; add monthly fund transfer fee
 
-function CalculateNoNoLineFee(quantity, listing_price) {
-    const no_no_line_fee = 0.1;
-    const no_no_line_fee_amount = no_no_line_fee * (quantity * listing_price);
-    return Math.round(no_no_line_fee_amount * 100) / 100;
-}
-
-function CalculateStripeFees(quantity, listing_price, currency) {
-    const stripe_base_card_charge_fee_eur = 0.25;
-    const stripe_variable_card_charge_fee = (currency === "EUR") ? 0.014 : 0.029;
-    const stripe_card_charge_fee_eur = (quantity * stripe_base_card_charge_fee_eur) + (listing_price * stripe_variable_card_charge_fee * quantity);
-    return Math.round(stripe_card_charge_fee_eur * 100) / 100;
-}
-
-async function UploadImages(files) {
-    let return_dictionary = {};
-
-    let data = new FormData();
-    for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        data.append("GoodImageFile", file);
-    }
-
-    const response = await axios.post(process.env.REACT_APP_IMAGE_UPLOAD_URL, data, config);    const config = {
-        headers: {'content-type': 'multipart/form-data'}
-    };
-    let public_id_array = Array();
-    let secure_url_array = Array();
-    for (let index = 0; index < response.data.length; index++) {
-        const original_secure_url_element = response.data[index].secure_url;
-        let original_public_id_element = response.data[index].public_id;
-        //Json can't pars symbol "/"
-        public_id_array.push((original_public_id_element.split("/").pop()).toString());
-        secure_url_array.push(original_secure_url_element);
-    }
-    return_dictionary["public_id"] = public_id_array;
-    return_dictionary["secure_url"] = secure_url_array;
-
-    return return_dictionary
-}
-
-async function AddNewGood(title, description, listing_price, quantity, currency, general_category, timestamp, main_image_cloudinary_public_id, other_images_cloudinary_public_id, main_image_cloudinary_secure_url, other_images_cloudinary_secure_url, height_mm, length_mm, width_mm, weight_g, custom_attribute_1_name, custom_attribute_2_name, custom_attribute_3_name, custom_attribute_4_name, custom_attribute_5_name, custom_attribute_1_value, custom_attribute_2_value, custom_attribute_3_value, custom_attribute_4_value, custom_attribute_5_value) {
-
-    const response = await axios.post(process.env.REACT_APP_SERVER_URL, {
-        query: `
-            mutation addPhysicalGood($title:String!,$description:String!,$quantity:Int!,
-                $current_price:Float!,$listing_price:Float!,
-                $timestamp:String!,$general_category:String!,
-                $main_image: String!, $other_images: [String!], $main_image_secure: String!, $other_images_secure: [String!],
-                $currency:String!,$seller_token:String!,
-                $height_mm: Float!, $length_mm: Float!, $width_mm: Float!, $weight_g: Float!,
-                $custom_attribute_1_name: String, $custom_attribute_2_name: String, $custom_attribute_3_name: String, $custom_attribute_4_name: String, $custom_attribute_5_name: String,
-                $custom_attribute_1_value: String, $custom_attribute_2_value: String, $custom_attribute_3_value: String, $custom_attribute_4_value: String, $custom_attribute_5_value: String) {
-                addPhysicalGood(goodInput:{
-                    title:$title,
-                    description:$description,
-                    quantity:$quantity,
-                    current_price:$current_price,
-                    listing_price:$listing_price,
-                    listing_timestamp:$timestamp,
-                    general_category_name:$general_category,
-                    main_image_cloudinary_public_id:$main_image,
-                    other_images_cloudinary_public_id:$other_images,
-                    main_image_cloudinary_secure_url:$main_image_secure,
-                    other_images_cloudinary_secure_url:$other_images_secure,
-                    currency:$currency,
-                    seller_jwt_token:$seller_token,
-                    height_mm:$height_mm,
-                    length_mm:$length_mm,
-                    width_mm:$width_mm,
-                    weight_g:$weight_g,
-                    custom_attribute_1_name:$custom_attribute_1_name,
-                    custom_attribute_2_name:$custom_attribute_2_name,
-                    custom_attribute_3_name:$custom_attribute_3_name,
-                    custom_attribute_4_name:$custom_attribute_4_name,
-                    custom_attribute_5_name:$custom_attribute_5_name,
-                    custom_attribute_1_value:$custom_attribute_1_value,
-                    custom_attribute_2_value:$custom_attribute_2_value,
-                    custom_attribute_3_value:$custom_attribute_3_value,
-                    custom_attribute_4_value:$custom_attribute_4_value,
-                    custom_attribute_5_value:$custom_attribute_5_value})
-                {
-                  _id
-                }
-    }
-  `,
-        variables: {
-            title: title,
-            description: description,
-            quantity: parseInt(quantity, 10),
-            current_price: parseFloat(listing_price),
-            listing_price: parseFloat(listing_price),
-            timestamp: timestamp.toString(),
-            general_category: general_category,
-            main_image: main_image_cloudinary_public_id[0],
-            other_images: other_images_cloudinary_public_id,
-            main_image_secure: main_image_cloudinary_secure_url[0],
-            other_images_secure: other_images_cloudinary_secure_url,
-            currency: currency,
-            seller_token: sessionStorage.getItem("business_jwtToken"),
-            height_mm: parseFloat(height_mm),
-            length_mm: parseFloat(length_mm),
-            width_mm: parseFloat(width_mm),
-            weight_g: parseFloat(weight_g),
-            custom_attribute_1_name: custom_attribute_1_name,
-            custom_attribute_2_name: custom_attribute_2_name,
-            custom_attribute_3_name: custom_attribute_3_name,
-            custom_attribute_4_name: custom_attribute_4_name,
-            custom_attribute_5_name: custom_attribute_5_name,
-            custom_attribute_1_value: custom_attribute_1_value,
-            custom_attribute_2_value: custom_attribute_2_value,
-            custom_attribute_3_value: custom_attribute_3_value,
-            custom_attribute_4_value: custom_attribute_4_value,
-            custom_attribute_5_value: custom_attribute_5_value,
-        }
-    });
-    return (response.status === 200 || response.status !== 201);
-}
 
 class PhysicalGoodForm extends React.Component {
     constructor(props) {
@@ -203,9 +83,9 @@ class PhysicalGoodForm extends React.Component {
             refresh_this_page: false
         };
         this.handleChange = this.handleChange.bind(this);
+        this.updateParent = this.updateParent.bind(this);
         this.selectCurrency = this.selectCurrency.bind(this);
         this.selectGeneralCategory = this.selectGeneralCategory.bind(this);
-        this.NewGoodSubmit = this.NewGoodSubmit.bind(this);
         this.SetMainImage = this.SetMainImage.bind(this);
         this.SetOtherImages = this.SetOtherImages.bind(this);
     };
@@ -213,74 +93,6 @@ class PhysicalGoodForm extends React.Component {
 
     //TODO: fix button styles
 
-    NewGoodSubmit = async (event) => {
-        event.preventDefault();
-        this.setState({
-            submitting_new_good: true
-        });
-        if (this.state.successfully_added_new_physical_good === false && this.state.submitting_new_good === true) {
-            message.loading('Adding a new Physical good ...', 5000);
-        }
-
-        //TODO: submit button logic
-        const {title, description, listing_price, quantity, currency, general_category, main_image_file, other_images_files, height_mm, length_mm, width_mm, weight_g} = this.state;
-        const current_timestamp = new Date().getTime();
-
-        let main_image_cloudinary_submit = await UploadImages(main_image_file);
-        let other_images_cloudinary_submit = await UploadImages(other_images_files);
-
-        const main_image_cloudinary_public_id = main_image_cloudinary_submit.public_id;
-        const main_image_cloudinary_secure_url = main_image_cloudinary_submit.secure_url;
-        const other_images_cloudinary_public_id = other_images_cloudinary_submit.public_id;
-        const other_images_cloudinary_secure_url = other_images_cloudinary_submit.secure_url;
-
-
-        if (main_image_cloudinary_public_id && main_image_cloudinary_secure_url) {
-            let adding_good_success = await AddNewGood(title, description, listing_price, quantity, currency, general_category, current_timestamp, main_image_cloudinary_public_id, other_images_cloudinary_public_id, main_image_cloudinary_secure_url, other_images_cloudinary_secure_url, height_mm, length_mm, width_mm, weight_g);
-
-            if (adding_good_success === true) {
-                this.setState({
-                    successfully_added_new_physical_good: true,
-                    submitting_new_good: false
-                });
-                message.success("You successfully added a physical good");
-                window.location.reload();
-            } else {
-                message.error("There was an error adding your physical good. Please try again.");
-            }
-        } else {
-            message.error("Images were not correctly uploaded to the server.");
-        }
-
-        this.setState({
-            submitting_new_good: false
-        });
-    };
-    newgoodButton = () => {
-        //TODO: make button text better
-        const button_text = (this.state.submitting_new_good === true) ? "" : "Add a physical good";
-        const button_is_disabled = ((this.state.successfully_added_new_physical_good === true) && (!this.state.canSubmit && !this.state.successfully_added_new_physical_good));
-        const on_click_action = ((!this.state.submitting_new_good) && (this.state.successfully_added_new_physical_good !== true)) ? this.NewGoodSubmit : null;
-
-
-        if (this.state.successfully_added_new_physical_good === false) {
-            return (
-                <Button
-                    bsStyle="success"
-                    disabled={button_is_disabled}
-                    loading={this.state.submitting_new_good}
-                    onClick={on_click_action}
-                >
-                    <Spin indicator={antIcon} spinning={this.state.submitting_new_good}/>
-                    {button_text}
-                </Button>
-            );
-        }
-        //TODO: disabled should be dyanmic. Fix form validation
-        return (
-            <Icon type="check-circle" theme="twoTone" twoToneColor="#52c41a"/>
-        );
-    };
 
 
     handleChange(event) {
@@ -296,10 +108,37 @@ class PhysicalGoodForm extends React.Component {
         this.setState({
             currency: value
         });
+        this.updateParent();
     }
 
     selectGeneralCategory(value) {
         this.setState({general_category: value});
+        this.updateParent();
+    }
+    updateParent(){
+        const {title, description,
+            listing_price, quantity, currency,
+            general_category,
+            height_mm,length_mm, width_mm, weight_g,
+            main_image_file,other_images_files,
+            custom_attribute_1_name,custom_attribute_1_value,
+            custom_attribute_2_name,custom_attribute_2_value,
+            custom_attribute_3_name,custom_attribute_3_value,
+            custom_attribute_4_name, custom_attribute_4_value,
+            custom_attribute_5_name,custom_attribute_5_value} = this.state;
+
+        this.props.NewProductDetailsEntered(
+            title, description,
+            listing_price, quantity, currency,
+            general_category,
+            height_mm,length_mm, width_mm, weight_g,
+            main_image_file,other_images_files,
+            custom_attribute_1_name,custom_attribute_1_value,
+            custom_attribute_2_name,custom_attribute_2_value,
+            custom_attribute_3_name,custom_attribute_3_value,
+            custom_attribute_4_name, custom_attribute_4_value,
+            custom_attribute_5_name,custom_attribute_5_value
+        );
     }
 
     validateField(name, value) {
@@ -401,7 +240,13 @@ class PhysicalGoodForm extends React.Component {
             this.setState({
                 formErrors: fieldValidationErrors,
                 formValidity: validity,
-            }, () => this.canSubmit())
+            }, () => this.canSubmit());
+
+
+
+            if (this.state.formValidity.title && this.state.formValidity.listing_price && this.state.formValidity.quantity){
+                this.updateParent();
+            }
         }
     }
 
@@ -473,40 +318,17 @@ class PhysicalGoodForm extends React.Component {
         this.setState({
             main_image_file: files
         });
+        this.updateParent();
     }
 
     SetOtherImages(files) {
         this.setState({
             other_images_files: files
         });
+        this.updateParent();
     }
 
 
-    renderFeesAndPayment() {
-        if (this.state.formValidity.title && this.state.formValidity.listing_price && this.state.formValidity.quantity) {
-            const {currency, listing_price, quantity, title} = this.state;
-            const revenue = Math.round((listing_price * quantity) * 100) / 100;
-
-            const stripe_payment_fees = CalculateStripeFees(quantity, listing_price, currency);
-            const no_no_line_fees = CalculateNoNoLineFee(quantity, listing_price);
-            const net_revenue = Math.round((revenue - stripe_payment_fees - no_no_line_fees) * 100) / 100;
-            return (
-                <div>
-                    <h4>Expected revenue from ({title}):<b>{revenue}{currency}</b></h4>
-                    <h5>NoNoLine fees:<b>{no_no_line_fees}{currency}</b></h5>
-                    <h5>Payment fees(Stripe):<b>{stripe_payment_fees}{currency}</b></h5>
-                    <h4>Net revenue:<b>{net_revenue}{currency}</b></h4>
-                    {this.newgoodButton()}
-                </div>
-            );
-        } else {
-            return (
-                <div>
-                    <h4>Complete the necessary product details first.</h4>
-                </div>
-            );
-        }
-    }
 
     render() {
         //TODO: better names for {product details, shipping details,finances}
@@ -514,7 +336,7 @@ class PhysicalGoodForm extends React.Component {
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                         <Form className="login-form" layout="horizontal">
                             <Form.Item label="Title">
                                 <input
@@ -551,7 +373,7 @@ class PhysicalGoodForm extends React.Component {
                                         name="listing_price"
                                         min={0.01}
                                         max={21474836}
-                                        type="text"
+                                        type="number"
                                         placeholder="price"
                                         value={this.state.listing_price}
                                         onChange={this.handleChange}
@@ -565,6 +387,22 @@ class PhysicalGoodForm extends React.Component {
                                     </Select>
                                 </div>
                             </Form.Item>
+                            <Form.Item label="Quantity:&nbsp;&nbsp;&nbsp;&nbsp;">
+                                <div className="form-check form-check-inline">
+                                    <input
+                                        className={`form-control ${this.errorClass(this.state.formErrors.quantity)}`}
+                                        id="quantity"
+                                        name="quantity"
+                                        min={1}
+                                        max={21474836}
+                                        type="number"
+                                        placeholder="q"
+                                        value={this.state.quantity}
+                                        onChange={this.handleChange}
+                                    />
+                                    <div className="invalid-feedback">{this.state.formErrors.quantity}</div>
+                                </div>
+                            </Form.Item>
                             <Form.Item label="Shipping properties:&nbsp;&nbsp;&nbsp;&nbsp;">
                                 <div className="form-check form-check-inline">
                                     <input
@@ -574,7 +412,7 @@ class PhysicalGoodForm extends React.Component {
                                         min={1}
                                         max={21474836}
                                         type="number"
-                                        placeholder="height mmm"
+                                        placeholder="height mm"
                                         value={this.state.height_mm}
                                         onChange={this.handleChange}
                                     />
@@ -621,22 +459,7 @@ class PhysicalGoodForm extends React.Component {
                                     <div className="invalid-feedback">{this.state.formErrors.weight_g}</div>
                                 </div>
                             </Form.Item>
-                            <Form.Item label="Quantity:&nbsp;&nbsp;&nbsp;&nbsp;">
-                                <div className="form-check form-check-inline">
-                                    <input
-                                        className={`form-control ${this.errorClass(this.state.formErrors.quantity)}`}
-                                        id="quantity"
-                                        name="quantity"
-                                        min={1}
-                                        max={21474836}
-                                        type="number"
-                                        placeholder="q"
-                                        value={this.state.quantity}
-                                        onChange={this.handleChange}
-                                    />
-                                    <div className="invalid-feedback">{this.state.formErrors.quantity}</div>
-                                </div>
-                            </Form.Item>
+
                             <Form.Item label="Main image">
                                 <DropzoneArea
                                     filesLimit={1}
@@ -778,10 +601,6 @@ class PhysicalGoodForm extends React.Component {
                                 </Form.Item>
                             </Tooltip>
                         </Form>
-                    </div>
-                    <div className="col-md-6">
-                        <p>Fees and payments</p>
-                        {this.renderFeesAndPayment()}
                     </div>
                 </div>
             </div>
