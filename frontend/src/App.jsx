@@ -17,7 +17,7 @@ import Verify from "./pages/user/verify";
 import MyAccount from "./pages/user/myAccount";
 
 
-import {SellerPage} from "./pages/business/business_public/sellerPage.jsx";
+import SellerPage from "./pages/business/business_public/sellerPage.jsx";
 import Redirect from "react-router/es/Redirect";
 import Success from "./pages/checkout/success.jsx";
 import Cancel from "./pages/checkout/cancel";
