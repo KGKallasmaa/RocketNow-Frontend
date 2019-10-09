@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBox from "./searchBox.jsx";
+import SearchBox from "./search/searchBox.jsx";
 
 import logo from '../assets/img/logo.svg';
 import account_not_logged_in_img from '../assets/img/user_not_logged_in.png';
@@ -86,7 +86,7 @@ export function Navbar(props) {
             <div className="container">
                 <PageLogo/>
                 <form className="form-inline mr-auto" target="_self" style={searchForm_style}>
-                    <SearchBox query={query}/>
+                    <SearchBox query={query} type={props.type}/>
                 </form>
                 <button data-toggle="collapse" className="navbar-toggler" data-target="#navcol-1"><span
                     className="sr-only">Toggle navigation</span><span
@@ -115,4 +115,4 @@ export function Navbar(props) {
             </div>
         </nav>
     );
-};
+}

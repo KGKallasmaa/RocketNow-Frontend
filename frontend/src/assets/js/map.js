@@ -7,7 +7,7 @@ function initialize() {
 		mapTypeControl: false,
 		zoomControl: false,
 		streetViewControl: false
-	}
+	};
 	var img_icon = 'img/map-marker.png';
 	var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 	var marker = new google.maps.Marker({
