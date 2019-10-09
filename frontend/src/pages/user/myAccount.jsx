@@ -28,8 +28,7 @@ function renderUser(user) {
         );
     }
     return "";
-};
-
+}
 function renderOrders(orders) {
     if (orders) {
         return orders.map(order => {

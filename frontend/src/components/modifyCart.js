@@ -46,8 +46,7 @@ function getUserId() {
     }
     return jwt_token;
 
-};
-
+}
 
 export class AddToCart extends React.Component {
     constructor(props) {

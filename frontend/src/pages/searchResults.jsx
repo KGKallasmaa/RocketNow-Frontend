@@ -1,5 +1,5 @@
 import React from 'react';
-import {message} from 'antd';
+import {message, Button} from 'antd';
 import {AddToCart} from '../components/modifyCart';
 import {Navbar} from '../components/navbar.jsx';
 import Footer from '../components/footer.jsx';
@@ -10,12 +10,23 @@ import {print} from 'graphql';
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Helmet} from "react-helmet";
 import algoliasearch from 'algoliasearch/lite';
-import {InstantSearch, Pagination, Highlight, RefinementList, Menu,connectHits, CurrentRefinements} from 'react-instantsearch-dom';
+import {
+    InstantSearch,
+    Pagination,
+    Highlight,
+    RefinementList,
+    Menu,
+    connectHits,
+    CurrentRefinements
+} from 'react-instantsearch-dom';
+import {isMobile} from "react-device-detect";
+
 
 const searchClient = algoliasearch(
     process.env.REACT_APP_ALGOLIA_API_KEY,
     process.env.REACT_APP_ALGOLIA_SEARCH_ONLY_KEY
 );
+
 
 const currency_display_dictionary = {
     'EUR': '€',
@@ -73,7 +84,7 @@ function renderSearchResults(good) {
                 </div>
                 <div className="pi-text">
                     <h6>{currency_display_dictionary[good.currency]}{price}</h6>
-                    <Highlight hit={good} attribute="title" />
+                    <Highlight hit={good} attribute="title"/>
                 </div>
             </div>
         </div>
@@ -130,9 +141,11 @@ export default class searchResults extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            refinemenetsDidMount: false
+            refinemenetsDidMount: false,
+            filtersAreVisible: true,
         };
         this.renderSearch = this.renderSearch.bind(this);
+        this.filtersAreVisible = this.filtersAreVisible.bind(this);
     }
 
     renderSearch() {
@@ -165,13 +178,26 @@ export default class searchResults extends React.Component {
         });
     }
 
+    filtersAreVisible() {
+        const {filtersAreVisible} = this.state;
+        const newState = filtersAreVisible !== true;
+        this.setState({
+            filtersAreVisible: newState
+        });
+    }
+
     componentDidMount() {
         this.renderSearch();
+        if (isMobile) {
+            this.setState({
+                filtersAreVisible: false
+            });
+        }
     }
 
     render() {
         const query = this.props.match.params.query;
-        const {nonNumericRefinements, numericRefinements} = this.state;
+        const {nonNumericRefinements, numericRefinements, filtersAreVisible} = this.state;
         const cannonial_url = process.env.REACT_APP_PUBLIC_URL + "/search/" + query;
         return (
             <div>
@@ -190,16 +216,17 @@ export default class searchResults extends React.Component {
                             <CurrentRefinements/>
                         </div>
                     </div>
-
+                    <Button shape="circle" icon="filter" style={{marginLeft: "10%", color: "#1F96FE"}} aria-label={"Filter your search results"}
+                            onClick={this.filtersAreVisible}/>
+                    <br/>
+                    <br/>
                     <div className="container">
                         <div className="row">
-                            <div className="col-lg-3 order-2 order-lg-1">
+                            <div className="col-lg-3 order-1 order-lg-1" hidden={!filtersAreVisible}>
                                 <div className="filter-widget">
                                     <h2 className="fw-title">Category</h2>
                                     <ul className="sub-menu">
-                                        <RefinementList
-                                            attribute="category"
-                                        />
+                                        <RefinementList attribute="category"/>
                                     </ul>
                                 </div>
                                 <hr/>
@@ -214,7 +241,7 @@ export default class searchResults extends React.Component {
                             <br/><br/>
                         </div>
                         <br/><br/><br/><br/><br/><br/> <br/>
-                        <Pagination />
+                        <Pagination showFirst={false}/>
                         <br/><br/><br/><br/><br/>
                     </div>
                 </InstantSearch>
@@ -225,4 +252,3 @@ export default class searchResults extends React.Component {
     }
 }
 //TODO: range filtering for quantitative atributes
-//TODO: add pagnition
