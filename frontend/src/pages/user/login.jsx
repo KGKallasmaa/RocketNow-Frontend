@@ -226,8 +226,13 @@ class NormalLoginForm extends React.Component {
 
 
     renderRedirect = () => {
-        if (this.state.redirect === true) {
-            return <Redirect to="/"/>
+        const{redirect,from} = this.state;
+        if (redirect === true) {
+            let redirectUrl ="/";
+            if (from){
+                redirectUrl = "/"+from;
+            }
+            return <Redirect to={redirectUrl}/>
         }
     };
 

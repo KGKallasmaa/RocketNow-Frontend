@@ -24,7 +24,8 @@ export class AddressForm extends Component {
         this.state = {
             query: '',
             route: '',
-            ShippingName: this.props.ShippingName,
+            ShippingName:this.props.ShippingName,
+            ShippingAddressLine1:this.props.ShippingAddressLine1,
             street_number: '',
             formErrors: {
                 ShippingName: '',
@@ -60,7 +61,6 @@ export class AddressForm extends Component {
     handleAddressSubmit = e => {
         e.preventDefault();
         this.setState({SavingAddressInfo: true});
-
         axios.post(process.env.REACT_APP_SERVER_URL, {
             query: print(ShippingCost_QUERY),
             variables: {
@@ -77,6 +77,7 @@ export class AddressForm extends Component {
             return res.data;
         }).then(resData => {
             const shippingcost = resData.data.DeliveryCost;
+            console.log(shippingcost);
             axios.post(process.env.REACT_APP_SERVER_URL, {
                 query: print(DeliveryEstimate_QUERY),
                 variables: {
@@ -127,6 +128,18 @@ export class AddressForm extends Component {
         this.setState({SavingAddressInfo: false});
     };
 
+
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if(nextState.hasSearchedWithGoogle === false){
+            return false;
+        }
+        if (nextProps.ShippingAddressLine1 === this.props.ShippingAddressLine1){
+            return false;
+        }
+        
+        return this.state.SavingAddressInfo !== true;
+    }
 
     handleChange(event) {
         const {name, value} = event.target;
@@ -201,6 +214,8 @@ export class AddressForm extends Component {
     }
 
     handlePlaceSelect() {
+        alert("i made it here");
+        this.setState({SavingAddressInfo: true});
         let addressObject = this.autocomplete.getPlace();
         let address = addressObject.address_components;
 
@@ -249,13 +264,12 @@ export class AddressForm extends Component {
                 this.validateField("ShippingAddressLine1", this.state.ShippingAddressLine1);
             }
         }
+        this.setState({SavingAddressInfo: false});
         this.setState({hasSearchedWithGoogle: true});
     }
 
     renderForm() {
-        const {
-            hasSearchedWithGoogle
-        } = this.state;
+        const {hasSearchedWithGoogle} = this.state;
 
         if (hasSearchedWithGoogle === true) {
             let {ShippingName, ShippingAddressLine1, ShippingAddressLine2, ShippingCity, ShippingRegion, ShippingZip, ShippingCountry} = this.state;
@@ -665,15 +679,13 @@ export class GoToPayment extends React.Component {
         this.state = {
             stripe: this.props.stripe,
             IsLoading: true,
+            comondentDidMount:false
         };
         this.goToCheckout = this.goToCheckout.bind(this);
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (nextState.gettingStripeId === true){
-            return false
-        }
-        return true
+        return nextState.gettingStripeId !== true;
     }
 
 
