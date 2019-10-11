@@ -15,26 +15,27 @@ export default function Menu() {
                 <hr className="sidebar-divider my-0"/>
                 <ul className="nav navbar-nav text-light" id="accordionSidebar">
                     <li className="nav-item" role="presentation">
-                        <a className="nav-link active" href="/business/home">
+                        <a aria-label={"Dashboard"} className="nav-link active" href="/business/home">
                             <i className="fas fa-tachometer-alt"/>
-                            <span>Dashboard</span></a>
-                        <a className="nav-link active" href="/business/new/product">
-                            <i className="fas fa-lightbulb"/><
-                            span>New Product</span>
+                            <span>Dashboard</span>
                         </a>
-                        <a className="nav-link active" href="/business/orders">
+                        <a aria-label={"New Product"} className="nav-link active" href="/business/new/product">
+                            <i className="fas fa-lightbulb"/>
+                            <span>New Product</span>
+                        </a>
+                        <a aria-label={"Orders"} className="nav-link active" href="/business/orders">
                             <i className="fas fa-business-time"/>
                             <span>Orders</span>
                         </a>
-                        <a className="nav-link active" href="/business/finance">
+                        <a aria-label={"Finance"} className="nav-link active" href="/business/finance">
                             <i className="fas fa-dollar-sign"/>
                             <span>Finance</span>
                         </a>
-                        <a className="nav-link active" href="/business/warehouse">
+                        <a aria-label={"Warehouse"} className="nav-link active" href="/business/warehouse">
                             <i className="fas fa-warehouse"/>
                             <span>Warehouse</span>
                         </a>
-                        <a className="nav-link active" href="/logout">
+                        <a aria-label={"Logout"} className="nav-link active" href="/logout">
                             <i className="fas fa-sign-out-alt"/>
                             <span>Logout</span>
                         </a>

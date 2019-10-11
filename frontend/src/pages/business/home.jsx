@@ -1,16 +1,153 @@
 import React from "react";
 import Menu from "./common/menu";
 import "../../assets/css/business/admin.min.css";
+import axios from "axios";
+import {print} from "graphql";
+import {message} from "antd";
+import {THIS_YEAR_EXPENSES_QUERY} from "../../graphql/businessuser/dashboard/thisYearsExpenses_QUERY";
+import {THIS_MONTH_EXPENSES_QUERY} from "../../graphql/businessuser/dashboard/thisMonthsExpenses_QUERY";
+import {THIS_YEAR_REVENEU_QUERY} from "../../graphql/businessuser/dashboard/thisYearsReveneu_QUERY";
+import {THIS_MONTH_REVENEU_QUERY} from "../../graphql/businessuser/dashboard/thisMonthsReveneu_QUERY";
+import BusinessNavbar from "./common/navbar";
+import BusinessFooter from "./common/footer";
+import {Helmet} from "react-helmet";
+
 
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            thisMonthsRevenue: 0,
+            thisYearsRevenue: 0,
+            thisMonthsExpenses: 0,
+            thisYearsExpenses: 0
+        };
+        this.getThisMonthRevenue = this.getThisMonthRevenue.bind(this);
+        this.getThisYearRevenue = this.getThisYearRevenue.bind(this);
+        this.getThisMonthsExpenses = this.getThisMonthsExpenses.bind(this);
+        this.getThisYearsExpenses = this.getThisYearsExpenses.bind(this);
+    }
+
+    getThisMonthRevenue() {
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(THIS_MONTH_REVENEU_QUERY),
+            variables: {
+                jwt_token: sessionStorage.getItem("jwtToken_business")
+            }
+        }).then(res => {
+                this.setState({
+                    thisMonthsRevenue: res.data.data.thisMonthsRevenue
+                });
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    getThisYearRevenue() {
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(THIS_YEAR_REVENEU_QUERY),
+            variables: {
+                jwt_token: sessionStorage.getItem("jwtToken_business")
+            }
+        }).then(res => {
+                this.setState({
+                    thisYearsRevenue: res.data.data.thisYearsRevenue
+                });
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    getThisMonthsExpenses() {
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(THIS_MONTH_EXPENSES_QUERY),
+            variables: {
+                jwt_token: sessionStorage.getItem("jwtToken_business")
+            }
+        }).then(res => {
+                this.setState({
+                    thisMonthsExpenses: res.data.data.thisMonthsExpenses
+                });
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    getThisYearsExpenses() {
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(THIS_YEAR_EXPENSES_QUERY),
+            variables: {
+                jwt_token: sessionStorage.getItem("jwtToken_business")
+            }
+        }).then(res => {
+                this.setState({
+                    thisYearsExpenses: res.data.data.thisYearsExpenses
+                });
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    componentDidMount() {
+        this.getThisMonthRevenue();
+        this.getThisMonthsExpenses();
+        this.getThisYearRevenue();
+        this.getThisYearsExpenses();
     }
 
     render() {
+        const {thisMonthsRevenue, thisYearsRevenue, thisMonthsExpenses, thisYearsExpenses} = this.state;
+        const cannonial_url = process.env.REACT_APP_PUBLIC_URL + "/business/home";
         return (
             <div id="page-top">
+                <Helmet>
+                    <title>Dashboard</title>
+                    <meta property="og:title" content="Dashboard"/>
+                    <link rel="canonial" href={cannonial_url}/>
+                    <meta property="og:description"
+                          content="View the performance of your RocketNow store"/>
+                    <meta name="description" content="View the performance of your RocketNow store"/>
+                </Helmet>
                 <link rel="stylesheet"
                       href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"/>
@@ -18,41 +155,7 @@ export default class Home extends React.Component {
                     <Menu/>
                     <div className="d-flex flex-column" id="content-wrapper">
                         <div id="content">
-                            <nav className="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                                <div className="container-fluid">
-                                    <button className="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop"
-                                            type="button"><i className="fas fa-bars"/></button>
-                                    <ul className="nav navbar-nav flex-nowrap ml-auto">
-
-
-                                        <div className="d-none d-sm-block topbar-divider"/>
-                                        <li className="nav-item dropdown no-arrow" role="presentation">
-                                            <li className="nav-item dropdown no-arrow"><a
-                                                className="dropdown-toggle nav-link" data-toggle="dropdown"
-                                                aria-expanded="false" href="#"><span
-                                                className="d-none d-lg-inline mr-2 text-gray-600 small">USER &nbsp;1 &nbsp;&nbsp;</span><img
-                                                className="border rounded-circle img-profile"
-                                                src="assets/img/avatars/avatar1.jpeg"/></a>
-                                                <div
-                                                    className="dropdown-menu shadow dropdown-menu-right animated--grow-in"
-                                                    role="menu"><a className="dropdown-item" role="presentation"
-                                                                   href="#"><i
-                                                    className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"/>&nbsp;Profile</a><a
-                                                    className="dropdown-item" role="presentation" href="#"><i
-                                                    className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"/>&nbsp;Settings</a>
-                                                    <a
-                                                        className="dropdown-item" role="presentation" href="#"><i
-                                                        className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"/>&nbsp;Activity
-                                                        log</a>
-                                                    <div className="dropdown-divider"/>
-                                                    <a className="dropdown-item" role="presentation" href="#"><i
-                                                        className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"/>&nbsp;Logout</a>
-                                                </div>
-                                            </li>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>
+                            <BusinessNavbar/>
                             <div className="container-fluid">
                                 <div className="d-sm-flex justify-content-between align-items-center mb-4">
                                     <h3 className="text-dark mb-0">Dashboard</h3>
@@ -67,7 +170,7 @@ export default class Home extends React.Component {
                                                             className="text-uppercase text-primary font-weight-bold text-xs mb-1">
                                                             <span>Earnings (monthly)</span></div>
                                                         <div className="text-dark font-weight-bold h5 mb-0">
-                                                            <span>$40,000</span></div>
+                                                            <span>€{thisMonthsRevenue} </span></div>
                                                     </div>
                                                     <div className="col-auto"><i
                                                         className="fas fa-calendar fa-2x text-gray-300"/></div>
@@ -84,7 +187,7 @@ export default class Home extends React.Component {
                                                             className="text-uppercase text-primary font-weight-bold text-xs mb-1">
                                                             <span>Fees (monthly)</span></div>
                                                         <div className="text-dark font-weight-bold h5 mb-0">
-                                                            <span>$4,000</span></div>
+                                                            <span>€{thisMonthsExpenses}</span></div>
                                                     </div>
                                                     <div className="col-auto"><i
                                                         className="fas fa-calendar fa-2x text-gray-300"/></div>
@@ -101,7 +204,7 @@ export default class Home extends React.Component {
                                                             className="text-uppercase text-success font-weight-bold text-xs mb-1">
                                                             <span>Earnings (annual)</span></div>
                                                         <div className="text-dark font-weight-bold h5 mb-0">
-                                                            <span>$215,000</span></div>
+                                                            <span>€{thisYearsRevenue}</span></div>
                                                     </div>
                                                     <div className="col-auto"><i
                                                         className="fas fa-dollar-sign fa-2x text-gray-300"/></div>
@@ -118,7 +221,7 @@ export default class Home extends React.Component {
                                                             className="text-uppercase text-success font-weight-bold text-xs mb-1">
                                                             <span>Fees (annual)</span></div>
                                                         <div className="text-dark font-weight-bold h5 mb-0">
-                                                            <span>$21,500</span></div>
+                                                            <span>€{thisYearsExpenses}</span></div>
                                                     </div>
                                                     <div className="col-auto"><i
                                                         className="fas fa-dollar-sign fa-2x text-gray-300"/></div>
@@ -148,7 +251,7 @@ export default class Home extends React.Component {
                                                                                         role="presentation"
                                                                                         href="#">&nbsp;Another
                                                         action</a>
-                                                        <div className="dropdown-divider"></div>
+                                                        <div className="dropdown-divider"/>
                                                         <a className="dropdown-item" role="presentation"
                                                            href="#">&nbsp;Something else here</a></div>
                                                 </div>
@@ -402,12 +505,7 @@ export default class Home extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <footer className="bg-white sticky-footer">
-                            <div className="container my-auto">
-                                <div className="text-center my-auto copyright"><span>Copyright © RocketNow 2019</span>
-                                </div>
-                            </div>
-                        </footer>
+                        <BusinessFooter/>
                     </div>
                 </div>
             </div>

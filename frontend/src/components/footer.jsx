@@ -10,7 +10,7 @@ export default function Footer() {
                         <div className="col-sm-6 col-md-3 item">
                             <h3 style={{color: "#ffffff"}}>Services</h3>
                             <ul>
-                                <li><a aria-label={"Sell your goods on RocketNow"} href="/business/signup">Sell on
+                                <li><a aria-label={"Sell your goods on RocketNow"} href="/business/login">Sell on
                                     RocketNow</a></li>
                                 <li><a aria-label={"See the answers to the most frequently asked questions"}
                                        href="/faq">FAQ</a></li>
