@@ -3,7 +3,7 @@ import Menu from "./common/menu";
 import "../../assets/css/business/admin.min.css";
 import axios from "axios";
 import {print} from "graphql";
-import {message} from "antd";
+import {message, Select} from "antd";
 import BusinessNavbar from "./common/navbar";
 import {formatTimeStamp} from "../../components/relativeTimestamp";
 import BusinessFooter from "./common/footer";
@@ -13,7 +13,10 @@ import {NR_OF_NOT_SHIPPED_ORDERS_QUERY} from "../../graphql/businessuser/order/n
 import {UN_COMPLETED_ORDERS_VALUE_QUERY} from "../../graphql/businessuser/order/unCompletedOrdersValue_QUERY";
 import {NR_OF_IN_PROGRESS_ORDERS_QUERY} from "../../graphql/businessuser/order/nrOfInProgressOrders_QUERY";
 import {Helmet} from "react-helmet";
+import {UPDATE_PARTIAL_ORDER_STATUS} from "../../graphql/businessuser/order/updatePartialOrderStatus_MUTATION";
+import {getEmoji} from "../../components/emoji";
 
+const {Option} = Select;
 let GLOBAL_enumerator = 0;
 
 const currency_display_dictionary = {
@@ -41,65 +44,166 @@ function renderPartialOrderGoods(ordergoods) {
     return "";
 }
 
-function renderResults(partialOrder) {
-    GLOBAL_enumerator += 1;
-    const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-    const offset = new Date().getTimezoneOffset();
-    const offsetInMs = offset* 60 * 60 *1000;
-    const recivedTime = new Date(parseInt(partialOrder.received_timestamp_UTC+ offsetInMs));
-
-    let proccesingStartTime = undefined;
-    if (partialOrder.processing_start_timestamp_UTC) {
-        proccesingStartTime = new Date(parseInt(partialOrder.processing_start_timestamp_UTC+offsetInMs));
+function renderShippingAddress(shippingAddress) {
+    if (shippingAddress.shippingMethod === "ParcelDelivery") {
+        return (
+            <div>
+                <b>To:</b> {shippingAddress.shippingName} <br/>
+                <b>Location:</b> {shippingAddress.parcelDeliveryLocation.name} {getEmoji(shippingAddress.parcelDeliveryLocation.country)}<br/>
+                <b>Provider:</b> {shippingAddress.parcelDeliveryLocation.provider} <br/>
+            </div>
+        );
+    } else if (shippingAddress.shippingMethod === "AddressDelivery") {
+        return (
+            <div>
+                <b>To:</b> {shippingAddress.shippingName} <br/>
+                <b>Address Line 1:</b> {shippingAddress.addressOne} <br/>
+                <b>Address Line 2:</b> {shippingAddress.addressTwo} <br/>
+                <b>City:</b> {shippingAddress.city} <br/>
+                <b>Zip</b> {shippingAddress.zip} <br/>
+                <b>Region</b> {shippingAddress.region} <br/>
+                <b>Country</b> {shippingAddress.country}{getEmoji(shippingAddress.country)} <br/>
+            </div>
+        );
     }
-    let proccesingEndTime = undefined;
-    if (partialOrder.processing_end_timestamp_UTC) {
-        proccesingEndTime = new Date(parseInt(partialOrder.processing_end_timestamp_UTC+offsetInMs));
-    }
-    let shippedTime = undefined;
-    if (partialOrder.shipped_timestamp_UTC) {
-        shippedTime = new Date(parseInt(partialOrder.shipped_timestamp_UTC+offsetInMs));
-    }
-
-    return (
-        <tr>
-            <th scope="row">{GLOBAL_enumerator}</th>
-            <td>{partialOrder._id}</td>
-            <td>{partialOrder.partial_order_status}</td>
-            <td>
-                <b>Order received:</b> {recivedTime.toLocaleDateString("en-US", options)} ({formatTimeStamp(recivedTime)}) <br/>
-                {(proccesingStartTime) ? <b>Processing started:</b> : <p/>}
-                {(proccesingStartTime) ? proccesingStartTime.toLocaleDateString("en-US", options)(formatTimeStamp(proccesingStartTime)) : <p/>}
-                <br/>
-                {(proccesingEndTime) ? <b>Processing ended:</b> : <p/>}
-                {(proccesingEndTime) ? proccesingEndTime.toLocaleDateString("en-US", options)(formatTimeStamp(proccesingEndTime)) : <p/>}
-                <br/>
-                {(shippedTime) ? <b>Shipped:</b> : <p/>}
-                {(shippedTime) ? shippedTime.toLocaleDateString("en-US", options)(formatTimeStamp(shippedTime)) : <p/>}
-                <br/>
-            </td>
-            <td>
-                {renderPartialOrderGoods(partialOrder.order_items)}
-            </td>
-            <td>Shipping (todo)</td>
-        </tr>
-    );
 }
 
-function renderTableRows(goods) {
-    if (goods) {
-        return goods.map(good => {
-            return renderResults(good)
+function getOptionValues(currentStatus) {
+    let optionValues = [];
+    if (currentStatus === "RECEIVED") {
+        const options = [
+            <Option value="RECEIVED">RECEIVED</Option>,
+            <Option value="PROCESSING">PROCESSING</Option>,
+            <Option value="PROCESSED" disabled>PROCESSED</Option>,
+            <Option value="SHIPPED" disabled>SHIPPED</Option>
+        ];
+        optionValues = optionValues.concat(options);
+    } else if (currentStatus === "PROCESSING") {
+        const options = [
+            <Option value="RECEIVED" disabled>RECEIVED</Option>,
+            <Option value="PROCESSING">PROCESSING</Option>,
+            <Option value="PROCESSED">PROCESSED</Option>,
+            <Option value="SHIPPED" disabled>SHIPPED</Option>
+        ];
+        optionValues = optionValues.concat(options);
+    } else if (currentStatus === "PROCESSED") {
+        const options = [
+            <Option value="RECEIVED" disabled>RECEIVED</Option>,
+            <Option value="PROCESSING" disabled>PROCESSING</Option>,
+            <Option value="PROCESSED">PROCESSED</Option>,
+            <Option value="SHIPPED">SHIPPED</Option>
+        ];
+        optionValues = optionValues.concat(options);
+    }
+    return optionValues;
+}
+
+
+class PartialOrder extends React.Component {
+    constructor(props) {
+        super(props);
+        this.updateOrderStatus = this.updateOrderStatus.bind(this);
+    }
+
+    updateOrderStatus(newStatus) {
+        axios.post(process.env.REACT_APP_SERVER_URL, {
+            query: print(UPDATE_PARTIAL_ORDER_STATUS),
+            variables: {
+                jwt_token: sessionStorage.getItem("jwtToken_business"),
+                partialOrderId: this.props.partialOrder.partialOrder._id,
+                newStatus: newStatus
+            }
+        }).then(() => {
+                message.success("Your order status was updated to " + newStatus);
+            }
+        ).catch(error => {
+            if (error.response) {
+                if (error.response.data) {
+                    if (error.response.data.errors[0]) {
+                        const errorMessage = error.response.data.errors[0].message;
+                        if (errorMessage !== null) {
+                            message.error(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    render() {
+        const base = this.props.partialOrder;
+        const partialOrder = base.partialOrder;
+        const shippingAddress = base.shippingAddress;
+        GLOBAL_enumerator += 1;
+        const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+        const offset = new Date().getTimezoneOffset();
+        const offsetInMs = offset * 60 * 60 * 1000;
+        const recivedTime = new Date(parseInt(partialOrder.received_timestamp_UTC + offsetInMs));
+
+        let proccesingStartTime = undefined;
+        if (partialOrder.processing_start_timestamp_UTC) {
+            proccesingStartTime = new Date(parseInt(partialOrder.processing_start_timestamp_UTC + offsetInMs));
+        }
+        let proccesingEndTime = undefined;
+        if (partialOrder.processing_end_timestamp_UTC) {
+            proccesingEndTime = new Date(parseInt(partialOrder.processing_end_timestamp_UTC + offsetInMs));
+        }
+        let shippedTime = undefined;
+        if (partialOrder.shipped_timestamp_UTC) {
+            shippedTime = new Date(parseInt(partialOrder.shipped_timestamp_UTC + offsetInMs));
+        }
+
+        return (
+            <tr>
+                <th scope="row">{GLOBAL_enumerator}</th>
+                <td>{partialOrder._id}</td>
+                <td>
+                    <Select defaultValue={partialOrder.partial_order_status} style={{width: 120}}
+                            onChange={this.updateOrderStatus}>
+                        {getOptionValues(partialOrder.partial_order_status)}
+                    </Select>
+                </td>
+                <td>
+                    <b>Order
+                        received:</b> {recivedTime.toLocaleDateString("en-US", options)} ({formatTimeStamp(recivedTime)}) <br/>
+                    {(proccesingStartTime !== undefined) ? <b>Processing started:</b> : <p/>}
+                    {(proccesingStartTime !== undefined) ? proccesingStartTime.toLocaleDateString("en-US", options) :
+                        <p/>}
+                    {(proccesingStartTime !== undefined) ? " (" + formatTimeStamp(proccesingStartTime) + ")" : <p/>}
+                    <br/>
+                    {(proccesingEndTime !== undefined) ? <b>Processing ended:</b> : <p/>}
+                    {(proccesingEndTime !== undefined) ? proccesingEndTime.toLocaleDateString("en-US", options) : <p/>}
+                    {(proccesingEndTime !== undefined) ? " (" + formatTimeStamp(proccesingEndTime) + ")" : <p/>}
+                    <br/>
+                    {(shippedTime !== undefined) ? <b>Shipped:</b> : <p/>}
+                    {(shippedTime !== undefined) ? shippedTime.toLocaleDateString("en-US", options) : <p/>}
+                    {(shippedTime !== undefined) ? " (" + formatTimeStamp(shippedTime) + ")" : <p/>}
+                    <br/>
+                </td>
+                <td>
+                    {renderPartialOrderGoods(partialOrder.order_items)}
+                </td>
+                <td>{renderShippingAddress(shippingAddress)}</td>
+            </tr>
+        );
+    }
+}
+
+function renderTableRows(partialOrders) {
+    if (partialOrders) {
+        return partialOrders.map(partialOrder => {
+            return <PartialOrder partialOrder={partialOrder}/>
         });
     }
     return "";
 }
 
+
 export default class Order extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            myPartialOrders: null,
+            myPartialOrders: undefined,
             nrOfOrdersProcessingNotStarted: 0,
             nrOfInProgressOrders: 0,
             nrOfNotShippedOrders: 0,
@@ -110,7 +214,6 @@ export default class Order extends React.Component {
         this.getNrOfOrdersProcessingNotStarted = this.getNrOfOrdersProcessingNotStarted.bind(this);
         this.getNrOfNotShippedOrders = this.getNrOfNotShippedOrders.bind(this);
         this.getUnCompletedOrdersValue = this.getUnCompletedOrdersValue.bind(this);
-
     }
 
     getNrOfInProgressOrders() {
@@ -221,7 +324,7 @@ export default class Order extends React.Component {
             }
         }).then(res => {
                 this.setState({
-                    myPartialOrders: res.data.data.partialOrdersNotYetShipped
+                    excpandedPartialOrders: res.data.data.partialOrdersNotYetShipped
                 });
             }
         ).catch(error => {
@@ -250,7 +353,7 @@ export default class Order extends React.Component {
 
     render() {
         const {
-            myPartialOrders,
+            excpandedPartialOrders,
             nrOfOrdersProcessingNotStarted,
             nrOfInProgressOrders,
             nrOfNotShippedOrders,
@@ -424,7 +527,8 @@ export default class Order extends React.Component {
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    {renderTableRows(myPartialOrders)}
+                                                    {renderTableRows(excpandedPartialOrders)}
+                                                    {(!excpandedPartialOrders) ? <p>Loading ...</p> : <p/>}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -440,3 +544,4 @@ export default class Order extends React.Component {
         );
     }
 };
+//TODO: shipping info should include mobile phone nr as well
