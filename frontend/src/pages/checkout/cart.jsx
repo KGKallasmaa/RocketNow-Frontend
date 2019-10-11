@@ -12,6 +12,7 @@ import {Helmet} from "react-helmet";
 import {NUMBEROFGOODS_INCART_AND_SUBTOTAL_QUERY} from "../../graphql/numberOfGoods_inCart_And_Subtotal_QUERY";
 import {SHOPPINGCART_QUERY} from "../../graphql/shoppingCart_QUERY";
 import "../../assets/css/cart.min.css";
+import {EditCartGood} from "../../components/modifyCart";
 
 
 const currency_display_dictionary = {
@@ -25,31 +26,9 @@ const currency_display_dictionary = {
 };
 
 
-function rederCartItem(good) {
-    if (!good) {
-        return;
-    }
-    const title = good.good.title;
-    const quantity = good.quantity;
-    const subtotalPrice = good.good.current_price;
-    const currency = currency_display_dictionary[good.good.currency];
-    const mainImage = good.good.main_image_cloudinary_secure_url;
 
-    return (
-        <li>
-            <div className="pl-thumb">
-                <LazyLoadImage
-                    alt={title}
-                    src={mainImage}
-                />
-            </div>
-            <h6>{title}</h6>
-            <p>{quantity} x {currency}{subtotalPrice}</p>
-        </li>
-    );
-}
 
-function rederLoadingCartCartItem(componentDidMount) {
+function renderLoadingCartCartItem(componentDidMount) {
     if (componentDidMount) {
         return;
     }
@@ -63,6 +42,15 @@ function rederLoadingCartCartItem(componentDidMount) {
     );
 }
 
+
+function renderCartItem(good) {
+    if (!good) {
+        return;
+    }
+    return (
+        <EditCartGood good={good}/>
+    );
+}
 
 export default class ShoppingCart extends React.Component {
     constructor(props) {
@@ -93,13 +81,31 @@ export default class ShoppingCart extends React.Component {
             orderSubtotal: undefined,
             shippingTaxCost: 0,
             subTotalTaxCost: 0,
-            componentDidMount: false
+            componentDidMount: false,
         };
         this.shippingOptionSelected = this.shippingOptionSelected.bind(this);
         this.DeliveryEstimateSelected = this.DeliveryEstimateSelected.bind(this);
         this.ShippingCostSelected = this.ShippingCostSelected.bind(this);
     }
 
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        const{shippingOption,ShippingAddressLine1,ParcelDeliveryLocation} = this.state;
+        if (shippingOption !== nextState.shippingOption){
+            return true;
+        }
+        if (shippingOption === "Address delivery"){
+            if (ShippingAddressLine1 !== nextState.ShippingAddressLine1){
+                return true;
+            }
+        }
+        else {
+            if (ParcelDeliveryLocation !== nextState.ParcelDeliveryLocation){
+                return true;
+            }
+        }
+        return nextState.componentDidMount === true;
+    }
     shippingOptionSelected(event) {
         this.setState({
             shippingOption: event.target.value,
@@ -189,6 +195,8 @@ export default class ShoppingCart extends React.Component {
 
     }
 
+
+
     render() {
         let {
             ShippingName,
@@ -209,7 +217,7 @@ export default class ShoppingCart extends React.Component {
             ShippingValuesAreValid,
             ShippingEstimatedDeliveryTime,
             shoppingcartGoods,
-            componentDidMount
+            componentDidMount,
         } = this.state;
 
         const jwt_token = (isRegularUserLoggedIn()) ? sessionStorage.getItem("jwtToken") : sessionStorage.getItem("temporary_user_id");
@@ -228,11 +236,11 @@ export default class ShoppingCart extends React.Component {
                     <link rel="canonial" href={cannonialUrl}/>
                     <meta name="description" content="View your shopping cart at RocketNow"/>
                 </Helmet>
-                <section class="checkout-section spad">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8 order-2 order-lg-1">
-                                <form class="checkout-form">
+                <section className="checkout-section spad">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-8 order-2 order-lg-1">
+                                <form className="checkout-form">
                                     <div className="cf-title">Shipping type</div>
                                     <div className="row shipping-btns">
                                         <div className="col-6">
@@ -285,6 +293,9 @@ export default class ShoppingCart extends React.Component {
                                         </div>
                                     </div>
                                 </form>
+
+
+
                                 <GoToPayment
                                     jwt_token={jwt_token}
                                     ShippingName={ShippingName}
@@ -305,20 +316,20 @@ export default class ShoppingCart extends React.Component {
                                     disabled={!ShippingValuesAreValid}
                                 />
                             </div>
-                            <div class="col-lg-4 order-1 order-lg-2">
-                                <div class="checkout-cart">
+                            <div className="col-lg-4 order-1 order-lg-2">
+                                <div className="checkout-cart">
                                     <h3>Your Cart</h3>
-                                    <ul class="product-list">
-                                        {(componentDidMount === false && shoppingcartGoods !== "noResults") ? rederLoadingCartCartItem(componentDidMount) :
+                                    <ul className="product-list">
+                                        {(componentDidMount === false && shoppingcartGoods !== "noResults") ? renderLoadingCartCartItem(componentDidMount) :
                                             <p/>}
-                                        {(shoppingcartGoods !== undefined && shoppingcartGoods !== "noResults") ? shoppingcartGoods.map(rederCartItem) :
+                                        {(shoppingcartGoods !== undefined && shoppingcartGoods !== "noResults") ? shoppingcartGoods.map(renderCartItem) :
                                             <p/>}
                                     </ul>
-                                    <ul class="price-list">
+                                    <ul className="price-list">
                                         <li>Subtotal<span>{currency}{subtotal}</span></li>
                                         <li>Shipping<span>{currency}{shipping}</span></li>
                                         <li>Taxes<span>{currency}{tax}</span></li>
-                                        <li class="total">Total<span>{currency}{total}</span></li>
+                                        <li className="total">Total<span>{currency}{total}</span></li>
                                     </ul>
                                 </div>
                             </div>
