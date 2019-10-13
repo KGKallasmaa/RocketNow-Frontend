@@ -19,6 +19,8 @@ import BusinessLogin from "./pages/business/business_public/login";
 import Verify from "./pages/user/verify";
 import MyAccount from "./pages/user/myAccount";
 
+import PageNotFound from "./pages/PageNotFound.jsx";
+
 
 import SellerPage from "./pages/business/business_public/sellerPage.jsx";
 import Redirect from "react-router/es/Redirect";
@@ -93,7 +95,8 @@ export default function App() {
                 <PrivateBusinessRoute exact path="/business/finance" component={BusinessHome}/>
                 <PrivateBusinessRoute exact path="/business/orders" component={BusinessOrders}/>
                 <PrivateBusinessRoute exact path="/business/warehouse" component={BusinessWarehouse}/>
-                <Route exact path="" component={Home}/>
+                <Route exact path="/" component={Home}/>
+                <Route path="*" component={PageNotFound} />
             </Switch>
         </Router>
     );
