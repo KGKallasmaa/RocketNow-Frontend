@@ -36,6 +36,8 @@ export default function Footer() {
                             <a title={"View RocketNow on Facebook"} href="#"><i
                                 className="icon ion-social-facebook"/></a>
                             <a title={"View RocketNow on Instagram"} href="#"><i className="icon ion-social-instagram"/></a>
+                            <a title={"View RocketNow on LinedIn"} href="#"><i
+                                className="icon ion-social-linkedin"/></a>
                         </div>
                     </div>
                     <p className="copyright">Made with&nbsp;❤️ &nbsp;in Estonia 🇪🇪</p>
