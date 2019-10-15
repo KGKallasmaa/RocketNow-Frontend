@@ -51,7 +51,7 @@ export default class Careers extends React.PureComponent {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-10 col-lg-8 col-xl-11 mx-auto" style={{color: "white"}}>
-                                <div class="site-heading">
+                                <div className="site-heading">
                                     <br/><br/><br/>
                                     <h1 style={{color: "white", textAlign: "center"}}><strong>Careers</strong>&nbsp;at
                                         RocketNow</h1>

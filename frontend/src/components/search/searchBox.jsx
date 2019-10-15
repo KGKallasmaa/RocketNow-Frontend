@@ -10,7 +10,7 @@ const searchClient = algoliasearch(
     process.env.REACT_APP_ALGOLIA_SEARCH_ONLY_KEY
 );
 
-export default class RocketNowSearchBox extends React.Component {
+export default class RocketNowSearchBox extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,13 +19,6 @@ export default class RocketNowSearchBox extends React.Component {
         };
         this.handleSearch = this.handleSearch.bind(this);
         this.updateQuery = this.updateQuery.bind(this);
-    }
-
-    componentDidMount() {
-        this.setState({
-            query: (this.props.query !== undefined) ? this.props.query : "",
-            type: (this.props.type !== undefined) ? this.props.type : ""
-        });
     }
 
     handleSearch() {
@@ -48,7 +41,8 @@ export default class RocketNowSearchBox extends React.Component {
 
 
     render() {
-        const {query, type} = this.state;
+        const query = (this.props.query !== undefined) ? this.props.query : "";
+        const type = (this.props.type !== undefined) ? this.props.type : "";
         if (type === "instant") {
             return (
                 <SearchBox
