@@ -102,10 +102,6 @@ export class LoadingGoodCard extends React.PureComponent {
 const recommendStyle = {maxWidth: "100%"};
 
 export class LoadingReccomendationGoodCard extends React.PureComponent {
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return false;
-    }
-
     render() {
         if (this.props.good === undefined) {
             return (
