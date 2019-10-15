@@ -19,7 +19,7 @@ import BusinessLogin from "./pages/business/business_public/login";
 import Verify from "./pages/user/verify";
 import MyAccount from "./pages/user/myAccount";
 
-import PageNotFound from "./pages/PageNotFound.jsx";
+import PageNotFound from "./pages/pageNotFound.jsx";
 
 
 import SellerPage from "./pages/business/business_public/sellerPage.jsx";

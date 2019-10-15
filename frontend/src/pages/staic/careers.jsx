@@ -26,7 +26,8 @@ export default class Careers extends React.PureComponent {
                     <meta name="twitter:card" content="summary"/>
                 </Helmet>
                 <nav className="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
-                    <div className="container"><a className="navbar-brand" href="/">RocketNow</a>
+                    <div className="container"><a className="navbar-brand" href="/" aria-label={"Go to homepage"}
+                                                  style={{color: "white"}}>RocketNow</a>
                         <button data-toggle="collapse" data-target="#navbarResponsive" className="navbar-toggler"
                                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i
                             className="fa fa-bars"/></button>
@@ -34,32 +35,39 @@ export default class Careers extends React.PureComponent {
                             className="collapse navbar-collapse" id="navbarResponsive">
                             <ul className="nav navbar-nav ml-auto">
                                 <li className="nav-item" role="presentation"><a className="nav-link"
-                                                                                href="/about">About</a></li>
+                                                                                href="/about" aria-label={"Go to about page"}
+                                                                                style={{color: "white"}}>About</a></li>
                                 <li className="nav-item" role="presentation"/>
-                                <li className="nav-item" role="presentation"><a className="nav-link"
-                                                                                href="/contact">Contact</a>
+                                <li className="nav-item" role="presentation"><a className="nav-link" aria-label={"Go to contact page"}
+                                                                                href="/contact"
+                                                                                style={{color: "white"}}>Contact</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
-                <header className="masthead" style={{
-                    backgroundImage: `url(${galaxy})`
-                }}>
+                <header className="masthead" style={{background: `url(${galaxy})`, backgroundPosition: "center"}}>
                     <div className="overlay"/>
                     <div className="container">
                         <div className="row">
-                            <div className="col-md-10 col-lg-8 col-xl-11 mx-auto">
+                            <div className="col-md-10 col-lg-8 col-xl-11 mx-auto" style={{color: "white"}}>
                                 <div class="site-heading">
-                                    <h1><strong>Careers</strong>&nbsp;at RocketNow</h1><span
-                                    className="text-left subheading"><strong>RocketNow is looking for people who want to create something new. You are always welcome to seek opportunities to join our team, especially if you who move fast, are not afraid of challenges.</strong></span>
+                                    <br/><br/><br/>
+                                    <h1 style={{color: "white", textAlign: "center"}}><strong>Careers</strong>&nbsp;at
+                                        RocketNow</h1>
+                                    <span
+                                        className="text-left subheading"><strong>RocketNow is looking for people who want to create something new. You are always welcome to seek opportunities to join our team, especially if you who move fast, are not afraid of challenges.</strong>
+                                </span>
+                                    <br/><br/><br/>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </header>
                 <div className="container">
+                    <br/>
                     <h1 className="text-center"><strong>Open positions</strong></h1>
+                    <br/>
                 </div>
                 <div className="team-boxed">
                     <div className="container text-left">
