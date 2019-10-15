@@ -156,7 +156,7 @@ export default class Home extends React.Component {
     render() {
         const {trending, reccomend, bestselling} = this.state;
         return (
-            <div>
+            <React.Fragment>
                 <Navbar/>
                 <br/>
                 <section className="product-filter-section">
@@ -205,8 +205,7 @@ export default class Home extends React.Component {
                     </div>
                 </section>
                 <Footer/>
-                <script src="../assets/js/main.js"/>
-            </div>
+            </React.Fragment>
         );
     }
 };

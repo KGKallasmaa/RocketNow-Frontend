@@ -7,9 +7,7 @@ export const OrderCard_QUERY = gql`
             received_timestamp_UTC
             processing_start_timestamp_UTC
             processing_end_timestamp_UTC
-            shipping_start_timestamp_UTC
-            shipping_end_timestamp_UTC
-            delivered_timestamp_UTC
+            shipped_timestamp_UTC
             deliveryEstimate_UTC
             status
             subtotal
