@@ -1,15 +1,10 @@
 import {Navbar} from "../../../components/navbar";
 import Footer from "../../../components/footer";
 import {Helmet} from "react-helmet";
-import React, {Fragment} from "react";
-import {Query} from "react-apollo";
-import {message, Skeleton} from "antd";
+import React from "react";
 import {individualBusinessUser_QUERY} from "../../../graphql/individualBusinessUser_QUERY";
-import {businessUserGoods_QUERY} from "../../../graphql/businessUserGood_QUERY";
-import axios from "axios";
-import {print} from "graphql";
-import {product_QUERY} from "../../../graphql/individualProduct_QUERY";
-import {RECOMMEND_GOOD_QUERY} from "../../../graphql/reccomendGood_QUERY";
+import {fetchData} from "../../../common/fetcher";
+
 
 function renderBusinessUserGoods(good) {
     const url = "/goods" + good.nr + "/" + good.title;
@@ -35,62 +30,36 @@ function renderGoods(goods) {
 
 
 export default class SellerPage extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {};
     }
 
-    componentDidMount() {
-        const variables =
-            {
-                nr: parseInt(this.props.match.params.nr,10),
-                displayname: this.props.match.params.name
-            };
-        axios.post(process.env.REACT_APP_SERVER_URL, {
-            query: print(individualBusinessUser_QUERY),
-            variables: variables
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return nextState.goods !== undefined;
+    }
 
-        }).then(resData => {
-                const base = resData.data.data.individualBusinessUser;
-                this.setState({
-                    logoURL: base.logoURL,
-                    description: base.description
-                });
-            }
-        ).catch(error => {
-            if (error.response) {
-                if (error.response.data) {
-                    if (error.response.data.errors[0]) {
-                        const errorMessage = error.response.data.errors[0].message;
-                        if (errorMessage !== null) {
-                            message.error(errorMessage);
-                        }
-                    }
-                }
-            }
-        });
-        axios.post(process.env.REACT_APP_SERVER_URL, {
-            query: print(businessUserGoods_QUERY),
-            variables: variables
-
-        }).then(resData => {
-                this.setState({
-                    goods: resData.data.data.businessUserGoods
-                });
-            }
-        ).catch(error => {
-            if (error.response) {
-                if (error.response.data) {
-                    if (error.response.data.errors[0]) {
-                        const errorMessage = error.response.data.errors[0].message;
-                        if (errorMessage !== null) {
-                            message.error(errorMessage);
-                        }
-                    }
-                }
-            }
-        });
+    async componentDidMount() {
+        const sellerInfoVariables = {
+            nr: parseInt(this.props.match.params.nr, 10),
+            displayname: this.props.match.params.name
+        };
+        let fetchSellerInfo = fetchData(sellerInfoVariables, individualBusinessUser_QUERY);
+        let fetchSellerGoods = fetchData(sellerInfoVariables, individualBusinessUser_QUERY);
+        let sellerData = await fetchSellerInfo;
+        if (sellerData !== null) {
+            const base = sellerData.individualBusinessUser;
+            this.setState({
+                logoURL: base.logoURL,
+                description: base.description
+            });
+        }
+        let sellerGoods = await  fetchSellerGoods;
+        if (sellerGoods !== null) {
+            this.setState({
+                goods:sellerGoods.businessUserGoods
+            });
+        }
     }
 
     render() {
@@ -101,7 +70,7 @@ export default class SellerPage extends React.Component {
         const urlToShare = "/" + nr + "/" + displayname;
         const {logoURL, description, goods} = this.state;
         return (
-            <div>
+            <React.Fragment>
                 <Helmet>
                     <title>{displayname} at RocketNow</title>
                     <meta property="og:title" content={ogTitle}/>
@@ -146,7 +115,7 @@ export default class SellerPage extends React.Component {
                     <br/> <br/> <br/>
                 </div>
                 <Footer/>
-            </div>
+            </React.Fragment>
         );
     }
 };
