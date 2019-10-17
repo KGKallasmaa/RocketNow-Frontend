@@ -95,7 +95,7 @@ function renderOrders(orders) {
     return "";
 }
 
-function renderAdress(userDeliveryAdresses) {
+function renderAddress(userDeliveryAdresses) {
     if (userDeliveryAdresses) {
         return userDeliveryAdresses.map(location => {
             const base = location.shippingAddress;
@@ -234,7 +234,7 @@ export default class MyAccount extends React.Component {
                             <h2 className="text-center">Your address</h2>
                         </div>
                         <div className="row justify-content-center features">
-                            {renderAdress(userDeliveryAdresses)}
+                            {renderAddress(userDeliveryAdresses)}
                         </div>
                     </div>
                 </div>
