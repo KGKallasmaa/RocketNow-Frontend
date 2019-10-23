@@ -24,9 +24,10 @@ export default React.memo(() => {
                                     <li><a aria-label={"Read the story of RocketNow"} href="/about">About</a></li>
                                     <li><a aria-label={"See the careers that are currently available"}
                                            href="/careers">Careers</a></li>
+                                    <li><a aria-label={"Please contact us for any inquiries"} href="/contact">Contact</a></li>
                                     <li><a aria-label={"Read some tips and tips about shopping online"}
                                            href="/blog">Blog</a></li>
-                                    <li><a aria-label={"View our pages sitemap"} href="/sitemap.xml">Sitemap</a></li>
+
                                 </ul>
                             </div>
                             <div className="col-md-6 item text">
