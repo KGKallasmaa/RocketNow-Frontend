@@ -30,6 +30,7 @@ import About from "./pages/staic/about";
 import Careers from "./pages/staic/careers";
 import Faq from "./pages/staic/faq";
 import Tos from "./pages/staic/tos";
+import Contact from "./pages/staic/contact";
 import PrivacyPolicy from "./pages/staic/privacyPolicy";
 import OrderReceipt from "./pages/checkout/orderReceipt";
 import Blog from "./pages/staic/blog";
@@ -90,6 +91,7 @@ export default function App() {
                 <Route exact path="/tos" component={Tos}/>
                 <Route exact path="/privacy" component={PrivacyPolicy}/>
                 <Route exact path="/blog" component={Blog}/>
+                <Route exact path="/contact" component={Contact}/>
                 <PrivateBusinessRoute exact path="/business/home" component={BusinessHome}/>
                 <PrivateBusinessRoute exact path="/business/new/product" component={BusinessNewProduct}/>
                 <PrivateBusinessRoute exact path="/business/finance" component={BusinessHome}/>
