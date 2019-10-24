@@ -10,7 +10,7 @@ export default React.memo((props) => {
     const description = good.description.length > maxDiscriptionLenght ?
         good.description.substring(0, maxDiscriptionLenght - 3) + "..." :
         good.description;
-    const good_url = "/goods/" + props.nr + "/" + good.title;
+    const good_url = "/goods/" + good.nr + "/" + good.title;
     return (
         <div className="col-sm-6 col-md-5 col-lg-4 item">
             <div className="box" style={recommendStyle}>
