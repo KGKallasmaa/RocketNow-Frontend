@@ -1,6 +1,5 @@
 import React from "react";
 import { InputNumber, message} from 'antd';
-import {LazyLoadImage} from "react-lazy-load-image-component";
 import {currency_symbol_converter} from "./currency_and_symbol";
 import {ADD_TOCART_MUTATION} from "../graphql/addToCart_MUTATION";
 import {ADD_TO_FAVORITES_MUTATION} from "../graphql/addToFavorites_MUTATION";
@@ -104,8 +103,6 @@ export class AddToFavorites extends React.Component {
             alert_message("SUCCESS", this.props.title, this.props.quantity, "cart");
         }
     }
-
-
     render() {
         return (
             <button className="btn btn-outline-danger text-center" style={this.props.style} onClick={this.addToFavorites}>
@@ -173,11 +170,14 @@ export class EditCartGood extends React.Component {
         const title = good.good.title;
         const subtotalPrice = good.good.current_price;
         const currency = currency_symbol_converter[good.good.currency];
-        const mainImage = good.good.main_image_cloudinary_secure_url;
+        const desiredWith = 99;
+        let mainImage = good.good.main_image_cloudinary_secure_url;
+        const res = mainImage.split("/image/upload");
+        mainImage = res[0]+"/image/upload/w_"+desiredWith.toString()+res[1];
         return (
             <li>
                 <div className="pl-thumb">
-                    <LazyLoadImage
+                    <img
                         alt={title}
                         src={mainImage}
                     />
