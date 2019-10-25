@@ -5,7 +5,6 @@ MAINTAINER karl.gustav1789@gmail.com
 
 WORKDIR /app
 COPY . .
-RUN yarn run test
 RUN yarn run build
 
 FROM mhart/alpine-node
