@@ -39,16 +39,14 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "3.1.1",
-    "react-snap": "^1.23.0",
-    "webpack": "^4.41.2",
-    "react-select-country-list": "^2.0.1"
+    "react-select-country-list": "^2.0.1",
+    "webpack": "^4.41.2"
   },
   "scripts": {
     "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postbuild": "react-snap"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
