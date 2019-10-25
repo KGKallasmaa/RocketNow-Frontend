@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import GoodsPage from "./pages/product/productPage";
+import CategoryPage from "./pages/categoryPage";
 import SearchResults from "./pages/searchResults";
 import Reset from "./pages/user/reset";
 import ShoppingCart from "./pages/checkout/cart";
-import Home from "./pages/home";
+import Home from "./pages/homepage/home";
 
 import BusinessHome from "./pages/business/home";
 import BusinessWarehouse from "./pages/business/warehouse";
@@ -23,7 +24,6 @@ import PageNotFound from "./pages/pageNotFound.jsx";
 
 
 import SellerPage from "./pages/business/business_public/sellerPage.jsx";
-import Redirect from "react-router/es/Redirect";
 import Success from "./pages/checkout/success.jsx";
 import Cancel from "./pages/checkout/cancel";
 import About from "./pages/staic/about";
@@ -35,6 +35,8 @@ import PrivacyPolicy from "./pages/staic/privacyPolicy";
 import OrderReceipt from "./pages/checkout/orderReceipt";
 import Blog from "./pages/staic/blog";
 import {isBusinessUserLoggedIn, isRegularUserLoggedIn} from "./components/authentication";
+
+import { Redirect } from 'react-router-dom';
 
 const Logout = () => {
     sessionStorage.clear();
@@ -75,14 +77,14 @@ export default function App() {
                 <Route exact path="/reset/password/:token?" component={Reset}/>
                 <Route exact path="/logout" component={Logout}/>
                 <Route exact path="/goods/:nr/:title" component={GoodsPage}/>
+                <Route exact path="/c/:category" component={CategoryPage}/>
                 <Route exact path="/cart" component={ShoppingCart}/>
-                <Route exact path="/seller/:nr/:name" component={SellerPage}/>
                 <Route exact path="/seller/:nr/:name" render={(props) => <SellerPage {...props} />}/>
                 <PrivateRegularRoute path="/me" component={MyAccount}/>
                 <PrivateRegularRoute path="/success/:success_id" component={Success}/>
                 <PrivateRegularRoute path="/cancel/:cancel_id" component={Cancel}/>
                 <PrivateRegularRoute path="/receipt/order/:order_id" component={OrderReceipt}/>
-                <Route exact path="/search/:query/:page_nr?/:category?" component={SearchResults}/>
+                <Route exact path="/search/:query" component={SearchResults}/>
                 <Route exact path="/about" component={About}/>
                 <Route exact path="/careers" component={Careers}/>
                 <Route exact path="/business/signup" component={BusinessSignup}/>

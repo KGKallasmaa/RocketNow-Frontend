@@ -4,10 +4,8 @@ import Footer from "../../components/footer";
 import {Navbar} from "../../components/navbar";
 import {product_QUERY} from "../../graphql/individualProduct_QUERY";
 import {RECOMMEND_GOOD_QUERY} from "../../graphql/reccomendGood_QUERY";
-import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {fetchData} from "../../common/fetcher";
 import {LoadingGoodCard,LoadingReccomendationGoodCard} from "./components/loadingGoodCard";
-
 
 const RecommendationCard = lazy(() => import("./components/recommendationGoodCard.jsx"));
 const RegularGoodCard = lazy(() => import("./components/regularGoodCard.jsx"));
@@ -71,6 +69,7 @@ export default class ProductPage extends React.Component {
         return (
             <React.Fragment>
                 <Navbar/>
+                <br/><br/>
                 {(good !== undefined) ? mapRegularGood(good,this.props.match.params.nr) : <p/>}
                 <LoadingGoodCard good={good}/>
                 <div className="features-boxed">
