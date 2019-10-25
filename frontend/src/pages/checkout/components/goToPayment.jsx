@@ -1,7 +1,7 @@
 import React from "react";
 import {Icon, Skeleton} from "antd";
-import {CHECKOUT_MUTATION} from "../../graphql/checkout_MUTATION";
-import {fetchData} from "../../common/fetcher";
+import {CHECKOUT_MUTATION} from "../../../graphql/checkout_MUTATION";
+import {fetchData} from "../../../common/fetcher";
 
 const loadingIcon = <Icon type="loading" style={{fontSize: 24}} spin/>;
 
@@ -16,10 +16,6 @@ export class GoToPayment extends React.PureComponent {
         this.goToCheckout = this.goToCheckout.bind(this);
     }
 
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log("GO TO PAYMENT componentDidUpdate")
-    }
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return this.state.weHaveStripe !== nextState.weHaveStripe;
     }
@@ -76,7 +72,6 @@ export class GoToPayment extends React.PureComponent {
             return (
                 <Skeleton loading={true}>
                     <button disabled={this.props.disabled}
-                            style={{backgroundColor: "#1F96FE"}}
                             className="site-btn submit-order-btn"
                             onClick={this.goToCheckout}>
                     </button>
@@ -84,13 +79,14 @@ export class GoToPayment extends React.PureComponent {
             );
         }
         return (
-            <button disabled={this.props.disabled}
-                    style={{backgroundColor: "#1F96FE"}}
-                    className="site-btn submit-order-btn"
-                    onClick={this.goToCheckout}>
-                {(IsLoading === true) ? loadingIcon : ""}
-                {(IsLoading === false) ? "Proceed to Payment" : ""}
-            </button>
+            <div className="container">
+                <button disabled={this.props.disabled}
+                        className="site-btn submit-order-btn"
+                        onClick={this.goToCheckout}>
+                    {(IsLoading === true) ? loadingIcon : ""}
+                    {(IsLoading === false) ? "Proceed to Payment" : ""}
+                </button>
+            </div>
         );
     }
 }

@@ -9,7 +9,7 @@ export default class PageNotFound extends React.PureComponent {
             <React.Fragment>
                 <Helmet>
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet"/>
-                    <title>Page not found</title>
+                    <title>404: Page not found</title>
                 </Helmet>
                 <div id="notfound">
                     <div className="notfound">

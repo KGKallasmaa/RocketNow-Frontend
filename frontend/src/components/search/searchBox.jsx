@@ -53,7 +53,7 @@ export default class RocketNowSearchBox extends React.PureComponent {
                 <SearchBox
                     defaultRefinement={query}
                     placeholder={"Search for anything"}
-                    searchAsYouType={"false"}
+                    searchAsYouType={false}
                 />
             );
         }
@@ -65,7 +65,7 @@ export default class RocketNowSearchBox extends React.PureComponent {
                     >
                         <SearchBox
                             placeholder={"Search for anything"}
-                            searchAsYouType={"false"}
+                            searchAsYouType={false}
                             onChange={this.updateQuery}
                             onSubmit={this.handleSearch}
                         />
