@@ -3,7 +3,7 @@ import {Form, Icon, message, Spin} from 'antd';
 import gql from "graphql-tag";
 import {print} from 'graphql';
 import logo from '../../assets/img/logo.svg';
-import Redirect from "react-router-dom/es/Redirect";
+import { Redirect } from 'react-router-dom';
 import {Helmet} from "react-helmet";
 import axios from 'axios';
 import FacebookLogin from "react-facebook-login";

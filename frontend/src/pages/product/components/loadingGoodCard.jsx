@@ -1,6 +1,6 @@
 import React from "react";
 import {AddToCart} from "../../../components/modifyCart";
-import Skeleton from "antd/es/skeleton";
+import {Skeleton} from 'antd';
 
 export class LoadingGoodCard extends React.PureComponent {
     render() {

@@ -93,4 +93,28 @@
         <loc>http://rocketnow.eu/seller/3/RocketNow</loc>
         <lastmod>2019-10-20T16:59:52+00:00</lastmod>
     </url>
+    <url>
+        <loc>http://rocketnow.eu/c/fashion</loc>
+        <lastmod>2019-10-25T16:59:52+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rocketnow.eu/c/health_and_beauty</loc>
+        <lastmod>2019-10-25T16:59:52+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rocketnow.eu/c/subscriptions</loc>
+        <lastmod>2019-10-25T16:59:52+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rocketnow.eu/c/digital</loc>
+        <lastmod>2019-10-25T16:59:52+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rocketnow.eu/c/entertainment</loc>
+        <lastmod>2019-10-25T16:59:52+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rocketnow.eu/c/electronics</loc>
+        <lastmod>2019-10-25T16:59:52+00:00</lastmod>
+    </url>
 </urlset>

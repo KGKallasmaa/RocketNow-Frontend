@@ -200,7 +200,7 @@ export default class searchResults extends React.Component {
         const {nonNumericRefinements, numericRefinements, filtersAreVisible} = this.state;
         const cannonial_url = process.env.REACT_APP_PUBLIC_URL + "/search/" + query;
         return (
-            <div>
+            <React.Fragment>
                 <Helmet>
                     <title>RocketNow: {query}</title>
                     <link rel="canonial" href={cannonial_url}/>
@@ -210,13 +210,15 @@ export default class searchResults extends React.Component {
                     searchClient={searchClient}
                 >
                     <Navbar query={query} type={"instant"}/>
+                    <br/><br/>
                     <div className="page-top-info">
                         <div className="container">
                             <h5>Showing results for "<b>{query}</b>"</h5>
                             <CurrentRefinements/>
                         </div>
                     </div>
-                    <Button shape="circle" icon="filter" style={{marginLeft: "10%", color: "#1F96FE"}} aria-label={"Filter your search results"}
+                    <Button shape="circle" icon="filter" style={{marginLeft: "10%", color: "#1F96FE"}}
+                            aria-label={"Filter your search results"}
                             onClick={this.filtersAreVisible}/>
                     <br/>
                     <br/>
@@ -247,7 +249,7 @@ export default class searchResults extends React.Component {
                 </InstantSearch>
                 <Footer/>
                 <script src="../assets/js/main.js"/>
-            </div>
+            </React.Fragment>
         )
     }
 }

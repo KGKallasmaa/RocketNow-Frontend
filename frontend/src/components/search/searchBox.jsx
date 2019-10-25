@@ -1,14 +1,19 @@
 import React from 'react';
-import Redirect from "react-router-dom/es/Redirect";
+import { Redirect } from 'react-router-dom';
 import 'instantsearch.css/themes/algolia.css';
 import {InstantSearch, SearchBox} from 'react-instantsearch-dom';
-import algoliasearch from "algoliasearch/lite";
+import algoliasearch from 'algoliasearch/lite';
 
 
 const searchClient = algoliasearch(
     process.env.REACT_APP_ALGOLIA_API_KEY,
     process.env.REACT_APP_ALGOLIA_SEARCH_ONLY_KEY
 );
+
+const style={
+   width:"100%",
+    marginBottom:"5px"
+};
 
 export default class RocketNowSearchBox extends React.PureComponent {
     constructor(props) {
@@ -53,18 +58,20 @@ export default class RocketNowSearchBox extends React.PureComponent {
             );
         }
         return (
-            <InstantSearch
-                indexName="product"
-                searchClient={searchClient}
-            >
-                <SearchBox
-                    placeholder={"Search for anything"}
-                    searchAsYouType={"false"}
-                    onChange={this.updateQuery}
-                    onSubmit={this.handleSearch}
-                />
-                {this.renderRedirect()}
-            </InstantSearch>
+            <div style={style}>
+                    <InstantSearch
+                        indexName="product"
+                        searchClient={searchClient}
+                    >
+                        <SearchBox
+                            placeholder={"Search for anything"}
+                            searchAsYouType={"false"}
+                            onChange={this.updateQuery}
+                            onSubmit={this.handleSearch}
+                        />
+                        {this.renderRedirect()}
+                    </InstantSearch>
+            </div>
         );
     }
 }

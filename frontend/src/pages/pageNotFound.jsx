@@ -1,5 +1,5 @@
 import React from 'react';
-import Helmet from "react-helmet/es/Helmet";
+import { Helmet } from 'react-helmet';
 import "../assets/css/pageNotFound.min.css";
 
 

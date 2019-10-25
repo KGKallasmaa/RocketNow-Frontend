@@ -2,10 +2,10 @@ import React, {lazy, Suspense} from "react";
 import {Helmet} from "react-helmet";
 import Footer from "../../components/footer.jsx";
 import "../../assets/css/static/careers.min.css";
-import galaxy from "../../assets/img/static/Galaxy.jpg";
-import software from "../../assets/img/static/Software.jpg";
-import design from "../../assets/img/static/Design.jpg";
-import marketing from "../../assets/img/static/Marketing.jpg";
+import galaxy from "./assets/img/Galaxy.jpg";
+import software from "./assets/img/Software.jpg";
+import design from "./assets/img/Design.jpg";
+import marketing from "./assets/img/Marketing.jpg";
 
 const IndividualCareer = lazy(() => import("./components/IndividualCareer"));
 

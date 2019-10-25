@@ -4,7 +4,7 @@ import {Helmet} from "react-helmet";
 import {OrderCard_QUERY} from "../../graphql/orderCard_QUERY";
 import {currency_symbol_converter} from "../../components/currency_and_symbol";
 import {fetchData} from "../../common/fetcher";
-import Skeleton from "antd/es/skeleton";
+import {Skeleton} from 'antd';
 
 const PageLogo = () => {
     return (
