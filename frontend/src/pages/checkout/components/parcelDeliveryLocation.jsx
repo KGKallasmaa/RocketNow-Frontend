@@ -42,9 +42,7 @@ export class ParcelDeliveryLocationForm extends React.PureComponent {
         this.setShippingName = this.setShippingName.bind(this);
     };
 
-    componentDidUpdate(prevProps, prevState) {
-        console.log("PARCEL DELIVERY LOCATION componentDidUpdate")
-    }
+
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         if (this.state.loadingParcelLocations !== nextState.loadingParcelLocations){
             return true;

@@ -3,20 +3,18 @@ import {Skeleton, Checkbox} from 'antd';
 import Footer from "../../components/footer.jsx";
 import {Navbar} from "../../components/navbar.jsx";
 import {isRegularUserLoggedIn} from "../../components/authentication";
-import {GoToPayment} from "./checkout";
-import {formatTimeStamp} from "../../components/relativeTimestamp";
+import {GoToPayment} from "./components/goToPayment";
 import {Helmet} from "react-helmet";
 import {NUMBEROFGOODS_INCART_AND_SUBTOTAL_QUERY} from "../../graphql/numberOfGoods_inCart_And_Subtotal_QUERY";
 import {SHOPPINGCART_QUERY} from "../../graphql/shoppingCart_QUERY";
-import "../../assets/css/cart.min.css";
+import "./assets/css/cart.min.css";
 import {EditCartGood} from "../../components/modifyCart";
 import {currency_symbol_converter} from "../../components/currency_and_symbol";
 import {fetchData} from "../../common/fetcher";
 import {ParcelDeliveryLocationForm} from "./components/parcelDeliveryLocation";
 import {AddressForm} from "./components/addressForm";
+import {OrderEstimateForm} from "./components/orderEstimate";
 
-
-const script_url = "https://maps.googleapis.com/maps/api/js?key=" + process.env.REACT_APP_GOOGLE_PLACES_API_KEY + "&libraries=places";
 
 function renderLoadingCartCartItem() {
     return (
@@ -32,7 +30,6 @@ function renderLoadingCartCartItem() {
 
 function renderCartItem(good) {
     if (!good) {
-        alert("This should not happen!!!!");
         return;
     }
     return (
@@ -100,7 +97,6 @@ export default class ShoppingCart extends React.Component {
                          ParcelDeliveryLocationName,
                          ParcelDeliveryLocationCountry,
     ) {
-        console.log("I recuuested an update")
         //In Estonia for shippping VAT is 20%
         const VAT = 0.2;
         const shippingCostWithoutTax = Math.round(100 * (ShippingCost / (1 + VAT))) / 100;
@@ -136,20 +132,18 @@ export default class ShoppingCart extends React.Component {
     };
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-    //    alert(JSON.stringify(nextState));
-        if (nextState.shippingOption === "Parcel delivery"){
-            if (nextState.ParcelDeliveryLocation !== this.state.ParcelDeliveryLocation){
+        //    alert(JSON.stringify(nextState));
+        if (nextState.shippingOption === "Parcel delivery") {
+            if (nextState.ParcelDeliveryLocation !== this.state.ParcelDeliveryLocation) {
                 return true;
             }
-        }
-        else if (nextState.shippingOption === "Address delivery"){
-            console.log(nextState)
-            if (nextState.ParcelDeliveryLocation !== this.state.ShippingAddressLine1){
+        } else if (nextState.shippingOption === "Address delivery") {
+            if (nextState.ParcelDeliveryLocation !== this.state.ShippingAddressLine1) {
                 return true;
             }
 
         }
-        if (nextState.ShippingEstimatedDeliveryTime !== this.state.ShippingEstimatedDeliveryTime){
+        if (nextState.ShippingEstimatedDeliveryTime !== this.state.ShippingEstimatedDeliveryTime) {
             return true;
         }
 
@@ -162,12 +156,6 @@ export default class ShoppingCart extends React.Component {
         return nextState.addressFormUpdatedWithGoogle !== true;
 
     }
-
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log("CART COMPONENT componentDidUpdate")
-    }
-
 
     async componentDidMount() {
         let orderSubtotal = undefined;
@@ -221,7 +209,8 @@ export default class ShoppingCart extends React.Component {
             shoppingcartGoods,
             componentDidMount,
             addressFormUpdatedWithGoogle,
-            ParcelDeliveryLocationName
+            ParcelDeliveryLocationName,
+            shippingOption
         } = this.state;
 
         const jwt_token = (isRegularUserLoggedIn()) ? sessionStorage.getItem("jwtToken") : sessionStorage.getItem("temporary_user_id");
@@ -247,21 +236,22 @@ export default class ShoppingCart extends React.Component {
                                 <form className="checkout-form">
                                     <div className="cf-title">Shipping type</div>
                                     <div className="row shipping-btns">
-                                        <div className="col-6">
-                                            <Checkbox value={"Parcel delivery"}
-                                                      checked={this.state.shippingOption === 'Parcel delivery'}
-                                                      onChange={this.shippingOptionSelected}>Parcel delivery
-                                            </Checkbox>
-                                        </div>
-                                        <br/>
-                                        <div className="col-6">
-                                            <Checkbox value={"Address delivery"}
-                                                      checked={this.state.shippingOption === 'Address delivery'}
-                                                      onChange={this.shippingOptionSelected}>Address delivery
-                                            </Checkbox>
+                                        <div className="container">
+                                            <div className="col-6">
+                                                <Checkbox value={"Parcel delivery"}
+                                                          checked={this.state.shippingOption === 'Parcel delivery'}
+                                                          onChange={this.shippingOptionSelected}>Parcel delivery
+                                                </Checkbox>
+                                            </div>
+                                            <br/>
+                                            <div className="col-6">
+                                                <Checkbox value={"Address delivery"}
+                                                          checked={this.state.shippingOption === 'Address delivery'}
+                                                          onChange={this.shippingOptionSelected}>Address delivery
+                                                </Checkbox>
+                                            </div>
                                         </div>
                                     </div>
-
                                     {(this.state.shippingOption !== 'Parcel delivery') ? <p/> :
                                         <ParcelDeliveryLocationForm
                                             ShippingName={ShippingName}
@@ -272,38 +262,25 @@ export default class ShoppingCart extends React.Component {
                                             ShippingCostSelected={this.ShippingCostSelected}
                                             disabled={this.state.shippingOption !== 'Parcel delivery'}/>
                                     }
-                                    <script src={script_url}/>
-
-                                    {(this.state.shippingOption !== 'Address delivery') ? <p/> :
+                                    {(shippingOption !== 'Address delivery') ? <p/> :
                                         <AddressForm
-                                        ShippingName={ShippingName}
-                                        ShippingAddressLine1={ShippingAddressLine1}
-                                        ShippingAddressLine2={ShippingAddressLine2}
-                                        ShippingCity={ShippingCity}
-                                        ShippingRegion={ShippingRegion}
-                                        ShippingZip={ShippingZip}
-                                        ShippingCountry={ShippingCountry}
-                                        ShippingCurrency={ShippingCurrency}
-                                        DeliveryEstimateSelected={this.DeliveryEstimateSelected}
-                                        ShippingCostSelected={this.ShippingCostSelected}
-                                        SearchedWithGoogle={this.SearchedWithGoogle}
-                                        hasSearchedWithGoogle={addressFormUpdatedWithGoogle}
-                                        disabled={this.state.shippingOption !== 'Address delivery'}
+                                            ShippingName={ShippingName}
+                                            ShippingAddressLine1={ShippingAddressLine1}
+                                            ShippingAddressLine2={ShippingAddressLine2}
+                                            ShippingCity={ShippingCity}
+                                            ShippingRegion={ShippingRegion}
+                                            ShippingZip={ShippingZip}
+                                            ShippingCountry={ShippingCountry}
+                                            ShippingCurrency={ShippingCurrency}
+                                            DeliveryEstimateSelected={this.DeliveryEstimateSelected}
+                                            ShippingCostSelected={this.ShippingCostSelected}
+                                            SearchedWithGoogle={this.SearchedWithGoogle}
+                                            hasSearchedWithGoogle={addressFormUpdatedWithGoogle}
+                                            disabled={this.state.shippingOption !== 'Address delivery'}
                                         />
                                     }
-                                    <div
-                                        className="cf-title"> {(ShippingEstimatedDeliveryTime !== undefined) ? "Delivery details" : "Select shipping option for delivery details"}</div>
-                                    <div className="row shipping-btns">
-                                        <div className="col-6">
-                                            <h4> {(ShippingEstimatedDeliveryTime !== undefined) ? "Estimated arrival time" :
-                                                <p/>}</h4>
-                                        </div>
-                                        <div className="col-6">
-                                            <h4>
-                                                <b>{(ShippingEstimatedDeliveryTime !== undefined) ? formatTimeStamp(ShippingEstimatedDeliveryTime) :
-                                                    <p/>} </b></h4>
-                                        </div>
-                                    </div>
+                                    <OrderEstimateForm shippingOption={shippingOption}
+                                                       ShippingEstimatedDeliveryTime={ShippingEstimatedDeliveryTime}/>
                                 </form>
 
                                 {(ShippingCity !== undefined || ParcelDeliveryLocationName !== undefined) ? <GoToPayment
@@ -331,7 +308,8 @@ export default class ShoppingCart extends React.Component {
                                 <div className="checkout-cart">
                                     <h3>Your Cart</h3>
                                     <ul className="product-list">
-                                        {(componentDidMount === false && shoppingcartGoods !== "noResults") ? renderLoadingCartCartItem() : <p/>}
+                                        {(componentDidMount === false && shoppingcartGoods !== "noResults") ? renderLoadingCartCartItem() :
+                                            <p/>}
                                         {(shoppingcartGoods !== undefined && shoppingcartGoods !== "noResults") ? shoppingcartGoods.map(renderCartItem) :
                                             <p/>}
                                     </ul>
