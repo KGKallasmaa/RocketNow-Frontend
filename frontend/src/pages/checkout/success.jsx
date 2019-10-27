@@ -89,6 +89,8 @@ export default class Success extends React.Component {
         return (
             <div>
                 <Navbar/>
+                <br/>
+                <br/>
                 <Helmet>
                     <title>Thank you from RocketNow</title>
                     <link rel="canonial" href={CannonialUrl}/>
