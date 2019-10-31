@@ -4,8 +4,10 @@ export const Address_QUERY = gql`
     query individualOrder($jwt_token:String!) {
         individualOrder(jwt_token:$jwt_token) {
             shippingAddress{
+                _id
                 dateAdded_UTC
                 isActive
+                isDefault
                 shippingName
                 addressOne
                 addressTwo
@@ -18,8 +20,6 @@ export const Address_QUERY = gql`
                     provider
                     name
                     country
-                    x_coordinate
-                    y_coordinate
                 }
             }
         }

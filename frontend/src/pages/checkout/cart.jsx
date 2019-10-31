@@ -294,7 +294,7 @@ export default class ShoppingCart extends React.Component {
                                         ShippingCountry={ShippingCountry}
                                         TimezoneOffset_M={TimezoneOffset_M}
                                         ShippingMethod={ShippingMethod}
-                                        ShippingCost={ShippingCost + shippingTaxCost}
+                                        ShippingCost={ShippingCost}
                                         taxCost={tax - subTotalTaxCost}
                                         ParcelDeliveryLocation={ParcelDeliveryLocation}
                                         ShippingCurrency={ShippingCurrency}

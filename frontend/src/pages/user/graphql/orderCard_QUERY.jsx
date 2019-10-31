@@ -9,6 +9,18 @@ export const OrderCard_QUERY = gql`
             }
             shippingAddress{
                 shippingName
+                addressOne
+                addressTwo
+                city
+                region
+                zip
+                country
+                shippingMethod
+                parcelDeliveryLocation{
+                    provider
+                    name
+                    country
+                }
             }
             received_timestamp_UTC
             subtotal
@@ -20,6 +32,7 @@ export const OrderCard_QUERY = gql`
                 price_per_one_item
                 quantity
                 currency
+                main_image_cloudinary_secure_url
             }
         }
     }
