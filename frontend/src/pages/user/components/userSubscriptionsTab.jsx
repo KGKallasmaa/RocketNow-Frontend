@@ -10,7 +10,7 @@ export class UserSubscriptionsTab extends React.PureComponent {
     render() {
         return (
             <React.Fragment>
-              <b>Not completed</b>
+              <b>Coming soon</b>
             </React.Fragment>
         );
     }

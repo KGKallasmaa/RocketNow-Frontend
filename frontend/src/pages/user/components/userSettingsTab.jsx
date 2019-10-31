@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-
 export class UserSettingsTab extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -10,7 +8,7 @@ export class UserSettingsTab extends React.PureComponent {
     render() {
         return (
             <React.Fragment>
-                <b>Not completed</b>
+                <b>Coming soon</b>
             </React.Fragment>
         );
     }
