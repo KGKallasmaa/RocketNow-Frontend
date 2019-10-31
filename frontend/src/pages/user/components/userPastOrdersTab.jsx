@@ -1,7 +1,5 @@
 import React from 'react';
 import {Button, Empty, Skeleton, Table, Tag} from 'antd';
-import {fetchData} from "../../../common/fetcher";
-import {OrderCard_QUERY} from "../graphql/orderCard_QUERY";
 import noOrders from "../assets/img/noOrders.png";
 import {UserOrderDetail} from "./orderDetail";
 
@@ -54,16 +52,9 @@ export class UserPastOrdersTab extends React.PureComponent {
     }
 
     async componentDidMount() {
-        const variables = {
-            jwt_token: sessionStorage.getItem("jwtToken")
-        };
-        let fetchPastOrderData = fetchData(variables, OrderCard_QUERY);
-        let orderData = await fetchPastOrderData;
-        if (orderData !== null) {
-            const raw_data = orderData.individualOrder;
+        if (this.props.orders !== null) {
             this.setState({
-                data: renderData(raw_data),
-                rawData:raw_data,
+                data: renderData(this.props.orders),
             });
         }
     }
@@ -88,6 +79,21 @@ export class UserPastOrdersTab extends React.PureComponent {
             if (this.state.data !== undefined) {
                 return (
                     <React.Fragment>
+                        <div className="team-boxed">
+                            <div className="container">
+                                <div className="intro"/>
+                                <div className="row people">
+                                    <div className="col-xl-1"/>
+                                    <div className="col-md-6 col-lg-4 col-xl-10 item">
+                                        <div className="box">
+                                            <br/>
+                                            <h3>Past orders</h3>
+                                        </div>
+                                    </div>
+                                    <div className="col-xl-1"/>
+                                </div>
+                            </div>
+                        </div>
                         <Table dataSource={this.state.data}>
                             <Column title="Preview" dataIndex="preview" key="preview"
                                     render={preview => (
@@ -114,7 +120,7 @@ export class UserPastOrdersTab extends React.PureComponent {
                                     render={nr => (
                                         <span>
                                             {nr.map(nr => (
-                                                <UserOrderDetail  rawData={this.state.rawData} orderId={nr}/>
+                                                <UserOrderDetail rawData={this.props.orders} orderId={nr}/>
                                             ))}
                                         </span>
                                     )}

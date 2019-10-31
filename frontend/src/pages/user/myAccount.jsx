@@ -2,26 +2,17 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import Footer from '../../components/footer.jsx';
 import {Navbar} from '../../components/navbar.jsx';
-//import {message} from 'antd';
-//import {formatTimeStamp} from '../../components/relativeTimestamp';
-//import '../../assets/css/myaccount.min.css';
-//import {LazyLoadImage} from 'react-lazy-load-image-component';
-//import {getEmoji} from '../../components/emoji';
-//import {UserCard_QUERY} from '../../graphql/userCard_QUERY';
-//import {OrderCard_QUERY} from '../../graphql/orderCard_QUERY';
-//import {Address_QUERY} from '../../graphql/address_QUERY';
-//import axios from "axios";
-//import {print} from "graphql";
-
+import '../../assets/css/myaccount.min.css';
 import {Icon, Tabs} from 'antd';
 import {UserPastOrdersTab} from "./components/userPastOrdersTab";
 import {UserGeneralTab} from "./components/userGeneralTab";
 import {UserSubscriptionsTab} from "./components/userSubscriptionsTab";
 import {UserSettingsTab} from "./components/userSettingsTab";
+import {fetchData} from "../../common/fetcher";
+import {OrderCard_QUERY} from "./graphql/orderCard_QUERY";
 
 
 const {TabPane} = Tabs;
-
 
 export default class MyAccount extends React.Component {
     constructor(props) {
@@ -29,9 +20,22 @@ export default class MyAccount extends React.Component {
         this.state = {};
     }
 
+    async componentDidMount() {
+        const variables = {
+            jwt_token: sessionStorage.getItem("jwtToken")
+        };
+        let fetchPastOrderData = fetchData(variables, OrderCard_QUERY);
+        let orderData = await fetchPastOrderData;
+        if (orderData !== null) {
+            this.setState({
+                orders: orderData.individualOrder,
+            });
+        }
+    }
+
 
     render() {
-        const {individualUser, userDeliveryAdresses, orders} = this.state;
+        let {orders} = this.state;
         const userName = sessionStorage.getItem("regularUserFullName");
         return (
             <React.Fragment>
@@ -59,36 +63,30 @@ export default class MyAccount extends React.Component {
                         <div className="col-md-1"/>
                         <div className="col-md-10">
                             <Tabs defaultActiveKey="1">
-                                <TabPane
-                                    tab={<span><Icon type="user"/>General</span>}
-                                    key="1">
-                                    <UserGeneralTab/>
+                                <TabPane tab={<span><Icon type="user"/>General</span>} key="1">
+                                    {(orders === undefined) ? <p>Loading ...</p> :
+                                        <UserGeneralTab userName={userName} orders={orders}/>}
                                 </TabPane>
-                                <TabPane
-                                    tab={<span><Icon type="tags"/>Orders</span>}
-                                    key="2">
-                                    <UserPastOrdersTab/>
+                                <TabPane tab={<span><Icon type="tags"/>Orders</span>} key="2">
+                                    {(orders === undefined) ? <p>Loading ...</p> :
+                                        <UserPastOrdersTab orders={orders}/>
+                                    }
                                 </TabPane>
-                                <TabPane
-                                    tab={<span><Icon type="schedule"/>Subscriptions</span>}
-                                    key="3">
+                                <TabPane tab={<span><Icon type="schedule"/>Subscriptions</span>} key="3">
                                     <UserSubscriptionsTab/>
                                 </TabPane>
-                                <TabPane
-                                    tab={<span><Icon type="setting"/>Settings</span>}
-                                    key="4">
+                                <TabPane tab={<span><Icon type="setting"/>Settings</span>} key="4">
                                     <UserSettingsTab/>
                                 </TabPane>
                             </Tabs>
                         </div>
                         <div className="col-md-1"/>
-
                     </div>
                 </div>
                 <br/><br/><br/><br/><br/>
                 <br/><br/><br/><br/><br/>
-                < br/> < br/>
-                < Footer/>
+                <br/> <br/>
+                <Footer/>
             </React.Fragment>
         );
     }
