@@ -24,11 +24,11 @@ function renderShippingAddress(shippingAddress) {
             </div>
         );
     } else if (shippingAddress.shippingMethod === "AddressDelivery") {
+        const addressLine2 = (shippingAddress.addressTwo !== undefined) ? "-"+shippingAddress.addressTwo : "";
         return (
             <div>
                 <b>To:</b> {shippingAddress.shippingName} <br/>
-                <b>Address Line 1:</b> {shippingAddress.addressOne} <br/>
-                <b>Address Line 2:</b> {shippingAddress.addressTwo} <br/>
+                <b>Address:</b> {shippingAddress.addressOne}{addressLine2} <br/>
                 <b>City:</b> {shippingAddress.city} <br/>
                 <b>Zip</b> {shippingAddress.zip} <br/>
                 <b>Region</b> {shippingAddress.region} <br/>
@@ -88,7 +88,8 @@ function fetchAddressData(addresses) {
 
 async function makeAddressNotActive(event) {
     const variables = {
-        location_id: event.target.value,
+        jwt_token: sessionStorage.getItem("jwtToken"),
+        location_id: event.target.value
     };
     let notActiveAddress = await fetchData(variables, not_Active_Address_MUTATION);
     if (notActiveAddress !== null) {
