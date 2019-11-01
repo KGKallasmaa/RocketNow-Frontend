@@ -89,8 +89,7 @@ export default class Success extends React.Component {
         return (
             <div>
                 <Navbar/>
-                <br/>
-                <br/>
+                <br/><br/>
                 <Helmet>
                     <title>Thank you from RocketNow</title>
                     <link rel="canonial" href={CannonialUrl}/>
@@ -108,8 +107,9 @@ export default class Success extends React.Component {
                                 </Steps>
                             </div>
                             <br/>
-                            <p className="text-center">We have received your order and deliver it as soon as
-                                possible.</p>
+                            <p className="text-center">
+                                We have received your order and deliver it as soon as possible.
+                            </p>
                             <br/>
                         </div>
                         <div className="row justify-content-center features">
@@ -117,6 +117,7 @@ export default class Success extends React.Component {
                         </div>
                     </div>
                 </div>
+                <br/><br/><br/>
                 <Footer/>
             </div>
         );
