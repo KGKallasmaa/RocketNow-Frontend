@@ -72,6 +72,7 @@ export default class Contact extends React.PureComponent {
                     <meta name="twitter:image" content={ogLogo}/>
                 </Helmet>
                 <Navbar/>
+                <br/><br/>
                 <div style={{background}}>
                     <div className="container">
                         <br/><br/><br/>
@@ -131,7 +132,7 @@ export default class Contact extends React.PureComponent {
                     </div>
                 </div>
                 <div/>
-                <br/><br/><br/><br/><br/><br/><br/><br/>
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/>
                 <Footer/>
             </React.Fragment>
         );
