@@ -14,8 +14,12 @@ const currency_display_dictionary = {
     'CHF': 'Fr'
 };
 
+function round(amount) {
+    return Math.round((amount) * 100) / 100;
+}
+
 function renderShippingAddress(shippingAddress) {
-    if (shippingAddress === undefined){
+    if (shippingAddress === undefined) {
         return "";
     }
     if (shippingAddress.shippingMethod === "ParcelDelivery") {
@@ -27,11 +31,11 @@ function renderShippingAddress(shippingAddress) {
             </div>
         );
     } else if (shippingAddress.shippingMethod === "AddressDelivery") {
+        const addressLine2 = (shippingAddress.addressTwo !== undefined) ? "-"+shippingAddress.addressTwo : "";
         return (
             <div>
                 <b>To:</b> {shippingAddress.shippingName} <br/>
-                <b>Address Line 1:</b> {shippingAddress.addressOne} <br/>
-                <b>Address Line 2:</b> {shippingAddress.addressTwo} <br/>
+                <b>Address:</b> {shippingAddress.addressOne}{addressLine2} <br/>
                 <b>City:</b> {shippingAddress.city} <br/>
                 <b>Zip</b> {shippingAddress.zip} <br/>
                 <b>Region</b> {shippingAddress.region} <br/>
@@ -149,10 +153,11 @@ export class UserOrderDetail extends React.PureComponent {
 
         const tile = "Order " + orderId;
         const receiptURL = "receipt/order/" + orderId;
-        const subtotal = order.subtotal;
-        const shipping = order.shipping_cost;
-        const taxes = order.tax_cost;
-        const total = subtotal + shipping + taxes;
+        const subtotal = round(order.subtotal);
+        const shipping = round(order.shipping_cost);
+        const taxes = round(order.tax_cost);
+        const total = round(subtotal + shipping + taxes);
+        console.log(order);
         return (
             <React.Fragment>
                 <Button type="primary" onClick={this.showModal}>
@@ -189,10 +194,10 @@ export class UserOrderDetail extends React.PureComponent {
                         </div>
                         <div className="col-md-6">
                             <h3>Summary</h3>
-                            <p>Subtotal &nbsp;€{subtotal}</p>
-                            <p>Shipping and Handling &nbsp;€{shipping}</p>
-                            <p>Tax &nbsp;€{taxes}</p>
-                            <b><p>Total &nbsp;€{total}</p></b>
+                            <b>Subtotal</b> &nbsp;€{subtotal} <br/>
+                            <b>Shipping and Handling</b> &nbsp;€{shipping} <br/>
+                            <b>Tax</b> &nbsp;€{taxes} <br/>
+                            <b>Total</b> &nbsp;€{total} <br/>
                             <a href={receiptURL}>View the invoice</a>
                         </div>
                     </div>
