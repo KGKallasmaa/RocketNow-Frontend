@@ -1,7 +1,7 @@
 import React from "react";
 import {Form, Icon} from "antd";
 import {ShippingCost_QUERY} from "../../../graphql/shippingCost_QUERY";
-import {DeliveryEstimate_QUERY} from "../../../graphql/deliveryEstimate_QUERY";
+import {orderDeliveryEstimate_QUERY} from "../graphql/orderDeliveryEstimate_QUERY";
 import {fetchData} from "../../../common/fetcher";
 import countryList from 'react-select-country-list';
 
@@ -53,18 +53,13 @@ export class AddressForm extends React.PureComponent {
         let fetchShippingCost = fetchData(variables, ShippingCost_QUERY);
         variables = {
             jwt_token: sessionStorage.getItem("jwtToken"),
-            TimezoneOffset_M: new Date().getTimezoneOffset(),
-            ShippingAddressLine1: ShippingAddressLine1,
-            ShippingAddressLine2: ShippingAddressLine2,
-            ShippingCity: ShippingCity,
-            ShippingRegion: ShippingRegion,
-            ShippingZip: ShippingZip,
-            ShippingCountry: ShippingCountry,
-            ShippingMethod: "AddressDelivery",
-            ShippingCurrency: this.props.ShippingCurrency
+            timezoneOffset_M: new Date().getTimezoneOffset(),
+            shippingCountry: ShippingCountry,
+            shippingMethod: "AddressDelivery"
         };
 
-        let fetchDeliveryEstimate = fetchData(variables, DeliveryEstimate_QUERY);
+
+        let fetchDeliveryEstimate = fetchData(variables,orderDeliveryEstimate_QUERY);
         let shippingCostFromDB = await fetchShippingCost;
 
         if (shippingCostFromDB !== null) {
@@ -88,7 +83,8 @@ export class AddressForm extends React.PureComponent {
         }
         let deliveryEstimateFromDB = await fetchDeliveryEstimate;
         if (deliveryEstimateFromDB != null) {
-            const deliveryEstimate = (deliveryEstimateFromDB.DeliveryTimeEstimate === -1) ? "" : deliveryEstimateFromDB.DeliveryTimeEstimate;
+            let deliveryEstimate = new Date();
+            deliveryEstimate.setTime(deliveryEstimateFromDB.orderDeliveryEstimate.deliveryTime);
             this.props.DeliveryEstimateSelected(
                 deliveryEstimate
             );

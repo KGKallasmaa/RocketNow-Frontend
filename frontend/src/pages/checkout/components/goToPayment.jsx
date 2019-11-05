@@ -54,7 +54,7 @@ export class GoToPayment extends React.PureComponent {
             ShippingCurrency: this.props.ShippingCurrency,
             taxCost: this.props.taxCost,
             ParcelDeliveryLocation: this.props.ParcelDeliveryLocation,
-            deliveryEstimate_UTC: this.props.deliveryEstimate_UTC,
+            deliveryEstimate_UTC: this.props.deliveryEstimate_UTC.toISOString(),
             TimezoneOffset_M: this.props.TimezoneOffset_M,
             totalCost: this.props.taxCost + this.props.ShippingCost + this.props.orderSubtotal
         };

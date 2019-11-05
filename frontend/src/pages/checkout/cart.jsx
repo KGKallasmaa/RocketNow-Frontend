@@ -43,7 +43,6 @@ export default class ShoppingCart extends React.Component {
         this.state = {
             shippingOption: 'Address delivery',
             shippingOptions: ['Parcel delivery', 'Address delivery'],
-            addressFormUpdatedWithGoogle: false,
             sessionId: '',
             goingToPayment: false,
             goingToPaymentButtonClicked: false,
@@ -72,7 +71,6 @@ export default class ShoppingCart extends React.Component {
         this.shippingOptionSelected = this.shippingOptionSelected.bind(this);
         this.DeliveryEstimateSelected = this.DeliveryEstimateSelected.bind(this);
         this.ShippingCostSelected = this.ShippingCostSelected.bind(this);
-        this.SearchedWithGoogle = this.SearchedWithGoogle.bind(this);
     }
 
     shippingOptionSelected(event) {
@@ -125,11 +123,6 @@ export default class ShoppingCart extends React.Component {
         });
     };
 
-    SearchedWithGoogle(Action) {
-        this.setState({
-            addressFormUpdatedWithGoogle: Action,
-        });
-    };
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         //    alert(JSON.stringify(nextState));
@@ -150,10 +143,7 @@ export default class ShoppingCart extends React.Component {
         if (nextState.orderSubtotal === undefined) {
             return false;
         }
-        if (nextState.TimezoneOffset_M !== undefined) {
-            return false;
-        }
-        return nextState.addressFormUpdatedWithGoogle !== true;
+        return nextState.TimezoneOffset_M === undefined;
 
     }
 
@@ -208,7 +198,6 @@ export default class ShoppingCart extends React.Component {
             ShippingEstimatedDeliveryTime,
             shoppingcartGoods,
             componentDidMount,
-            addressFormUpdatedWithGoogle,
             ParcelDeliveryLocationName,
             shippingOption
         } = this.state;
@@ -274,8 +263,6 @@ export default class ShoppingCart extends React.Component {
                                             ShippingCurrency={ShippingCurrency}
                                             DeliveryEstimateSelected={this.DeliveryEstimateSelected}
                                             ShippingCostSelected={this.ShippingCostSelected}
-                                            SearchedWithGoogle={this.SearchedWithGoogle}
-                                            hasSearchedWithGoogle={addressFormUpdatedWithGoogle}
                                             disabled={this.state.shippingOption !== 'Address delivery'}
                                         />
                                     }

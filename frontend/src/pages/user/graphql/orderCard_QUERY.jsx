@@ -23,6 +23,10 @@ export const OrderCard_QUERY = gql`
                 }
             }
             received_timestamp_UTC
+            processing_start_timestamp_UTC
+            processing_end_timestamp_UTC
+            shipped_timestamp_UTC
+            deliveryEstimate_UTC
             subtotal
             shipping_cost
             tax_cost
