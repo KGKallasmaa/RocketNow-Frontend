@@ -150,6 +150,8 @@ export class UserOrderDetail extends React.PureComponent {
         const processingStartTime = timeConverter(order.processing_start_timestamp_UTC);
         const processingEndTime = timeConverter(order.processing_end_timestamp_UTC);
         const shippedTime = timeConverter(order.shipped_timestamp_UTC);
+        const deliveryEstimate = timeConverter(order.deliveryEstimate_UTC);
+
 
         const tile = "Order " + orderId;
         const receiptURL = "receipt/order/" + orderId;
@@ -173,12 +175,14 @@ export class UserOrderDetail extends React.PureComponent {
                     <Steps size="small" current={1}>
                         <Step status={receivedStatus} title="Received" subTitle={receivedTime}
                               icon={<Icon type="shopping"/>}/>
-                        <Step status={processingStatus} title="Processing" subTitle={processingStartTime}
+                        <Step status={processingStatus} title="Processing" subTitle={(order.processing_start_timestamp_UTC !== null) ? processingStartTime : ""}
                               icon={<Icon type="loading"/>}/>
-                        <Step status={processedStatus} title="Proceeded" subTitle={processingEndTime}
+                        <Step status={processedStatus} title="Proceeded" subTitle={(order.processing_end_timestamp_UTC !== null) ? processingEndTime : ""}
                               icon={<Icon type="rocket"/>}/>
-                        <Step status={shippedStatus} title="Shipped" subTitle={shippedTime}
+                        <Step status={shippedStatus} title="Shipped" subTitle={(order.shipped_timestamp_UTC !== null) ? shippedTime : ""}
                               icon={<Icon type="smile"/>}/>
+                        <Step status={shippedStatus} title="Estimate" subTitle={(order.deliveryEstimate_UTC !== null) ? deliveryEstimate : ""}
+                              icon={<Icon type="pushpin"/>}/>
                     </Steps>
                     <br/><br/>
                     <div className="row">

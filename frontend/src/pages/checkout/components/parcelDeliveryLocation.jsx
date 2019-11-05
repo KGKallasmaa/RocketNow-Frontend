@@ -4,23 +4,24 @@ import {Select, Skeleton} from "antd";
 import {isRegularUserLoggedIn} from "../../../components/authentication";
 import {getEmoji} from "../../../components/emoji";
 import {ShippingCost_QUERY} from "../../../graphql/shippingCost_QUERY";
-import {DeliveryEstimate_QUERY} from "../../../graphql/deliveryEstimate_QUERY";
+import {orderDeliveryEstimate_QUERY} from "../graphql/orderDeliveryEstimate_QUERY";
 import {ShippingLocations_QUERY} from "../../../graphql/parcelLocations_QUERY";
 import {fetchData} from "../../../common/fetcher";
 
 
 const {Option, OptGroup} = Select;
+
 function arraysEqual(arr1, arr2) {
-    if (arr1 === undefined && arr2 === undefined){
+    if (arr1 === undefined && arr2 === undefined) {
         return true;
     }
-    if (arr1 === undefined || arr2 === undefined){
+    if (arr1 === undefined || arr2 === undefined) {
         return false;
     }
-    if(arr1.length !== arr2.length)
+    if (arr1.length !== arr2.length)
         return false;
-    for(let i = arr1.length; i--;) {
-        if(arr1[i].props.value.toString() !== arr2[i].props.value.toString()){
+    for (let i = arr1.length; i--;) {
+        if (arr1[i].props.value.toString() !== arr2[i].props.value.toString()) {
             return false;
         }
     }
@@ -44,20 +45,20 @@ export class ParcelDeliveryLocationForm extends React.PureComponent {
 
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (this.state.loadingParcelLocations !== nextState.loadingParcelLocations){
+        if (this.state.loadingParcelLocations !== nextState.loadingParcelLocations) {
             return true;
         }
-        if (this.props.ParcelDeliveryLocation === undefined){
+        if (this.props.ParcelDeliveryLocation === undefined) {
             return true;
         }
-        if (this.props.ParcelDeliveryLocation === nextProps.ParcelDeliveryLocation){
+        if (this.props.ParcelDeliveryLocation === nextProps.ParcelDeliveryLocation) {
             return false;
         }
-        const otherLocationsAreEqual = arraysEqual(this.state.OtherLocations,nextState.OtherLocations);
-        if (!otherLocationsAreEqual){
+        const otherLocationsAreEqual = arraysEqual(this.state.OtherLocations, nextState.OtherLocations);
+        if (!otherLocationsAreEqual) {
             return true;
         }
-        const nearestLocationsAreEqual = arraysEqual(this.state.NearestLocations,nextState.NearestLocations);
+        const nearestLocationsAreEqual = arraysEqual(this.state.NearestLocations, nextState.NearestLocations);
         return !nearestLocationsAreEqual;
     }
 
@@ -79,14 +80,13 @@ export class ParcelDeliveryLocationForm extends React.PureComponent {
 
         variables = {
             jwt_token: (isRegularUserLoggedIn()) ? sessionStorage.getItem("jwtToken") : sessionStorage.getItem("temporary_user_id"),
-            ParcelDeliveryLocation: ParcelDeliveryLocation,
-            TimezoneOffset_M: new Date().getTimezoneOffset(),
-            ShippingMethod: "ParcelDelivery",
-            ShippingCurrency: this.props.ShippingCurrency
+            timezoneOffset_M: new Date().getTimezoneOffset(),
+            shippingCountry: ParcelDeliveryLocationCountry,
+            shippingMethod: "ParcelDelivery",
         };
 
 
-        let fetchDeliveryEstimate = fetchData(variables, DeliveryEstimate_QUERY);
+        let fetchDeliveryEstimate = fetchData(variables, orderDeliveryEstimate_QUERY);
         let shippingCostFromDB = await fetchShippingCost;
 
 
@@ -111,7 +111,8 @@ export class ParcelDeliveryLocationForm extends React.PureComponent {
         }
         let deliveryEstimateFromDB = await fetchDeliveryEstimate;
         if (deliveryEstimateFromDB != null) {
-            const deliveryEstimate = (deliveryEstimateFromDB.DeliveryTimeEstimate === -1) ? "" : deliveryEstimateFromDB.DeliveryTimeEstimate;
+            let deliveryEstimate = new Date();
+            deliveryEstimate.setTime(deliveryEstimateFromDB.orderDeliveryEstimate.deliveryTime);
             this.props.DeliveryEstimateSelected(
                 deliveryEstimate
             );
@@ -180,7 +181,7 @@ export class ParcelDeliveryLocationForm extends React.PureComponent {
         if (this.props.disabled === true) {
             return (<div/>);
         }
-        const {NearestLocations, OtherLocations,loadingParcelLocations} = this.state;
+        const {NearestLocations, OtherLocations, loadingParcelLocations} = this.state;
         if (loadingParcelLocations === true) {
             return (
                 <div>
@@ -196,7 +197,7 @@ export class ParcelDeliveryLocationForm extends React.PureComponent {
                             <br/>
                             <div className="col-md-12">
                                 <div className="row address-inputs">
-                                   <Skeleton active={true} rows={3}/>
+                                    <Skeleton active={true} rows={3}/>
                                 </div>
                             </div>
                         </div>
