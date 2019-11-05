@@ -3,6 +3,7 @@ import React from "react";
 import {Helmet} from "react-helmet";
 import {AddToCart} from "../../../components/modifyCart";
 import {currency_symbol_converter} from "../../../components/currency_and_symbol";
+import {formatTimeStamp} from "../../../components/relativeTimestamp";
 
 
 function renderCustomAtributes(custom_attribute_names, custom_attribute_values) {
@@ -56,6 +57,8 @@ function rendeOtherImages(otherImages, title) {
 
 export default React.memo((props) => {
     const base = props.good;
+    const addressDeliveryEstimate = props.addressDeliveryEstimate;
+    const parcelDeliveryEstimate = props.parcelDeliveryEstimate;
     let price = base.current_price * (1 + base.general_category.tax);
     price = Math.ceil(100 * price) / 100;
     const id = base._id;
@@ -68,6 +71,7 @@ export default React.memo((props) => {
     const twitterUrlText = "Share " + base.title + " on Twitter";
     const categoryUrl = "/c/" + base.general_category.name;
     const twitterTitle = base.title + "- Rocketnow";
+
     return (
         <React.Fragment>
             <div className="page-top-info">
@@ -155,13 +159,13 @@ export default React.memo((props) => {
                                         <div className="panel-body">
                                             <p>Home Delivery
                                                 <br/>
-                                                Estimated delivery time is <span>3 - 4 days</span>
+                                                Estimated delivery time is <span>{formatTimeStamp(addressDeliveryEstimate)}</span>
                                                 <br/>
                                                 Home delivery will cost approximately <span>€5</span>
                                             </p>
                                             <p>Parcel Delivery
                                                 <br/>
-                                                Estimated delivery time is <span>1 - 2 days</span>
+                                                Estimated delivery time is <span>{formatTimeStamp(parcelDeliveryEstimate)}</span>
                                                 <br/>
                                                 Parcel Delivery will cost approximately <span>€3</span>
                                             </p>

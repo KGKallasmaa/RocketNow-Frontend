@@ -5,7 +5,8 @@ import {Navbar} from "../../components/navbar";
 import {product_QUERY} from "../../graphql/individualProduct_QUERY";
 import {RECOMMEND_GOOD_QUERY} from "../../graphql/reccomendGood_QUERY";
 import {fetchData} from "../../common/fetcher";
-import {LoadingGoodCard,LoadingReccomendationGoodCard} from "./components/loadingGoodCard";
+import {LoadingGoodCard, LoadingReccomendationGoodCard} from "./components/loadingGoodCard";
+import {singleProductDeliveryEstimate_QUERY} from "./graphql/singleProductDeliveryEstimate_QUERY";
 
 const RecommendationCard = lazy(() => import("./components/recommendationGoodCard.jsx"));
 const RegularGoodCard = lazy(() => import("./components/regularGoodCard.jsx"));
@@ -17,15 +18,29 @@ function mapRecommendation(good) {
         </Suspense>
     );
 }
-function mapRegularGood(good,nr) {
+
+function mapRegularGood(good, nr,parcelDeliveryEstimate,addressDeliveryEstimate) {
     return (
         <Suspense fallback={"Loading ..."}>
-            <RegularGoodCard good={good} nr={nr}/>
+            <RegularGoodCard parcelDeliveryEstimate={parcelDeliveryEstimate} addressDeliveryEstimate={addressDeliveryEstimate} good={good} nr={nr}/>
         </Suspense>
     );
 }
 
+function getMyLocation() {
+    const location = window.navigator && window.navigator.geolocation;
+    if (location) {
+        const positionOptions = {
+            enableHighAccuracy: true, timeout: 20000, maximumAge: 0
+        };
 
+        navigator.geolocation.getCurrentPosition((position) => {
+            return [position.coords.latitude,position.coords.longitude];
+        }, (error) => {
+        }, positionOptions);
+    }
+    return [0.0,0.0];
+}
 
 export default class ProductPage extends React.Component {
     constructor(props) {
@@ -34,7 +49,7 @@ export default class ProductPage extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-      return nextState.rec !== undefined;
+        return nextState.rec !== undefined;
     }
 
     async componentDidMount() {
@@ -52,7 +67,7 @@ export default class ProductPage extends React.Component {
         let productData = await fetchProductData;
         if (productData !== null) {
             this.setState({
-                good:productData.individualGood,
+                good: productData.individualGood,
             });
         }
         let recommendationData = await fetchReccomendationData;
@@ -61,16 +76,38 @@ export default class ProductPage extends React.Component {
                 rec: recommendationData.recommend
             });
         }
-    }
+        const myCoOrdinates = getMyLocation();
+        const variables = {
+            good_id: this.state.good._id,
+            quantity: 1,
+            TimezoneOffset_M: new Date().getTimezoneOffset(),
+            lat:myCoOrdinates[0],
+            long:myCoOrdinates[1]
+        };
+        let fetchSingleProductDeliveryEstimate = fetchData(variables, singleProductDeliveryEstimate_QUERY);
 
+        let deliveryEstimate = await fetchSingleProductDeliveryEstimate;
+        if (deliveryEstimate !== null) {
+            const raw =deliveryEstimate.singleProductDeliveryEstimate;
+            const parcel = new Date();
+            parcel.setTime(raw[0].deliveryTime);
+            const address = new Date();
+            address.setTime(raw[1].deliveryTime);
+            this.setState({
+                parcelDeliveryEstimate:parcel,
+                addressDeliveryEstimate:new Date(address)
+            });
+        }
+    };
 
     render() {
-        const {good,rec} = this.state;
+        const {good, rec,parcelDeliveryEstimate,addressDeliveryEstimate} = this.state;
         return (
             <React.Fragment>
                 <Navbar/>
                 <br/><br/>
-                {(good !== undefined) ? mapRegularGood(good,this.props.match.params.nr) : <p/>}
+                {(good !== undefined && parcelDeliveryEstimate !== undefined && addressDeliveryEstimate !== undefined) ? mapRegularGood(good, this.props.match.params.nr,parcelDeliveryEstimate,addressDeliveryEstimate) :
+                    <p/>}
                 <LoadingGoodCard good={good}/>
                 <div className="features-boxed">
                     < div className="container">
