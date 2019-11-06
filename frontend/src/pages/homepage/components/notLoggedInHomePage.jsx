@@ -80,7 +80,7 @@ export default React.memo(() => {
                             <div className="col-lg-6 order-lg-1">
                                 <div className="p-5">
                                     <h2 className="display-4" style={{fontSize: "36px", fontFamily: "Lato"}}>
-                                        For those who appreciate grate choice<br/><br/>
+                                        For great choice appreciators<br/><br/>
                                     </h2>
                                     <p className="sellingpointText">While most platforms limit their selection to one or two
                                         categories, we offer goods in 6 categories. <br/>Looking for a book to entertain? We
