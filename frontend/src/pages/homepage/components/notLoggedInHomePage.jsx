@@ -19,6 +19,7 @@ import shippo from "../assets/img/shippo.jpeg";
 import stripe from "../assets/img/stripe.jpeg";
 import subscription from "../assets/img/subscribtions.jpeg";
 import support from "../assets/img/support.jpeg";
+import CustomerChat from "../../../components/customerChat/customerChat";
 
 const font = {fontFamily: "Lato"};
 
@@ -278,6 +279,7 @@ export default React.memo(() => {
                         </div>
                     </div>
                 </div>
+                <CustomerChat/>
                 <Footer/>
             </React.Fragment>
         );

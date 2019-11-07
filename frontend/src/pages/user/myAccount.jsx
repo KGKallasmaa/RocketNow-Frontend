@@ -8,7 +8,7 @@ import {UserPastOrdersTab} from "./components/userPastOrdersTab";
 import {UserGeneralTab} from "./components/userGeneralTab";
 import {UserSubscriptionsTab} from "./components/userSubscriptionsTab";
 import {UserSettingsTab} from "./components/userSettingsTab";
-import {fetchData} from "../../common/fetcher";
+import {fetchData} from "../../components/fetcher";
 import {OrderCard_QUERY} from "./graphql/orderCard_QUERY";
 
 

@@ -2,7 +2,7 @@ import React from "react";
 import {Form, Icon} from "antd";
 import {ShippingCost_QUERY} from "../../../graphql/shippingCost_QUERY";
 import {orderDeliveryEstimate_QUERY} from "../graphql/orderDeliveryEstimate_QUERY";
-import {fetchData} from "../../../common/fetcher";
+import {fetchData} from "../../../components/fetcher";
 import countryList from 'react-select-country-list';
 
 export class AddressForm extends React.PureComponent {

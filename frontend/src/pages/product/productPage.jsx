@@ -4,7 +4,7 @@ import Footer from "../../components/footer";
 import {Navbar} from "../../components/navbar";
 import {product_QUERY} from "../../graphql/individualProduct_QUERY";
 import {RECOMMEND_GOOD_QUERY} from "../../graphql/reccomendGood_QUERY";
-import {fetchData} from "../../common/fetcher";
+import {fetchData} from "../../components/fetcher";
 import {LoadingGoodCard, LoadingReccomendationGoodCard} from "./components/loadingGoodCard";
 import {singleProductDeliveryEstimate_QUERY} from "./graphql/singleProductDeliveryEstimate_QUERY";
 

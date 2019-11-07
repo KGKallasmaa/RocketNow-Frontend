@@ -1,5 +1,5 @@
 import React from 'react';
-import {fetchData} from "../../../common/fetcher";
+import {fetchData} from "../../../components/fetcher";
 import {UserCard_QUERY} from "../../../graphql/userCard_QUERY";
 import {Table, Tag, Skeleton, Button, Empty, message} from 'antd';
 import {formatTimeStamp} from "../../../components/relativeTimestamp";

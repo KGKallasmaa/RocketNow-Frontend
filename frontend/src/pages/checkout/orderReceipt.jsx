@@ -3,7 +3,7 @@ import logo from '../../assets/img/logo.svg';
 import {Helmet} from "react-helmet";
 import {OrderCard_QUERY} from "../user/graphql/orderCard_QUERY";
 import {currency_symbol_converter} from "../../components/currency_and_symbol";
-import {fetchData} from "../../common/fetcher";
+import {fetchData} from "../../components/fetcher";
 import {Skeleton} from 'antd';
 
 const PageLogo = () => {
