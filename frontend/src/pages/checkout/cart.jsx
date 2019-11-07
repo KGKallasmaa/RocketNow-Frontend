@@ -10,7 +10,7 @@ import {SHOPPINGCART_QUERY} from "../../graphql/shoppingCart_QUERY";
 import "./assets/css/cart.min.css";
 import {EditCartGood} from "../../components/modifyCart";
 import {currency_symbol_converter} from "../../components/currency_and_symbol";
-import {fetchData} from "../../common/fetcher";
+import {fetchData} from "../../components/fetcher";
 import {ParcelDeliveryLocationForm} from "./components/parcelDeliveryLocation";
 import {AddressForm} from "./components/addressForm";
 import {OrderEstimateForm} from "./components/orderEstimate";

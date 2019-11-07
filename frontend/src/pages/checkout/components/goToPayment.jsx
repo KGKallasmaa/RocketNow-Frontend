@@ -1,7 +1,7 @@
 import React from "react";
 import {Icon, Skeleton} from "antd";
 import {CHECKOUT_MUTATION} from "../../../graphql/checkout_MUTATION";
-import {fetchData} from "../../../common/fetcher";
+import {fetchData} from "../../../components/fetcher";
 
 const loadingIcon = <Icon type="loading" style={{fontSize: 24}} spin/>;
 

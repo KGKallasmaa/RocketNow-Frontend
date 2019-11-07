@@ -3,7 +3,7 @@ import { InputNumber, message} from 'antd';
 import {currency_symbol_converter} from "./currency_and_symbol";
 import {ADD_TOCART_MUTATION} from "../graphql/addToCart_MUTATION";
 import {ADD_TO_FAVORITES_MUTATION} from "../graphql/addToFavorites_MUTATION";
-import {fetchData} from "../common/fetcher";
+import {fetchData} from "./fetcher";
 
 const alert_message = (type, title, quantity, cathegory) => {
     const abs_quantity = Math.abs(quantity);

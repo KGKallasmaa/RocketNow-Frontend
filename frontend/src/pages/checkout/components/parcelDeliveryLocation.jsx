@@ -6,7 +6,7 @@ import {getEmoji} from "../../../components/emoji";
 import {ShippingCost_QUERY} from "../../../graphql/shippingCost_QUERY";
 import {orderDeliveryEstimate_QUERY} from "../graphql/orderDeliveryEstimate_QUERY";
 import {ShippingLocations_QUERY} from "../../../graphql/parcelLocations_QUERY";
-import {fetchData} from "../../../common/fetcher";
+import {fetchData} from "../../../components/fetcher";
 
 
 const {Option, OptGroup} = Select;

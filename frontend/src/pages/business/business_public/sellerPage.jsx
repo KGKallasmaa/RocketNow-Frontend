@@ -3,7 +3,7 @@ import Footer from "../../../components/footer";
 import {Helmet} from "react-helmet";
 import React from "react";
 import {individualBusinessUser_QUERY} from "../../../graphql/individualBusinessUser_QUERY";
-import {fetchData} from "../../../common/fetcher";
+import {fetchData} from "../../../components/fetcher";
 
 
 function renderBusinessUserGoods(good) {
