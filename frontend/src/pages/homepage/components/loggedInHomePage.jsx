@@ -6,7 +6,7 @@ import axios from 'axios';
 import {print} from 'graphql';
 import {message} from "antd";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {AddToCart} from "../../../components/modifyCart";
+import {AddToCart} from "../../../components/modifyCart.jsx";
 import {RECOMMEND_GOOD_QUERY} from "../../../graphql/reccomendGood_QUERY";
 import {BEST_SELLING_QUERY} from "../../../graphql/bestSelling_QUERY";
 import {TRENDING_GOOD_QUERY} from "../../../graphql/trending_good_QUERY";

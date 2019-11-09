@@ -17,7 +17,7 @@ import MyAccount from "./pages/user/myAccount";
 import PageNotFound from "./pages/pageNotFound.jsx";
 
 
-import SellerPage from "./pages/sellersPage/sellerPage.jsx";
+import SellerPage from "./pages/sellerspage/sellerPage.jsx";
 import Success from "./pages/checkout/success.jsx";
 import Cancel from "./pages/checkout/cancel";
 import About from "./pages/staic/about";

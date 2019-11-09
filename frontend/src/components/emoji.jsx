@@ -20,5 +20,7 @@ export const getEmoji = (name) => {
         case "DPD":
             return <span role="img" aria-label="DPD"><img src={dbd_logo} width="28" height="28"
                                                           alt="DPD"/> </span>;
+        default:
+            return ""
     }
 };

@@ -1,7 +1,6 @@
-import {LazyLoadImage} from 'react-lazy-load-image-component';
 import React from "react";
 import {Helmet} from "react-helmet";
-import {AddToCart} from "../../../components/modifyCart";
+import {AddToCart} from "../../../components/modifyCart.jsx";
 import {currency_symbol_converter} from "../../../components/currency_and_symbol";
 import {formatTimeStamp} from "../../../components/relativeTimestamp";
 

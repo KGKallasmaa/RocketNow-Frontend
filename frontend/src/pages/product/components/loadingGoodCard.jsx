@@ -1,5 +1,5 @@
 import React from "react";
-import {AddToCart} from "../../../components/modifyCart";
+import {AddToCart} from "../../../components/modifyCart.jsx";
 import {Skeleton} from 'antd';
 
 export class LoadingGoodCard extends React.PureComponent {
