@@ -23,9 +23,9 @@ export default React.memo(() => {
                             <h1 className="text-left masthead-heading mb-0"
                                 style={font}>Terms of Service
                             </h1>
-                            <h2 className="text-left masthead-subheading mb-0" style={font}>
+                            <h5 className="text-left masthead-subheading mb-0" style={font}>
                                 Last&nbsp;updated:&nbsp;November&nbsp;07,&nbsp;2019
-                            </h2>
+                            </h5>
                         </div>
                     </div>
                     <div/>
@@ -37,7 +37,7 @@ export default React.memo(() => {
                     <div className="row">
                         <div className="col-md-1"/>
                         <div className="col-md-10">
-                            <br/>
+                            <br/><br/>
                             <h3>Terms&nbsp;of Service</h3>
                             <p>These Terms of Service ("Terms", "Terms and
                                 Conditions") govern your relationship with https://rocketnow.eu website (the "Service")
@@ -52,7 +52,7 @@ export default React.memo(() => {
                             <p>By accessing or using the Service you agree to be bound by these Terms. If you
                                 disagree with any part of the terms then you may not access the Service.
                             </p>
-                            <h3>Purchases</h3>
+                            <h3>1. Purchases</h3>
                             <p>If you wish to purchase any product or service made available
                                 through the Service ("Purchase"), you may be asked to supply certain information
                                 relevant to your Purchase including, without limitation, your credit card number, the
@@ -75,7 +75,7 @@ export default React.memo(() => {
                             <p>We reserve the right to refuse or cancel your order if fraud or an unauthorised or
                                 illegal transaction is suspected.
                             </p>
-                            <h3>Availability,&nbsp;and&nbsp;Inaccuracies</h3>
+                            <h3>2. Availability,&nbsp;and&nbsp;Inaccuracies</h3>
                             <p>We are constantly
                                 updating our offerings of products and services on the Service. The products or services
                                 available on our Service may be mispriced, described inaccurately, or unavailable, and
@@ -94,7 +94,7 @@ export default React.memo(() => {
                                 Promotions, please review the applicable rules as well as our Privacy Policy. If the
                                 rules for a Promotion conflict with these Terms, the Promotion rules will apply.
                             </p>
-                            <h3>Subscriptions</h3>
+                            <h3>3. Subscriptions</h3>
                             <p>Some parts of the Service are billed on a subscription basis
                                 ("Subscription(s)"). You will be billed in advance on a recurring and periodic basis
                                 ("Billing Cycle"). Billing cycles are set either on a monthly or annual basis, depending
@@ -118,7 +118,7 @@ export default React.memo(() => {
                                 certain deadline date, with the full payment corresponding to the billing period as
                                 indicated on the invoice.
                             </p>
-                            <h3>Free&nbsp;Trial</h3>
+                            <h3>4. Free&nbsp;Trial</h3>
                             <p>RocketNow Technologies OÜ may, at its sole discretion, offer
                                 a Subscription with a free trial for a limited period of time ("Free Trial").
                             </p>
@@ -135,7 +135,7 @@ export default React.memo(() => {
                                 modify the terms and conditions of the Free Trial offer, or (ii) cancel such Free
                                 Trial offer.
                             </p>
-                            <h3>Fee&nbsp;Changes</h3>
+                            <h3>5. Fee&nbsp;Changes</h3>
                             <p>RocketNow Technologies OÜ, in its sole discretion and at any
                                 time, may modify the Subscription fees for the Subscriptions. Any Subscription fee
                                 change will become effective at the end of the then-current Billing Cycle.
@@ -147,12 +147,12 @@ export default React.memo(() => {
                             <p>Your continued use of the Service after the Subscription fee change comes into effect
                                 constitutes your agreement to pay the modified Subscription fee amount.
                             </p>
-                            <h3>Refunds</h3>
+                            <h3>6. Refunds</h3>
                             <p>Certain refund requests for Subscriptions may be considered by
                                 RocketNow Technologies OÜ on a case-by-case basis and granted in sole discretion of
                                 RocketNow Technologies OÜ.
                             </p>
-                            <h3>Content</h3>
+                            <h3>7. Content</h3>
                             <p>Our Service allows you to post, link, store, share and otherwise make
                                 available certain information, text, graphics, videos, or other material ("Content").
                                 You are responsible for the Content that you post to the Service, including its
@@ -173,7 +173,7 @@ export default React.memo(() => {
                                 any person.
                             </p>
 
-                            <h3>Accounts</h3>
+                            <h3>8. Accounts</h3>
                             <p>When you create an account with us, you must provide us information
                                 that is accurate, complete, and current at all times. Failure to do so constitutes a
                                 breach of the Terms, which may result in immediate termination of your account on our
@@ -188,7 +188,7 @@ export default React.memo(() => {
                                 your account.
                             </p>
 
-                            <h3>Intellectual&nbsp;Property</h3>
+                            <h3>9. Intellectual&nbsp;Property</h3>
                             <p>The Service and its original content (excluding
                                 Content provided by users), features and functionality are and will remain the exclusive
                                 property of RocketNow Technologies OÜ and its licensors. The Service is protected by
@@ -197,7 +197,7 @@ export default React.memo(() => {
                                 without the prior written consent of RocketNow Technologies OÜ.
                             </p>
 
-                            <h3>Links&nbsp;To&nbsp;Other&nbsp;Web&nbsp;Sites</h3>
+                            <h3>10. Links&nbsp;To&nbsp;Other&nbsp;Web&nbsp;Sites</h3>
                             <p>Our Service may contain links to
                                 third-party web sites or services that are not owned or controlled by RocketNow
                                 Technologies OÜ.
@@ -213,7 +213,7 @@ export default React.memo(() => {
                             <p>We strongly advise you to read the terms and conditions and privacy policies of any
                                 third-party web sites or services that you visit.
                             </p>
-                            <h3>Termination</h3>
+                            <h3>11. Termination</h3>
                             <p>We may terminate or suspend your account immediately, without
                                 prior notice or liability, for any reason whatsoever, including without limitation if
                                 you breach the Terms.
@@ -221,7 +221,7 @@ export default React.memo(() => {
                             <p>Upon termination, your right to use the Service will immediately cease. If you wish
                                 to terminate your account, you may simply discontinue using the Service.
                             </p>
-                            <h3>Limitation&nbsp;Of&nbsp;Liability</h3>
+                            <h3>12. Limitation&nbsp;Of&nbsp;Liability</h3>
                             <p>In no event shall RocketNow Technologies
                                 OÜ, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable
                                 for any indirect, incidental, special, consequential or punitive damages, including
@@ -235,7 +235,7 @@ export default React.memo(() => {
                                 whether or not we have been informed of the possibility of such damage, and even if a
                                 remedy set forth herein is found to have failed of its essential purpose.
                             </p>
-                            <h3>Disclaimer</h3>
+                            <h3>13. Disclaimer</h3>
                             <p>Your use of the Service is at your sole risk. The Service is
                                 provided on an "AS IS" and "AS AVAILABLE" basis. The Service is provided without
                                 warranties of any kind, whether express or implied, including, but not limited to,
@@ -248,7 +248,7 @@ export default React.memo(() => {
                                 Service is free of viruses or other harmful components; or d) the results of using
                                 the Service will meet your requirements.
                             </p>
-                            <h3>Governing&nbsp;Law</h3>
+                            <h3>14. Governing&nbsp;Law</h3>
                             <p>These Terms shall be governed and construed in accordance
                                 with the laws of Estonia, without regard to its conflict of law provisions.
                             </p>
@@ -260,7 +260,7 @@ export default React.memo(() => {
                                 regarding the Service.
                             </p>
 
-                            <h3>Changes</h3>
+                            <h3>15. Changes</h3>
                             <p>We reserve the right, at our sole discretion, to modify or replace
                                 these Terms at any time. If a revision is material we will try to provide at least 30
                                 days notice prior to any new terms taking effect. What constitutes a material change
@@ -278,6 +278,7 @@ export default React.memo(() => {
                         <div className="col-md-1"/>
                     </div>
                 </div>
+                <br/><br/>
                 <Footer/>
             </React.Fragment>
         );
