@@ -41,7 +41,7 @@ export default React.memo(() => {
                             <h3>Terms&nbsp;of Service</h3>
                             <p>These Terms of Service ("Terms", "Terms and
                                 Conditions") govern your relationship with https://rocketnow.eu website (the "Service")
-                                operated by RocketNow Technologies OÜ ("us", "we", or "our").
+                                operated by RocketNow Technologies OÜ ("us", "we","RocketNo" or "our").
                             </p>
                             <p>Please read these Terms and Conditions carefully before using the Service.
                             </p>
@@ -101,25 +101,24 @@ export default React.memo(() => {
                                 on the type of subscription plan you select when purchasing a Subscription.
                             </p>
                             <p>At the end of each Billing Cycle, your Subscription will automatically renew under
-                                the exact same conditions unless you cancel it or RocketNow Technologies OÜ cancels
+                                the exact same conditions unless you cancel it or RocketNow cancels
                                 it. You may cancel your Subscription renewal either through your online account
-                                management page or by contacting RocketNow Technologies OÜ customer support
-                                team.
+                                management page or by contacting RocketNows customer support team.
                             </p>
                             <p>A valid payment method, including credit card, is required to process the payment for
-                                your Subscription. You shall provide RocketNow Technologies OÜ with accurate and
+                                your Subscription. You shall provide RocketNow  with accurate and
                                 complete billing information including full name, address, state, zip code,
                                 telephone number, and a valid payment method information. By submitting such payment
                                 information, you automatically authorize RocketNow Technologies OÜ to charge all
                                 Subscription fees incurred through your account to any such payment instruments.
                             </p>
-                            <p>Should automatic billing fail to occur for any reason, RocketNow Technologies OÜ will
+                            <p>Should automatic billing fail to occur for any reason, RocketNow will
                                 issue an electronic invoice indicating that you must proceed manually, within a
                                 certain deadline date, with the full payment corresponding to the billing period as
                                 indicated on the invoice.
                             </p>
                             <h3>4. Free&nbsp;Trial</h3>
-                            <p>RocketNow Technologies OÜ may, at its sole discretion, offer
+                            <p>RocketNow may, at its sole discretion, offer
                                 a Subscription with a free trial for a limited period of time ("Free Trial").
                             </p>
                             <p>You may be required to enter your billing information in order to sign up for the
