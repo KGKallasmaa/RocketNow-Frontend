@@ -24,7 +24,7 @@ export default React.memo(() => {
                                 style={font}>Terms of Service
                             </h1>
                             <h5 className="text-left masthead-subheading mb-0" style={font}>
-                                Last&nbsp;updated:&nbsp;November&nbsp;07,&nbsp;2019
+                                Last&nbsp;updated:&nbsp;November&nbsp;12,&nbsp;2019
                             </h5>
                         </div>
                     </div>
