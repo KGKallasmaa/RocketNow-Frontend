@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import "../assets/css/pageNotFound.min.css";
+import AcceptsCookies from "../components/legal/cookie_consent";
 
 
 export default class PageNotFound extends React.PureComponent {
@@ -13,6 +14,7 @@ export default class PageNotFound extends React.PureComponent {
                 </Helmet>
                 <div id="notfound">
                     <div className="notfound">
+
                         <div className="notfound-404">
                             <h1>Oops!</h1>
                         </div>
@@ -22,6 +24,7 @@ export default class PageNotFound extends React.PureComponent {
                         <a href="/">Go To Homepage</a>
                     </div>
                 </div>
+                <AcceptsCookies/>
             </React.Fragment>
         );
     }

@@ -10,6 +10,7 @@ import {AddToCart} from "../../../components/modifyCart";
 import {RECOMMEND_GOOD_QUERY} from "../../../graphql/reccomendGood_QUERY";
 import {BEST_SELLING_QUERY} from "../../../graphql/bestSelling_QUERY";
 import {TRENDING_GOOD_QUERY} from "../../../graphql/trending_good_QUERY";
+import   AcceptsCookies from "../../../components/legal/cookie_consent.jsx";
 
 const currency_display_dictionary = {
     'EUR': '€',
@@ -159,6 +160,7 @@ export default class Home extends React.Component {
             <React.Fragment>
                 <Navbar/>
                 <br/><br/><br/><br/>
+                <AcceptsCookies/>
                 <section className="product-filter-section">
                     <div className="container">
                         <div className="section-title">

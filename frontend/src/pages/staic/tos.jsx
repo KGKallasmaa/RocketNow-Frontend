@@ -3,6 +3,7 @@ import {Helmet} from "react-helmet";
 import Footer from "../../components/footer.jsx";
 
 import {Navbar} from "../../components/navbar";
+import AcceptsCookies from "../../components/legal/cookie_consent";
 
 
 const font = {fontFamily: "Lato"};
@@ -36,6 +37,7 @@ export default React.memo(() => {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-1"/>
+                        <AcceptsCookies/>
                         <div className="col-md-10">
                             <br/><br/>
                             <h3>Terms&nbsp;of Service</h3>

@@ -20,6 +20,7 @@ import {
     CurrentRefinements
 } from 'react-instantsearch-dom';
 import {isMobile} from "react-device-detect";
+import AcceptsCookies from "../components/legal/cookie_consent";
 
 
 const searchClient = algoliasearch(
@@ -217,6 +218,7 @@ export default class searchResults extends React.Component {
                             <CurrentRefinements/>
                         </div>
                     </div>
+                    <AcceptsCookies/>
                     <Button shape="circle" icon="filter" style={{marginLeft: "10%", color: "#1F96FE"}}
                             aria-label={"Filter your search results"}
                             onClick={this.filtersAreVisible}/>

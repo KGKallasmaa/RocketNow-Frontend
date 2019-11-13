@@ -9,6 +9,7 @@ import axios from 'axios';
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import '../../assets/css/login.min.css';
+import AcceptsCookies from "../../components/legal/cookie_consent";
 
 
 const signUp_MUTATION = gql`
@@ -337,6 +338,7 @@ class NormalSignupForm extends React.Component {
                           content="Signing up to RocketNow unlocks a whole new world"/>
                     <meta name="description" content="Signing up to RocketNow unlocks a whole new world"/>
                 </Helmet>
+                <AcceptsCookies/>
                 <div className="login-box-header">
                     <h4 style={{
                         color: "rgb(139,139,139)",

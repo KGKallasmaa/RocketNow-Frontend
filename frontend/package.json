@@ -19,6 +19,7 @@
     "material-ui-dropzone": "^2.3.5",
     "mdbreact": "^4.8.5-patch.1",
     "react": "^16.9.0",
+    "react-cookie-consent": "^2.5.0",
     "react-device-detect": "^1.9.10",
     "react-dom": "^16.9.0",
     "react-emoji-render": "^0.6.0",

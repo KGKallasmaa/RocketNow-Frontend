@@ -9,6 +9,7 @@ import {message} from "antd";
 import ogLogo from "../../assets/img/og_Logo.png";
 import {fetchData} from "../../components/fetcher";
 import {contactForm_QUERY} from "./graphql/contactForm_QUERY";
+import AcceptsCookies from "../../components/legal/cookie_consent";
 
 const background = {backgroundColor: "#f7f7f7"};
 const font = {fontFamily: "Catamaran"};
@@ -76,6 +77,7 @@ export default class Contact extends React.PureComponent {
                 <div style={{background}}>
                     <div className="container">
                         <br/><br/><br/>
+                        <AcceptsCookies/>
                         <div className="row">
                             <div className="col-md-6">
                                 <form onSubmit={this.sendEmail}>

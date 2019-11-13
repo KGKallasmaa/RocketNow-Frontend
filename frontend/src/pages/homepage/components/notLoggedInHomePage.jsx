@@ -20,6 +20,7 @@ import stripe from "../assets/img/stripe.jpeg";
 import subscription from "../assets/img/subscribtions.jpeg";
 import support from "../assets/img/support.jpeg";
 import CustomerChat from "../../../components/customerChat/customerChat";
+import AcceptsCookies from "../../../components/legal/cookie_consent";
 
 const font = {fontFamily: "Lato"};
 
@@ -50,6 +51,7 @@ export default React.memo(() => {
                     <div className="bg-circle-2 bg-circle"/>
                     <div className="bg-circle-3 bg-circle"/>
                 </header>
+                <AcceptsCookies/>
                 <div className="brands">
                     <a href="/about" aria-label={"Read the story of RocketNow"}>
                         <img className="img-fluid visible" src={stripe}

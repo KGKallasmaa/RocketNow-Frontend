@@ -5,6 +5,7 @@ import {OrderCard_QUERY} from "../user/graphql/orderCard_QUERY";
 import {currency_symbol_converter} from "../../components/currency_and_symbol";
 import {fetchData} from "../../components/fetcher";
 import {Skeleton} from 'antd';
+import AcceptsCookies from "../../components/legal/cookie_consent";
 
 const PageLogo = () => {
     return (
@@ -65,7 +66,7 @@ class CompletedOrderReceipt extends React.PureComponent {
                     <title>Order nr {this.props.order_id}</title>
                     <meta name="description" content="View the order you made at RocketNow"/>
                 </Helmet>
-
+                <AcceptsCookies/>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-1"/>
