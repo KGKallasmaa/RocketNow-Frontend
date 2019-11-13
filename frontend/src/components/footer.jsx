@@ -11,7 +11,7 @@ export default React.memo(() => {
                             <div className="col-sm-6 col-md-3 item">
                                 <h3 style={color}>Services</h3>
                                 <ul>
-                                    <li><a aria-label={"Sell your goods on RocketNow"} href="/business/login">Sell on
+                                    <li><a aria-label={"Sell your goods on RocketNow"} href="http://business.rocketnow.eu">Sell on
                                         RocketNow</a></li>
 
                                 </ul>

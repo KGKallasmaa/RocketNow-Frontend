@@ -1,6 +1,6 @@
 import React from 'react';
 import {message, Button} from 'antd';
-import {AddToCart} from '../components/modifyCart';
+import {AddToCart} from '../components/modifyCart.jsx';
 import {Navbar} from '../components/navbar.jsx';
 import Footer from '../components/footer.jsx';
 import {SEARCH_QUERY} from "../graphql/search_QUERY";

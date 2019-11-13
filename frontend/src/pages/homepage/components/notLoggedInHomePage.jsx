@@ -214,8 +214,7 @@ export default React.memo(() => {
                                 <div className="box"><i className="fa fa-truck icon" id="howToIcon"/>
                                     <h3 className="name" style={font}>3. Choose a Shipping
                                         Option</h3>
-                                    <p className="description">We can ship your order to a parcel location or your home
-                                        address.
+                                    <p className="description">We ship your order to a parcel location or a home address.
                                         We're also providing you with an estimated arrival time.</p>
                                 </div>
                             </div>

@@ -8,7 +8,7 @@ import {Helmet} from "react-helmet";
 import {NUMBEROFGOODS_INCART_AND_SUBTOTAL_QUERY} from "../../graphql/numberOfGoods_inCart_And_Subtotal_QUERY";
 import {SHOPPINGCART_QUERY} from "../../graphql/shoppingCart_QUERY";
 import "./assets/css/cart.min.css";
-import {EditCartGood} from "../../components/modifyCart";
+import {EditCartGood} from "../../components/modifyCart.jsx";
 import {currency_symbol_converter} from "../../components/currency_and_symbol";
 import {fetchData} from "../../components/fetcher";
 import {ParcelDeliveryLocationForm} from "./components/parcelDeliveryLocation";
