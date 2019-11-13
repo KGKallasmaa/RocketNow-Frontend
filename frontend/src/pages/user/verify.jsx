@@ -10,6 +10,7 @@ import Footer from "../../components/footer";
 
 import '../../assets/css/verification.min.css';
 import logo from '../../assets/img/logo.svg';
+import AcceptsCookies from "../../components/legal/cookie_consent";
 
 
 const verifyEmail_MUTATION = gql`
@@ -189,6 +190,7 @@ export default class Verify extends React.Component {
                         </div>
                     </form>
                 </div>
+                <AcceptsCookies/>
                 <Footer/>
             </div>
         );

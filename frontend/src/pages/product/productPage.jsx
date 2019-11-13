@@ -7,6 +7,8 @@ import {RECOMMEND_GOOD_QUERY} from "../../graphql/reccomendGood_QUERY";
 import {fetchData} from "../../components/fetcher";
 import {LoadingGoodCard, LoadingReccomendationGoodCard} from "./components/loadingGoodCard";
 import {singleProductDeliveryEstimate_QUERY} from "./graphql/singleProductDeliveryEstimate_QUERY";
+import AcceptsCookies from "../../components/legal/cookie_consent.jsx";
+
 
 const RecommendationCard = lazy(() => import("./components/recommendationGoodCard.jsx"));
 const RegularGoodCard = lazy(() => import("./components/regularGoodCard.jsx"));
@@ -19,10 +21,11 @@ function mapRecommendation(good) {
     );
 }
 
-function mapRegularGood(good, nr,parcelDeliveryEstimate,addressDeliveryEstimate) {
+function mapRegularGood(good, nr, parcelDeliveryEstimate, addressDeliveryEstimate) {
     return (
         <Suspense fallback={"Loading ..."}>
-            <RegularGoodCard parcelDeliveryEstimate={parcelDeliveryEstimate} addressDeliveryEstimate={addressDeliveryEstimate} good={good} nr={nr}/>
+            <RegularGoodCard parcelDeliveryEstimate={parcelDeliveryEstimate}
+                             addressDeliveryEstimate={addressDeliveryEstimate} good={good} nr={nr}/>
         </Suspense>
     );
 }
@@ -35,11 +38,11 @@ function getMyLocation() {
         };
 
         navigator.geolocation.getCurrentPosition((position) => {
-            return [position.coords.latitude,position.coords.longitude];
+            return [position.coords.latitude, position.coords.longitude];
         }, (error) => {
         }, positionOptions);
     }
-    return [0.0,0.0];
+    return [0.0, 0.0];
 }
 
 export default class ProductPage extends React.Component {
@@ -81,34 +84,35 @@ export default class ProductPage extends React.Component {
             good_id: this.state.good._id,
             quantity: 1,
             TimezoneOffset_M: new Date().getTimezoneOffset(),
-            lat:myCoOrdinates[0],
-            long:myCoOrdinates[1]
+            lat: myCoOrdinates[0],
+            long: myCoOrdinates[1]
         };
         let fetchSingleProductDeliveryEstimate = fetchData(variables, singleProductDeliveryEstimate_QUERY);
 
         let deliveryEstimate = await fetchSingleProductDeliveryEstimate;
         if (deliveryEstimate !== null) {
-            const raw =deliveryEstimate.singleProductDeliveryEstimate;
+            const raw = deliveryEstimate.singleProductDeliveryEstimate;
             const parcel = new Date();
             parcel.setTime(raw[0].deliveryTime);
             const address = new Date();
             address.setTime(raw[1].deliveryTime);
             this.setState({
-                parcelDeliveryEstimate:parcel,
-                addressDeliveryEstimate:new Date(address)
+                parcelDeliveryEstimate: parcel,
+                addressDeliveryEstimate: new Date(address)
             });
         }
     };
 
     render() {
-        const {good, rec,parcelDeliveryEstimate,addressDeliveryEstimate} = this.state;
+        const {good, rec, parcelDeliveryEstimate, addressDeliveryEstimate} = this.state;
         return (
             <React.Fragment>
                 <Navbar/>
                 <br/><br/>
-                {(good !== undefined && parcelDeliveryEstimate !== undefined && addressDeliveryEstimate !== undefined) ? mapRegularGood(good, this.props.match.params.nr,parcelDeliveryEstimate,addressDeliveryEstimate) :
+                {(good !== undefined && parcelDeliveryEstimate !== undefined && addressDeliveryEstimate !== undefined) ? mapRegularGood(good, this.props.match.params.nr, parcelDeliveryEstimate, addressDeliveryEstimate) :
                     <p/>}
                 <LoadingGoodCard good={good}/>
+                <AcceptsCookies/>
                 <div className="features-boxed">
                     < div className="container">
                         <div className="intro">

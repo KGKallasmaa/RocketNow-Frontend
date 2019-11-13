@@ -6,6 +6,7 @@ import galaxy from "./assets/img/Galaxy.jpg";
 import software from "./assets/img/Software.jpg";
 import design from "./assets/img/Design.jpg";
 import marketing from "./assets/img/Marketing.jpg";
+import AcceptsCookies from "../../components/legal/cookie_consent";
 
 const IndividualCareer = lazy(() => import("./components/IndividualCareer"));
 
@@ -25,6 +26,7 @@ export default class Careers extends React.PureComponent {
                     <meta property="og:image" content={galaxy}/>
                     <meta name="twitter:card" content="summary"/>
                 </Helmet>
+                <AcceptsCookies/>
                 <nav className="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
                     <div className="container"><a className="navbar-brand" href="/" aria-label={"Go to homepage"}
                                                   style={{color: "white"}}>RocketNow</a>

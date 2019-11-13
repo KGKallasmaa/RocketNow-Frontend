@@ -10,6 +10,7 @@ import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import '../../assets/css/login.min.css';
 import {isRegularUserLoggedIn} from "../../components/authentication";
+import AcceptsCookies from "../../components/legal/cookie_consent";
 
 
 const login_QUERY = gql`
@@ -255,6 +256,7 @@ class NormalLoginForm extends React.Component {
                           content="Loging in to RocketNow unlocks a whole new world"/>
                     <meta name="description" content="Signing up to RocketNow unlocks a whole new world"/>
                 </Helmet>
+                <AcceptsCookies/>
                 <div className="login-box-header">
                     <h4 style={{
                         color: "rgb(139,139,139)",

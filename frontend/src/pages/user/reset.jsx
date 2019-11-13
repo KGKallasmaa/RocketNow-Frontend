@@ -3,11 +3,12 @@ import {Form, message, Spin, Icon} from 'antd';
 import gql from "graphql-tag";
 import {print} from 'graphql';
 import logo from '../../assets/img/logo.svg';
-import { Redirect } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {Helmet} from "react-helmet";
 import axios from 'axios';
 import '../../assets/css/login.min.css';
 import ReCAPTCHA from "react-google-recaptcha";
+import AcceptsCookies from "../../components/legal/cookie_consent";
 
 const recaptchaRef = React.createRef();
 
@@ -153,7 +154,7 @@ class NormalResetForm extends React.Component {
                 variables = {
                     password: this.state.password,
                     mode: "resetPassword",
-                    token:this.state.resetToken
+                    token: this.state.resetToken
                 }
             }
 
@@ -209,7 +210,7 @@ class NormalResetForm extends React.Component {
     renderForm(resetToken) {
         if (resetToken) {
             return (
-                <div>
+                <React.Fragment>
                     <Form onSubmit={this.ResetPasswordSubmit} className="login-form">
                         <Form.Item>
                             <label htmlFor="password">Password</label>
@@ -262,11 +263,12 @@ class NormalResetForm extends React.Component {
                                                                                        href="/login">Log in!</a>
                         </p>
                     </div>
-                </div>
+                </React.Fragment>
             );
 
-        } else {
-            return (<div>
+        }
+        return (
+            <React.Fragment>
                 <Form onSubmit={this.ResetPasswordSubmit} className="login-form">
                     <Form.Item>
                         <label htmlFor="email">Email</label>
@@ -306,8 +308,8 @@ class NormalResetForm extends React.Component {
                                                                                    href="/login">Log in!</a>
                     </p>
                 </div>
-            </div>);
-        }
+            </React.Fragment>
+        );
     }
 
     renderRedirect = () => {
@@ -340,6 +342,7 @@ class NormalResetForm extends React.Component {
                 <div className="email-login" style={{backgroundColor: "#ffffff"}}>
                     {this.renderForm(resetToken)}
                     {this.renderRedirect()}
+                    <AcceptsCookies/>
                     <br/>
                     <br/>
                     <br/>

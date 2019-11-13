@@ -14,6 +14,7 @@ import {fetchData} from "../../components/fetcher";
 import {ParcelDeliveryLocationForm} from "./components/parcelDeliveryLocation";
 import {AddressForm} from "./components/addressForm";
 import {OrderEstimateForm} from "./components/orderEstimate";
+import AcceptsCookies from "../../components/legal/cookie_consent";
 
 
 function renderLoadingCartCartItem() {
@@ -218,6 +219,7 @@ export default class ShoppingCart extends React.Component {
                     <link rel="canonial" href={cannonialUrl}/>
                     <meta name="description" content="View your shopping cart at RocketNow"/>
                 </Helmet>
+                <AcceptsCookies/>
                 <section className="checkout-section spad">
                     <div className="container">
                         <div className="row">

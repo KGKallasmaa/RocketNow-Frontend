@@ -10,6 +10,7 @@ import {UserSubscriptionsTab} from "./components/userSubscriptionsTab";
 import {UserSettingsTab} from "./components/userSettingsTab";
 import {fetchData} from "../../components/fetcher";
 import {OrderCard_QUERY} from "./graphql/orderCard_QUERY";
+import AcceptsCookies from "../../components/legal/cookie_consent";
 
 
 const {TabPane} = Tabs;
@@ -58,6 +59,7 @@ export default class MyAccount extends React.Component {
                 </div>
                 <br/>
                 <br/>
+                <AcceptsCookies/>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-1"/>
