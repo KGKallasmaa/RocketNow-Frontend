@@ -5,7 +5,7 @@ import {OrderCard_QUERY} from "../user/graphql/orderCard_QUERY";
 import {currency_symbol_converter} from "../../components/currency_and_symbol";
 import {fetchData} from "../../components/fetcher";
 import {Skeleton} from 'antd';
-import AcceptsCookies from "../../components/legal/cookie_consent";
+import AcceptsCookies from "../../components/legal/cookieConsent";
 
 const PageLogo = () => {
     return (

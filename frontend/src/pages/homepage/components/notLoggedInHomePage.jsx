@@ -5,22 +5,22 @@ import {Helmet} from "react-helmet";
 import "../assets/css/notLoggedInHome.min.css";
 import "../assets/css/bootstrap.min.css";
 
-import algolia from "../assets/img/algolia.jpeg";
-import choice from "../assets/img/choice.jpeg";
-import delivery from "../assets/img/delivery.jpeg";
-import digitalGoods from "../assets/img/digital_goods.jpeg";
-import electronics from "../assets/img/electronics.jpeg";
-import entertainment from "../assets/img/entartainment.jpeg";
+import algolia from "../assets/img/algolia.webp";
+import choice from "../assets/img/choice.webp";
+import delivery from "../assets/img/digital_goods.webp";
+import digitalGoods from "../assets/img/digital_goods.webp";
+import electronics from "../assets/img/entartainment.webp";
+import entertainment from "../assets/img/entartainment.webp";
 import messenger from "../assets/img/facebook-messenger.svg";
-import fashion from "../assets/img/fashion.jpeg";
-import healthAndBeauty from "../assets/img/health_and_beauty.jpeg";
-import mailChimp from "../assets/img/mail_chimp.jpeg";
-import shippo from "../assets/img/shippo.jpeg";
-import stripe from "../assets/img/stripe.jpeg";
-import subscription from "../assets/img/subscribtions.jpeg";
-import support from "../assets/img/support.jpeg";
+import fashion from "../assets/img/fashion.webp";
+import healthAndBeauty from "../assets/img/health_and_beauty.webp";
+import mailChimp from "../assets/img/mail_chimp.webp";
+import shippo from "../assets/img/shippo.webp";
+import stripe from "../assets/img/stripe.webp";
+import subscription from "../assets/img/subscriptions.webp";
+import support from "../assets/img/support.webp";
 import CustomerChat from "../../../components/customerChat/customerChat";
-import AcceptsCookies from "../../../components/legal/cookie_consent";
+import AcceptsCookies from "../../../components/legal/cookieConsent";
 
 const font = {fontFamily: "Lato"};
 

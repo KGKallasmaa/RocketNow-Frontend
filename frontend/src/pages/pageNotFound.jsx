@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import "../assets/css/pageNotFound.min.css";
-import AcceptsCookies from "../components/legal/cookie_consent";
+import AcceptsCookies from "../components/legal/cookieConsent";
 
 
 export default class PageNotFound extends React.PureComponent {

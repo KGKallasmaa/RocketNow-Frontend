@@ -10,7 +10,7 @@ import {AddToCart} from "../../../components/modifyCart.jsx";
 import {RECOMMEND_GOOD_QUERY} from "../../../graphql/reccomendGood_QUERY";
 import {BEST_SELLING_QUERY} from "../../../graphql/bestSelling_QUERY";
 import {TRENDING_GOOD_QUERY} from "../../../graphql/trending_good_QUERY";
-import   AcceptsCookies from "../../../components/legal/cookie_consent.jsx";
+import   AcceptsCookies from "../../../components/legal/cookieConsent.jsx";
 
 const currency_display_dictionary = {
     'EUR': '€',

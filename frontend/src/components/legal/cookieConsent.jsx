@@ -6,7 +6,7 @@ export default React.memo(() => {
             <CookieConsent
                 location="bottom"
                 buttonText="Got it!"
-                cookieName="rocketNowUserConsentCookiee"
+                cookieName="rocketNowUserConsentCookie"
                 style={{background: "#2B373B"}}
                 buttonStyle={{color: "#4e503b", fontSize: "13px"}}
                 expires={150}

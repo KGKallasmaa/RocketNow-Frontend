@@ -6,7 +6,7 @@ import Footer from "../../components/footer.jsx";
 import {Navbar} from "../../components/navbar.jsx";
 import axios from "axios";
 import {print} from "graphql";
-import AcceptsCookies from "../../components/legal/cookie_consent";
+import AcceptsCookies from "../../components/legal/cookieConsent";
 
 const {Step} = Steps;
 

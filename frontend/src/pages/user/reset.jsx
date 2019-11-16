@@ -8,7 +8,7 @@ import {Helmet} from "react-helmet";
 import axios from 'axios';
 import '../../assets/css/login.min.css';
 import ReCAPTCHA from "react-google-recaptcha";
-import AcceptsCookies from "../../components/legal/cookie_consent";
+import AcceptsCookies from "../../components/legal/cookieConsent";
 
 const recaptchaRef = React.createRef();
 

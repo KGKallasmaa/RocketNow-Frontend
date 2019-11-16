@@ -9,7 +9,7 @@ import {message} from "antd";
 import ogLogo from "../../assets/img/og_Logo.png";
 import {fetchData} from "../../components/fetcher";
 import {contactForm_QUERY} from "./graphql/contactForm_QUERY";
-import AcceptsCookies from "../../components/legal/cookie_consent";
+import AcceptsCookies from "../../components/legal/cookieConsent";
 
 const background = {backgroundColor: "#f7f7f7"};
 const font = {fontFamily: "Catamaran"};

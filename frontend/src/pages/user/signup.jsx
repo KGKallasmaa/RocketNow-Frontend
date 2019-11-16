@@ -9,7 +9,7 @@ import axios from 'axios';
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import '../../assets/css/login.min.css';
-import AcceptsCookies from "../../components/legal/cookie_consent";
+import AcceptsCookies from "../../components/legal/cookieConsent";
 
 
 const signUp_MUTATION = gql`

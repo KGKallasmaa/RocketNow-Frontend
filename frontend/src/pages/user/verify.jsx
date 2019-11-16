@@ -10,7 +10,7 @@ import Footer from "../../components/footer";
 
 import '../../assets/css/verification.min.css';
 import logo from '../../assets/img/logo.svg';
-import AcceptsCookies from "../../components/legal/cookie_consent";
+import AcceptsCookies from "../../components/legal/cookieConsent";
 
 
 const verifyEmail_MUTATION = gql`

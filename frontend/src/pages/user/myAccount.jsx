@@ -10,7 +10,7 @@ import {UserSubscriptionsTab} from "./components/userSubscriptionsTab";
 import {UserSettingsTab} from "./components/userSettingsTab";
 import {fetchData} from "../../components/fetcher";
 import {OrderCard_QUERY} from "./graphql/orderCard_QUERY";
-import AcceptsCookies from "../../components/legal/cookie_consent";
+import AcceptsCookies from "../../components/legal/cookieConsent";
 
 
 const {TabPane} = Tabs;

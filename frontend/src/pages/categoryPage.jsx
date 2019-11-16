@@ -1,5 +1,5 @@
 import React from 'react';
-import AcceptsCookies from "../components/legal/cookie_consent";
+import AcceptsCookies from "../components/legal/cookieConsent";
 
 export default class CategoryPage extends React.PureComponent {
     render() {

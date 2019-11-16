@@ -20,7 +20,7 @@ import {
     CurrentRefinements
 } from 'react-instantsearch-dom';
 import {isMobile} from "react-device-detect";
-import AcceptsCookies from "../components/legal/cookie_consent";
+import AcceptsCookies from "../components/legal/cookieConsent";
 
 
 const searchClient = algoliasearch(
