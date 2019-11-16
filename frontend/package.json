@@ -27,9 +27,9 @@
     "react-select-country-list": "^2.0.1",
     "react-device-detect": "^1.9.10",
     "react-emoji-render": "^1.1.0",
-    "react-lazy-load-image-component": "^1.3.2",
     "react-cookie-consent": "^2.5.0",
-    "file-loader": "^4.2.0"
+    "file-loader": "^4.2.0",
+    "react-lazyload": "^2.6.5"
   },
   "scripts": {
     "start": "PORT=3001 react-scripts start",

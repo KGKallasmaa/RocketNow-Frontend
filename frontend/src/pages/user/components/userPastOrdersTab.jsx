@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Empty, Skeleton, Table, Tag} from 'antd';
 import noOrders from "../assets/img/noOrders.png";
 import {UserOrderDetail} from "./orderDetail";
+import LazyLoad from "react-lazyload";
 
 const {Column} = Table;
 const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
@@ -99,7 +100,9 @@ export class UserPastOrdersTab extends React.PureComponent {
                                     render={preview => (
                                         <span>
                                             {preview.map(preview => (
-                                                <img style={img_style} src={preview}/>
+                                                <LazyLoad>
+                                                    <img style={img_style} src={preview}/>
+                                                </LazyLoad>
                                             ))}
                                         </span>
                                     )}

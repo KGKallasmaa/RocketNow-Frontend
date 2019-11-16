@@ -7,6 +7,7 @@ import {Navbar} from "../../components/navbar.jsx";
 import axios from "axios";
 import {print} from "graphql";
 import AcceptsCookies from "../../components/legal/cookieConsent";
+import LazyLoad from "react-lazyload";
 
 const {Step} = Steps;
 
@@ -27,8 +28,10 @@ const OrderGoodCard = (good) => {
     return (
         <div className="col-sm-6 col-md-5 col-lg-4 item">
             <div className="box" style={{width: "100%"}}>
-                <img src={good.image} alt={good.title}
-                     style={{maxWidth: "100%", maxHeight: "200px"}}/>
+                <LazyLoad>
+                    <img src={good.image} alt={good.title}
+                         style={{maxWidth: "100%", maxHeight: "200px"}}/>
+                </LazyLoad>
                 <h3 className="name">{good.title}</h3>
                 <br/> <br/> <br/>
             </div>

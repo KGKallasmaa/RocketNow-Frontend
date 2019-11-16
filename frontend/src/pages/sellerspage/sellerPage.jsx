@@ -12,6 +12,8 @@ import {Helmet} from "react-helmet";
 import {Button, Empty, Skeleton} from "antd";
 import notLoadedLogo from "./assets/img/seller-logo-not-loaded.jpg";
 import noOrders from "../user/assets/img/noOrders.png";
+import LazyLoad from "react-lazyload";
+import logo from "../../assets/img/logo.svg";
 
 
 function renderBusinessUserGoods(good) {
@@ -133,10 +135,12 @@ export default class SellerPage extends React.Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-6">
-                                    <img className="rounded border"
-                                         src={notLoadedLogo}
-                                         style={{maxWidth: "100px"}}
-                                         alt={this.props.match.params.name + " logo at RocketNow"}/>
+                                    <LazyLoad>
+                                        <img className="rounded border"
+                                             src={notLoadedLogo}
+                                             style={{maxWidth: "100px"}}
+                                             alt={this.props.match.params.name + " logo at RocketNow"}/>
+                                    </LazyLoad>
                                 </div>
                                 <div className="col-md-6">
                                     <h1>{this.props.match.params.name}</h1>

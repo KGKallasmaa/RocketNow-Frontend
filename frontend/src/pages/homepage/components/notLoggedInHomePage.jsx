@@ -7,9 +7,9 @@ import "../assets/css/bootstrap.min.css";
 
 import algolia from "../assets/img/algolia.webp";
 import choice from "../assets/img/choice.webp";
-import delivery from "../assets/img/digital_goods.webp";
+import delivery from "../assets/img/delivery.webp";
 import digitalGoods from "../assets/img/digital_goods.webp";
-import electronics from "../assets/img/entartainment.webp";
+import electronics from "../assets/img/electronics.webp";
 import entertainment from "../assets/img/entartainment.webp";
 import messenger from "../assets/img/facebook-messenger.svg";
 import fashion from "../assets/img/fashion.webp";
@@ -21,6 +21,8 @@ import subscription from "../assets/img/subscriptions.webp";
 import support from "../assets/img/support.webp";
 import CustomerChat from "../../../components/customerChat/customerChat";
 import AcceptsCookies from "../../../components/legal/cookieConsent";
+
+import LazyLoad from 'react-lazyload';
 
 const font = {fontFamily: "Lato"};
 
@@ -54,19 +56,29 @@ export default React.memo(() => {
                 <AcceptsCookies/>
                 <div className="brands">
                     <a href="/about" aria-label={"Read the story of RocketNow"}>
-                        <img className="img-fluid visible" src={stripe}
-                             alt="stripe logo" loading="lazy"/>
-                        <img className="visible"
-                             src={shippo}
-                             alt="shippo logo"
-                             loading="lazy"/>
-                        <img
-                            className="visible" src={algolia} alt="algolia logo" loading="lazy"/>
-                        <img
-                            className="visible" src={mailChimp} loading="lazy" alt="mailchimp logo"/>
-                        <img
-                            className="visible" src={messenger} style={{width: "140px", height: "40px"}}
-                            alt="messenger logo" loading="lazy"/>
+                        <LazyLoad>
+                            <img className="visible" src={stripe}
+                                 alt="stripe logo"/>
+                        </LazyLoad>
+                        <LazyLoad>
+                            <img className="visible"
+                                 src={shippo}
+                                 alt="shippo logo"
+                            />
+                        </LazyLoad>
+                        <LazyLoad>
+                            <img
+                                className="visible" src={algolia} alt="algolia logo"/>
+                        </LazyLoad>
+                        <LazyLoad>
+                            <img
+                                className="visible" src={mailChimp} alt="mailchimp logo"/>
+                        </LazyLoad>
+                        <LazyLoad>
+                            <img
+                                className="visible" src={messenger} style={{width: "140px", height: "40px"}}
+                                alt="messenger logo"/>
+                        </LazyLoad>
                     </a>
                 </div>
                 <div/>
@@ -76,8 +88,10 @@ export default React.memo(() => {
                         <div className="row align-items-center">
                             <div className="col-lg-6 order-lg-2">
                                 <div className="p-5">
-                                    <img className="rounded-circle img-fluid" src={choice}
-                                         alt="choice balloons"/>
+                                    <LazyLoad>
+                                        <img className="rounded-circle img-fluid" src={choice}
+                                             alt="choice balloons"/>
+                                    </LazyLoad>
                                 </div>
                             </div>
                             <div className="col-lg-6 order-lg-1">
@@ -108,17 +122,20 @@ export default React.memo(() => {
                                     Fashion
                                 </h3>
                                 <a href="/c/fashion" aria-label={"View our fashion selection"}>
-                                    <img className="img-fluid" src={fashion}
-                                         alt="fashion category"/>
+                                    <LazyLoad>
+                                        <img className="img-fluid" src={fashion}
+                                             alt="fashion category"/>
+                                    </LazyLoad>
                                 </a>
                                 <h3 className="name"
                                     style={{fontSize: "20px", fontFamily: "Lato"}}>
                                     Health &amp; Beauty
                                 </h3>
-
                                 <a href="/c/health_and_beauty" aria-label={"View our health & beauty selection"}>
-                                    <img className="img-fluid" src={healthAndBeauty}
-                                         alt="health and beauty category"/>
+                                    <LazyLoad>
+                                        <img className="img-fluid" src={healthAndBeauty}
+                                             alt="health and beauty category"/>
+                                    </LazyLoad>
                                 </a>
                             </div>
                             <div className="col-sm-4 col-md-4 col-lg-3 item"
@@ -128,16 +145,20 @@ export default React.memo(() => {
                                     Subscriptions
                                 </h3>
                                 <a href="/c/subscriptions" aria-label={"View our subscriptions selection"}>
-                                    <img className="img-fluid" src={subscription}
-                                         alt="subscriptions category"/>
+                                    <LazyLoad>
+                                        <img className="img-fluid" src={subscription}
+                                             alt="subscriptions category"/>
+                                    </LazyLoad>
                                 </a>
                                 <h3 className="name" style={{fontSize: "20px", fontFamily: "Lato"}}>
                                     Digital Goods
                                 </h3>
 
                                 <a href="/c/digital" aria-label={"View our digital goods selection"}>
-                                    <img className="img-fluid" src={digitalGoods}
-                                         alt="digital goods category"/>
+                                    <LazyLoad>
+                                        <img className="img-fluid" src={digitalGoods}
+                                             alt="digital goods category"/>
+                                    </LazyLoad>
                                 </a>
                             </div>
                             <div className="col-sm-4 col-md-4 col-lg-3 item"
@@ -147,17 +168,20 @@ export default React.memo(() => {
                                 </h3>
 
                                 <a href="/c/entertainment" aria-label={"View our entertainment selection"}>
-                                    <img className="img-fluid" src={entertainment}
-                                         alt="entertainment category"/>
+                                    <LazyLoad>
+                                        <img className="img-fluid" src={entertainment}
+                                             alt="entertainment category"/>
+                                    </LazyLoad>
                                 </a>
                                 <h3 className="name" style={{fontSize: "20px", fontFamily: "Lato"}}>
                                     Electronics
                                 </h3>
                                 <a href="/c/electronics" aria-label={"View our electronics selection"}>
-                                    <img className="img-fluid" src={electronics}
-                                         alt="electronics category"/>
+                                    <LazyLoad>
+                                        <img className="img-fluid" src={electronics}
+                                             alt="electronics category"/>
+                                    </LazyLoad>
                                 </a>
-
                             </div>
                         </div>
                     </div>
@@ -167,9 +191,11 @@ export default React.memo(() => {
                         <div className="row align-items-center">
                             <div className="col-lg-6 order-lg-1">
                                 <div className="p-5">
-                                    <img className="rounded-circle img-fluid"
-                                         src={delivery}
-                                         alt="accurate delivery"/>
+                                    <LazyLoad>
+                                        <img className="rounded-circle img-fluid"
+                                             src={delivery}
+                                             alt="accurate delivery"/>
+                                    </LazyLoad>
                                 </div>
                             </div>
                             <div className="col-lg-6 order-lg-2">
@@ -250,8 +276,10 @@ export default React.memo(() => {
                         <div className="row align-items-center">
                             <div className="col-lg-6 order-lg-2">
                                 <div className="p-5">
-                                    <img className="rounded-circle img-fluid" src={support}
-                                         alt="RocketNow support"/>
+                                    <LazyLoad>
+                                        <img className="rounded-circle img-fluid" src={support}
+                                             alt="RocketNow support"/>
+                                    </LazyLoad>
                                 </div>
                             </div>
                             <div className="col-lg-6 order-lg-1">

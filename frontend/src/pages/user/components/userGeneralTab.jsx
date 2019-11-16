@@ -8,6 +8,7 @@ import {Address_QUERY} from "../graphql/address_QUERY";
 import {default_Address_MUTATION} from "../graphql/defaultAddress_MUTATION";
 import {not_Active_Address_MUTATION} from "../graphql/notActiveAddress_MUTATION";
 import noOrders from "../assets/img/noOrders.png";
+import LazyLoad from "react-lazyload";
 
 const {Column} = Table;
 
@@ -250,8 +251,10 @@ export class UserGeneralTab extends React.PureComponent {
                             <div className="col-xl-1"/>
                             <div className="col-md-6 col-lg-4 col-xl-10 item">
                                 <div className="box">
-                                    <img alt={this.props.userName} className="rounded-circle"
-                                         src={sessionStorage.getItem("regularUserImageURL")}/>
+                                    <LazyLoad>
+                                        <img alt={this.props.userName} className="rounded-circle"
+                                             src={sessionStorage.getItem("regularUserImageURL")}/>
+                                    </LazyLoad>
                                     <br/>
                                     <p className="title">Joined {formatTimeStamp(individualUser.signupTimestamp_UNIX)}</p>
                                     <p className="description">Email: karl.gustav1789@gmail.com</p>

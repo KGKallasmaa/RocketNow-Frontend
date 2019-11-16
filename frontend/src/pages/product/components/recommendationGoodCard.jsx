@@ -1,6 +1,6 @@
 import React from "react";
-import {LazyLoadImage} from "react-lazy-load-image-component";
 import {AddToCart} from "../../../components/modifyCart";
+import LazyLoad from "react-lazyload";
 
 const recommendStyle = {maxWidth: "100%"};
 
@@ -15,10 +15,11 @@ export default React.memo((props) => {
         <div className="col-sm-6 col-md-5 col-lg-4 item">
             <div className="box" style={recommendStyle}>
                 <a href={good_url} aria-label={"View recommended good: " + good.title}>
-                    <LazyLoadImage
-                        alt={good.title}
-                        src={good.main_image_cloudinary_secure_url}
-                        width={"250px"}/>
+                    <LazyLoad>
+                        <img  alt={good.title}
+                              src={good.main_image_cloudinary_secure_url}
+                              width={"250px"}/>
+                    </LazyLoad>
                 </a>
                 <br/>
                 <h3 className="name">{good.title}</h3>

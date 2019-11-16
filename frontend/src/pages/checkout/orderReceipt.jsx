@@ -6,18 +6,21 @@ import {currency_symbol_converter} from "../../components/currency_and_symbol";
 import {fetchData} from "../../components/fetcher";
 import {Skeleton} from 'antd';
 import AcceptsCookies from "../../components/legal/cookieConsent";
+import LazyLoad from "react-lazyload";
 
 const PageLogo = () => {
     return (
         <div>
             <a title={"Homepage"} href="/">
-                <img src={logo} style={{
-                    width: "70px",
-                    height: "70px",
-                    paddingRight: "0px",
-                    marginRight: "15px",
-                    marginTop: "30px"
-                }} alt="RocketNow logo"/>
+                <LazyLoad>
+                    <img src={logo} style={{
+                        width: "70px",
+                        height: "70px",
+                        paddingRight: "0px",
+                        marginRight: "15px",
+                        marginTop: "30px"
+                    }} alt="RocketNow logo"/>
+                </LazyLoad>
             </a>
         </div>
     )

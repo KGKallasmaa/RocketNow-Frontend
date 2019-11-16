@@ -4,6 +4,7 @@ import {currency_symbol_converter} from "./currency_and_symbol";
 import {ADD_TOCART_MUTATION} from "../graphql/addToCart_MUTATION";
 import {ADD_TO_FAVORITES_MUTATION} from "../graphql/addToFavorites_MUTATION";
 import {fetchData} from "./fetcher";
+import LazyLoad from "react-lazyload";
 
 const alert_message = (type, title, quantity, cathegory) => {
     const abs_quantity = Math.abs(quantity);
@@ -177,10 +178,12 @@ export class EditCartGood extends React.Component {
         return (
             <li>
                 <div className="pl-thumb">
-                    <img
-                        alt={title}
-                        src={mainImage}
-                    />
+                    <LazyLoad>
+                        <img
+                            alt={title}
+                            src={mainImage}
+                        />
+                    </LazyLoad>
                 </div>
                 <h6>{title}</h6>
                 <p><InputNumber min={1} max={100} defaultValue={currentQuantity}

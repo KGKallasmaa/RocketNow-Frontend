@@ -9,6 +9,8 @@ import axios from 'axios';
 import '../../assets/css/login.min.css';
 import ReCAPTCHA from "react-google-recaptcha";
 import AcceptsCookies from "../../components/legal/cookieConsent";
+import LazyLoad from "react-lazyload";
+import digitalGoods from "../homepage/assets/img/digital_goods.webp";
 
 const recaptchaRef = React.createRef();
 
@@ -334,9 +336,11 @@ class NormalResetForm extends React.Component {
                         fontWeight: "400",
                         fontSize: "27px"
                     }}>
-                        <img src={logo}
-                             style={{height: "150px"}}
-                             alt="RocketNow logo"/>
+                        <LazyLoad>
+                            <img src={logo}
+                                 style={{height: "150px"}}
+                                 alt="RocketNow logo"/>
+                        </LazyLoad>
                     </h4>
                 </div>
                 <div className="email-login" style={{backgroundColor: "#ffffff"}}>

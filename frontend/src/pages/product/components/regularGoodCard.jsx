@@ -3,6 +3,7 @@ import {Helmet} from "react-helmet";
 import {AddToCart} from "../../../components/modifyCart.jsx";
 import {currency_symbol_converter} from "../../../components/currency_and_symbol";
 import {formatTimeStamp} from "../../../components/relativeTimestamp";
+import LazyLoad from "react-lazyload";
 
 
 function renderCustomAtributes(custom_attribute_names, custom_attribute_values) {
@@ -39,7 +40,9 @@ function rendeOtherImages(otherImages, title) {
         const img = otherImages[i];
         images.push(
             <div className="pt active" data-imgbigurl={img}>
-                <img src={img} alt={title}/>
+                <LazyLoad>
+                    <img src={img} alt={title}/>
+                </LazyLoad>
             </div>
         );
     }

@@ -10,6 +10,7 @@ import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import '../../assets/css/login.min.css';
 import AcceptsCookies from "../../components/legal/cookieConsent";
+import LazyLoad from "react-lazyload";
 
 
 const signUp_MUTATION = gql`
@@ -327,13 +328,12 @@ class NormalSignupForm extends React.Component {
 
     render() {
         const signup_user_status = this.state.signupBusinessUser;
-        const cannonial_url = process.env.REACT_APP_PUBLIC_URL + "/signup";
         return (
             <div className="d-flex flex-column justify-content-center" id="login-box">
                 <Helmet>
                     <title>Sign up</title>
                     <meta property="og:title" content="Sign up"/>
-                    <link rel="canonial" href={cannonial_url}/>
+                    <link rel="canonial" href={ process.env.REACT_APP_PUBLIC_URL + "/signup"}/>
                     <meta property="og:description"
                           content="Signing up to RocketNow unlocks a whole new world"/>
                     <meta name="description" content="Signing up to RocketNow unlocks a whole new world"/>
@@ -346,9 +346,13 @@ class NormalSignupForm extends React.Component {
                         fontWeight: "400",
                         fontSize: "27px"
                     }}>
-                        <img src={logo}
-                             style={{height: "150px"}}
-                             alt="RocketNow logo"/>
+                        <LazyLoad>
+                            <img src={logo}
+                                 style={{height: "150px"}}
+                                 alt="RocketNow logo"/>
+                        </LazyLoad>
+
+
                     </h4>
                 </div>
                 <div className="login-box-content">
