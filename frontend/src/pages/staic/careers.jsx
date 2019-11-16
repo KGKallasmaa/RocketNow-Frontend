@@ -6,7 +6,7 @@ import galaxy from "./assets/img/Galaxy.jpg";
 import software from "./assets/img/Software.jpg";
 import design from "./assets/img/Design.jpg";
 import marketing from "./assets/img/Marketing.jpg";
-import AcceptsCookies from "../../components/legal/cookie_consent";
+import AcceptsCookies from "../../components/legal/cookieConsent";
 
 const IndividualCareer = lazy(() => import("./components/IndividualCareer"));
 

@@ -10,7 +10,7 @@ import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import '../../assets/css/login.min.css';
 import {isRegularUserLoggedIn} from "../../components/authentication";
-import AcceptsCookies from "../../components/legal/cookie_consent";
+import AcceptsCookies from "../../components/legal/cookieConsent";
 
 
 const login_QUERY = gql`

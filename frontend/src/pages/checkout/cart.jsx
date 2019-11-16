@@ -14,7 +14,7 @@ import {fetchData} from "../../components/fetcher";
 import {ParcelDeliveryLocationForm} from "./components/parcelDeliveryLocation";
 import {AddressForm} from "./components/addressForm";
 import {OrderEstimateForm} from "./components/orderEstimate";
-import AcceptsCookies from "../../components/legal/cookie_consent";
+import AcceptsCookies from "../../components/legal/cookieConsent";
 
 
 function renderLoadingCartCartItem() {

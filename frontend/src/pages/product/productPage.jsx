@@ -7,7 +7,7 @@ import {RECOMMEND_GOOD_QUERY} from "../../graphql/reccomendGood_QUERY";
 import {fetchData} from "../../components/fetcher";
 import {LoadingGoodCard, LoadingReccomendationGoodCard} from "./components/loadingGoodCard";
 import {singleProductDeliveryEstimate_QUERY} from "./graphql/singleProductDeliveryEstimate_QUERY";
-import AcceptsCookies from "../../components/legal/cookie_consent.jsx";
+import AcceptsCookies from "../../components/legal/cookieConsent.jsx";
 
 
 const RecommendationCard = lazy(() => import("./components/recommendationGoodCard.jsx"));

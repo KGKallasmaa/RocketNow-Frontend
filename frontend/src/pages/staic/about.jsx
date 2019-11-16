@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Helmet} from "react-helmet";
 import Footer from "../../components/footer.jsx";
 import {Navbar} from "../../components/navbar.jsx";
-import AcceptsCookies from "../../components/legal/cookie_consent";
+import AcceptsCookies from "../../components/legal/cookieConsent";
 
 
 export default class About extends React.Component {
