@@ -4,13 +4,16 @@ import Footer from '../../components/footer.jsx';
 import {Navbar} from '../../components/navbar.jsx';
 import '../../assets/css/myaccount.min.css';
 import {Icon, Tabs} from 'antd';
+import 'antd/es/icon/style/css';
+import 'antd/es/tabs/style/css';
+
 import {UserPastOrdersTab} from "./components/userPastOrdersTab";
 import {UserGeneralTab} from "./components/userGeneralTab";
 import {UserSubscriptionsTab} from "./components/userSubscriptionsTab";
 import {UserSettingsTab} from "./components/userSettingsTab";
 import {fetchData} from "../../components/fetcher";
 import {OrderCard_QUERY} from "./graphql/orderCard_QUERY";
-import AcceptsCookies from "../../components/legal/cookieConsent";
+import AcceptsCookies from "../../components/cookieConsent";
 
 
 const {TabPane} = Tabs;

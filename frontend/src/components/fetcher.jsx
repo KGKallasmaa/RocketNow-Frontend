@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {print} from "graphql";
 import {message} from "antd";
+import 'antd/es/message/style/css';
 
 
 export const fetchData = async (variables, query) => {

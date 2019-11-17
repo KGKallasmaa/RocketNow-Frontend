@@ -10,8 +10,14 @@ import {fetchData} from "../../components/fetcher";
 
 import {Helmet} from "react-helmet";
 import {Button, Empty, Skeleton} from "antd";
+import 'antd/es/button/style/css';
+import 'antd/es/empty/style/css';
+import 'antd/es/skeleton/style/css';
+
 import notLoadedLogo from "./assets/img/seller-logo-not-loaded.jpg";
-import noOrders from "../user/assets/img/noOrders.png";
+import noOrders from "../user/assets/img/noOrders.webp";
+import LazyLoad from "react-lazyload";
+
 
 
 function renderBusinessUserGoods(good) {
@@ -133,10 +139,12 @@ export default class SellerPage extends React.Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-6">
-                                    <img className="rounded border"
-                                         src={notLoadedLogo}
-                                         style={{maxWidth: "100px"}}
-                                         alt={this.props.match.params.name + " logo at RocketNow"}/>
+                                    <LazyLoad>
+                                        <img className="rounded border"
+                                             src={notLoadedLogo}
+                                             style={{maxWidth: "100px"}}
+                                             alt={this.props.match.params.name + " logo at RocketNow"}/>
+                                    </LazyLoad>
                                 </div>
                                 <div className="col-md-6">
                                     <h1>{this.props.match.params.name}</h1>

@@ -1,10 +1,14 @@
 import React from 'react';
+import {Helmet} from "react-helmet";
 
 const color = {color: "#ffffff"};
 
 export default React.memo(() => {
         return (
             <div className="footer-dark">
+                <Helmet>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"/>
+                </Helmet>
                 <footer>
                     <div className="container">
                         <div className="row">

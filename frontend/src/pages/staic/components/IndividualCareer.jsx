@@ -1,15 +1,15 @@
 import React from "react";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import LazyLoad from "react-lazyload";
 
 
 export default (props) => {
     return(
         <div className="col-md-6 col-lg-4 item">
             <div className="box">
-                <LazyLoadImage
-                    alt={props.name + "career"}
-                    src={props.img}
-                />
+                <LazyLoad>
+                    <img  alt={props.name + "career"}
+                         src={props.img}/>
+                </LazyLoad>
                 <h4 className="name">{props.name}</h4>
                 <p className="title">{props.title}</p>
                 <p className="description">{props.description}</p>

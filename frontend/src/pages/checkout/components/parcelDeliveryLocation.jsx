@@ -1,6 +1,9 @@
 import Emoji from "react-emoji-render";
 import React from "react";
 import {Select, Skeleton} from "antd";
+import 'antd/es/select/style/css';
+import 'antd/es/skeleton/style/css';
+
 import {isRegularUserLoggedIn} from "../../../components/authentication";
 import {getEmoji} from "../../../components/emoji";
 import {ShippingCost_QUERY} from "../../../graphql/shippingCost_QUERY";

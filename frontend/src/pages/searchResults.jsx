@@ -1,5 +1,5 @@
 import React from 'react';
-import {message, Button} from 'antd';
+
 import {AddToCart} from '../components/modifyCart.jsx';
 import {Navbar} from '../components/navbar.jsx';
 import Footer from '../components/footer.jsx';
@@ -7,20 +7,17 @@ import {SEARCH_QUERY} from "../graphql/search_QUERY";
 import "../assets/css/searchresults.css";
 import axios from 'axios';
 import {print} from 'graphql';
-import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Helmet} from "react-helmet";
 import algoliasearch from 'algoliasearch/lite';
-import {
-    InstantSearch,
-    Pagination,
-    Highlight,
-    RefinementList,
-    Menu,
-    connectHits,
-    CurrentRefinements
-} from 'react-instantsearch-dom';
+import {InstantSearch, Pagination, Highlight, RefinementList, Menu, connectHits, CurrentRefinements} from 'react-instantsearch-dom';
 import {isMobile} from "react-device-detect";
-import AcceptsCookies from "../components/legal/cookieConsent";
+import AcceptsCookies from "../components/cookieConsent";
+import LazyLoad from "react-lazyload";
+
+import {message, Button} from 'antd';
+
+import 'antd/es/message/style/css';
+import 'antd/es/button/style/css';
 
 
 const searchClient = algoliasearch(
@@ -74,10 +71,10 @@ function renderSearchResults(good) {
             <div className="product-item">
                 <div className="pi-pic">
                     <a title={good.title} href={good_url}>
-                        <LazyLoadImage
-                            alt={good.title}
-                            src={good.imgage}
-                        />
+                        <LazyLoad>
+                            <img  alt={good.title}
+                                  src={good.imgage}/>
+                        </LazyLoad>
                     </a>
                     <div className="pi-links">
                         <AddToCart good_id={good._id} title={good.title} quantity={1}/>

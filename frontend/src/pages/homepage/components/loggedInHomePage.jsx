@@ -5,12 +5,14 @@ import Footer from "../../../components/footer";
 import axios from 'axios';
 import {print} from 'graphql';
 import {message} from "antd";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import 'antd/es/message/style/css';
+
 import {AddToCart} from "../../../components/modifyCart.jsx";
 import {RECOMMEND_GOOD_QUERY} from "../../../graphql/reccomendGood_QUERY";
 import {BEST_SELLING_QUERY} from "../../../graphql/bestSelling_QUERY";
 import {TRENDING_GOOD_QUERY} from "../../../graphql/trending_good_QUERY";
-import   AcceptsCookies from "../../../components/legal/cookieConsent.jsx";
+import  AcceptsCookies from "../../../components/cookieConsent.jsx";
+import LazyLoad from "react-lazyload";
 
 const currency_display_dictionary = {
     'EUR': '€',
@@ -38,10 +40,10 @@ function renderSingleTrendingResult(good) {
             <div className="product-item">
                 <div className="pi-pic">
                     <a title={good.title} href={good_url}>
-                        <LazyLoadImage
-                            alt={good.title}
-                            src={good.main_image_cloudinary_secure_url}
-                        />
+                        <LazyLoad>
+                            <img  alt={good.title}
+                                  src={good.main_image_cloudinary_secure_url}/>
+                        </LazyLoad>
                     </a>
                     <div className="pi-links">
                         <AddToCart good_id={good._id} title={good.title} quantity={1}/>

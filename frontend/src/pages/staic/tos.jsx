@@ -3,7 +3,7 @@ import {Helmet} from "react-helmet";
 import Footer from "../../components/footer.jsx";
 
 import {Navbar} from "../../components/navbar";
-import AcceptsCookies from "../../components/legal/cookieConsent";
+import AcceptsCookies from "../../components/cookieConsent";
 
 
 const font = {fontFamily: "Lato"};

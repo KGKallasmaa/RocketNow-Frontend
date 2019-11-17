@@ -4,12 +4,13 @@ import "../../assets/css/static/contact.min.css";
 import Footer from "../../components/footer.jsx";
 import {Navbar} from "../../components/navbar.jsx";
 import {message} from "antd";
+import 'antd/es/message/style/css';
 
 
-import ogLogo from "../../assets/img/og_Logo.png";
+import ogLogo from "../../assets/img/ogLogo.webp";
 import {fetchData} from "../../components/fetcher";
 import {contactForm_QUERY} from "./graphql/contactForm_QUERY";
-import AcceptsCookies from "../../components/legal/cookieConsent";
+import AcceptsCookies from "../../components/cookieConsent";
 
 const background = {backgroundColor: "#f7f7f7"};
 const font = {fontFamily: "Catamaran"};

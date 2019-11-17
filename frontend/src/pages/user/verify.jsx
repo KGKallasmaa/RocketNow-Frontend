@@ -1,5 +1,7 @@
 import React from 'react';
 import {message} from 'antd';
+import 'antd/es/message/style/css';
+
 import gql from "graphql-tag";
 import {print} from 'graphql';
 import { Redirect } from 'react-router-dom';
@@ -10,7 +12,8 @@ import Footer from "../../components/footer";
 
 import '../../assets/css/verification.min.css';
 import logo from '../../assets/img/logo.svg';
-import AcceptsCookies from "../../components/legal/cookieConsent";
+import AcceptsCookies from "../../components/cookieConsent";
+import LazyLoad from "react-lazyload";
 
 
 const verifyEmail_MUTATION = gql`
@@ -178,7 +181,9 @@ export default class Verify extends React.Component {
                 <div className="login-clean">
                     <form method="post" style={{width: "450px", padding: "35px"}}>
                         <div className="illustration">
-                            <img src={logo} style={{width: "150px"}} alt="RocketNow logo"/>
+                            <LazyLoad>
+                                <img src={logo} style={{width: "150px"}} alt="RocketNow logo"/>
+                            </LazyLoad>
                         </div>
                         {text}
                         <div className="form-group">

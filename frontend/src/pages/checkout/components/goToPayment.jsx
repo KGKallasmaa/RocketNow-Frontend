@@ -1,5 +1,8 @@
 import React from "react";
 import {Icon, Skeleton} from "antd";
+import 'antd/es/icon/style/css';
+import 'antd/es/skeleton/style/css';
+
 import {CHECKOUT_MUTATION} from "../../../graphql/checkout_MUTATION";
 import {fetchData} from "../../../components/fetcher";
 
