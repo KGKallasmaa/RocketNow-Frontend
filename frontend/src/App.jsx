@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Switch,Redirect} from 'react-router-dom'
 import GoodsPage from "./pages/product/productPage";
 import CategoryPage from "./pages/categoryPage";
 import SearchResults from "./pages/searchResults";
-import Reset from "./pages/user/reset";
+//import Reset from "./pages/user/reset";
 import ShoppingCart from "./pages/checkout/cart";
 import Home from "./pages/homepage/home";
 
@@ -58,7 +58,6 @@ export default function App() {
                 <Route exact path="/signup" component={Signup}/>
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/verify/email/:token?" component={Verify}/>
-                <Route exact path="/reset/password/:token?" component={Reset}/>
                 <Route exact path="/logout" component={Logout}/>
                 <Route exact path="/goods/:nr/:title" component={GoodsPage}/>
                 <Route exact path="/c/:category" component={CategoryPage}/>
@@ -82,3 +81,4 @@ export default function App() {
         </Router>
     );
 };
+//TODO: implement pw reset                 <Route exact path="/reset/password/:token?" component={Reset}/>
