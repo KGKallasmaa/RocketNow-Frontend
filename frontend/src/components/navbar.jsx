@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBox from "./search/searchBox.jsx";
+import SearchBox from "./searchBox.jsx";
 import {isRegularUserLoggedIn} from "./authentication";
 
 const style = {
@@ -21,6 +21,7 @@ export const Navbar = React.memo((props) => {
             if (!currentTemporaryUserID) {
                 const temporaryUserID = uuidv4();
                 sessionStorage.setItem("temporary_user_id", temporaryUserID.toString());
+                console.log(sessionStorage.getItem("temporary_user_id"))
             }
         }
         const login_or_logout_button_text = (!userIsLoggedIn) ? "Login" : "Logout";

@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React from "react";
 import {Helmet} from "react-helmet";
 import Footer from "../../components/footer.jsx";
 import {Navbar} from "../../components/navbar.jsx";
-import AcceptsCookies from "../../components/legal/cookieConsent";
+import AcceptsCookies from "../../components/cookieConsent";
 
 
 export default class About extends React.Component {

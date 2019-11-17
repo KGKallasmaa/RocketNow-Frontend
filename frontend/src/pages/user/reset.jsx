@@ -1,5 +1,11 @@
 import React from 'react';
 import {Form, message, Spin, Icon} from 'antd';
+
+import 'antd/es/message/style/css';
+import 'antd/es/form/style/css';
+import 'antd/es/spin/style/css';
+import 'antd/es/icon/style/css';
+
 import gql from "graphql-tag";
 import {print} from 'graphql';
 import logo from '../../assets/img/logo.svg';
@@ -8,9 +14,9 @@ import {Helmet} from "react-helmet";
 import axios from 'axios';
 import '../../assets/css/login.min.css';
 import ReCAPTCHA from "react-google-recaptcha";
-import AcceptsCookies from "../../components/legal/cookieConsent";
+import AcceptsCookies from "../../components/cookieConsent";
 import LazyLoad from "react-lazyload";
-import digitalGoods from "../homepage/assets/img/digital_goods.webp";
+
 
 const recaptchaRef = React.createRef();
 

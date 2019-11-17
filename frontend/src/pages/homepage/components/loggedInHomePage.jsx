@@ -5,11 +5,13 @@ import Footer from "../../../components/footer";
 import axios from 'axios';
 import {print} from 'graphql';
 import {message} from "antd";
+import 'antd/es/message/style/css';
+
 import {AddToCart} from "../../../components/modifyCart.jsx";
 import {RECOMMEND_GOOD_QUERY} from "../../../graphql/reccomendGood_QUERY";
 import {BEST_SELLING_QUERY} from "../../../graphql/bestSelling_QUERY";
 import {TRENDING_GOOD_QUERY} from "../../../graphql/trending_good_QUERY";
-import   AcceptsCookies from "../../../components/legal/cookieConsent.jsx";
+import  AcceptsCookies from "../../../components/cookieConsent.jsx";
 import LazyLoad from "react-lazyload";
 
 const currency_display_dictionary = {

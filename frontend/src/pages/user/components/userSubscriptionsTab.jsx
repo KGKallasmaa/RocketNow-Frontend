@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-
 export class UserSubscriptionsTab extends React.PureComponent {
     constructor(props) {
         super(props);

@@ -1,5 +1,8 @@
 import React from "react";
 import {Skeleton, Checkbox} from 'antd';
+import 'antd/es/skeleton/style/css';
+import 'antd/es/checkbox/style/css';
+
 import Footer from "../../components/footer.jsx";
 import {Navbar} from "../../components/navbar.jsx";
 import {isRegularUserLoggedIn} from "../../components/authentication";
@@ -14,7 +17,7 @@ import {fetchData} from "../../components/fetcher";
 import {ParcelDeliveryLocationForm} from "./components/parcelDeliveryLocation";
 import {AddressForm} from "./components/addressForm";
 import {OrderEstimateForm} from "./components/orderEstimate";
-import AcceptsCookies from "../../components/legal/cookieConsent";
+import AcceptsCookies from "../../components/cookieConsent";
 
 
 function renderLoadingCartCartItem() {

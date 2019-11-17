@@ -1,5 +1,8 @@
 import React from "react";
 import { InputNumber, message} from 'antd';
+import 'antd/es/message/style/css';
+import 'antd/es/input-number/style/css';
+
 import {currency_symbol_converter} from "./currency_and_symbol";
 import {ADD_TOCART_MUTATION} from "../graphql/addToCart_MUTATION";
 import {ADD_TO_FAVORITES_MUTATION} from "../graphql/addToFavorites_MUTATION";

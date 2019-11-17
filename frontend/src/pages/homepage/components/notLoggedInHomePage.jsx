@@ -19,8 +19,8 @@ import shippo from "../assets/img/shippo.webp";
 import stripe from "../assets/img/stripe.webp";
 import subscription from "../assets/img/subscriptions.webp";
 import support from "../assets/img/support.webp";
-import CustomerChat from "../../../components/customerChat/customerChat";
-import AcceptsCookies from "../../../components/legal/cookieConsent";
+import CustomerChat from "../../../components/customerChat";
+import AcceptsCookies from "../../../components/cookieConsent";
 
 import LazyLoad from 'react-lazyload';
 

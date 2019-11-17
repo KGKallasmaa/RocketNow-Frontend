@@ -10,10 +10,14 @@ import {fetchData} from "../../components/fetcher";
 
 import {Helmet} from "react-helmet";
 import {Button, Empty, Skeleton} from "antd";
+import 'antd/es/button/style/css';
+import 'antd/es/empty/style/css';
+import 'antd/es/skeleton/style/css';
+
 import notLoadedLogo from "./assets/img/seller-logo-not-loaded.jpg";
-import noOrders from "../user/assets/img/noOrders.png";
+import noOrders from "../user/assets/img/noOrders.webp";
 import LazyLoad from "react-lazyload";
-import logo from "../../assets/img/logo.svg";
+
 
 
 function renderBusinessUserGoods(good) {

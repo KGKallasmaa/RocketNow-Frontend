@@ -7,7 +7,7 @@ import {getEmoji} from "../../../components/emoji";
 import {Address_QUERY} from "../graphql/address_QUERY";
 import {default_Address_MUTATION} from "../graphql/defaultAddress_MUTATION";
 import {not_Active_Address_MUTATION} from "../graphql/notActiveAddress_MUTATION";
-import noOrders from "../assets/img/noOrders.png";
+import noOrders from "../assets/img/noOrders.webp";
 import LazyLoad from "react-lazyload";
 
 const {Column} = Table;

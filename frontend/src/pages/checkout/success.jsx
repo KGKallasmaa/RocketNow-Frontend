@@ -1,12 +1,16 @@
 import React from "react";
 import gql from "graphql-tag";
 import {Icon, Steps, message} from "antd";
+import 'antd/es/message/style/css';
+import 'antd/es/steps/style/css';
+import 'antd/es/icon/style/css';
+
 import {Helmet} from "react-helmet";
 import Footer from "../../components/footer.jsx";
 import {Navbar} from "../../components/navbar.jsx";
 import axios from "axios";
 import {print} from "graphql";
-import AcceptsCookies from "../../components/legal/cookieConsent";
+import AcceptsCookies from "../../components/cookieConsent";
 import LazyLoad from "react-lazyload";
 
 const {Step} = Steps;

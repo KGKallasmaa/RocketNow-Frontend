@@ -1,5 +1,8 @@
 import React from "react";
 import {Form, Icon} from "antd";
+import 'antd/es/form/style/css';
+import 'antd/es/icon/style/css';
+
 import {ShippingCost_QUERY} from "../../../graphql/shippingCost_QUERY";
 import {orderDeliveryEstimate_QUERY} from "../graphql/orderDeliveryEstimate_QUERY";
 import {fetchData} from "../../../components/fetcher";

@@ -1,5 +1,10 @@
 import React from 'react';
 import {Form, message, Spin, Icon} from 'antd';
+import 'antd/es/message/style/css';
+import 'antd/es/form/style/css';
+import 'antd/es/spin/style/css';
+import 'antd/es/icon/style/css';
+
 import gql from "graphql-tag";
 import {print} from 'graphql';
 import logo from '../../assets/img/logo.svg';
@@ -9,7 +14,7 @@ import axios from 'axios';
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import '../../assets/css/login.min.css';
-import AcceptsCookies from "../../components/legal/cookieConsent";
+import AcceptsCookies from "../../components/cookieConsent";
 import LazyLoad from "react-lazyload";
 
 
