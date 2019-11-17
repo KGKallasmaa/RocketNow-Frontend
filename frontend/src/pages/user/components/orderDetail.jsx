@@ -1,5 +1,10 @@
 import React from 'react';
 import {Modal, Button, Steps, Icon} from 'antd';
+import 'antd/es/modal/style/css';
+import 'antd/es/button/style/css';
+import 'antd/es/steps/style/css';
+import 'antd/es/icon/style/css';
+
 import {getEmoji} from "../../../components/emoji";
 
 const {Step} = Steps;

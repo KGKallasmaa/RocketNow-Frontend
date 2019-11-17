@@ -213,14 +213,16 @@ export default class ShoppingCart extends React.Component {
         const total = (!shipping || !tax || !subtotal) ? '' : Math.round(100 * (shipping + tax + subtotal)) / 100;
         const currency = (!shipping || !tax || !subtotal) ? '' : currency_symbol_converter[ShippingCurrency];
 
-        const cannonialUrl = process.env.REACT_APP_CLIENT_URL + "/cart";
+
         return (
             <div>
                 <Navbar/>
                 <Helmet>
                     <title>Shopping cart</title>
-                    <link rel="canonial" href={cannonialUrl}/>
+                    <link rel="preconnect" href="https://m.stripe.com"/>
+                    <link rel="canonial" href={process.env.REACT_APP_CLIENT_URL + "/cart"}/>
                     <meta name="description" content="View your shopping cart at RocketNow"/>
+                    <script src="https://js.stripe.com/v3/"/>
                 </Helmet>
                 <AcceptsCookies/>
                 <section className="checkout-section spad">

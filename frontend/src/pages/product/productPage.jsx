@@ -112,7 +112,6 @@ export default class ProductPage extends React.Component {
                 {(good !== undefined && parcelDeliveryEstimate !== undefined && addressDeliveryEstimate !== undefined) ? mapRegularGood(good, this.props.match.params.nr, parcelDeliveryEstimate, addressDeliveryEstimate) :
                     <p/>}
                 <LoadingGoodCard good={good}/>
-                <AcceptsCookies/>
                 <div className="features-boxed">
                     < div className="container">
                         <div className="intro">
@@ -124,6 +123,7 @@ export default class ProductPage extends React.Component {
                         </div>
                     </div>
                 </div>
+                <AcceptsCookies/>
                 <Footer/>
             </React.Fragment>
         );
