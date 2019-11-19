@@ -11,6 +11,6 @@ services:
       - '.:/usr/src/app'
       - '/usr/src/app/node_modules'
     ports:
-      - '80:5000'
+      - '3001:3000'
     environment:
       - NODE_ENV=production
