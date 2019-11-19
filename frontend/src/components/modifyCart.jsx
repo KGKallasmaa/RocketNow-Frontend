@@ -83,7 +83,7 @@ export class RemoveFromCart extends React.Component {
     render() {
         return (
             <button className="btn btn-outline-danger btn-sm" onClick={this.removeFromCart}>
-                <i className="fa fa-trash" aria-hidden="true"/>
+                <i className="far fa-trash-alt" aria-hidden="true"/>
             </button>
         );
     }
@@ -110,7 +110,7 @@ export class AddToFavorites extends React.Component {
     render() {
         return (
             <button className="btn btn-outline-danger text-center" style={this.props.style} onClick={this.addToFavorites}>
-                <i className="fa fa-heart" aria-hidden="true"/>
+                <i className="far fa-heart icon" aria-hidden="true"/>
             </button>
         );
     }

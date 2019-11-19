@@ -19,7 +19,7 @@ import shippo from "../assets/img/shippo.webp";
 import stripe from "../assets/img/stripe.webp";
 import subscription from "../assets/img/subscriptions.webp";
 import support from "../assets/img/support.webp";
-import CustomerChat from "../../../components/customerChat";
+
 import AcceptsCookies from "../../../components/cookieConsent";
 
 import LazyLoad from 'react-lazyload';
@@ -222,14 +222,14 @@ export default React.memo(() => {
                         </div>
                         <div className="row justify-content-center features">
                             <div className="col-sm-6 col-md-5 col-lg-4 item">
-                                <div className="box"><i className="fa fa-pencil icon" id="howToIcon"/>
+                                <div className="box"><i className="far fa-edit icon" id="howToIcon"/>
                                     <h3 className="name" style={font}>1. Signup for free.</h3>
                                     <p className="description">Sign up &nbsp;online for free. &nbsp;All you need is an email
                                         address, or a Google or Facebook account.&nbsp;</p>
                                 </div>
                             </div>
                             <div className="col-sm-6 col-md-5 col-lg-4 item">
-                                <div className="box"><i className="fa fa-search icon" id="howToIcon"/>
+                                <div className="box"><i className="fas fa-search icon" id="howToIcon"/>
                                     <h3 className="name" style={font}>2. Search for Products</h3>
                                     <p className="description">Tell us what are you looking for. Search for a specific title
                                         or
@@ -237,7 +237,7 @@ export default React.memo(() => {
                                 </div>
                             </div>
                             <div className="col-sm-6 col-md-5 col-lg-4 item">
-                                <div className="box"><i className="fa fa-truck icon" id="howToIcon"/>
+                                <div className="box"><i className="fas fa-truck icon" id="howToIcon"/>
                                     <h3 className="name" style={font}>3. Choose a Shipping
                                         Option</h3>
                                     <p className="description">We ship your order to a parcel location or a home address.
@@ -245,7 +245,7 @@ export default React.memo(() => {
                                 </div>
                             </div>
                             <div className="col-sm-6 col-md-5 col-lg-4 item">
-                                <div className="box"><i className="fa fa-cc-stripe icon" id="howToIcon"/>
+                                <div className="box"><i className="fab fa-stripe icon" id="howToIcon"/>
                                     <h3 className="name" style={font}>4. Enter Payment
                                         Details</h3>
                                     <p className="description">We accept all major credit and debit cards. Your payment is
@@ -260,7 +260,7 @@ export default React.memo(() => {
                                 </div>
                             </div>
                             <div className="col-sm-6 col-md-5 col-lg-4 item">
-                                <div className="box"><i className="fa fa-heart-o icon" id="howToIcon"/>
+                                <div className="box"><i className="far fa-heart icon" id="howToIcon"/>
                                     <h3 className="name" style={font}>
                                         6. &nbsp;Spread the Love
                                     </h3>
@@ -308,7 +308,6 @@ export default React.memo(() => {
                         </div>
                     </div>
                 </div>
-                <CustomerChat/>
                 <Footer/>
             </React.Fragment>
         );

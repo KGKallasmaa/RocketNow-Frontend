@@ -7,7 +7,7 @@ export default React.memo(() => {
         return (
             <div className="footer-dark">
                 <Helmet>
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"/>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"/>
                 </Helmet>
                 <footer>
                     <div className="container">
@@ -15,9 +15,11 @@ export default React.memo(() => {
                             <div className="col-sm-6 col-md-3 item">
                                 <h3 style={color}>Services</h3>
                                 <ul>
-                                    <li><a aria-label={"Sell your goods on RocketNow"} href="http://business.rocketnow.eu">Sell on
-                                        RocketNow</a></li>
-
+                                    <li>
+                                        <a aria-label={"Sell your goods on RocketNow"} href="http://business.rocketnow.eu">
+                                            Sell on RocketNow
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div className="col-sm-6 col-md-3 item">
@@ -48,12 +50,15 @@ export default React.memo(() => {
                                 <p style={color}> A new e-commerce platform.</p>
                             </div>
                             <div className="col item social">
-                                <a title={"View RocketNow on Facebook"} href="#"><i
-                                    className="icon ion-social-facebook"/></a>
-                                <a title={"View RocketNow on Instagram"} href="#"><i
-                                    className="icon ion-social-instagram"/></a>
-                                <a title={"View RocketNow on LinedIn"} href="#"><i
-                                    className="icon ion-social-linkedin"/></a>
+                                <a title={"View RocketNow on Facebook"} href="#">
+                                    <i className="fab fa-facebook"/>
+                                </a>
+                                <a title={"View RocketNow on Instagram"} href="#">
+                                    <i className="fab fa-instagram"/>
+                                </a>
+                                <a title={"View RocketNow on LinedIn"} href="#">
+                                    <i className="fab fa-linkedin"/>
+                                </a>
                             </div>
                         </div>
                         <p className="copyright">Made with&nbsp;❤️ &nbsp;in Estonia 🇪🇪</p>
