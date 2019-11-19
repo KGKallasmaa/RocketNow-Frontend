@@ -45,7 +45,8 @@ COPY package-lock.json /tmp/package-lock.lock
 RUN cd /tmp && yarn
 RUN cp -a /tmp/node_modules /usr/src/app/
 
-
+# simple HTTP server
+RUN yarn global add http-server
 
 # From here we load our application's code in, therefore the previous docker
 # "layer" that's been cached will be used if possible
@@ -55,7 +56,7 @@ COPY . /usr/src/app
 
 RUN yarn build
 # Expose port
-EXPOSE 5000
+EXPOSE 3001
 
 
-CMD [ "serve", "-s", "build"]
+CMD [ "http-server", "./build", "-g", "-p", "3001", "-P" ]
