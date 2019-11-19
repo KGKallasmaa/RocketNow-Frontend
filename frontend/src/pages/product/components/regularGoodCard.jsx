@@ -177,9 +177,9 @@ export default React.memo((props) => {
                             </div>
                             <div className="social-sharing">
                                 <a aria-label={"Share " + base.title + " on Facebook"} title={faceBookUrlText}
-                                   href={facebookUrl}><i className="fa fa-facebook"/></a>
+                                   href={facebookUrl}><i className="fab fa-facebook"/></a>
                                 <a aria-label={"Share " + base.title + " on Twitter"} title={twitterUrlText}
-                                   href={twitterUrl}><i className="fa fa-twitter"/></a>
+                                   href={twitterUrl}><i className="fab fa-twitter"/></a>
                             </div>
                         </div>
                     </div>

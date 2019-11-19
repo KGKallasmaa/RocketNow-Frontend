@@ -24,28 +24,25 @@ import AcceptsCookies from "../../../components/cookieConsent";
 
 import LazyLoad from 'react-lazyload';
 
-const font = {fontFamily: "Lato"};
-
 export default React.memo(() => {
         return (
             <React.Fragment>
                 <Helmet>
                     <link rel="canonial" href="http://rocketnow.eu"/>
+                    <link rel="stylesheet"
+                          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                          crossOrigin="anonymous"/>
                 </Helmet>
                 <Navbar/>
                 <header className="masthead text-center text-white">
                     <div className="masthead-content">
                         <div className="container text-left">
-                            <h1 className="text-left masthead-heading mb-0"
-                                style={font}>RocketNow
+                            <h1 className="text-left masthead-heading mb-0">RocketNow
                             </h1>
-                            <h2 className="text-left masthead-subheading mb-0" style={font}>
+                            <h2 className="text-left masthead-subheading mb-0">
                                 Shop for everything
                             </h2>
-                            <a className="btn btn-primary visible btn-xl rounded-pill mt-5" role="button"
-                               href="/about" id="learnMore" aria-label={"Read the story of RocketNow"}>
-                                Learn More
-                            </a>
                         </div>
                     </div>
                     <div/>
@@ -218,19 +215,19 @@ export default React.memo(() => {
                 <div className="features-boxed" id="grey">
                     <div className="container" id="grey">
                         <div className="intro">
-                            <h2 className="text-center" style={font}>How to use RocketNow</h2>
+                            <h2 className="text-center">How to use RocketNow</h2>
                         </div>
                         <div className="row justify-content-center features">
                             <div className="col-sm-6 col-md-5 col-lg-4 item">
                                 <div className="box"><i className="far fa-edit icon" id="howToIcon"/>
-                                    <h3 className="name" style={font}>1. Signup for free.</h3>
+                                    <h3 className="name">1. Signup for free.</h3>
                                     <p className="description">Sign up &nbsp;online for free. &nbsp;All you need is an email
                                         address, or a Google or Facebook account.&nbsp;</p>
                                 </div>
                             </div>
                             <div className="col-sm-6 col-md-5 col-lg-4 item">
                                 <div className="box"><i className="fas fa-search icon" id="howToIcon"/>
-                                    <h3 className="name" style={font}>2. Search for Products</h3>
+                                    <h3 className="name">2. Search for Products</h3>
                                     <p className="description">Tell us what are you looking for. Search for a specific title
                                         or
                                         a general term. You can also browse through our categories.</p>
@@ -238,7 +235,7 @@ export default React.memo(() => {
                             </div>
                             <div className="col-sm-6 col-md-5 col-lg-4 item">
                                 <div className="box"><i className="fas fa-truck icon" id="howToIcon"/>
-                                    <h3 className="name" style={font}>3. Choose a Shipping
+                                    <h3 className="name">3. Choose a Shipping
                                         Option</h3>
                                     <p className="description">We ship your order to a parcel location or a home address.
                                         We're also providing you with an estimated arrival time.</p>
@@ -246,7 +243,7 @@ export default React.memo(() => {
                             </div>
                             <div className="col-sm-6 col-md-5 col-lg-4 item">
                                 <div className="box"><i className="fab fa-stripe icon" id="howToIcon"/>
-                                    <h3 className="name" style={font}>4. Enter Payment
+                                    <h3 className="name">4. Enter Payment
                                         Details</h3>
                                     <p className="description">We accept all major credit and debit cards. Your payment is
                                         securely processed by Stripe. </p>
@@ -254,14 +251,14 @@ export default React.memo(() => {
                             </div>
                             <div className="col-sm-6 col-md-5 col-lg-4 item">
                                 <div className="box"><i className="fa fa-barcode icon" id="howToIcon"/>
-                                    <h3 className="name" style={font}>5. Track your Order</h3>
+                                    <h3 className="name">5. Track your Order</h3>
                                     <p className="description">You can track your order in your account, and we'll tell when
                                         it's shipped. We're also giving you the estimated arrival time.</p>
                                 </div>
                             </div>
                             <div className="col-sm-6 col-md-5 col-lg-4 item">
                                 <div className="box"><i className="far fa-heart icon" id="howToIcon"/>
-                                    <h3 className="name" style={font}>
+                                    <h3 className="name">
                                         6. &nbsp;Spread the Love
                                     </h3>
                                     <p className="description">That's it. Pick up your order from your shipping
