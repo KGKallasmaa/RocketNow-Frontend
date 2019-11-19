@@ -26,7 +26,6 @@
     "webpack": "^4.41.2",
     "react-select-country-list": "^2.0.1",
     "react-snap": "^1.23.0",
-    "webpack": "^4.41.2"
     "react-device-detect": "^1.9.10",
     "react-emoji-render": "^1.1.0",
     "react-cookie-consent": "^2.5.0",
