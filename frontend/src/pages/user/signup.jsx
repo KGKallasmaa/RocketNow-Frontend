@@ -342,6 +342,10 @@ class NormalSignupForm extends React.Component {
                     <meta property="og:description"
                           content="Signing up to RocketNow unlocks a whole new world"/>
                     <meta name="description" content="Signing up to RocketNow unlocks a whole new world"/>
+                    <link rel="stylesheet"
+                          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                          crossOrigin="anonymous"/>
                 </Helmet>
                 <AcceptsCookies/>
                 <div className="login-box-header">
