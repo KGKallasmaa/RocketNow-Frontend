@@ -23,6 +23,7 @@ import support from "../assets/img/support.webp";
 import AcceptsCookies from "../../../components/cookieConsent";
 
 import LazyLoad from 'react-lazyload';
+const fontSize = {fontSize: "20px"};
 
 export default React.memo(() => {
         return (
@@ -93,13 +94,13 @@ export default React.memo(() => {
                             </div>
                             <div className="col-lg-6 order-lg-1">
                                 <div className="p-5">
-                                    <h2 className="display-4" style={{fontSize: "36px", fontFamily: "Lato"}}>
-                                        For great choice appreciators<br/><br/>
-                                    </h2>
-                                    <p className="sellingpointText">While most platforms limit their selection to one or two
-                                        categories, we offer goods in 6 categories. <br/>Looking for a book to entertain? We
-                                        got you covered!<br/> Looking for a nice notebook for your friend's birthday?
-                                        Would you like a black, a yellow or a green one?
+                                    <h2 className="display-4">For great choice appreciators</h2>
+                                    <p style={fontSize}>While most platforms limit their selection to one or two
+                                        categories, we offer goods in 6 categories.</p>
+                                    <p style={fontSize}>
+                                        Looking for a book to entertain? We got you covered! Looking for a nice notebook for
+                                        your friend's birthday?
+                                        Same story.
                                     </p>
                                 </div>
                             </div>
@@ -197,15 +198,12 @@ export default React.memo(() => {
                             </div>
                             <div className="col-lg-6 order-lg-2">
                                 <div className="p-5">
-                                    <h2 className="display-4" style={{fontSize: "36px", fontFamily: "Lato"}}>
-                                        For accurate delivery lovers
-                                    </h2>
+                                    <h2 className="display-4">For accurate delivery lovers</h2>
                                     <br/>
-                                    <p className="sellingpointText">Our cutting edge technology
+                                    <p style={fontSize}>Our cutting edge technology
                                         and close relationships with the merchants help us accurately predict when your
-                                        orders arrive. This gives you peace of mind and frees up your time.<br/> Spend it
-                                        with
-                                        your loved ones.
+                                        orders arrive.</p>
+                                    <p style={fontSize}>This gives you peace of mind and frees up your time.Spend it with your loved ones.
                                     </p>
                                 </div>
                             </div>
@@ -281,14 +279,13 @@ export default React.memo(() => {
                             </div>
                             <div className="col-lg-6 order-lg-1">
                                 <div className="p-5">
-                                    <h2 className="display-4" style={{fontSize: "36px", fontFamily: "Lato"}}>
-                                        Support all the way!</h2>
+                                    <h2 className="display-4">Support all the way!</h2>
                                     <br/>
-                                    <p className="sellingpointText">We're there for you at every
-                                        step of the way. <br/>If you need help with your orders or you have an awesome idea
+                                    <p style={fontSize}>We're there for you at every
+                                        step of the way.</p>
+                                    <p style={fontSize}>If you need help with your orders or you have an awesome idea
                                         on how to make the service better for everyone there's always a lovely person
-                                        whom
-                                        you can chat with.</p>
+                                        whom you can chat with.</p>
                                 </div>
                             </div>
                         </div>
