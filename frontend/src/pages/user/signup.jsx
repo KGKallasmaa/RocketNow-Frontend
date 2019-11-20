@@ -11,7 +11,6 @@ import logo from '../../assets/img/logo.svg';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
-import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import '../../assets/css/login.min.css';
 import AcceptsCookies from "../../components/cookieConsent";
@@ -274,10 +273,6 @@ class NormalSignupForm extends React.Component {
             fullname = response.w3.ig;
             email = response.w3.U3;
             image_URL = response.profileObj.imageUrl;
-        } else if (method === "Facebook") {
-            fullname = response.name;
-            email = response.email;
-            image_URL = response.picture.data.url;
         }
         if (fullname && email && image_URL) {
             axios.post(process.env.REACT_APP_SERVER_URL, {
@@ -318,11 +313,6 @@ class NormalSignupForm extends React.Component {
     responseGoogle = (response) => {
         this.SocialSignUp(response, "Google");
     };
-
-    responseFacebook = (response) => {
-        this.SocialSignUp(response, "Facebook");
-    };
-
 
     renderRedirect = () => {
         if (this.state.redirect === true) {
@@ -369,19 +359,8 @@ class NormalSignupForm extends React.Component {
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="row">
-                                    <div className="col-md-6"
-                                         style={{height: "40px", textAlign: "center", width: "250px"}}>
-                                        <FacebookLogin
-                                            appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-                                            fields="name,email,picture"
-                                            buttonText="Sign up with Facebook"
-                                            callback={this.responseFacebook}
-                                            cssClass="my-facebook-button-class"
-                                            icon="fa-facebook"
-                                        />
-                                    </div>
-                                    <div className="col-md-6"
-                                         style={{height: "40px", textAlign: "center", width: "250px"}}>
+                                    <div className="col-md-12"
+                                         style={{height: "40px", textAlign: "center", width: "500px"}}>
                                         <GoogleLogin
                                             clientId={process.env.REACT_APP_GOOGLE_LOGIN_KEY}
                                             buttonText="Sign up with Google"

@@ -52,7 +52,7 @@ export default class RocketNowSearchBox extends React.PureComponent {
             return (
                 <SearchBox
                     defaultRefinement={query}
-                    placeholder={"Search for anything"}
+                    placeholder={"Search for harry"}
                     searchAsYouType={false}
                 />
             );
@@ -64,7 +64,7 @@ export default class RocketNowSearchBox extends React.PureComponent {
                         searchClient={searchClient}
                     >
                         <SearchBox
-                            placeholder={"Search for anything"}
+                            placeholder={"Search for harry"}
                             searchAsYouType={false}
                             onChange={this.updateQuery}
                             onSubmit={this.handleSearch}

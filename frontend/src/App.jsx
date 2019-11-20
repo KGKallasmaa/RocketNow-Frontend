@@ -22,12 +22,10 @@ import Success from "./pages/checkout/success.jsx";
 import Cancel from "./pages/checkout/cancel";
 import About from "./pages/staic/about";
 import Careers from "./pages/staic/careers";
-import Faq from "./pages/staic/faq";
 import Tos from "./pages/staic/tos";
 import Contact from "./pages/staic/contact";
 import PrivacyPolicy from "./pages/staic/privacyPolicy";
 import OrderReceipt from "./pages/checkout/orderReceipt";
-import Blog from "./pages/staic/blog";
 import {isRegularUserLoggedIn} from "./components/authentication";
 
 
@@ -71,10 +69,8 @@ export default function App() {
                 <Route exact path="/search/:query" component={SearchResults}/>
                 <Route exact path="/about" component={About}/>
                 <Route exact path="/careers" component={Careers}/>
-                <Route exact path="/faq" component={Faq}/>
                 <Route exact path="/tos" component={Tos}/>
                 <Route exact path="/privacy" component={PrivacyPolicy}/>
-                <Route exact path="/blog" component={Blog}/>
                 <Route exact path="/contact" component={Contact}/>
                 <Route exact path="/" component={Home}/>
                 <Route path="*" component={PageNotFound} />
