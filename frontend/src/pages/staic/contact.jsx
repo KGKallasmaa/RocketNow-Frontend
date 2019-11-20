@@ -72,6 +72,10 @@ export default class Contact extends React.PureComponent {
                     <meta name="twitter:card" content="summary"/>
                     <meta property="og:image" content={ogLogo}/>
                     <meta name="twitter:image" content={ogLogo}/>
+                    <link rel="stylesheet"
+                          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                          crossOrigin="anonymous"/>
                 </Helmet>
                 <Navbar/>
                 <br/><br/>
@@ -117,14 +121,14 @@ export default class Contact extends React.PureComponent {
                                     <div className="col-md-12" style={{background}}>
                                         <br/><br/>
                                         <iframe allowFullScreen="" frameBorder="0"
-                                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyArway9oG2qWdikdiJcaxxnGqn14SgA6nw&amp;q=Maakri+36&amp;zoom=16"
+                                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyArway9oG2qWdikdiJcaxxnGqn14SgA6nw&amp;q=Buckingham+Palace&amp;zoom=16"
                                                 width="100%" height="400"/>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-12">
                                         <h2 style={{font}}>Contact details</h2>
-                                        <p>Legal name: RocketNow OÜ</p>
+                                        <p>Legal name: RocketNow Technologies OÜ</p>
                                         <p>Email: karl.gustav1789@gmail.com</p>
                                         <p>VAT: 12345</p>
                                         <p>IBAN: EE123456789101234</p>
