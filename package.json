@@ -1,0 +1,67 @@
+{
+  "name": "frontend",
+  "description": "RocketNow is a new e-commerce platform",
+  "version": "0.3.0",
+  "private": true,
+  "main": "index.jsx",
+  "author": "Karl-Gustav Kallasmaa",
+  "homepage": "https://rocketnow.eu",
+  "dependencies": {
+    "algoliasearch": "^3.35.1",
+    "antd": "^3.24.3",
+    "axios": "^0.19.0",
+    "graphql": "^14.3.1",
+    "graphql-tag": "^2.10.1",
+    "instantsearch.css": "^7.3.1",
+    "react-helmet": "^5.2.1",
+    "react-instantsearch-dom": "^5.7.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "3.2.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-google-login": "^5.0.7",
+    "react-google-recaptcha": "^2.0.1",
+    "webpack": "^4.41.2",
+    "react-select-country-list": "^2.0.1",
+    "react-device-detect": "^1.9.10",
+    "react-emoji-render": "^1.1.0",
+    "react-cookie-consent": "^2.5.0",
+    "file-loader": "^4.2.0",
+    "react-lazyload": "^2.6.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "format": "prettier --write \"src/**/*.tsx\" \"src/**/*.jsx\"",
+    "eject": "react-scripts eject"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "semi": true,
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "endOfLine": "lf"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  }
+}

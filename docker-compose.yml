@@ -1,0 +1,10 @@
+version: '3.5'
+services:
+  frontend:
+    image: "rocketnow/frontend"
+    container_name: "frontend_container"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '80:3001'

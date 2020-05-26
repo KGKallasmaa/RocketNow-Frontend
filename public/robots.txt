@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /verify*
+Disallow: /reset*
+Disallow: /logout
+Disallow: /success*
+Disallow: /cancel*
+Disallow: /receipt/order/*
+
+
+Sitemap: https://rocketnow.eu/sitemap.xml
